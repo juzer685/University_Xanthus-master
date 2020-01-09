@@ -26,9 +26,8 @@
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <style>
-        h6
-        {
-            color:red;
+        h6 {
+            color: red;
         }
     </style>
 </head>
@@ -44,7 +43,7 @@
 
                 <form action="~/Login/Login" method="post">
                     <div class="input-group mb-3">
-                        <input name="UserName" type="text" class="form-control" placeholder="Email" >
+                        <input name="UserName" type="text" class="form-control" placeholder="Email">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -60,14 +59,13 @@
                         </div>
                     </div>
                     <div class="row">
-                        @*<div class="col-8">
-            <div class="icheck-primary">
-                <input type="checkbox" id="remember">
-                <label for="remember">
-                    Remember Me
-                </label>
-            </div>
-        </div>*@
+                        <div class="col-8">
+                            <div class="icheck-primary">
+                                <label for="remember">
+                                    <a href="/Login/ForgotPassword">Forgot Password?</a>
+                                </label>
+                            </div>
+                        </div>
                         <!-- /.col -->
                         <div class="col-4">
                             <input id="login" type="submit" class="btn btn-primary btn-block" value="Login" />

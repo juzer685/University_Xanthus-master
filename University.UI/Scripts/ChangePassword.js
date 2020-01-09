@@ -24,7 +24,8 @@ function RegisterHandler() {
             });
         }
         else {
-            _showSuccessMessage("Password and Confirm Password does not match");
+            alert("Password and Confirm Password does not match");
+            //_showSuccessMessage("Password and Confirm Password does not match");
         }
     });
 }
