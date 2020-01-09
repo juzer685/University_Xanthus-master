@@ -253,7 +253,7 @@ namespace University.UI.Areas.Admin.Controllers
             return View("_ProductUserGuide", viewModel);
         }
 
-        public ActionResult SaveProductUserGuide(ProductUserGuideViewModel model, string UserGuideId)
+        public ActionResult SaveProductUserGuide(ProductUserGuideViewModel model, string UserGuideId, HttpPostedFileBase file)
         {
             if (UserGuideId.ToString() == "0")
             {
@@ -268,6 +268,10 @@ namespace University.UI.Areas.Admin.Controllers
                 //    model.ImageURL = "";
                 //}
                 var viewModel = AutoMapper.Mapper.Map<ProductUserGuideViewModel, ProductUserGuide>(model);
+                if (file != null)
+                {
+                    viewModel.ImageURL = UploadFileOnServer(ProductImagePath, file);
+                }
                 var res = _productService.SaveProductUserGuide(viewModel);
                 return Json(true, JsonRequestBehavior.AllowGet);
             }
