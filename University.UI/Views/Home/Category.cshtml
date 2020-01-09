@@ -1,0 +1,125 @@
+﻿@model University.UI.Models.HomePageViewModel
+
+@{
+    ViewBag.Title = "Category";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .ips-logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 0 1px rgba(0,0,0,.125), 0 1px 3px rgba(0,0,0,.2);
+        padding: 10px;
+    }
+
+    .product-info {
+        margin-top: 20px;
+        padding-bottom: 50px;
+        padding: 0px 100px;
+    }
+
+    .product-title {
+        text-align: center;
+    }
+
+        .product-title .category-name {
+            font-size: 1.5rem;
+        }
+
+    .product-card {
+        box-shadow: 0 0 1px rgba(0,0,0,.125), 0 1px 3px rgba(0,0,0,.2);
+    }
+
+    .product-img {
+        /*background: #efefef;*/
+        border-bottom: 2px solid #00BCD4;
+    }
+
+    .product-name {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        font-size: 1rem;
+        text-decoration: underline;
+    }
+
+    .product-tabs {
+        display: flex;
+        justify-content: center;
+        flex-flow: column;
+        align-items: center;
+        padding: 10px 0px;
+    }
+</style>
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">Product Information</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item" aria-current="page"><a href="/Home">Home</a></li>
+                    <li class="breadcrumb-item" aria-current="page"><a href="/Home/Category">Products</a></li>
+                    @if (!string.IsNullOrWhiteSpace(ViewBag.CategoryName))
+                    {
+                        <li class="breadcrumb-item active" aria-current="page">@System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(@ViewBag.CategoryName?.ToLower() ?? "")</li>
+                    }
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row justify-center">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="ips-logo">
+                            <img src="~/images/university-logo.png" alt="slide" width="140" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-title">
+                                <p class="category-name">PRODUCTS</p>
+                            </div>
+                            <div class="product-list-content">
+                                <div class="row">
+                                    @foreach (var category in Model.SubCategories)
+                                    {
+                                        <div class="col-12 col-sm-6 col-md-4">
+                                            <div class="product-card">
+                                                <a href="~/Products/ProductListByCategory?id=@category.Id">
+                                                    <img class="product-img arrow-icon" src="~/Uploads/SubCategory/@category.ImageURL" alt="slide" width="100%" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';">
+                                                    <p class="product-name">@category.Name</p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+<!-- /.content -->
+
+<script>
+    function viewSubCategories(id) {
+        $.ajax("SubCategories?Id=" + id, function (data) {
+            //alert(data);
+        });
+    }
+
+</script>

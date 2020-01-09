@@ -1,0 +1,199 @@
+﻿
+@model University.UI.Areas.Admin.Models.ProductViewModel
+@using University.UI.Areas.Admin.Models
+<style>
+    .table-bordered, td {
+        border-color: black;
+    }
+</style>
+
+@Html.HiddenFor(m => m.ProductForm)
+<input type="button" class="btn btn-primary" value="Add" onclick="AddFAQ()" style="float:right" />
+<div class="row">
+    <div id="faqGrid" class="container-fluid grid-striped">
+        <div class="row font-weight-bold py-2">
+            <div class="col">
+                Question
+            </div>
+            <div class="col">
+                Answer
+            </div>
+            <div class="col">
+                Action
+            </div>
+        </div>
+
+        @if (Model.ProductFAQs != null && Model.ProductFAQs.Count > 0)
+        {
+            for (int i = 0; i <= Model.ProductFAQs.Count - 1; i++)
+            {
+                @Html.Partial("_ProductFAQForm", Model.ProductFAQs[i])
+            }
+        }
+
+    </div>
+    <div class="container-fluid"><button onclick="Cancel()" type="button" class="btn btn-primary">Exit</button></div>
+</div>
+
+<div id="FaqVideoPopup" class="modal" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add Videos</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body" id="popupBody" style="height: 150px;overflow: scroll;">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<script id="FAQTemplate" type="text/html">
+    @Html.Partial("_ProductFAQForm", new ProductFaqViewModel() { ProductId = Model.Id })
+</script>
+
+
+
+
+<script>
+    var template = $('#FAQTemplate').html();
+
+    function SaveProductFormFaq(e) {
+        $('#ProductFAQAssocitedID').val($("#ddlusrlst").val());
+       // alert($("#ddlusrlst").val());
+        var form = $(e.target);
+        var url = form.attr('action');
+        var formData = new FormData($(e.target)[0]);
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: formData, // serializes the form's elements.
+            enctype: 'multipart/form-data',
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                $('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
+                //alert("Data Saved Successfully"); // show response from the php script.
+                //Cancel();
+                $(form).replaceWith(data);
+                 _showSuccessMessage("Data Saved Successfully");
+                 setTimeout(function () { $('#spec').trigger('click'); }, 1500);
+            }
+        });
+
+        e.preventDefault();
+    }
+
+    $(document).ready(function () {
+    });
+
+    function AddFAQ() {
+        $('#faqGrid').append(template);
+    }
+
+    function DeleteFAQ(event, id) {
+        $("#DeleteConfirmationModal").modal('show');
+        $(document).on('click', 'button#confirmation-yes', function () {
+            $.ajax({
+                type: "POST",
+                url: "/Admin/Product/DeleteProductFAQ",
+                data: { FaqId: id }, // serializes the form's elements.
+                cache: false,
+                success: function (data) {
+                    //alert('Deleted Successfully');
+                    $('.overlayDelete').css({ "visibility": "", "opacity": "" });
+                    var tr = $(event).closest("[name=ProductFormFaq]");
+                    $(tr).remove();
+                }
+            });
+        });
+    }
+    var emptyGuid = '0';
+    function AddEditFAQVideos(faqId) {
+        if (faqId == emptyGuid) {
+            $("#popupBody").html("Please Save FAQ First.");
+            $("#FaqVideoPopup").modal('show');
+            return;
+        }
+        $.ajax({
+            type: "POST",
+            url: "/Admin/Product/AddEditFAQVideos",
+            data: { FaqId: faqId }, // serializes the form's elements.
+            cache: false,
+            success: function (data) {
+                //alert('Deleted Successfully');
+                $("#popupBody").html(data);
+                $("#FaqVideoPopup").modal('show');
+            }
+        });
+    }
+
+
+    function AddFAQVideo() {
+        var Vtemplate = $('#FAQVideoTemplate').html();
+        $('#faqVideoGrid').append(Vtemplate);
+    }
+    
+    function getVideoFile(event) {
+        debugger;
+        var input = $(event).siblings("[name=FAQVideo]");
+        $(input).click();
+    }
+    function getImgFile(event) {
+        var input = $(event).siblings("[name=FAQVideoImg]");
+        $(input).click();
+    }
+
+    function readURLThumnale(input) {
+        debugger;
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                var img = $(input).parent().parent().find("img.Thumbnail");
+                $(img).attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function SaveProductFormFaqVideo(e) {
+
+        $('#BasicDeatilsAssocitedID').val($("#ddlusrlst").val());
+
+        //alert$("bbb");
+        var form = $(e.target);
+        var url = form.attr('action');
+        var formData = new FormData($(e.target)[0]);
+        //if ( )
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: formData, // serializes the form's elements.
+            enctype: 'multipart/form-data',
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                $('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
+                //alert("Data Saved Successfully"); // show response from the php script.
+                //Cancel();
+                $(form).replaceWith(data);
+            }
+        });
+
+        e.preventDefault();
+    }
+
+</script>

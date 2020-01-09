@@ -1,0 +1,110 @@
+﻿@using University.UI.Utilities;
+
+@model IEnumerable<University.UI.Areas.Admin.Models.ProductUserGuideViewModel>
+@{
+    ViewBag.Title = "UserGuide";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    #search-container {
+        padding: 10px;
+    }
+
+    #txtProductVideo {
+        padding: 25px;
+    }
+
+    .searchItemTitle {
+        font-size: 1.3rem;
+        text-decoration: underline;
+        margin-top: 10px;
+    }
+</style>
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">User Guides</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">User Guides</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row justify-center">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div id="search-container" class="input-group">
+                            <input id="txtProductVideo" type="text" onkeypress="onEnterKeyPress(event)" class="form-control" placeholder="How do I charge the M5.." aria-label="Smart Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button onclick="onSearchProductVideo()" class="btn btn-outline-secondary" type="button">Search <img class="arrow-icon" src="~/images/arrow-icon.png" alt="slide" width="18"></button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <div class="container">
+                            <div class="pageBlock">
+
+                                <div class="searchDetails">
+                                    <div class="">
+                                        <div class="col-lg-12 row">
+                                            @foreach (var item in Model)
+                                            {
+                                                <div class="col-lg-4" style="margin-bottom:4em">
+                                                    <div class="">
+                                                        @if (string.IsNullOrEmpty(item.ImageFullPath))
+                                                        {
+                                                            <a href="/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(item.ProductId.ToString(),System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])"><img class="searchImage" src="/images/NoImageAvailable.jpg" alt="searchImage" width="100%" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';"></a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <a href="/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(item.ProductId.ToString(),System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])"><img class="searchImage" src="@item.ImageFullPath" alt="searchImage" width="100%" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';"></a>
+                                                        }
+                                                    </div>
+                                                    <div class="text-center">
+                                                        <a href="/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(item.ProductId.ToString(),System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])"><div class="searchItemTitle">@item.Title</div></a>
+                                                        <p title="@item.Description" class="block-ellipsis">@item.Description</p>
+                                                        @*<a class="readMore" href="/Products/ProductsById?ProductId=@item.ProductId">Read More</a>*@
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<script type="text/javascript">
+    function onSearchProductVideo() {
+        var text = $("#txtProductVideo").val();
+        location.href = "../UserGuide/UserGuide?SearchString=" + text;
+    }
+    function onEnterKeyPress(event) {
+        if (event.key == "Enter")
+            onSearchProductVideo();
+    }
+</script>

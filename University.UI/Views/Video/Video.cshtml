@@ -1,0 +1,105 @@
+﻿@model IEnumerable<University.UI.Areas.Admin.Models.ProductVideoViewModel>
+@*@model IEnumerable<University.Data.ProductVideos>*@
+@using University.UI.Utilities;
+
+@{
+    /**/
+
+    ViewBag.Title = "Video";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+
+    #search-container {
+        padding: 10px;
+    }
+
+    #txtProductVideo {
+        padding: 25px;
+    }
+</style>
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">Videos</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Videos</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row justify-center">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div id="search-container" class="input-group">
+                            <input id="txtProductVideo" type="text" onkeypress="onEnterKeyPress(event)" class="form-control" placeholder="How do I charge the M5.." aria-label="Smart Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button onclick="onSearchProductVideo()" class="btn btn-outline-secondary" type="button">Search <img class="arrow-icon" src="~/images/arrow-icon.png" alt="slide" width="18"></button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <div class="row">
+                           
+                                <div class="col-lg-4">
+                <iframe class="video v1 ChildVideo" width="100%" height="200" src="https://www.youtube.com/embed/tJKueryWBG0" frameborder="0" enablejsapi="1" allowfullscreen></iframe>
+                @*<iframe class="video v1" width="100%" height="200" src="" frameborder="0" allowfullscreen autoplay></iframe>*@
+                <div class="col-12 col-md-10">
+                    <div class="searchItemTitle"><a class="searchItemTitle" href="">Subcontractors Need Help With Their Paperwork </a></div>
+                    <p class="block-ellipsis" title="">BUCHANAN & ASSOCIATES PROMO</p>
+
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <iframe class="video v1 ChildVideo" width="100%" height="200" src="https://www.youtube.com/embed/b6yg1LfugM8" frameborder="0" enablejsapi="1" allowfullscreen></iframe>
+                @*<iframe class="video v1" width="100%" height="200" src="" frameborder="0" allowfullscreen autoplay></iframe>*@
+                <div class="col-12 col-md-10">
+                    <div class="searchItemTitle"><a class="searchItemTitle" href="">Best App for Business Management & Procurement Assistance</a></div>
+                    <p class="block-ellipsis" title="">SMALLBIZPRO</p>
+
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <iframe class="video v1 ChildVideo" width="100%" height="200" src="https://www.youtube.com/embed/r-1quxcUnwo" frameborder="0" enablejsapi="1" allowfullscreen></iframe>
+                @*<iframe class="video v1" width="100%" height="200" src="" frameborder="0" allowfullscreen autoplay></iframe>*@
+                <div class="col-12 col-md-10">
+                    <div class="searchItemTitle"><a class="searchItemTitle" href="">The Business Zone w</a></div>
+                    <p class="block-ellipsis" title="">SMALLBIZPRO</p>
+
+                </div>
+            </div>
+
+                            </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<script type="text/javascript">
+    function onSearchProductVideo() {
+        var text = $("#txtProductVideo").val();
+        location.href = "../Video/Video?SearchString=" + text;
+    }
+    function onEnterKeyPress(event) {
+        if (event.key == "Enter")
+            onSearchProductVideo();
+    }
+</script>

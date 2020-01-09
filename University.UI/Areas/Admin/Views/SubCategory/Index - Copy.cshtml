@@ -1,0 +1,189 @@
+﻿@model IEnumerable<University.UI.Areas.Admin.Models.SubCategoryViewModel>
+
+@{
+    ViewBag.Title = "Category";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .pageContainer {
+        background-color: #e8e8e8;
+    }
+
+    .table-bordered, td {
+        border-color: black;
+    }
+
+    .btn-primary-ips {
+        background-color: #23555e !important;
+        color: #fff !important;
+    }
+  
+</style>
+@*<div class="page-content">*@
+    <div class="breadcrumbSearchContainer">
+        <div class="row">
+            <div class="col-12 col-md-8">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item" aria-current="page"><a href="/Home">Home</a></li>
+                        <li class="breadcrumb-item" aria-current="page"><a href="#">Administration</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Category</li>
+                    </ol>
+
+                </nav>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Smart Search..." aria-label="Smart Search" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button id="smartSearch" class="btn btn-outline-secondary" type="button">SEARCH</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container pageContainer">
+        <br />
+        <h2>Category</h2>
+        <br />
+
+
+
+
+        <div class="table-responsive">
+            <input type="button" class="btn-primary-ips" value="Add" onclick="AddSubCategory()" style="float:left; margin:5px;" />
+            <table class="display" style="width:100%" id="SubCategoryTable">
+                <thead>
+                    <tr>
+                        <th>Category Name</th>
+                        @*<th>Sub Category Name</th>*@
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            @*<td>@item.CategoryMaster.Name</td>*@
+                            <td>@item.Name</td>
+                            <td>
+                                <input type="button" class="btn-primary-ips" value="Edit" onclick="AddSubCategory('@item.Id')" />
+                                <input type="button" class="btn-primary-ips" value="Delete" onclick="DeleteSubCategory('@item.Id')" />
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <div id="AddEditSubCategory" class="modal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <form id="subCategoryForm" action="/Admin/SubCategory/AddEditSubCategory">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add Category</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body" id="popupBody">
+                        @Html.Partial("AddEditSubCategory", new University.UI.Areas.Admin.Models.SubCategoryViewModel())
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-default">Submit</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="alert alert-success" id="success-alert">
+        <button type="button" class="close" data-dismiss="alert">x</button>
+        <strong>Success! </strong>
+        Product have added to your wishlist.
+    </div>
+    @*</div>*@
+    <script>
+        $(document).ready(function () {
+            $("#success-alert").hide();
+            //alert();
+
+            $('#SubCategoryTable').DataTable();
+            $(document).on('submit', '#subCategoryForm', function (e) {
+                // code
+                var form = $(this);
+                var url = form.attr('action');
+                var formData = new FormData($(this)[0]);
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: formData, // serializes the form's elements.
+                    enctype: 'multipart/form-data',
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        $('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
+                        //alert("Data Saved Successfully"); // show response from the php script.
+                        setTimeout(function () {
+                            location.reload();
+                        }, 1500);
+                    }
+                });
+
+                e.preventDefault();
+            });
+
+        });
+
+
+        function AddSubCategory(Id) {
+            $("#Name").val('');
+            $("#Id").val('');
+
+
+            $.ajax({
+                type: "POST",
+                url: "/Admin/SubCategory/GetSubCategory",
+                data: { Id: Id }, // serializes the form's elements.
+                success: function (data) {
+                    //alert(data); // show response from the php script.
+                    $("#popupBody").html(data);
+                    $("#AddEditSubCategory").modal('show');
+                }
+            });
+        }
+
+        function DeleteSubCategory(Id) {
+            $('.overlayDelete').css({ "visibility": "visible", "opacity": "1" });
+            $(document).on('click', '.ConfirmBtn', function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/Admin/SubCategory/DeleteSubCategory",
+                    data: { Id: Id }, // serializes the form's elements.
+                    success: function (data) {
+                        //alert("Data Deleted Successfully"); // show response from the php script.
+                        location.reload();
+                    }
+                });
+            });
+        }
+
+        function showAlert() {
+            $("#success-alert").fadeTo(2000, 500).slideUp(500, function () {
+                $("#success-alert").slideUp(500);
+            });
+        }
+
+    </script>

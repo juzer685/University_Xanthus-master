@@ -1,0 +1,145 @@
+﻿@model University.UI.Areas.Admin.Models.ProductViewModel
+@using University.UI.Areas.Admin.Models
+<style>
+    .table-bordered, td {
+        border-color: black;
+    }
+
+    .FileInputDoc {
+        width: 100%;
+    }
+</style>
+
+<input type="button" class="btn btn-primary" value="Add" onclick="AddProductDocument()" style="float:right" />
+<div class="row">
+    <div id="ProductDocumentGrid" class="container-fluid grid-striped">
+        <div class="row font-weight-bold py-2">
+            <div class="col">
+                Title
+            </div>
+            <div class="col">
+                Description
+            </div>
+            <div class="col">
+                Document
+            </div>
+            <div class="col">
+                Document Display Name
+            </div>
+            <div class="col">
+                Action
+            </div>
+        </div>
+
+        @if (Model.ProductDocuments != null && Model.ProductDocuments.Count > 0)
+        {
+            for (int i = 0; i <= Model.ProductDocuments.Count - 1; i++)
+            {
+                @Html.Partial("_ProductDocumentForm", Model.ProductDocuments[i])
+            }
+        }
+
+    </div>
+    <div class="container-fluid"><button onclick="Cancel()" type="button" class="btn btn-primary">Exit</button></div>
+</div>
+
+<div id="ProductDocumentPopup" class="modal" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"></h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body text-center" id="ProductDocumentPopupBody">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script id="ProductDocumentTemplate" type="text/html">
+    @Html.Partial("_ProductDocumentForm", new ProductDocumentViewModel() { ProductId = Model.Id })
+</script>
+
+
+
+
+<script>
+    var template = $('#ProductDocumentTemplate').html();
+
+    function SaveProductDocumentForm(e) {
+        $('#ProductDOCAssocitedID').val($("#ddlusrlst").val());
+        var form = $(e.target);
+        var url = form.attr('action');
+        var formData = new FormData($(e.target)[0]);
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: formData, // serializes the form's elements.
+            enctype: 'multipart/form-data',
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                $('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
+                //alert("Data Saved Successfully"); // show response from the php script.
+                //Cancel();
+                $(form).replaceWith(data);
+                 _showSuccessMessage("Data Saved Successfully");
+            }
+        });
+
+        e.preventDefault();
+    }
+
+    $(document).ready(function () {
+    });
+
+    function DeleteProductDocument(event, id) {
+        $("#DeleteConfirmationModal").modal('show');
+        $(document).on('click', 'button#confirmation-yes', function () {
+            $.ajax({
+                type: "POST",
+                url: "/Admin/Product/DeleteProductDocument",
+                data: { ProductDocumentId: id }, // serializes the form's elements.
+                cache: false,
+                success: function (data) {
+                    //alert('Deleted Successfully');
+                    $('.overlayDelete').css({ "visibility": "", "opacity": "" });
+                    var tr = $(event).closest("[name=ProductDocumentForm]");
+                    $(tr).remove();
+                }
+            });
+        });
+    }
+
+    function ShowProductDocument(url) {
+        $.ajax({
+            type: "POST",
+            url: "/Admin/Product/PlayDocument",
+            data: { url: url }, // serializes the form's elements.
+            cache: false,
+            success: function (data) {
+                $("#ProductDocumentPopupBody").html(data);
+                $("#ProductDocumentPopup").modal('show');
+            }
+        });
+        //DeleteProductFAQ
+
+    }
+
+
+    function AddProductDocument() {
+        var Vtemplate = $('#ProductDocumentTemplate').html();
+        $('#ProductDocumentGrid').append(Vtemplate);
+    }
+
+</script>
+

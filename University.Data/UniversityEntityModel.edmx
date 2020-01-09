@@ -1,0 +1,1809 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="UniversityModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CategoryMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="ImageURL" Type="nvarchar(max)" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CompanyName" Type="varchar" MaxLength="50" />
+          <Property Name="Address1" Type="varchar" MaxLength="50" />
+          <Property Name="Address2" Type="varchar" MaxLength="50" />
+          <Property Name="City" Type="varchar" MaxLength="50" />
+          <Property Name="State" Type="char" MaxLength="2" />
+          <Property Name="ZIP" Type="char" MaxLength="10" />
+          <Property Name="ContactName" Type="varchar" MaxLength="50" />
+          <Property Name="ContactTelephone" Type="char" MaxLength="10" />
+          <Property Name="ContactEmail" Type="varchar" MaxLength="50" />
+          <Property Name="CurrencyBaseUnit" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="CCTerminalID" Type="varchar" MaxLength="50" />
+          <Property Name="CCTransactionKey" Type="varchar" MaxLength="255" />
+          <Property Name="CCClearingPlatform" Type="varchar" MaxLength="50" />
+          <Property Name="TimeZone" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="DSTAdjust" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="DateTimeCreated" Type="datetime" />
+          <Property Name="DateTimeModified" Type="datetime" />
+          <Property Name="MediumCashBoxValuePriority" Type="float" />
+          <Property Name="HighCashBoxValuePriority" Type="float" />
+          <Property Name="CoinBoxVolume" Type="int" />
+          <Property Name="ImageLogoPath" Type="varchar" MaxLength="255" />
+          <Property Name="BankReconOffset" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="CoinAcceptanceRateThreshold" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="CCTransactionFee" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="SecureGatewayFee" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="ManagementSystemFee" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="CustomerActive" Type="bit" />
+          <Property Name="CustomerBillable" Type="bit" />
+          <Property Name="PaymentProcessor" Type="varchar" MaxLength="32" />
+          <Property Name="DailyNotificationsEmail" Type="varchar" MaxLength="500" />
+          <Property Name="BillingEmail" Type="varchar" MaxLength="500" />
+          <Property Name="CurrencyCode" Type="char" MaxLength="3" />
+          <Property Name="CountryID" Type="int" />
+          <Property Name="DefaultLanguage" Type="char" MaxLength="5" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="WebUserIDCreated" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="WebUserIDModified" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IsSmartCardUsed" Type="bit" Nullable="false" />
+          <Property Name="CCUserID" Type="int" />
+          <Property Name="AccessCardCustomer" Type="varchar" MaxLength="50" />
+          <Property Name="AccessCardAddress" Type="varchar" MaxLength="50" />
+          <Property Name="AccessCardCity" Type="varchar" MaxLength="50" />
+          <Property Name="AccessCardState" Type="char" MaxLength="2" />
+          <Property Name="AccessCardZIP" Type="char" MaxLength="5" />
+          <Property Name="ObservesDST" Type="bit" />
+          <Property Name="Alerts" Type="int" />
+          <Property Name="CCFee" Type="numeric" Precision="9" Scale="0" />
+          <Property Name="CustomerID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FAQ">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Question" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Answer" Type="nvarchar(max)" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="AssocitedID" Type="int" />
+        </EntityType>
+        <EntityType Name="FAQDoc">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FAQId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ImageURL" Type="nchar" MaxLength="100" />
+          <Property Name="VideoURL" Type="nchar" MaxLength="100" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="GeneralFeedback">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FeedbackDescription" Type="nvarchar(max)" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="AssocitedID" Type="int" />
+        </EntityType>
+        <EntityType Name="HomeBanner">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="LinkTo" Type="varchar" MaxLength="500" />
+          <Property Name="ImageALT" Type="nvarchar(max)" />
+          <Property Name="ImageURL" Type="nvarchar(max)" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="AssocitedID" Type="int" />
+        </EntityType>
+        <EntityType Name="HomeSlider">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Link" Type="nvarchar" MaxLength="50" />
+          <Property Name="TextDescription" Type="nvarchar(max)" />
+          <Property Name="ImageURL" Type="nvarchar(max)" />
+          <Property Name="ImageALT" Type="nvarchar(max)" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="AssocitedID" Type="int" />
+        </EntityType>
+        <EntityType Name="Login_tbl">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="RoleID" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CustomerId" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="AdminId" Type="int" />
+          <Property Name="MobileNo" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" />
+          <Property Name="ImageURL" Type="nvarchar(max)" />
+          <Property Name="ImageALT" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="SubCategoryId" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="AssocitedID" Type="int" />
+        </EntityType>
+        <EntityType Name="ProductDocuments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="Decription" Type="nvarchar(max)" />
+          <Property Name="DocumentURL" Type="nvarchar(max)" />
+          <Property Name="DocumentDisplayName" Type="nvarchar(max)" />
+          <Property Name="ProductId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="AssocitedID" Type="int" />
+        </EntityType>
+        <EntityType Name="ProductFAQs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Question" Type="nvarchar(max)" />
+          <Property Name="Answer" Type="nvarchar(max)" />
+          <Property Name="ProductId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="VideoUrl" Type="nvarchar(max)" />
+          <Property Name="AssocitedID" Type="int" />
+        </EntityType>
+        <EntityType Name="ProductFAQVideos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductFAQsId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ImageURL" Type="nchar" MaxLength="100" />
+          <Property Name="VideoURL" Type="nchar" MaxLength="100" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="AssocitedID" Type="int" />
+        </EntityType>
+        <EntityType Name="ProductFeedback">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FeedbackDescription" Type="nvarchar(max)" />
+          <Property Name="ProductId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="AssocitedID" Type="int" />
+        </EntityType>
+        <EntityType Name="ProductSpec">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="ProductId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="AssocitedID" Type="int" />
+        </EntityType>
+        <EntityType Name="ProductUserGuide">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="ImageURL" Type="nvarchar(max)" />
+          <Property Name="ImageALT" Type="nvarchar(max)" />
+          <Property Name="DocumentURL" Type="nvarchar(max)" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProductId" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="AssocitedID" Type="int" />
+        </EntityType>
+        <EntityType Name="ProductVideos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="Decription" Type="nvarchar(max)" />
+          <Property Name="VideoURL" Type="nvarchar(max)" />
+          <Property Name="ThumbnailURL" Type="nvarchar(max)" />
+          <Property Name="ProductId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="AssocitedID" Type="int" />
+        </EntityType>
+        <EntityType Name="RecentVisitedProduct">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ViewedDate" Type="datetime" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="SubCategoryMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="ImageURL" Type="nvarchar(max)" />
+          <Property Name="ImageALT" Type="nvarchar(max)" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="AssocitedID" Type="int" />
+        </EntityType>
+        <EntityType Name="Web_Login">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <Association Name="FK_AdminLogin">
+          <End Role="Login_tbl" Type="Self.Login_tbl" Multiplicity="0..1" />
+          <End Role="Login_tbl1" Type="Self.Login_tbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login_tbl">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Login_tbl1">
+              <PropertyRef Name="AdminId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerLogin">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Login_tbl" Type="Self.Login_tbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Login_tbl">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FAQDoc_FAQ">
+          <End Role="FAQ" Type="Self.FAQ" Multiplicity="1" />
+          <End Role="FAQDoc" Type="Self.FAQDoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FAQ">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FAQDoc">
+              <PropertyRef Name="FAQId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HomeSlider_HomeSlider">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="HomeSlider" Type="Self.HomeSlider" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HomeSlider">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Login_tbl_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="Login_tbl" Type="Self.Login_tbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Login_tbl">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_SubCategoryMaster">
+          <End Role="SubCategoryMaster" Type="Self.SubCategoryMaster" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubCategoryMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="SubCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductDocuments_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ProductDocuments" Type="Self.ProductDocuments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductDocuments">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductFAQs_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ProductFAQs" Type="Self.ProductFAQs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductFAQs">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductFAQVideos_ProductFAQVideos">
+          <End Role="ProductFAQs" Type="Self.ProductFAQs" Multiplicity="1" />
+          <End Role="ProductFAQVideos" Type="Self.ProductFAQVideos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductFAQs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductFAQVideos">
+              <PropertyRef Name="ProductFAQsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductFeedback_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ProductFeedback" Type="Self.ProductFeedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductFeedback">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductSpec_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ProductSpec" Type="Self.ProductSpec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductSpec">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductUserGuide_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="ProductUserGuide" Type="Self.ProductUserGuide" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductUserGuide">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductVideos_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ProductVideos" Type="Self.ProductVideos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductVideos">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RecentVisitedProduct_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="RecentVisitedProduct" Type="Self.RecentVisitedProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RecentVisitedProduct">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubCategoryMaster_CategoryMaster">
+          <End Role="CategoryMaster" Type="Self.CategoryMaster" Multiplicity="1" />
+          <End Role="SubCategoryMaster" Type="Self.SubCategoryMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SubCategoryMaster">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetCustomerList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="WebUserID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SmartSerach" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="freeText" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Sp_Login_form" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserName" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_LoginUniersity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserName" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="UniversityModelStoreContainer">
+          <EntitySet Name="CategoryMaster" EntityType="Self.CategoryMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FAQ" EntityType="Self.FAQ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FAQDoc" EntityType="Self.FAQDoc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GeneralFeedback" EntityType="Self.GeneralFeedback" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HomeBanner" EntityType="Self.HomeBanner" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HomeSlider" EntityType="Self.HomeSlider" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Login_tbl" EntityType="Self.Login_tbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductDocuments" EntityType="Self.ProductDocuments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductFAQs" EntityType="Self.ProductFAQs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductFAQVideos" EntityType="Self.ProductFAQVideos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductFeedback" EntityType="Self.ProductFeedback" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductSpec" EntityType="Self.ProductSpec" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductUserGuide" EntityType="Self.ProductUserGuide" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductVideos" EntityType="Self.ProductVideos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RecentVisitedProduct" EntityType="Self.RecentVisitedProduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubCategoryMaster" EntityType="Self.SubCategoryMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Web_Login" EntityType="Self.Web_Login" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AdminLogin" Association="Self.FK_AdminLogin">
+            <End Role="Login_tbl" EntitySet="Login_tbl" />
+            <End Role="Login_tbl1" EntitySet="Login_tbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerLogin" Association="Self.FK_CustomerLogin">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Login_tbl" EntitySet="Login_tbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FAQDoc_FAQ" Association="Self.FK_FAQDoc_FAQ">
+            <End Role="FAQ" EntitySet="FAQ" />
+            <End Role="FAQDoc" EntitySet="FAQDoc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HomeSlider_HomeSlider" Association="Self.FK_HomeSlider_HomeSlider">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="HomeSlider" EntitySet="HomeSlider" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Login_tbl_Role" Association="Self.FK_Login_tbl_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Login_tbl" EntitySet="Login_tbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_SubCategoryMaster" Association="Self.FK_Product_SubCategoryMaster">
+            <End Role="SubCategoryMaster" EntitySet="SubCategoryMaster" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductDocuments_Product" Association="Self.FK_ProductDocuments_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductDocuments" EntitySet="ProductDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductFAQs_Product" Association="Self.FK_ProductFAQs_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductFAQs" EntitySet="ProductFAQs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductFAQVideos_ProductFAQVideos" Association="Self.FK_ProductFAQVideos_ProductFAQVideos">
+            <End Role="ProductFAQs" EntitySet="ProductFAQs" />
+            <End Role="ProductFAQVideos" EntitySet="ProductFAQVideos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductFeedback_Product" Association="Self.FK_ProductFeedback_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductFeedback" EntitySet="ProductFeedback" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductSpec_Product" Association="Self.FK_ProductSpec_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductSpec" EntitySet="ProductSpec" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductUserGuide_Product" Association="Self.FK_ProductUserGuide_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductUserGuide" EntitySet="ProductUserGuide" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductVideos_Product" Association="Self.FK_ProductVideos_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductVideos" EntitySet="ProductVideos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RecentVisitedProduct_Product" Association="Self.FK_RecentVisitedProduct_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="RecentVisitedProduct" EntitySet="RecentVisitedProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubCategoryMaster_CategoryMaster" Association="Self.FK_SubCategoryMaster_CategoryMaster">
+            <End Role="CategoryMaster" EntitySet="CategoryMaster" />
+            <End Role="SubCategoryMaster" EntitySet="SubCategoryMaster" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="UniversityModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CategoryMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="UpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="SubCategoryMaster" Relationship="Self.FK_SubCategoryMaster_CategoryMaster" FromRole="CategoryMaster" ToRole="SubCategoryMaster" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="ZIP" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="ContactName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ContactTelephone" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="ContactEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CurrencyBaseUnit" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CCTerminalID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CCTransactionKey" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CCClearingPlatform" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TimeZone" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="DSTAdjust" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="DateTimeCreated" Type="DateTime" Precision="3" />
+          <Property Name="DateTimeModified" Type="DateTime" Precision="3" />
+          <Property Name="MediumCashBoxValuePriority" Type="Double" />
+          <Property Name="HighCashBoxValuePriority" Type="Double" />
+          <Property Name="CoinBoxVolume" Type="Int32" />
+          <Property Name="ImageLogoPath" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="BankReconOffset" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CoinAcceptanceRateThreshold" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CCTransactionFee" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SecureGatewayFee" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ManagementSystemFee" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CustomerActive" Type="Boolean" />
+          <Property Name="CustomerBillable" Type="Boolean" />
+          <Property Name="PaymentProcessor" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="DailyNotificationsEmail" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="BillingEmail" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CurrencyCode" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="CountryID" Type="Int32" />
+          <Property Name="DefaultLanguage" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="WebUserIDCreated" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="WebUserIDModified" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IsSmartCardUsed" Type="Boolean" Nullable="false" />
+          <Property Name="CCUserID" Type="Int32" />
+          <Property Name="AccessCardCustomer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AccessCardAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AccessCardCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AccessCardState" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="AccessCardZIP" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Name="ObservesDST" Type="Boolean" />
+          <Property Name="Alerts" Type="Int32" />
+          <Property Name="CCFee" Type="Decimal" Precision="9" Scale="0" />
+          <Property Name="CustomerID" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <NavigationProperty Name="Login_tbl" Relationship="UniversityModel.FK_CustomerLogin" FromRole="Customer" ToRole="Login_tbl" />
+        </EntityType>
+        <EntityType Name="FAQ">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Question" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Answer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="FAQDoc" Relationship="Self.FK_FAQDoc_FAQ" FromRole="FAQ" ToRole="FAQDoc" />
+          <Property Name="AssocitedID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="FAQDoc">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FAQId" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ImageURL" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="VideoURL" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="FAQ" Relationship="Self.FK_FAQDoc_FAQ" FromRole="FAQDoc" ToRole="FAQ" />
+        </EntityType>
+        <EntityType Name="GeneralFeedback">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FeedbackDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="AssocitedID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="HomeBanner">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LinkTo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ImageALT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="AssocitedID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="HomeSlider">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Link" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TextDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageALT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_HomeSlider_HomeSlider" FromRole="HomeSlider" ToRole="Product" />
+          <Property Name="AssocitedID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageALT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SubCategoryId" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="HomeSlider" Relationship="Self.FK_HomeSlider_HomeSlider" FromRole="Product" ToRole="HomeSlider" />
+          <NavigationProperty Name="SubCategoryMaster" Relationship="Self.FK_Product_SubCategoryMaster" FromRole="Product" ToRole="SubCategoryMaster" />
+          <NavigationProperty Name="ProductDocuments" Relationship="Self.FK_ProductDocuments_Product" FromRole="Product" ToRole="ProductDocuments" />
+          <NavigationProperty Name="ProductFAQs" Relationship="Self.FK_ProductFAQs_Product" FromRole="Product" ToRole="ProductFAQs" />
+          <NavigationProperty Name="ProductFeedback" Relationship="Self.FK_ProductFeedback_Product" FromRole="Product" ToRole="ProductFeedback" />
+          <NavigationProperty Name="ProductSpec" Relationship="Self.FK_ProductSpec_Product" FromRole="Product" ToRole="ProductSpec" />
+          <NavigationProperty Name="ProductUserGuide" Relationship="Self.FK_ProductUserGuide_Product" FromRole="Product" ToRole="ProductUserGuide" />
+          <NavigationProperty Name="ProductVideos" Relationship="Self.FK_ProductVideos_Product" FromRole="Product" ToRole="ProductVideos" />
+          <NavigationProperty Name="RecentVisitedProduct" Relationship="Self.FK_RecentVisitedProduct_Product" FromRole="Product" ToRole="RecentVisitedProduct" />
+          <Property Name="AssocitedID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ProductDocuments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Decription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DocumentURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DocumentDisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProductId" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_ProductDocuments_Product" FromRole="ProductDocuments" ToRole="Product" />
+          <Property Name="AssocitedID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ProductFAQs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Question" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Answer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProductId" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="VideoUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_ProductFAQs_Product" FromRole="ProductFAQs" ToRole="Product" />
+          <NavigationProperty Name="ProductFAQVideos" Relationship="Self.FK_ProductFAQVideos_ProductFAQVideos" FromRole="ProductFAQs" ToRole="ProductFAQVideos" />
+          <Property Name="AssocitedID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ProductFAQVideos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductFAQsId" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ImageURL" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="VideoURL" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="ProductFAQs" Relationship="Self.FK_ProductFAQVideos_ProductFAQVideos" FromRole="ProductFAQVideos" ToRole="ProductFAQs" />
+          <Property Name="AssocitedID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ProductFeedback">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FeedbackDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProductId" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_ProductFeedback_Product" FromRole="ProductFeedback" ToRole="Product" />
+          <Property Name="AssocitedID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ProductSpec">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProductId" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_ProductSpec_Product" FromRole="ProductSpec" ToRole="Product" />
+          <Property Name="AssocitedID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ProductUserGuide">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageALT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DocumentURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProductId" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_ProductUserGuide_Product" FromRole="ProductUserGuide" ToRole="Product" />
+          <Property Name="AssocitedID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ProductVideos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Decription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="VideoURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ThumbnailURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProductId" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_ProductVideos_Product" FromRole="ProductVideos" ToRole="Product" />
+          <Property Name="AssocitedID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="RecentVisitedProduct">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="ViewedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserId" Type="Int32" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_RecentVisitedProduct_Product" FromRole="RecentVisitedProduct" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Login_tbl" Relationship="UniversityModel.FK_Login_tbl_Role" FromRole="Role" ToRole="Login_tbl" />
+        </EntityType>
+        <EntityType Name="SubCategoryMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryId" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageALT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="CategoryMaster" Relationship="Self.FK_SubCategoryMaster_CategoryMaster" FromRole="SubCategoryMaster" ToRole="CategoryMaster" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product_SubCategoryMaster" FromRole="SubCategoryMaster" ToRole="Product" />
+          <Property Name="AssocitedID" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_SubCategoryMaster_CategoryMaster">
+          <End Role="CategoryMaster" Type="Self.CategoryMaster" Multiplicity="1" />
+          <End Role="SubCategoryMaster" Type="Self.SubCategoryMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SubCategoryMaster">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FAQDoc_FAQ">
+          <End Role="FAQ" Type="Self.FAQ" Multiplicity="1" />
+          <End Role="FAQDoc" Type="Self.FAQDoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FAQ">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FAQDoc">
+              <PropertyRef Name="FAQId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HomeSlider_HomeSlider">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="HomeSlider" Type="Self.HomeSlider" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HomeSlider">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_SubCategoryMaster">
+          <End Role="SubCategoryMaster" Type="Self.SubCategoryMaster" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubCategoryMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="SubCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductDocuments_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ProductDocuments" Type="Self.ProductDocuments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductDocuments">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductFAQs_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ProductFAQs" Type="Self.ProductFAQs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductFAQs">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductFeedback_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ProductFeedback" Type="Self.ProductFeedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductFeedback">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductSpec_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ProductSpec" Type="Self.ProductSpec" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductSpec">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductUserGuide_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="ProductUserGuide" Type="Self.ProductUserGuide" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductUserGuide">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductVideos_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ProductVideos" Type="Self.ProductVideos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductVideos">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RecentVisitedProduct_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="RecentVisitedProduct" Type="Self.RecentVisitedProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RecentVisitedProduct">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductFAQVideos_ProductFAQVideos">
+          <End Role="ProductFAQs" Type="Self.ProductFAQs" Multiplicity="1" />
+          <End Role="ProductFAQVideos" Type="Self.ProductFAQVideos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductFAQs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductFAQVideos">
+              <PropertyRef Name="ProductFAQsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="UniversityEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CategoryMaster" EntityType="Self.CategoryMaster" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" />
+          <EntitySet Name="FAQ" EntityType="Self.FAQ" />
+          <EntitySet Name="FAQDoc" EntityType="Self.FAQDoc" />
+          <EntitySet Name="GeneralFeedback" EntityType="Self.GeneralFeedback" />
+          <EntitySet Name="HomeBanner" EntityType="Self.HomeBanner" />
+          <EntitySet Name="HomeSlider" EntityType="Self.HomeSlider" />
+          <EntitySet Name="Product" EntityType="Self.Product" />
+          <EntitySet Name="ProductDocuments" EntityType="Self.ProductDocuments" />
+          <EntitySet Name="ProductFAQs" EntityType="Self.ProductFAQs" />
+          <EntitySet Name="ProductFAQVideos" EntityType="Self.ProductFAQVideos" />
+          <EntitySet Name="ProductFeedback" EntityType="Self.ProductFeedback" />
+          <EntitySet Name="ProductSpec" EntityType="Self.ProductSpec" />
+          <EntitySet Name="ProductUserGuide" EntityType="Self.ProductUserGuide" />
+          <EntitySet Name="ProductVideos" EntityType="Self.ProductVideos" />
+          <EntitySet Name="RecentVisitedProduct" EntityType="Self.RecentVisitedProduct" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="SubCategoryMaster" EntityType="Self.SubCategoryMaster" />
+          <AssociationSet Name="FK_SubCategoryMaster_CategoryMaster" Association="Self.FK_SubCategoryMaster_CategoryMaster">
+            <End Role="CategoryMaster" EntitySet="CategoryMaster" />
+            <End Role="SubCategoryMaster" EntitySet="SubCategoryMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FAQDoc_FAQ" Association="Self.FK_FAQDoc_FAQ">
+            <End Role="FAQ" EntitySet="FAQ" />
+            <End Role="FAQDoc" EntitySet="FAQDoc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HomeSlider_HomeSlider" Association="Self.FK_HomeSlider_HomeSlider">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="HomeSlider" EntitySet="HomeSlider" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_SubCategoryMaster" Association="Self.FK_Product_SubCategoryMaster">
+            <End Role="SubCategoryMaster" EntitySet="SubCategoryMaster" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductDocuments_Product" Association="Self.FK_ProductDocuments_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductDocuments" EntitySet="ProductDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductFAQs_Product" Association="Self.FK_ProductFAQs_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductFAQs" EntitySet="ProductFAQs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductFeedback_Product" Association="Self.FK_ProductFeedback_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductFeedback" EntitySet="ProductFeedback" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductSpec_Product" Association="Self.FK_ProductSpec_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductSpec" EntitySet="ProductSpec" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductUserGuide_Product" Association="Self.FK_ProductUserGuide_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductUserGuide" EntitySet="ProductUserGuide" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductVideos_Product" Association="Self.FK_ProductVideos_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductVideos" EntitySet="ProductVideos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RecentVisitedProduct_Product" Association="Self.FK_RecentVisitedProduct_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="RecentVisitedProduct" EntitySet="RecentVisitedProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductFAQVideos_ProductFAQVideos" Association="Self.FK_ProductFAQVideos_ProductFAQVideos">
+            <End Role="ProductFAQs" EntitySet="ProductFAQs" />
+            <End Role="ProductFAQVideos" EntitySet="ProductFAQVideos" />
+          </AssociationSet>
+          <FunctionImport Name="GetCustomerList" ReturnType="Collection(UniversityModel.GetCustomerList_Result)">
+          <Parameter Name="WebUserID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SmartSerach" ReturnType="Collection(UniversityModel.SmartSerach_Result)">
+          <Parameter Name="freeText" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Web_Login" EntityType="UniversityModel.Web_Login" />
+          <FunctionImport Name="sp_LoginUniersity" ReturnType="Collection(String)">
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Login_tbl" EntityType="UniversityModel.Login_tbl" />
+          <AssociationSet Name="FK_Login_tbl_Role" Association="UniversityModel.FK_Login_tbl_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Login_tbl" EntitySet="Login_tbl" />
+          </AssociationSet>
+          <FunctionImport Name="Sp_Login_form" ReturnType="Collection(UniversityModel.Sp_Login_form_Result)">
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+          <AssociationSet Name="FK_CustomerLogin" Association="UniversityModel.FK_CustomerLogin">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Login_tbl" EntitySet="Login_tbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdminLogin" Association="UniversityModel.FK_AdminLogin">
+            <End Role="Login_tbl" EntitySet="Login_tbl" />
+            <End Role="Login_tbl1" EntitySet="Login_tbl" />
+          </AssociationSet>
+        </EntityContainer>
+        <ComplexType Name="GetCustomerList_Result">
+          <Property Type="Decimal" Name="CustomerId" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="CompanyName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="SmartSerach_Result">
+          <Property Type="Decimal" Name="id" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="Title" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="String" Name="url" Nullable="true" />
+          <Property Type="String" Name="TableName" Nullable="false" MaxLength="16" />
+          <Property Type="String" Name="Producttitle" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="Web_Login">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="Decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Login_tbl">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RoleID" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="Role" Relationship="UniversityModel.FK_Login_tbl_Role" FromRole="Login_tbl" ToRole="Role" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerId" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Customer" Relationship="UniversityModel.FK_CustomerLogin" FromRole="Login_tbl" ToRole="Customer" />
+          <Property Name="AdminId" Type="Int32" />
+          <Property Name="MobileNo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Login_tbl1" Relationship="UniversityModel.FK_AdminLogin" FromRole="Login_tbl" ToRole="Login_tbl1" />
+          <NavigationProperty Name="Login_tbl2" Relationship="UniversityModel.FK_AdminLogin" FromRole="Login_tbl1" ToRole="Login_tbl" />
+        </EntityType>
+        <Association Name="FK_Login_tbl_Role">
+          <End Type="UniversityModel.Role" Role="Role" Multiplicity="0..1" />
+          <End Type="UniversityModel.Login_tbl" Role="Login_tbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Login_tbl">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="Sp_Login_form_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="RoleID" Nullable="true" Precision="18" Scale="0" />
+        </ComplexType>
+        <Association Name="FK_CustomerLogin">
+          <End Type="UniversityModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="UniversityModel.Login_tbl" Role="Login_tbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Login_tbl">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AdminLogin">
+          <End Type="UniversityModel.Login_tbl" Role="Login_tbl" Multiplicity="0..1" />
+          <End Type="UniversityModel.Login_tbl" Role="Login_tbl1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login_tbl">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Login_tbl1">
+              <PropertyRef Name="AdminId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="UniversityModelStoreContainer" CdmEntityContainer="UniversityEntities">
+          <EntitySetMapping Name="CategoryMaster">
+            <EntityTypeMapping TypeName="UniversityModel.CategoryMaster">
+              <MappingFragment StoreEntitySet="CategoryMaster">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customer">
+            <EntityTypeMapping TypeName="UniversityModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="ZIP" ColumnName="ZIP" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="ContactTelephone" ColumnName="ContactTelephone" />
+                <ScalarProperty Name="ContactEmail" ColumnName="ContactEmail" />
+                <ScalarProperty Name="CurrencyBaseUnit" ColumnName="CurrencyBaseUnit" />
+                <ScalarProperty Name="CCTerminalID" ColumnName="CCTerminalID" />
+                <ScalarProperty Name="CCTransactionKey" ColumnName="CCTransactionKey" />
+                <ScalarProperty Name="CCClearingPlatform" ColumnName="CCClearingPlatform" />
+                <ScalarProperty Name="TimeZone" ColumnName="TimeZone" />
+                <ScalarProperty Name="DSTAdjust" ColumnName="DSTAdjust" />
+                <ScalarProperty Name="DateTimeCreated" ColumnName="DateTimeCreated" />
+                <ScalarProperty Name="DateTimeModified" ColumnName="DateTimeModified" />
+                <ScalarProperty Name="MediumCashBoxValuePriority" ColumnName="MediumCashBoxValuePriority" />
+                <ScalarProperty Name="HighCashBoxValuePriority" ColumnName="HighCashBoxValuePriority" />
+                <ScalarProperty Name="CoinBoxVolume" ColumnName="CoinBoxVolume" />
+                <ScalarProperty Name="ImageLogoPath" ColumnName="ImageLogoPath" />
+                <ScalarProperty Name="BankReconOffset" ColumnName="BankReconOffset" />
+                <ScalarProperty Name="CoinAcceptanceRateThreshold" ColumnName="CoinAcceptanceRateThreshold" />
+                <ScalarProperty Name="CCTransactionFee" ColumnName="CCTransactionFee" />
+                <ScalarProperty Name="SecureGatewayFee" ColumnName="SecureGatewayFee" />
+                <ScalarProperty Name="ManagementSystemFee" ColumnName="ManagementSystemFee" />
+                <ScalarProperty Name="CustomerActive" ColumnName="CustomerActive" />
+                <ScalarProperty Name="CustomerBillable" ColumnName="CustomerBillable" />
+                <ScalarProperty Name="PaymentProcessor" ColumnName="PaymentProcessor" />
+                <ScalarProperty Name="DailyNotificationsEmail" ColumnName="DailyNotificationsEmail" />
+                <ScalarProperty Name="BillingEmail" ColumnName="BillingEmail" />
+                <ScalarProperty Name="CurrencyCode" ColumnName="CurrencyCode" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+                <ScalarProperty Name="DefaultLanguage" ColumnName="DefaultLanguage" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="WebUserIDCreated" ColumnName="WebUserIDCreated" />
+                <ScalarProperty Name="WebUserIDModified" ColumnName="WebUserIDModified" />
+                <ScalarProperty Name="IsSmartCardUsed" ColumnName="IsSmartCardUsed" />
+                <ScalarProperty Name="CCUserID" ColumnName="CCUserID" />
+                <ScalarProperty Name="AccessCardCustomer" ColumnName="AccessCardCustomer" />
+                <ScalarProperty Name="AccessCardAddress" ColumnName="AccessCardAddress" />
+                <ScalarProperty Name="AccessCardCity" ColumnName="AccessCardCity" />
+                <ScalarProperty Name="AccessCardState" ColumnName="AccessCardState" />
+                <ScalarProperty Name="AccessCardZIP" ColumnName="AccessCardZIP" />
+                <ScalarProperty Name="ObservesDST" ColumnName="ObservesDST" />
+                <ScalarProperty Name="Alerts" ColumnName="Alerts" />
+                <ScalarProperty Name="CCFee" ColumnName="CCFee" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FAQ">
+            <EntityTypeMapping TypeName="UniversityModel.FAQ">
+              <MappingFragment StoreEntitySet="FAQ">
+                <ScalarProperty Name="AssocitedID" ColumnName="AssocitedID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FAQDoc">
+            <EntityTypeMapping TypeName="UniversityModel.FAQDoc">
+              <MappingFragment StoreEntitySet="FAQDoc">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FAQId" ColumnName="FAQId" />
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+                <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GeneralFeedback">
+            <EntityTypeMapping TypeName="UniversityModel.GeneralFeedback">
+              <MappingFragment StoreEntitySet="GeneralFeedback">
+                <ScalarProperty Name="AssocitedID" ColumnName="AssocitedID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FeedbackDescription" ColumnName="FeedbackDescription" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HomeBanner">
+            <EntityTypeMapping TypeName="UniversityModel.HomeBanner">
+              <MappingFragment StoreEntitySet="HomeBanner">
+                <ScalarProperty Name="AssocitedID" ColumnName="AssocitedID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="LinkTo" ColumnName="LinkTo" />
+                <ScalarProperty Name="ImageALT" ColumnName="ImageALT" />
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HomeSlider">
+            <EntityTypeMapping TypeName="UniversityModel.HomeSlider">
+              <MappingFragment StoreEntitySet="HomeSlider">
+                <ScalarProperty Name="AssocitedID" ColumnName="AssocitedID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="TextDescription" ColumnName="TextDescription" />
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+                <ScalarProperty Name="ImageALT" ColumnName="ImageALT" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product">
+            <EntityTypeMapping TypeName="UniversityModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="AssocitedID" ColumnName="AssocitedID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+                <ScalarProperty Name="ImageALT" ColumnName="ImageALT" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SubCategoryId" ColumnName="SubCategoryId" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductDocuments">
+            <EntityTypeMapping TypeName="UniversityModel.ProductDocuments">
+              <MappingFragment StoreEntitySet="ProductDocuments">
+                <ScalarProperty Name="AssocitedID" ColumnName="AssocitedID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Decription" ColumnName="Decription" />
+                <ScalarProperty Name="DocumentURL" ColumnName="DocumentURL" />
+                <ScalarProperty Name="DocumentDisplayName" ColumnName="DocumentDisplayName" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductFAQs">
+            <EntityTypeMapping TypeName="UniversityModel.ProductFAQs">
+              <MappingFragment StoreEntitySet="ProductFAQs">
+                <ScalarProperty Name="AssocitedID" ColumnName="AssocitedID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="Answer" ColumnName="Answer" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="VideoUrl" ColumnName="VideoUrl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductFAQVideos">
+            <EntityTypeMapping TypeName="UniversityModel.ProductFAQVideos">
+              <MappingFragment StoreEntitySet="ProductFAQVideos">
+                <ScalarProperty Name="AssocitedID" ColumnName="AssocitedID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProductFAQsId" ColumnName="ProductFAQsId" />
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+                <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductFeedback">
+            <EntityTypeMapping TypeName="UniversityModel.ProductFeedback">
+              <MappingFragment StoreEntitySet="ProductFeedback">
+                <ScalarProperty Name="AssocitedID" ColumnName="AssocitedID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FeedbackDescription" ColumnName="FeedbackDescription" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductSpec">
+            <EntityTypeMapping TypeName="UniversityModel.ProductSpec">
+              <MappingFragment StoreEntitySet="ProductSpec">
+                <ScalarProperty Name="AssocitedID" ColumnName="AssocitedID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductUserGuide">
+            <EntityTypeMapping TypeName="UniversityModel.ProductUserGuide">
+              <MappingFragment StoreEntitySet="ProductUserGuide">
+                <ScalarProperty Name="AssocitedID" ColumnName="AssocitedID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+                <ScalarProperty Name="ImageALT" ColumnName="ImageALT" />
+                <ScalarProperty Name="DocumentURL" ColumnName="DocumentURL" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductVideos">
+            <EntityTypeMapping TypeName="UniversityModel.ProductVideos">
+              <MappingFragment StoreEntitySet="ProductVideos">
+                <ScalarProperty Name="AssocitedID" ColumnName="AssocitedID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Decription" ColumnName="Decription" />
+                <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+                <ScalarProperty Name="ThumbnailURL" ColumnName="ThumbnailURL" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RecentVisitedProduct">
+            <EntityTypeMapping TypeName="UniversityModel.RecentVisitedProduct">
+              <MappingFragment StoreEntitySet="RecentVisitedProduct">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="ViewedDate" ColumnName="ViewedDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="UniversityModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubCategoryMaster">
+            <EntityTypeMapping TypeName="UniversityModel.SubCategoryMaster">
+              <MappingFragment StoreEntitySet="SubCategoryMaster">
+                <ScalarProperty Name="AssocitedID" ColumnName="AssocitedID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+                <ScalarProperty Name="ImageALT" ColumnName="ImageALT" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetCustomerList" FunctionName="UniversityModel.Store.GetCustomerList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UniversityModel.GetCustomerList_Result">
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SmartSerach" FunctionName="UniversityModel.Store.SmartSerach">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UniversityModel.SmartSerach_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="TableName" ColumnName="TableName" />
+                <ScalarProperty Name="Producttitle" ColumnName="Producttitle" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Web_Login">
+            <EntityTypeMapping TypeName="UniversityModel.Web_Login">
+              <MappingFragment StoreEntitySet="Web_Login">
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_LoginUniersity" FunctionName="UniversityModel.Store.sp_LoginUniersity" />
+          <EntitySetMapping Name="Login_tbl">
+            <EntityTypeMapping TypeName="UniversityModel.Login_tbl">
+              <MappingFragment StoreEntitySet="Login_tbl">
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Sp_Login_form" FunctionName="UniversityModel.Store.Sp_Login_form">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UniversityModel.Sp_Login_form_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

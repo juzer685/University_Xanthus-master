@@ -1,0 +1,21 @@
+﻿@model University.UI.Areas.Admin.Models.ProductFaqViewModel
+
+<form onsubmit="SaveProductFormFaq(event)" name="ProductFormFaq" enctype="multipart/form-data" method="post" action="/Admin/Product/SaveProductProductFAQ">
+    <div class="row py-2">
+
+        <div class="col">
+            @Html.HiddenFor(y => y.ProductId)
+            @Html.Hidden("FaqId", Model.Id)
+            @Html.TextBoxFor(m => m.Question, new { @class = "form-control", @Required = "Required" })
+        </div>
+        <input name="AssocitedID" id="ProductFAQAssocitedID" type="hidden" />
+        <div class="col">
+            @Html.TextBoxFor(m => m.Answer, new { @class = "form-control", @Required = "Required" })
+        </div>
+        <div class="col">
+            <input type="submit" class="btn btn-primary" value="Save" />
+            <input type="button" class="btn btn-primary" value="Delete" onclick="DeleteFAQ(this,'@Model.Id');" />
+            <input type="button" class="btn btn-primary" value="Add/Edit videos" onclick="AddEditFAQVideos('@Model.Id')" />
+        </div>
+    </div>
+</form>

@@ -1,0 +1,50 @@
+﻿@model  University.UI.Areas.Admin.Models.ProductDocumentViewModel
+
+<form onsubmit="SaveProductDocumentForm(event)" name="ProductDocumentForm" enctype="multipart/form-data" method="post" action="/Admin/Product/SaveProductDocument">
+    <div class="row py-2">
+        <div class="col">
+            <input name="AssocitedID" id="ProductDOCAssocitedID" type="hidden" />
+            @Html.HiddenFor(y => y.ProductId)
+            @Html.Hidden("ProductDocumentId", Model.Id,new { @Value = Model.Id })
+            @Html.TextBoxFor(m => m.Title, new { @class = "form-control", @required = "required", @pattern = "^[^<>%$*@!#]*$", @title = "Special characters are not allowed." })
+            @Html.ValidationMessageFor(m => m.Title)
+        </div>
+        <div class="col">
+            @Html.TextAreaFor(m => m.Decription, new { @class = "form-control", @rows = "1", @required = "required" })
+            @Html.ValidationMessageFor(m => m.Decription)
+        </div>
+
+        @if (string.IsNullOrWhiteSpace(Model.DocumentURL))
+        {
+            <div class="col custom-file">
+                <input type="file" class="custom-file-input" id="customFile" accept="application/pdf ,application/vnd.ms-excel">
+                <label class="custom-file-label" for="customFile">Choose file</label>
+            </div>
+        }
+        else
+        {
+            <div class="col custom-file">
+                <input type="file" class="custom-file-input" id="customFile" >
+                <label class="custom-file-label" for="customFile">Choose file</label>
+                <a href="@Model.DocumentFullPath" target="_blank">@Model.DocumentDisplayName</a>
+            </div>
+        }
+        <div class="col">
+            @Html.TextAreaFor(m => m.DocumentDisplayName, new { @class = "form-control", @rows = "1" })
+            @Html.ValidationMessageFor(m => m.DocumentDisplayName)
+        </div>
+        <div class="col">
+            <input type="submit" class="btn btn-primary" value="Save" />&nbsp;
+            <input type="button" class="btn btn-primary" value="Delete" onclick="DeleteProductDocument(this,'@Model.Id')" />
+        </div>
+
+    </div>
+</form>
+
+<script>
+    $(document).ready(function () {
+        bsCustomFileInput.init();
+    });
+</script>
+
+

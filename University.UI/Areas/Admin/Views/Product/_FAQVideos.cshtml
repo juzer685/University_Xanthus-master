@@ -1,0 +1,36 @@
+﻿@model  University.UI.Areas.Admin.Models.ProductFaqViewModel
+@using University.UI.Areas.Admin.Models
+
+<div id="faqVideoGrid" class="grid-striped">
+    <div class="row font-weight-bold py-2">
+        <div class="col" />
+        <div class="col">
+        </div>
+        <div class="col">
+            <input type="button" class="btn-primary-ips" value="Add" onclick="AddFAQVideo()" style="float:right" />
+        </div>
+    </div>
+    <div class="row font-weight-bold py-2">
+        <div class="col">
+            Link to Video
+        </div>
+        @*<div class="col">
+            Video Thumbnail
+        </div>*@
+        <div class="col">
+            Action
+        </div>
+    </div>
+
+    @if (Model.ProductFAQVideoList != null && Model.ProductFAQVideoList.Count > 0)
+    {
+        for (int i = 0; i <= Model.ProductFAQVideoList.Count - 1; i++)
+        {
+            @Html.Partial("_FAQVideoForm", Model.ProductFAQVideoList[i])
+        }
+    }
+
+</div>
+<script id="FAQVideoTemplate" type="text/html">
+    @Html.Partial("_FAQVideoForm", new ProductFAQVideoViewModel() { ProductFAQsId = Model.Id })
+</script>

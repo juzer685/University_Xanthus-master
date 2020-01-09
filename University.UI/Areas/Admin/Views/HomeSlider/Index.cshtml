@@ -1,0 +1,175 @@
+﻿@model IEnumerable<University.UI.Areas.Admin.Models.HomeSliderViewModel>
+
+@{
+    ViewBag.Title = "Home Slider";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">Home Slider</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Administration</a></li>
+                    <li class="breadcrumb-item active">Home Slider</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row justify-center">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            @*<button type="button" class="btn btn-primary btn-sm b-w-80 homeslideradd" onclick="AddHomeSlider()">*@
+                                <button type="button" class="btn btn-primary btn-sm b-w-80 homeslideradd" >
+                                    Add
+                                </button>
+                        </h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="HomeSliderTable" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Text</th>
+                                    <th class="text-center">link</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    if (Convert.ToInt32(Session["UserSessionIDs"]) == item.AssocitedID)
+                                    {
+                                        <tr>
+                                            <td>@item.Product.Title</td>
+                                            <td>@item.TextDescription</td>
+                                            <td class="text-center">
+                                                <i class="fas fa-edit" onclick="AddHomeSlider('@item.Id')"></i>
+                                                <i class="fas fa-trash" onclick="DeleteHomeSlider('@item.Id')"></i>
+                                                @*<input type="button" class="btn-primary-ips" value="Edit" onclick="AddHomeSlider('@item.Id')" />
+                                                    <input type="button" class="btn-primary-ips" value="Delete" onclick="DeleteHomeSlider('@item.Id')" />*@
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+<!-- /Add Home Slider modal-dialog -->
+<div class="modal fade" id="AddEditHomeSlider">
+    <div class="modal-dialog">
+        <form id="homeSliderForm" action="/Admin/HomeSlider/AddEditHomeSlider">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                
+                    <input name="AssocitedID" id="HomesliderAssocitedID" type="hidden" />
+               
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add Home Slider</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body" id="popupBody">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /Add Home Slider modal-dialog -->
+
+<script>
+    $('.homeslideradd').click(function () {
+        if ($('#ddlusrlst').val() == 0) {
+            _showSuccessMessage("First Select User");
+
+        }
+        else
+        {
+            AddHomeSlider();
+        }
+
+    })
+    $(document).ready(function () {
+        $('#HomeSliderTable').DataTable();
+
+        $(document).on('submit', '#homeSliderForm', function (e) {
+            // code
+            $('#HomesliderAssocitedID').val($("#ddlusrlst").val());
+           
+            var form = $(this);
+            var url = form.attr('action');
+            var formData = new FormData($(this)[0]);
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: formData, // serializes the form's elements.
+                enctype: 'multipart/form-data',
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    _showSuccessMessage("Data Saved Successfully");
+                    setTimeout(function () { location.reload(); }, 1500);
+                }
+            });
+            e.preventDefault();
+        });
+    });
+
+    function AddHomeSlider(Id) {
+        $("#Link").val('');
+        $("#Id").val('');
+        $.ajax({
+            type: "POST",
+            url: "/Admin/HomeSlider/GetHomeSlider",
+            data: { Id: Id }, // serializes the form's elements.
+            success: function (data) {
+                // show response from the php script.
+                $("#popupBody").html(data);
+                $("#AddEditHomeSlider").modal('show');
+            }
+        });
+    }
+
+    function DeleteHomeSlider(Id) {
+        $("#DeleteConfirmationModal").modal('show');
+        $(document).on('click', 'button#confirmation-yes', function () {
+            $.ajax({
+                type: "POST",
+                url: "/Admin/HomeSlider/DeleteHomeSlider",
+                data: { Id: Id }, // serializes the form's elements.
+                success: function (data) {
+                    //alert("Data Deleted Successfully"); // show response from the php script.
+                    location.reload();
+                }
+            });
+        });
+    }
+</script>

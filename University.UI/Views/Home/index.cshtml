@@ -1,0 +1,346 @@
+﻿
+@using University.UI.Utilities
+@model University.UI.Models.HomePageViewModel
+
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link href="~/plugins/fontawesome-free/css/fontawesome.min.css" rel="stylesheet" />
+    <link href="~/dist/css/adminlte.min.css" rel="stylesheet" />
+    <link href="~/plugins/fontawesome-free/css/all.min.css" rel="stylesheet" />
+
+
+
+</head>
+<style>
+
+
+    /*css welcome content start*/
+
+    .aboutBlock .aboutTitle {
+        padding-bottom: 10px;
+        font-size: 25px;
+    }
+
+    .aboutBlock {
+        background-position-x: 32%;
+        padding: 60px 0;
+        height: 350px;
+    }
+
+
+
+    .titleBlock {
+        padding: 50px 0px 50px;
+        text-align: center;
+    }
+
+        .titleBlock .titleTxt {
+            color: black;
+            font-size: 32px;
+            margin: 0px;
+            margin-bottom: 0px;
+            font-family: 'HelveticaNeue Medium';
+            margin-left: 10px;
+        }
+
+            .titleBlock .titleTxt.black {
+                color: black;
+            }
+
+        .titleBlock .lastView {
+            color: darkblue;
+            font-size: 12px;
+            font-family: 'HelveticaNeue';
+        }
+
+            .titleBlock .lastView span {
+                color: darkblue;
+                font-size: 12px;
+                font-family: 'HelveticaNeue Medium';
+            }
+    /*css welcome content end*/
+
+    /*Header Logo Start*/
+    .img-container {
+        text-align: center;
+        display: block;
+    }
+
+    .logoBannerr {
+        margin-left: 20px;
+        margin-top: 5px;
+    }
+
+    .logoBanner {
+        background-color: white;
+        height: 150px;
+    }
+    /*Header Logo End*/
+    .middleContent {
+        background-color: #ffffff;
+    }
+
+    .accordion {
+        background-color: #f7f7f7;
+        color: #444;
+        cursor: pointer;
+        padding: 10px;
+        width: 100%;
+        border: 1px solid;
+        text-align: left;
+        outline: none;
+        font-size: 12px;
+        transition: 0.4s;
+    }
+
+        .accordion:after {
+            float: right;
+            margin-left: 5px;
+            content: "";
+            background: url(../Images/plus-icon.png) no-repeat;
+            width: 21px;
+            height: 21px;
+            background-size: contain;
+        }
+
+    .panel {
+        padding: 0 18px;
+        background-color: #f2f2f2;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+        border: 1px solid #AAA;
+        color: black;
+    }
+
+    .accordion:after {
+        float: right;
+        margin-left: 5px;
+        content: "";
+        background: url(../../Images/plus-icon.png) no-repeat;
+        width: 21px;
+        height: 21px;
+        background-size: contain;
+    }
+
+    .panel {
+        padding: 0 18px;
+        background-color: #f2f2f2;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+    }
+</style>
+<div>
+    <div class="timeline-item">
+        <div class="timeline-item timeline-body logoBanner">
+            <span class="img-container ">
+                <img class="logoBannerr" src="~/Images/university-logo.png" alt="slide" width="140" onerror="this.onerror = null; this.src ='~/images~/Images/NoImageAvailable.jpg'">
+            </span>
+
+        </div>
+    </div>
+</div>
+
+
+@*@if (Model.HomeBanners.Count() > 0)
+    {*@
+<div>
+    <div class="attachment-block clearfix">
+
+        <div class="card-body">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+
+                <div class="carousel-inner">
+                    @*@foreach (var item in Model.HomeBanners)
+                        {*@
+                    <div class="carousel-item active">
+                        <img class="img-responsive img-rounded" src="~/images/training1.png" alt="slide" width="100%" onclick="" style="cursor:pointer" onerror="this.onerror = null; this.src = '/images/noimageavailable.jpg';">
+                        @*<img class="img-responsive img-rounded" src="~/Images/Training1.png" alt="slide" width="100%" onclick="window.location.href='/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(item.ProductId.ToString(), System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])'" style="cursor:pointer" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';">*@
+                    </div>
+                    @*}*@
+                </div>
+                <a class="carousel-control-prev" href="carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+
+            </div>
+        </div>
+    </div>
+</div>
+@*}*@
+
+<div class="middleContent">
+    <div class="container">
+        <div class="pageBlock">
+            <div class="titleBlock" style="background-color:white;">
+                <div class="">
+                    <p class="titleTxt">
+                        Welcome back
+                        @if (Session["CustomerName"] != null)
+                        {
+                            @Session["CustomerName"].ToString()
+                        }!
+                    </p>
+                    <p class="lastView">Last viewed: <span>@Model.LastViewedProduct</span></p>
+                </div>
+            </div>
+            @*@if (Model.BannerImage.ImageURL != null)
+                {*@
+            <div class="bannerContainer" style="text-align:center">
+                @*<img class="meter-icon" src="@Model.BannerImage.ImageURL" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" onclick="window.open('@Model.BannerImage.LinkTo')" alt="slide" style="cursor:pointer;width:200px;">*@
+                <img class="meter-icon" src="~/Images/Training2.png" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" onclick="" alt="slide" style="cursor:pointer;width:200px;">
+            </div>
+            @*}*@
+
+
+            <div class="searchBlock whiteBg row clearfix" style="display:block;margin-top: 40px;">
+                <div class="col-md-12">
+                    <div class="input-group">
+
+                        <input type="text" id="txtUserGuide" class="form-control" placeholder="Ask any question here, I.E. “How do I charge the M5”...." aria-label="Smart Search Home" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            @*<button id="smartSearch_home" class="btn btn-outline-secondary btn-navbar" type="button"><i class="fas fa-search" alt="slide" onerror="this.onerror = null; this.src = '/Images/NoImageAvailable.jpg';"></i></button>*@
+                            <button id="smartSearch_home" class="btn btn-outline-secondary" type="button">Search <img class="arrow-icon" src="~/images/arrow-icon.png" alt="slide" width="18" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="productListingContent">
+                <div class="row">
+
+                    @foreach (var product in Model.Products)
+                    {
+                        <div class="col-md-4">
+                            <div class="productContent">
+                                @*<div class="productImage background-product">
+                                        <a class="innerContent" href="/Products/ProductsById?ProductId=@product.Id">@product.Title </a>
+                                        <img class="arrow-icon" src="~/Uploads/Product/@product.ImageURL" alt="slide" width="100%">
+
+                                    </div>*@
+                                <div class="productImage background-product">
+                                    <a class="listitemProductName" href="/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(product.Id.ToString(),System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])">
+                                        <img class="" src="~/Uploads/Product/@product.ImageURL" alt="slide" width="100%" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';">
+                                    </a>
+                                </div>
+                                <div class="productDetails" style="text-align:center">
+                                    <div class="productName">
+                                        <a class="listitemProductName" href="/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(product.Id.ToString(),System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])">
+                                            <h2> @product.Title</h2>
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="aboutBlock">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-md-5">
+                            <div class="aboutTitle">About IPS University</div>
+                            <p>IPS University is an online learning resource center that provides 24/7 access to self-service training including maintenance how-to videos, technical manuals, and more. Become a pro with all the information you need to keep your IPS Smart Meters running at optimum performance. </p>
+                            <a href="/Home/about">Continue reading <img class="arrow-icon" src="/images/arrow-icon.png" alt="slide" width="18" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="titleBlock feedback" style="margin-top:20px; background-color: white;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-md-12">
+                            <p class="titleTxt">Feedback</p><br />
+                            <p class="lastView">Feedback! Ideas for improvements? Or just want to chat about possiblties? Use the form  stylbelow to connect.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- textarea -->
+                    <div class="form-group " style="margin-top: 10px;">
+
+                        <textarea value="Feedback" id="txtFeedback" class="form-control textAreaBox" rows="8" placeholder="I would love if you guys could show me an example of how..."></textarea>
+                    </div>
+                    <div style="text-align:center">
+                        <button id="btnSubmit" class="btn-primary" type="button">Submit</button>
+                    </div>
+                </div>
+            </div>
+            <div class="accordionBlock faq" style="background-color:white;margin-top:10px;">
+                <div class="titleBlock">
+                    <div class="container">
+                        <p class="titleTxt black">FAQ</p>
+                    </div>
+                </div>
+
+                <div class="productInfo container">
+                    @foreach (var item in Model.ProductFAQs)
+                    {
+                        <button class="accordion">@item.Question</button>
+                        <div class="panel">
+                            <p>@item.Answer</p>
+
+                        </div>
+                    }
+                </div>
+            </div>
+
+            @*<div class="accordionBlock faq" style="background-color:white;margin-top:10px;">
+                    <div class="titleBlock">
+                        <div class="container">
+                            <p class="titleTxt black">FAQ</p>
+                        </div>
+                    </div>
+
+                    <div class="productInfo container">
+                        @foreach (var item in Model.ProductFAQs)
+                        {
+                            <button class="accordion">@item.Question</button>
+                            <div class="panel">
+                                <p>@item.Answer</p>
+
+                            </div>
+                        }
+                    </div>
+                </div>*@
+
+        </div>
+    </div>
+</div>
+<script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        });
+    }
+</script>
+

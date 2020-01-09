@@ -1,0 +1,113 @@
+﻿@model IEnumerable<University.UI.Areas.Admin.Models.ProductViewModel>
+
+@{
+    ViewBag.Title = "Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .pageContainer {
+        background-color: #e8e8e8;
+    }
+
+    .table-bordered, td {
+        border-color: black;
+    }
+</style>
+@*<div class="page-content">*@
+    <div class="breadcrumbSearchContainer">
+        <div class="row">
+            <div class="col-12 col-md-8">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item" aria-current="page"><a href="/Home">Home</a></li>
+                        <li class="breadcrumb-item" aria-current="page"><a href="#">Administration</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Product</li>
+                    </ol>
+
+                </nav>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Smart Search..." aria-label="Smart Search" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button id="smartSearch" class="btn btn-outline-secondary" type="button">SEARCH</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container pageContainer">
+        <br />
+        <h2>Product</h2>
+        <br />
+
+
+
+
+        <div class="table-responsive">
+            <input type="button" class="btn-primary-ips" value="Add" onclick="AddProduct()" style="float:`left;" />
+            <table class="display" style="width:100%" id="ProductTable">
+                <thead>
+                    <tr>
+                        <th>Category Name</th>
+                        @*<th>Sub Category Name</th>*@
+                        <th>Product Title</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            @*<td>@item.CategoryMaster.Name</td>*@
+                            <td>@item.SubCategoryMaster.Name</td>
+                            <td>@item.Title</td>
+                            <td>
+                                <input type="button" class="btn-primary-ips" value="Edit" onclick="AddProduct('@item.Id')" />
+                                <input type="button" class="btn-primary-ips" value="Delete" onclick="DeleteProduct('@item.Id')" />
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div style="display:none;">
+        <form id="AddEditForm" method="post" action="@Url.Action("AddEditProduct","Product", new { area = "Admin" })">
+            <input type="text" id="ProductId" name="ProductId" />
+        </form>
+    </div>
+
+    @*</div>*@
+    <script>
+        $(document).ready(function () {
+            $('#ProductTable').DataTable();
+        });
+
+
+        function AddProduct(Id) {
+            var form = $("#AddEditForm");
+            $("#ProductId").val(Id);
+            form.submit();
+        }
+
+        function DeleteProduct(Id) {
+            $('.overlayDelete').css({ "visibility": "visible", "opacity": "1" });
+            $(document).on('click', '.ConfirmBtn', function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/Admin/Product/DeleteProduct",
+                    data: { Id: Id }, // serializes the form's elements.
+                    success: function (data) {
+                        //alert("Data Deleted Successfully"); // show response from the php script.
+                        location.reload();
+                    }
+                });
+            });
+        }
+
+    </script>

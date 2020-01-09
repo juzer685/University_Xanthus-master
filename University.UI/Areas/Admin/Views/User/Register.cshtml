@@ -1,0 +1,166 @@
+﻿@model University.UI.Areas.Admin.Models.RegistrationVM
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section styles{
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link href="~/dist/css/Loader.css" rel="stylesheet" />
+}
+
+<div id="loaderring">
+    <p>
+        <img src="~/Images/ajax_loader.gif" />
+    </p>
+</div>
+<div class="register-box" style="margin:auto;">
+    <div class="register-logo">
+        <a href="../../index2.html"><b>User Registration</b></a>
+    </div>
+
+    <div class="card">
+        <div class="card-body register-card-body">
+            <p class="login-box-msg">Register a new membership</p>
+
+            <form action="/Admin/User/Register" method="post" id="UserRegistrationForm">
+                @Html.ValidationMessageFor(x => x.FirstName, null, new { @class = "", style = "color:red;" })
+                <div class="input-group mb-3">
+                    @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control", placeholder = "First Name" })
+                    @*<input type="text" class="form-control" name="FirstName" placeholder="First Name">*@
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-user"></span>
+                        </div>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(x => x.LastName, null, new { @class = "", style = "color:red;" })
+                <div class="input-group mb-3">
+                    @Html.TextBoxFor(x => x.LastName, new { @class = "form-control", placeholder = "Last Name" })
+                    @*<input type="text" class="form-control" name="LastName" placeholder="LastName">*@
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-envelope"></span>
+                        </div>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(x => x.MobileNo, null, new { @class = "", style = "color:red;" })
+                <div class="input-group mb-3">
+                    @Html.TextBoxFor(x => x.MobileNo, new { @class = "form-control", placeholder = "Mobile Number" })
+                    @*<input type="text" class="form-control" name="MobileNo" placeholder="Mobile Number">*@
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-envelope"></span>
+                        </div>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(x => x.Email, null, new { @class = "", style = "color:red;" })
+                <div class="input-group mb-3">
+                    @Html.TextBoxFor(x => x.Email, new { @class = "form-control", placeholder = "Email" })
+                    @*<input type="text" class="form-control" name="Email" placeholder="Email">*@
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-envelope"></span>
+                        </div>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(x => x.Password, null, new { @class = "", style = "color:red;" })
+                <div class="input-group mb-3">
+                    @Html.PasswordFor(x => x.Password, new { @class = "form-control", placeholder = "Password" })
+                    @*<input type="password" class="form-control" name="Password" placeholder="Password">*@
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(x => x.ConfirmPassword, null, new { @class = "", style = "color:red;" })
+                <div class="input-group mb-3">
+                    @Html.PasswordFor(x => x.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password" })
+                    @*<input type="password" class="form-control" name="Password" placeholder="Password">*@
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
+                @*<div class="input-group mb-3">
+                        <input type="password" class="form-control" name="ConfirmPassword" placeholder="Retype password">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>*@
+                @Html.ValidationMessageFor(x => x.CustomerId, null, new { @class = "", style = "color:red;" })
+                <div class="input-group mb-3">
+                    @*<input type="email" class="form-control" placeholder="Customer">*@
+                    @Html.DropDownListFor(x => x.CustomerId, new SelectList(Model.CustomerList, "CustomerID", "CompanyName"), "Select Customer", new { @class = "form-control" })
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-envelope"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8">
+                        <div class="icheck-primary">
+                            <input type="checkbox" id="agreeTerms" name="terms" value="agree">
+                            <label for="agreeTerms">
+                                I agree to the <a href="#">terms</a>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-4">
+                        @*<button type="submit" class="btn btn-primary btn-block">Register</button>*@
+                        <input type="submit" id="UserRegisterationBtn" class="btn btn-primary btn-block" value="Register">
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+
+            @*<div class="social-auth-links text-center">
+                    <p>- OR -</p>
+                    <a href="#" class="btn btn-block btn-primary">
+                        <i class="fab fa-facebook mr-2"></i>
+                        Sign up using Facebook
+                    </a>
+                    <a href="#" class="btn btn-block btn-danger">
+                        <i class="fab fa-google-plus mr-2"></i>
+                        Sign up using Google+
+                    </a>
+                </div>
+
+                <a href="login.html" class="text-center">I already have a membership</a>*@
+        </div>
+        <!-- /.form-box -->
+    </div><!-- /.card -->
+</div>
+
+<!-- /.register-box -->
+@section scripts{
+    <!-- jQuery -->
+    <script src="../../plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="../../dist/js/adminlte.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/Register.js"></script>
+}
+
+
+
+
+

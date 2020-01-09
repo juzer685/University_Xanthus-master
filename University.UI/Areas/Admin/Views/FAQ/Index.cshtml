@@ -1,0 +1,166 @@
+﻿@model IEnumerable<University.UI.Areas.Admin.Models.FAQViewModel>
+
+@{
+    ViewBag.Title = "FAQ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">FAQs</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Administration</a></li>
+                    <li class="breadcrumb-item active">FAQs</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row justify-center">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            @*<button type="button" class="btn btn-primary btn-sm b-w-80" onclick="AddFAQ()">*@
+                            <button type="button" class="btn btn-primary btn-sm b-w-80 FAQadd" >
+                            Add
+                            </button>
+                        </h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="FAQTable" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Question</th>
+                                    <th class="text-center">Answer</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    if (Convert.ToInt32(Session["UserSessionIDs"]) == item.AssocitedID)
+                                    {
+                                        <tr>
+                                            <td>@item.Question</td>
+                                            <td>@item.Answer</td>
+                                            <td class="text-center">
+                                                <i class="fas fa-edit" onclick="AddFAQ('@item.Id')"></i>
+                                                <i class="fas fa-trash" onclick="DeleteFAQ('@item.Id')"></i>
+                                            </td>
+                                        </tr>
+                                     }
+                                    }
+                                </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+<!-- /Add Home Slider modal-dialog -->
+<div class="modal fade" id="AddEditFAQ">
+    <form id="faqForm" action="/Admin/FAQ/AddEditFAQ">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <input name="AssocitedID" id="FAQAssocitedID" type="hidden" />
+                <div class="modal-header">
+                    <h4 class="modal-title">FAQ</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" id="popupBody">
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<!-- /Add Home Slider modal-dialog -->
+
+<script>
+    $('.FAQadd').click(function () {
+        if ($('#ddlusrlst').val() == 0)
+        {
+            _showSuccessMessage("First Select User");
+        }
+        else
+        {
+            AddFAQ();
+        }
+    })
+
+    $(document).ready(function () {
+        $('#FAQTable').DataTable();
+
+        $(document).on('submit', '#faqForm', function (e) {
+            // code
+             $('#FAQAssocitedID').val($("#ddlusrlst").val());
+            
+            var form = $(this);
+            var url = form.attr('action');
+            var formData = new FormData($(this)[0]);
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: formData, // serializes the form's elements.
+                //enctype: 'multipart/form-data',
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    //$('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
+                    //alert("Data Saved Successfully"); // show response from the php script.
+                    _showSuccessMessage("Data Saved Successfully");
+                    setTimeout(function () { location.reload(); }, 1500);
+                }
+            });
+            e.preventDefault();
+        });
+    });
+
+    function AddFAQ(Id) {
+        $.ajax({
+            type: "POST",
+            url: "/Admin/FAQ/GetFAQ",
+            data: { id: Id }, // serializes the form's elements.
+            success: function (data) {
+                // show response from the php script.
+                $("#popupBody").html(data);
+                $("#AddEditFAQ").modal('show');
+            }
+        });
+    }
+
+    function DeleteFAQ(Id) {
+        $("#DeleteConfirmationModal").modal('show');
+        $(document).on('click', 'button#confirmation-yes', function () {
+            $.ajax({
+                type: "POST",
+                url: "/Admin/FAQ/DeleteFAQ",
+                data: { Id: Id }, // serializes the form's elements.
+                success: function (data) {
+                    //alert("Data Deleted Successfully"); // show response from the php script.
+                    location.reload();
+                }
+            });
+        });
+    }
+</script>

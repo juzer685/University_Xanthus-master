@@ -1,0 +1,125 @@
+﻿@model IEnumerable<University.UI.Areas.Admin.Models.ProductViewModel>
+
+@{
+    ViewBag.Title = "Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">Product</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Administration</a></li>
+                    <li class="breadcrumb-item active">Product</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row justify-center">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            @*<button type="button" class="btn btn-primary btn-sm b-w-80" onclick="AddProduct()">*@
+                            <button type="button" class="btn btn-primary btn-sm b-w-80 addproduct" >
+                                Add
+                            </button>
+                        </h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="ProductTable" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Category Name</th>
+                                    <th>Product Title</th>
+                                    <th>Action</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    if (Convert.ToInt32(Session["UserSessionIDs"]) == item.AssocitedID)
+                                    {
+                                        <tr>
+                                            <td>@item.SubCategoryMaster.Name</td>
+                                            <td>@item.Title</td>
+                                            <td>
+                                                @*<input name="AssocitedID" id="BasicDeatilsAssocitedID" type="hidden" />*@
+                                                <i class="fas fa-edit" onclick="AddProduct('@item.Id')"></i>
+                                                <i class="fas fa-trash" onclick="DeleteProduct('@item.Id')"></i>
+                                                @*<input type="button" class="btn-primary-ips" value="Edit" onclick="AddProduct('@item.Id')" />
+                                                <input type="button" class="btn-primary-ips" value="Delete" onclick="DeleteProduct('@item.Id')" />*@
+                                            </td>
+                                        </tr>
+                                     }
+                                    }
+                                </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+@* Add Edit Form *@
+<div style="display:none;">
+    <form id="AddEditForm" method="post" action="@Url.Action("AddEditProduct","Product", new { area = "Admin" })">
+        <input type="text" id="ProductId" name="ProductId" />
+
+    </form>
+</div>
+
+<script>
+    $('.addproduct').click(function () {
+        if ($('#ddlusrlst').val() == 0) {
+            _showSuccessMessage("First Select User");
+        }
+        else
+        {
+            AddProduct();
+        }
+
+    })
+
+
+    $(document).ready(function () {
+        $('#ProductTable').DataTable();
+        $('#BasicDeatilsAssocitedID').val($("#ddlusrlst").val());
+    });
+
+    function AddProduct(Id) {
+        var form = $("#AddEditForm");
+        $("#ProductId").val(Id);
+       
+        form.submit();
+    }
+    function DeleteProduct(Id) {
+        $("#DeleteConfirmationModal").modal('show');
+        $(document).on('click', 'button#confirmation-yes', function () {
+            $.ajax({
+                type: "POST",
+                url: "/Admin/Product/DeleteProduct",
+                data: { Id: Id }, // serializes the form's elements.
+                success: function (data) {
+                    //alert("Data Deleted Successfully"); // show response from the php script.
+                    location.reload();
+                }
+            });
+        });
+    }
+</script>

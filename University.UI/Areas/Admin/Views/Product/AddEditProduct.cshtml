@@ -1,0 +1,186 @@
+﻿@model University.UI.Areas.Admin.Models.ProductViewModel
+
+@{
+    ViewBag.Title = "Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">Add/Edit Product</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Administration</a></li>
+                    <li class="breadcrumb-item"><a href="/Admin/Product">Product</a></li>
+                    <li class="breadcrumb-item active">@(Model?.Title)</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row justify-center">
+            <div class="col-md-12">
+                <div class="card card-primary card-tabs">
+                    <div class="card-header p-0 pt-1">
+                        <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
+                            <li class="nav-item" id="basicdeatils"><a class="nav-link active" data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadProductBasicDetails">Basic Details</a></li>
+                            <li class="nav-item" ><a id="userguide" class="nav-link" data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadProductUserGuide">User Guide</a></li>
+                            <li class="nav-item" ><a id="video" class="nav-link" data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductVideos"> Videos</a></li>
+                            <li class="nav-item" ><a id="FAQ" class="nav-link" data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductFAQ"> FAQ</a></li>
+                            <li class="nav-item" ><a id="spec" class="nav-link" data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadProductSpecifiction"> Spec</a></li>
+                            <li class="nav-item" ><a id="howto" class="nav-link" data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductDocuments"> How To</a></li>
+                        </ul>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                      
+                        <input type="hidden" id="HdProductId" value="@Model.Id" />
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="tab-content bottomMargin20">
+                                    <div id="frmDiv" class="tab-pane in active">
+                                        @Html.Partial("_AddEditProductBasicDetails", Model)
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <br />
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<script>
+        var baseURL = "/Admin/Product/";
+        var blankId = '@Guid.Empty';
+        $(document).ready(function () {
+            //$('#myTab').tab();
+            $(document).on('submit', '[name=ProductForm]', function (e) {
+                // code
+                $('#BasicDeatilsAssocitedID').val($("#ddlusrlst").val());
+            // alert($("#ddlusrlst").val());
+                var form = $(this);
+                var url = form.attr('action');
+                var formData = new FormData($(this)[0]);
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: formData, // serializes the form's elements.
+                    enctype: 'multipart/form-data',
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        $('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
+                        //alert("Data Saved Successfully"); // show response from the php script.
+                        $("#HdProductId").val(data);
+                        $("#Id").val(data);
+                        _showSuccessMessage("Data Saved Successfully");
+                        setTimeout(function () { $('#userguide').trigger('click'); }, 1500);
+                        //Cancel();
+                        //$("#frmDiv").html(data);
+                    }
+                });
+
+                e.preventDefault();
+            });
+
+            $('[data-toggle="tab"]').click(function (e) {
+                e.preventDefault();
+                var loadurl = $(this).attr('href');
+                var targ = $(this).attr('data-target');
+                var HdProductId = $("#HdProductId").val();
+                if (HdProductId == blankId) { alert("Please Save Product Basic Details !"); return false; }
+                $.get(loadurl + "?productId=" + HdProductId, function (data) {
+                    $(targ).html(data);
+                });
+
+                //$.ajax({
+                //    url: loadurl + "?productId=" + HdProductId,
+                //    success: function (data) {
+                //        $(targ).html(data);
+                //    }
+                //});
+                $(this).tab('show')
+            });
+        });
+
+
+
+    function Cancel() {
+            window.location.href = '@Url.Action("Index", "Product",new {Area="Admin" })';
+        }
+
+    function LoadProductSpecifiction(Id) {
+            $.ajax({
+                type: "POST",
+                url: "/Admin/Product/LoadProductSpecifiction",
+                data: { ProductId: Id }, // serializes the form's elements.
+                cache: false,
+                success: function (data) {
+                    $("#frmDiv").html(data);
+                }
+            });
+        }
+    function SaveProductSpec(e) {
+            $('#ProductspecAssocitedID').val($("#ddlusrlst").val());
+            alert($("#ddlusrlst").val());
+            var form = $(e.target);
+            var url = form.attr('action');
+            var formData = new FormData($(e.target)[0]);
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: formData, // serializes the form's elements.
+                enctype: 'multipart/form-data',
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    $('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
+                    //alert("Data Saved Successfully");
+                    _showSuccessMessage("Data Saved Successfully");
+                    setTimeout(function () { $('#howto').trigger('click'); }, 1500);
+                }
+            });
+
+            e.preventDefault();
+        }
+    function SaveProductUserGuide(e) {
+            $('#ProductUserGuideAssocitedID').val($("#ddlusrlst").val());
+            var form = $(e.target);
+            var url = form.attr('action');
+            var formData = new FormData($(e.target)[0]);
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: formData, // serializes the form's elements.
+                enctype: 'multipart/form-data',
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    $('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
+                    //alert("Data Saved Successfully");
+                    _showSuccessMessage("Data Saved Successfully");
+                    setTimeout(function () { $('#video').trigger('click'); }, 1500);
+                    //setTimeout(function () { location.reload(); }, 1500);
+                }
+            });
+
+            e.preventDefault();
+        }
+</script>

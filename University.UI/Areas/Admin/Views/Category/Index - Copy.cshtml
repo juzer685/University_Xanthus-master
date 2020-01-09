@@ -1,0 +1,147 @@
+﻿@model IEnumerable<University.UI.Areas.Admin.Models.CategoryViewModel>
+
+@{
+    ViewBag.Title = "Category";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .pageContainer {
+        background-color: #e8e8e8;
+    }
+
+    .table-bordered, td {
+        border-color: black;
+    }
+</style>
+<div class="page-content">
+    <div class="container pageContainer">
+        <br />
+        <h2>Category</h2>
+        <br />
+
+
+
+
+        <div class="table-responsive">
+            <input type="button" class="btn-primary-ips" value="Add" onclick="Add()" style="float:right" />
+            <table class="display" style="width:100%" id="categoryTable">
+                <thead>
+                    <tr>
+                        <th>Category Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>
+                                <input type="button" class="btn-primary-ips" value="Edit" onclick="Add('@item.Id')" />
+                                <input type="button" class="btn-primary-ips" value="Delete" onclick="DeleteCategory('@item.Id')" />
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <div id="AddEditCategory" class="modal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Category</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" id="popupBody">
+                    @Html.Partial("AddEditCategory", new University.UI.Areas.Admin.Models.CategoryViewModel())
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            //alert();
+
+            $('#categoryTable').DataTable();
+            $(document).on('submit', '#categoryForm', function (e) {
+                // code
+                var form = $(this);
+                var url = form.attr('action');
+                var formData = new FormData($(this)[0]);
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: formData, // serializes the form's elements.
+                    enctype: 'multipart/form-data',
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        $('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
+                        //alert("Data Saved Successfully"); // show response from the php script.
+                        setTimeout(function () {
+                            location.reload();
+                        }, 1500);
+                       
+                    }
+                });
+
+                e.preventDefault();
+            });
+
+        });
+
+
+        function Add(Id) {
+            $("#Name").val('');
+            $("#Id").val('');
+
+
+            $.ajax({
+                type: "POST",
+                url: "/Admin/Category/GetCategory",
+                data: { Id: Id }, // serializes the form's elements.
+                success: function (data) {
+                    //alert(data); // show response from the php script.
+                    $("#popupBody").html(data);
+                    $("#AddEditCategory").modal('show');
+                }
+            });
+        }
+
+        function DeleteCategory(Id) {
+            $('.overlayDelete').css({ "visibility": "visible", "opacity": "1" });
+            $(document).on('click', '.ConfirmBtn', function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/Admin/Category/DeleteCategory",
+                    data: { Id: Id }, // serializes the form's elements.
+                    success: function (data) {
+                        //alert("Data Deleted Successfully"); // show response from the php script.
+                        location.reload();
+                    }
+                });
+            });
+        }
+
+
+    </script>

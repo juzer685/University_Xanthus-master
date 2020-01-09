@@ -1,0 +1,74 @@
+﻿@model IEnumerable<University.UI.Areas.Admin.Models.ProductFeedbackViewModel>
+
+@{
+    ViewBag.Title = "Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">Product Feedback</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Administration</a></li>
+                    <li class="breadcrumb-item active">Product Feedback</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row justify-center">
+            <div class="col-md-12">
+                <div class="card">
+                    @*<div class="card-header">
+                        <h3 class="card-title">
+                            <button type="button" class="btn btn-primary btn-sm b-w-80" onclick="AddHomeSlider()">
+                                Add
+                            </button>
+                        </h3>
+                    </div>*@
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="ProductFeedbackTable" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Product Title</th>
+                                    <th>Feedback</th>
+                                    <th>Created Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.Product.Title</td>
+                                        <td>@item.FeedbackDescription</td>
+                                        <td>
+                                            @item.CreatedDate
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+<script>
+    $(document).ready(function () {
+        $('#ProductFeedbackTable').DataTable();
+    });
+</script>

@@ -1,0 +1,103 @@
+﻿@model University.UI.Areas.Admin.Models.ProductViewModel
+<style>
+    #image-preview {
+        width: 250px;
+        height: 250px;
+    }
+
+    .info-text {
+        font-size: 0.7rem;
+        color: #03A9F4;
+    }
+</style>
+
+<form id="ProductForm" name="ProductForm" enctype="multipart/form-data" method="post" action="/Admin/Product/SaveProduct">
+    @Html.HiddenFor(m => m.Id)
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <input name="AssocitedID" id="BasicDeatilsAssocitedID" type="hidden" />
+                <label for="email">Category Name</label>
+                @Html.DropDownListFor(m => m.SubCategoryId, new SelectList(ViewBag.SubCategoryList, "Id", "Name"), "--select category--", new { @class = "form-control", @required = "required" })
+                @Html.ValidationMessageFor(m => m.SubCategoryId)
+            </div>
+
+            <div class="form-group">
+                <label for="Title">Product Title</label>
+                @Html.TextBoxFor(m => m.Title, new { @class = "form-control", @required = "required", @pattern = "^[^<>%$*@!#]*$", @title = "Special characters are not allowed." })
+                @Html.ValidationMessageFor(m => m.Title)
+            </div>
+            <div class="form-group">
+                <label for="Description">Product Description</label>
+                @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @required = "required" })
+                @Html.ValidationMessageFor(m => m.Description)
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="info-text" for="ImageUrl">Image <span class="ShortText">(Please ensure featured image size is Less than 2MB)</span></label>
+                <div class="input-group">
+                    <div class="custom-file">
+                        <input type="file" name="file" class="custom-file-input" id="file" required accept="image/jpeg" onchange="readURL(this);">
+                        <label class="custom-file-label" for="exampleInputFile">Select Image</label>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(m => m.ImageURL)
+                <img id="image-preview" src= @Model.CheckImage alt="" class="imgStd" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';"  />
+            </div>
+
+            <div class="form-group">
+                <label for="ImageUrl">Image alt (SEO)</label>
+                @Html.TextBoxFor(m => m.ImageALT, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ImageALT)
+            </div>
+        </div>
+        <div class="right">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button onclick="Cancel()" type="button" class="btn btn-primary">Cancel</button>
+            <button onclick="Cancel()" type="button" class="btn btn-primary">Exit</button>
+        </div>
+    </div>
+</form>
+<script>
+    $(document).ready(function () {
+        bsCustomFileInput.init();
+
+        var image = "@Model.ImageURL";
+        if (image) {
+            $("#file").removeAttr("required");
+        }
+
+        $("#CategoryId").on("change", function () {
+            
+            var categoryId = $('#CategoryId').val();
+            if (categoryId) {
+                $.ajax({
+                    url: '/Admin/Product/GetSubCategoryList',
+                    type: 'GET',
+                    datatype: 'JSON',
+                    data: { CategoryId: categoryId },
+                    success: function (result) {
+                        $('#SubCategoryId').empty();
+                        $('#SubCategoryId').append($('<option value="">--select sub category--</option>'));
+                        $.each(result, function (i, item) {
+                            $('#SubCategoryId').append('<option value="' + item.Value + '">' + item.Name + '</option>');
+                        });
+                    }
+                });
+            }
+
+        });
+    });
+
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#image-preview').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>

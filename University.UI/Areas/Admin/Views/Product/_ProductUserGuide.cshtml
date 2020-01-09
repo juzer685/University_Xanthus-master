@@ -1,0 +1,111 @@
+﻿@model University.UI.Areas.Admin.Models.ProductUserGuideViewModel
+<style>
+    #image-preview {
+        width: 250px;
+        height: 250px;
+        border: 1px solid #ddd;
+    }
+
+    .info-text {
+        font-size: 0.7rem;
+        color: #03A9F4;
+    }
+</style>
+
+<form onsubmit="SaveProductUserGuide(event)" name="ProductSuserguide" enctype="multipart/form-data" method="post" action="/Admin/Product/SaveProductUserGuide">
+    @Html.HiddenFor(y => y.ProductId)
+    @Html.Hidden("UserGuideId", Model.Id)
+    <div class="row">
+        <div class="col-md-6">
+
+            <div class="form-group">
+                <input name="AssocitedID" id="ProductUserGuideAssocitedID" type="hidden" />
+                <label for="Title">Title</label>
+                @Html.TextBoxFor(m => m.Title, new { @class = "form-control", @required = "required", @pattern = "^[^<>%$*@!#]*$", @title = "Special characters are not allowed." })
+                @Html.ValidationMessageFor(m => m.Title)
+            </div>
+            <div class="form-group">
+                <label for="Description">Description</label>
+                @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @required = "required" })
+                @Html.ValidationMessageFor(m => m.Description)
+            </div>
+            <div class="form-group">
+                <label for="Description">Document (URL)</label>
+                @Html.TextBoxFor(m => m.DocumentURL, new { @class = "form-control", @required = "required" })
+                @Html.ValidationMessageFor(m => m.DocumentURL)
+                @if (!string.IsNullOrWhiteSpace(Model.DocumentURL))
+                {
+                    <a href="@Model.DocumentURL" target="_blank">Download Document</a>
+                }
+            </div>
+        </div>
+        <div class="col-md-6">
+            @*<div class="form-group">
+                    <label for="ImageUrl">Image <span class="ShortText">(Please ensure featured images are 250x250,Less than 2MB and .JPG format)</span></label>
+                    <input type="file" id="Guidefile" name="Guidefile" class="form-control validateHeightWidth" accept="image/gif, image/png" onchange="readURLGuide(this);" />
+                    @Html.ValidationMessageFor(m => m.ImageURL)
+                    @if (string.IsNullOrWhiteSpace(Model.ImageFullPath))
+                    {
+                        <img id="guideImage" name="guideImage" src="" alt="" class="imgStd" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';"/>
+                        <input style="display:none;" id="DeleteImage" onclick="deleteGuideImage()" type="button" value="X" />
+                    }
+                    else
+                    {
+                        <img id="guideImage" name="guideImage" src="@Model.ImageFullPath" class="imgStd" />
+                        <input id="DeleteImage" onclick="deleteGuideImage()" type="button" value="Delete Image" />
+                    }
+                    <input type="hidden" name="IsDeletedImg" id="IsDeletedImg" value="false" />
+                </div>*@
+            <div class="form-group">
+                <label class="info-text" for="ImageUrl">Image <span class="ShortText">(Please ensure featured image size is Less than 2MB)</span></label>
+                <div class="input-group">
+                    <div class="custom-file">
+                        <input type="file" name="file" class="custom-file-input" id="file" required accept="image/jpeg" onchange="readURL(this);">
+                        <label class="custom-file-label" for="exampleInputFile">Select Image</label>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(m => m.ImageURL)
+                <img id="image-preview" src=@Model.CheckImage alt="" class="imgStd" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" />
+
+                
+            </div>
+            <div class="form-group">
+                <label for="ImageUrl">Image alt (SEO)</label>
+                @Html.TextBoxFor(m => m.ImageALT, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ImageALT)
+            </div>
+        </div>
+        <div class="right">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-primary" onclick="Cancel()">Cancel</button>
+            <button type="button" class="btn btn-primary" onclick="Cancel()">Exit</button>
+        </div>
+    </div>
+</form>
+
+<script>
+    $(document).ready(function () {
+
+    });
+    function readURLGuide(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#guideImage')
+                    .attr('src', e.target.result);
+                $("#DeleteImage").show();
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    function deleteGuideImage() {
+        $("#IsDeletedImg").val(true);
+        $("#guideImage").attr("src", "");
+        $("#DeleteImage").hide();
+        $("#Guidefile").val('');
+    }
+</script>
+
+

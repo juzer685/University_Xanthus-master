@@ -1,0 +1,440 @@
+﻿@model University.UI.Areas.Admin.Models.ProductViewModel
+@{
+    ViewBag.Title = "ProductsById";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+
+    .ips-logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 0 1px rgba(0,0,0,.125), 0 1px 3px rgba(0,0,0,.2);
+        padding: 10px;
+    }
+
+    .product-info {
+        /*padding-bottom: 50px;
+        padding: 0px 100px;*/
+    }
+
+    .product-title {
+        display: flex;
+        justify-content: space-between;
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    .spec-desc,
+    .product-desc {
+        font-size: 0.9rem;
+    }
+
+    .spec-title,
+    .video-title {
+        font-size: 0.9rem;
+        font-weight: bold;
+        text-align: left;
+    }
+
+    .video-desc {
+        font-size: 0.9rem;
+        text-align: left;
+    }
+
+    .product-img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        .product-img img {
+            height: 250px;
+            width: 250px;
+        }
+
+    .product-full-info {
+        margin-top: 20px;
+    }
+
+        .product-full-info .product-title {
+            display: flex;
+            font-size: 1rem;
+            font-weight: bold;
+            justify-content: center;
+        }
+
+        .product-full-info .product-desc {
+            display: flex;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .product-full-info .product-img {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+            .product-full-info .product-img img {
+                width: 100%;
+                height: 100%;
+            }
+
+        .product-full-info .product-document {
+            display: flex;
+            justify-content: center;
+        }
+
+
+    .how-to-card {
+        padding: 28px;
+        border: 2px solid #e8e8e8;
+        border-top: 0px;
+        background-color: white;
+    }
+
+        .how-to-card .how-to-title {
+            font-size: 1.2rem;
+        }
+
+        .how-to-card .how-to-desc {
+            font-size: 1rem;
+        }
+
+        .how-to-card .how-to-link {
+            font-size: 1rem;
+        }
+
+    .feedback-textarea {
+        width: 100%;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    #btn-submit-feedback {
+        float: right;
+    }
+
+    .overlay {
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        opacity: 0.3;
+    }
+    /*.ytp-play-button ytp-button{
+        background: transparent;
+        border: none !important;
+        font-size:0;
+    }
+    .subtitles
+    {
+
+         background: transparent;
+    border: none !important;
+    font-size:0;
+    }
+    .video-stream html5-main-video
+    {
+
+         background: transparent;
+    border: none !important;
+    font-size:0;
+    }
+    .ytp-title-channel
+    {
+        display:none;
+         background: transparent;
+    border: none !important;
+    font-size:0;
+    }*/
+</style>
+
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">Product Information</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item" aria-current="page"><a href="/Home">Home</a></li>
+                    <li class="breadcrumb-item" aria-current="page"><a href="/Home/Products">Products</a></li>
+                    @if (!string.IsNullOrWhiteSpace(Model.SubCategoryMaster?.Name))
+                    {
+                        <li class="breadcrumb-item">
+                            <a href="/Products/ProductListByCategory?id=@Model.SubCategoryId">@System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(Model.SubCategoryMaster.Name?.ToLower() ?? "")</a>
+                        </li>
+                    }
+                    <li class="breadcrumb-item active">@Model.Title</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row justify-center">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="ips-logo">
+                            <img src="~/Images/university-logo.png" alt="slide" width="140" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';">
+                        </div>
+                        <div class="product-info">
+                            <div class="product-title">
+                                <p>@Model.Title</p>
+                                @*<a href="javascript:void(0);" onclick="window.print();">
+                                        <i class="fas fa-print"></i>
+                                    </a>*@
+                                <a href="javascript:void(0);" onclick="window.print();">
+                                    <img class="" src="/images/print.png" alt="slide" width="40" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';">
+                                </a>
+                            </div>
+                            <div class="product-desc">
+                                <p>@Model.Description</p>
+                            </div>
+                            <div class="product-img">
+                                @*<img src="@Model.ImageFullPath" alt="Product Image" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" />*@
+                                <img src="~/Images/Training2.png" alt="Product Image" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" />
+                            </div>
+
+                            <div class="col-md-12 col-lg-12 product-full-info">
+                                <div class="card card-primary card-outline card-outline-tabs">
+                                    <div class="card-header p-0 border-bottom-0">
+                                        <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" data-toggle="tab" href="#user-guide"><span>USER GUIDE</span></a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-toggle="tab" href="#videos"><span>VIDEOS</span></a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-toggle="tab" href="#faq"><span>FAQ</span></a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-toggle="tab" href="#specs"><span>SPECS</span></a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-toggle="tab" href="#how-to"><span>HOW TO</span></a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-toggle="tab" href="#feedback"><span>FEEDBACK</span></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="card-body">
+                                        <!-- Tab panes -->
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="user-guide">
+                                               
+                                                    @if (Convert.ToInt32(Session["UserLoginID"]) == Model.ProductUserGuide.AssocitedID)
+                                                    {
+                                                        <div class="product-guide">
+                                                            <div class="product-title"> @Model.ProductUserGuide.Title</div>
+                                                            <p class="product-desc">@Model.ProductUserGuide.Description</p>
+
+                                                            <div class="product-document">
+                                                                @if (!String.IsNullOrEmpty(@Model.ProductUserGuide.DocumentURL))
+                                                                {
+
+                                                                    if (@Model.ProductUserGuide.DocumentURL.Contains(".pdf"))
+                                                                    {
+                                                                        <object data="@Model.ProductUserGuide.DocumentURL" type="application/pdf" width="100%" height="800px">
+                                                                            <p>
+                                                                                It appears you don't have a PDF plugin for this browser.
+                                                                                No biggie... you can
+                                                                                <a href="@Model.ProductUserGuide.DocumentURL">
+                                                                                    click here to download the PDF file.
+                                                                                </a>
+                                                                            </p>
+                                                                        </object>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <a style="color:blue;" href="@Model.ProductUserGuide.DocumentURL" target="_blank">User Guide</a>
+                                                                    }
+                                                                }
+                                                            </div>
+                                                            @if (!string.IsNullOrWhiteSpace(Model.ProductUserGuide.ImageURL))
+                                                                {
+                                                                <div class="product-img">
+                                                                    <img class="" src="~/Uploads/Product/@Model.ProductUserGuide.ImageURL" alt="@Model.ProductUserGuide.ImageALT" width="100%" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';">
+                                                                </div>
+                                                                }
+                                                        </div>
+                                                    }
+                                                
+                                                </div>
+                                            <div class="tab-pane" id="videos">
+                                                <div class="col-lg-12 row">
+                                                    <div class="col-lg-8">
+                                                        <iframe class="video v1 MainVideo" width="450" height="250" src="https://www.youtube.com/embed/tJKueryWBG0" frameborder="0" allowfullscreen></iframe>
+                                                        @*<iframe class="video v1 MainVideo" width="450" height="250" src="" frameborder="0" allowfullscreen></iframe>*@
+                                                        <div class="video-title " style="">Subcontractors Need Help With Their Paperwork </div>
+                                                        <p class="video-desc">BUCHANAN & ASSOCIATES PROMO</p>
+                                                    </div>
+                                                    <div class="col-lg-4" style="">
+                                                        <div>
+                                                            <a onclick="return false;">
+                                                                <div class="col-lg-12 ppp">
+                                                                    <iframe class="video v1 ChildVideo" width="180" height="100" src="https://www.youtube.com/embed/tJKueryWBG0" frameborder="0" enablejsapi="1" allowfullscreen></iframe>
+                                                                    @*<iframe class="video v1 ChildVideo" width="180" height="100" src="https://www.youtube.com/embed/b6yg1LfugM8" frameborder="0" enablejsapi="1" allowfullscreen></iframe>*@
+                                                                    <div class="overlay" style=""></div>
+
+                                                                </div>
+                                                            </a>
+                                                            <div class="searchItemTitle">Subcontractors Need Help With Their Paperwork </div>
+                                                            <p class="block-ellipsis">BUCHANAN & ASSOCIATES PROMO</p>
+                                                        </div>
+                                                        <div>
+                                                            <a onclick="return false;">
+                                                                <div class="col-lg-12">
+                                                                    <iframe class="video v1 ChildVideo" width="180" height="100" src="https://www.youtube.com/embed/b6yg1LfugM8" frameborder="0" enablejsapi="1" allowfullscreen></iframe>
+                                                                    <div class="overlay" style=""></div>
+
+                                                                </div>
+                                                            </a>
+                                                            <div class="searchItemTitle">Best App for Business Management & Procurement Assistance </div>
+                                                            <div class="block-ellipsis">SMALLBIZPRO</div>
+                                                        </div>
+                                                        <div>
+                                                            <a onclick="return false;">
+                                                                <div class="col-lg-12">
+                                                                    <iframe class="video v1 ChildVideo" width="180" height="100" src="https://www.youtube.com/embed/r-1quxcUnwo" frameborder="0" enablejsapi="1" allowfullscreen></iframe>
+                                                                    <div class="overlay" style=""></div>
+
+                                                                </div>
+                                                            </a>
+                                                            <div class="searchItemTitle">The Business Zone w</div>
+                                                            <p class="block-ellipsis">SMALLBIZPRO</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane" id="faq">
+                                                <div class="productInfo">
+                                                    @foreach (var item in Model.ProductFAQs)
+                                                    {
+                                                        <button class="accordion">@item.Question</button>
+                                                        <div class="panel">
+                                                            <p>@item.Answer</p>
+                                                            @if (item.ProductFAQVideoList != null)
+                                                            {
+                                                                foreach (var Videoitem in item.ProductFAQVideoList)
+                                                                {
+                                                                    <div style="margin-bottom:20px;">
+                                                                        <iframe class="video v1" width="100%" height="400" src="@Videoitem.VideoURL" frameborder="0" allowfullscreen></iframe>
+                                                                    </div>
+                                                                }
+                                                            }
+                                                        </div>
+                                                    }
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane" id="specs">
+                                                @if (@Model.ProductSpec != null)
+                                                {
+                                                    <h3 class="spec-title">@Model.ProductSpec.Title</h3>
+                                                    <p class="spec-desc">@Model.ProductSpec.Description</p>
+                                                }
+                                            </div>
+                                            <div class="tab-pane" id="how-to">
+                                                @foreach (var item in @Model.ProductDocuments)
+                                                {
+                                                    <div class="how-to-card">
+                                                        <h3 class="how-to-title">@item.Title</h3>
+                                                        <p class="how-to-desc">@item.Decription</p>
+                                                        @if (!string.IsNullOrEmpty(item.DocumentFullPath))
+                                                        {
+                                                            <div class="how-to-link">
+                                                                <span>Download:  </span> <a href="@item.DocumentFullPath" download>@item.DocumentDisplayName</a>
+                                                            </div>
+                                                        }
+                                                    </div>
+                                                }
+                                            </div>
+                                            <div class="tab-pane" id="feedback">
+                                                <div class="feedback-container">
+                                                    <div class="feedback-area">
+                                                        <textarea class="feedback-textarea" rows="8" id="txtFeedback" placeholder="I would love if you guys could show me an example of how..."></textarea>
+                                                        <button id="btn-submit-feedback" class="btn btn-primary" type="button">Submit</button>
+                                                    </div>
+                                                    <p id="feedbackMsg" style="color:white;text-align:center">@TempData["IsReturnValue"] </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.card -->
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+
+
+<script>
+
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+            });
+        }
+
+    $("#btn-submit-feedback").click(function (e) {
+            var txtvalue = $("#txtFeedback").val();
+            var id = '@Model.Id.ToString()'
+            if (txtvalue.length > 0) {
+                $.ajax({
+                    type: "GET",
+                    url: "/Products/ProductFeedback?message=" + $("#txtFeedback").val() + '&id=' + id,
+                    success: function (data) {
+                        $("#feedbackMsg").text(data);
+
+                        $("#txtFeedback").val("")
+                    }
+                });
+            }
+            else {
+                $("#feedbackMsg").text("Please enter feedback.");
+            }
+            e.preventDefault();
+        });
+        function activaTab(tab) {
+            $('.nav-tabs a[href="#' + tab + '"]').tab('show');
+            sessionStorage.setItem("menu", '');
+        };
+
+        $(document).ready(function () {
+            var menu = sessionStorage.getItem("menu");
+            if (menu != '') {
+                activaTab(menu);
+            }
+        });
+
+        )
+</script>
