@@ -128,6 +128,7 @@
                 success: function (data) {
                     //$('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
                     //alert("Data Saved Successfully"); // show response from the php script.
+                        $("#AddEditFAQ").modal("hide");
                     _showSuccessMessage("Data Saved Successfully");
                     setTimeout(function () { location.reload(); }, 1500);
                 }
