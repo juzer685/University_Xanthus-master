@@ -135,6 +135,7 @@
                 contentType: false,
                 processData: false,
                 success: function (data) {
+                     $("#AddEditHomeSlider").modal("hide");
                     _showSuccessMessage("Data Saved Successfully");
                     setTimeout(function () { location.reload(); }, 1500);
                 }

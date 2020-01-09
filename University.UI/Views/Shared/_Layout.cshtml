@@ -167,7 +167,11 @@
                 <li class="nav-item dropdown" style="width:180px">
                     <div class="row ">
                         <div class="col-sm-6">
-                            @if (Session["RoleID"].ToString() == "4")
+                            @if (Session["RoleID"].ToString() == "")
+                            {
+                                @Url.Action("Login", "Login");
+                            }
+                            else if (Session["RoleID"].ToString() == "4")
                             {
                                 <div class="mt-2">
                                     <select id="ddlusrlst" class="form-control " style="width:208%">
@@ -317,7 +321,11 @@
                     </div>
                     <div class="info" style="padding: 2px 5px;">
                         <a class="user-name">
-                            @if (Session["RoleID"].ToString() == "4")
+                            @if (Session["RoleID"].ToString() == "")
+                            {
+                                @Url.Action("Login", "Login");
+                            }
+                            else if (Session["RoleID"].ToString() == "4")
                             {
                                 @Session["AdminName"].ToString();
                             }
@@ -326,9 +334,9 @@
                                 @Session["UserNamee"].ToString();
                             }
                             @*<span class="customer-id">
-                                    CustomerId : @if (Session["Customer"] != null)
-                                    {@Session["Customer"].ToString()}
-                                </span>*@
+            CustomerId : @if (Session["Customer"] != null)
+            {@Session["Customer"].ToString()}
+        </span>*@
                         </a>
                     </div>
                 </div>
