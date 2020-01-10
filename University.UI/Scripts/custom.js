@@ -127,13 +127,13 @@ $(document).ready(function () {
             var maxwidth = 250;
             var maxheight = 250;
          //   const fileType = file['type'];
-            const validImageTypes = ['image / png'];
-            img.src = _URL.createObjectURL(file);
+            const validImageTypes = ['image/jpeg'];
+            var src = _URL.createObjectURL(file);
             img.onload = function () {
                 imgwidth = this.width;
                 imgheight = this.height;
 
-                if (imgwidth == maxwidth && imgheight == maxheight && !validImageTypes.includes(img.src)) {
+                if (imgwidth == maxwidth && imgheight == maxheight && validImageTypes.includes(src)) {
                     return true;
                 } else {
                     $('.overlaySizeAlert').css({ "visibility": "visible", "opacity": "1" });
