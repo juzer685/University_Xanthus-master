@@ -10,6 +10,8 @@ namespace University.Repository
 {
    public class UserHomeSliderRepository: IUserHomeSliderRepository
     {
+        
+
         public List<HomeSlider> GetProductUserGuideList()
         {
             using (var context = new UniversityEntities())

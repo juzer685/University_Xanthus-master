@@ -126,13 +126,14 @@ $(document).ready(function () {
             var imgheight = 0;
             var maxwidth = 250;
             var maxheight = 250;
-
+         //   const fileType = file['type'];
+            const validImageTypes = ['image / png'];
             img.src = _URL.createObjectURL(file);
             img.onload = function () {
                 imgwidth = this.width;
                 imgheight = this.height;
 
-                if (imgwidth == maxwidth && imgheight == maxheight) {
+                if (imgwidth == maxwidth && imgheight == maxheight && !validImageTypes.includes(img.src)) {
                     return true;
                 } else {
                     $('.overlaySizeAlert').css({ "visibility": "visible", "opacity": "1" });
@@ -219,11 +220,15 @@ $(document).ready(function () {
 //}
 
 function _showSuccessMessage(message) {
+    toastr.success(message);
+}
+
+function _showErrorMessage(message) {
     //$(document).Toasts('create', {
     //    class: 'bg-success',
     //    title: 'Success',
     //    //subtitle: 'Success Notification',
     //    body: message,//'Saved Successfully.'
     //});
-    toastr.success(message);
+    toastr.error(message);
 }

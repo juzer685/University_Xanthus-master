@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace University.Repository
 {
@@ -15,7 +16,8 @@ namespace University.Repository
         {
             using (var context = new UniversityEntities())
             {
-                var res = (from p in context.Product.Where(y => y.IsDeleted != true)
+                int AssociatedUserID = Convert.ToInt32(HttpContext.Current.Session["UserSessionIDs"]);
+                var res = (from p in context.Product.Where(y => y.IsDeleted != true && y.AssocitedID == AssociatedUserID)
                            join s in context.SubCategoryMaster.Where(y => y.IsDeleted != true)
                            on p.SubCategoryId equals s.Id
                            join c in context.CategoryMaster.Where(y => y.IsDeleted != true)
@@ -39,7 +41,7 @@ namespace University.Repository
                                UpdatedDate = p.UpdatedDate,
                                CategoryMaster = c,
                                SubCategoryMaster = s
-                           }).ToList();
+                           }).OrderByDescending(y => y.CreatedDate).ToList();
                 return res;
             }
         }

@@ -24,8 +24,13 @@ namespace University.UI.Areas.Admin.Controllers
 
         public ActionResult Index()
         {
+            
             var model = _homeService.GetHomeBanner();
             var viewModel = AutoMapper.Mapper.Map<HomeBanner, HomeBannerViewModel>(model);
+            if (viewModel == null)
+            {
+                viewModel = new HomeBannerViewModel();
+            }
             return View(viewModel);
         }
         public ActionResult AddEditHomeBanner(HomeBannerViewModel ViewModel, HttpPostedFileBase file)
@@ -38,7 +43,7 @@ namespace University.UI.Areas.Admin.Controllers
             var res = _homeService.AddOrUpdateHomeBanner(model);
             return Json(res, JsonRequestBehavior.AllowGet);
         }
-        
+
         [HttpPost]
         public ActionResult DeleteHomeBanner(string Id)
         {

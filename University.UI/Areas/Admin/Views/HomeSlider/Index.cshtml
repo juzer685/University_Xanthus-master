@@ -9,7 +9,7 @@
 <!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="container-fluid">
-        <div class="row mb-2">
+        <div class="row mb-2" style="margin-top:10px">
             <div class="col-sm-6">
                 <h1 class="m-0 text-dark">Home Slider</h1>
             </div><!-- /.col -->
@@ -50,8 +50,6 @@
                             <tbody>
                                 @foreach (var item in Model)
                                 {
-                                    if (Convert.ToInt32(Session["UserSessionIDs"]) == item.AssocitedID)
-                                    {
                                         <tr>
                                             <td>@item.Product.Title</td>
                                             <td>@item.TextDescription</td>
@@ -62,7 +60,6 @@
                                                     <input type="button" class="btn-primary-ips" value="Delete" onclick="DeleteHomeSlider('@item.Id')" />*@
                                             </td>
                                         </tr>
-                                    }
                                 }
                             </tbody>
                         </table>
@@ -107,7 +104,7 @@
 <script>
     $('.homeslideradd').click(function () {
         if ($('#ddlusrlst').val() == 0) {
-            _showSuccessMessage("First Select User");
+            _showErrorMessage("First Select User");
 
         }
         else

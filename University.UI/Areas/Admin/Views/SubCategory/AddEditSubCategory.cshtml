@@ -18,6 +18,9 @@
         font-size: 0.7rem;
         color: #03A9F4;
     }
+    .pointer {
+            cursor: pointer;
+        }
 </style>
 
 
@@ -43,7 +46,7 @@
 <div class="form-group">
     <label for="ImageUrl">Category Image <span class="ShortText">(Please ensure featured images are 250x250,Less than 2MB and .JPG format)</span></label>
     <div class="custom-file">
-        <input type="file" id="file" name="file" class="custom-file-input validateHeightWidth iamgeselect" required accept="image/jpeg" onchange="readURL(this);" />
+        <input type="file" id="file" name="file" class="custom-file-input validateHeightWidth iamgeselect pointer" required accept="image/jpeg" onchange="readURL(this);" />
         <label class="custom-file-label" for="exampleInputFile">Category Image</label>
     </div>
         @Html.ValidationMessageFor(m => m.ImageURL)

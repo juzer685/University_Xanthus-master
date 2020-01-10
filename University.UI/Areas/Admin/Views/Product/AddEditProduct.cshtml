@@ -41,7 +41,6 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                      
                         <input type="hidden" id="HdProductId" value="@Model.Id" />
                         <div class="row">
                             <div class="col-md-12">
@@ -97,6 +96,7 @@
 
                 e.preventDefault();
             });
+            $("")
 
             $('[data-toggle="tab"]').click(function (e) {
                 e.preventDefault();
@@ -160,7 +160,8 @@
             e.preventDefault();
         }
     function SaveProductUserGuide(e) {
-            $('#ProductUserGuideAssocitedID').val($("#ddlusrlst").val());
+        $('#ProductUserGuideAssocitedID').val($("#ddlusrlst").val());
+        
             var form = $(e.target);
             var url = form.attr('action');
             var formData = new FormData($(e.target)[0]);

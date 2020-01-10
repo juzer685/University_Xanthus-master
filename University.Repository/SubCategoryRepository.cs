@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace University.Repository
 {
@@ -14,7 +15,8 @@ namespace University.Repository
         {
             using (var context = new UniversityEntities())
             {
-                return context.SubCategoryMaster.Include("CategoryMaster").Where(y => y.IsDeleted != true ).ToList();
+                int AssociatedUserID = Convert.ToInt32(HttpContext.Current.Session["UserSessionIDs"]);
+                return context.SubCategoryMaster.Include("CategoryMaster").Where(y => y.IsDeleted != true && y.AssocitedID == AssociatedUserID).OrderByDescending(t => t.CreatedDate).ToList();
             }
         }
         public IEnumerable<SubCategoryMaster> GetSubCategoryListOnlyHaveProduct()

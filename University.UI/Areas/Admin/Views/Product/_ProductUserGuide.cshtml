@@ -13,7 +13,7 @@
 </style>
 
 <form onsubmit="SaveProductUserGuide(event)" name="ProductSuserguide" enctype="multipart/form-data" method="post" action="/Admin/Product/SaveProductUserGuide">
-    @Html.HiddenFor(y => y.ProductId)
+    @Html.HiddenFor(y => y.ProductId )
     @Html.Hidden("UserGuideId", Model.Id)
     <div class="row">
         <div class="col-md-6">

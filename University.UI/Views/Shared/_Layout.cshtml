@@ -163,18 +163,18 @@
             </ul>
 
             <!-- Right navbar links -->
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item dropdown" style="width:180px">
-                    <div class="row ">
-                        <div class="col-sm-6">
+            <ul class="navbar-nav ml-auto pointer">
+                <li class="nav-item dropdown pointer" style="width:180px">
+                    <div class="row pointer">
+                        <div class="col-sm-6 pointer">
                             @if (Session["RoleID"].ToString() == "")
                             {
                                 @Url.Action("Login", "Login");
                             }
                             else if (Session["RoleID"].ToString() == "4")
                             {
-                                <div class="mt-2">
-                                    <select id="ddlusrlst" class="form-control " style="width:208%">
+                                <div class="mt-2 pointer">
+                                    <select id="ddlusrlst" class="form-control pointer" style="width:208%">
                                         <option value="0">Select User</option>
                                         @foreach (var item in lst)
                                         {
@@ -585,12 +585,14 @@
                                             <p>Home Slider</p>
                                         </a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a href="~/Admin/HomeBanner" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Home Banner</p>
-                                        </a>
-                                    </li>
+                                 
+                                            <li class="nav-item">
+                                                <a href="~/Admin/HomeBanner" class="nav-link">
+                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <p>Home Banner</p>
+                                                </a>
+                                            </li>
+                                      
                                     <li class="nav-item">
                                         <a href="~/Admin/FAQ" class="nav-link">
                                             <i class="far fa-question-circle nav-icon"></i>

@@ -10,7 +10,7 @@ namespace University.Repository.Interface
 {
     public interface IHomeRepository
     {
-
+       
         IEnumerable<HomeSlider> GetHomeSliderList();
         HomeSlider GetHomeSlider(int id);
         bool AddOrUpdateHomeSlider(HomeSlider model);

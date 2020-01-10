@@ -37,7 +37,21 @@ namespace University.UI.Areas.Admin.Models
                 }
             }
         }
-        
+        public string CheckImage
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(ImageURL))
+                {
+                    return "/images/NoImageAvailable.jpg";
+                }
+                else
+                {
+                    return ImageFullPath;
+                }
+            }
+        }
+
 
     }
 }

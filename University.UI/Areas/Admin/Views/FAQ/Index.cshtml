@@ -8,7 +8,7 @@
 <!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="container-fluid">
-        <div class="row mb-2">
+        <div class="row mb-2" style="margin-top:10px">
             <div class="col-sm-6">
                 <h1 class="m-0 text-dark">FAQs</h1>
             </div><!-- /.col -->
@@ -49,8 +49,7 @@
                             <tbody>
                                 @foreach (var item in Model)
                                 {
-                                    if (Convert.ToInt32(Session["UserSessionIDs"]) == item.AssocitedID)
-                                    {
+                                    
                                         <tr>
                                             <td>@item.Question</td>
                                             <td>@item.Answer</td>
@@ -59,7 +58,7 @@
                                                 <i class="fas fa-trash" onclick="DeleteFAQ('@item.Id')"></i>
                                             </td>
                                         </tr>
-                                     }
+                                     
                                     }
                                 </tbody>
                         </table>
@@ -99,7 +98,7 @@
     $('.FAQadd').click(function () {
         if ($('#ddlusrlst').val() == 0)
         {
-            _showSuccessMessage("First Select User");
+            _showErrorMessage("First Select User");
         }
         else
         {

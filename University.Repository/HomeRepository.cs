@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using University.Data;
 using University.Data.CustomEntities;
 using University.Repository.Interface;
+using System.Web;
 
 namespace University.Repository
 {
@@ -16,7 +17,8 @@ namespace University.Repository
         {
             using (var context = new UniversityEntities())
             {
-                return context.HomeSlider.Include("Product").Where(y => y.IsDeleted != true).ToList();
+                int AssociatedUserID = Convert.ToInt32(HttpContext.Current.Session["UserSessionIDs"]);
+                return context.HomeSlider.Include("Product").Where(y => y.IsDeleted != true && y.AssocitedID == AssociatedUserID).OrderByDescending(y=>y.CreatedDate).ToList();
             }
         }
         public HomeSlider GetHomeSlider(int id)
@@ -82,7 +84,8 @@ namespace University.Repository
         {
             using (var context = new UniversityEntities())
             {
-                return context.HomeBanner.Where(y => y.IsDeleted != null && y.IsDeleted != true).OrderByDescending(y => y.UpdatedDate).FirstOrDefault();
+                int AssociatedUserID = Convert.ToInt32(HttpContext.Current.Session["UserSessionIDs"]);
+                return context.HomeBanner.Where(y => y.IsDeleted != null && y.IsDeleted != true && y.AssocitedID== AssociatedUserID).OrderByDescending(y => y.UpdatedDate).FirstOrDefault();
             }
         }
 
@@ -144,7 +147,8 @@ namespace University.Repository
         {
             using (var context = new UniversityEntities())
             {
-                var res = context.FAQ.Where(y => y.IsDeleted != true).ToList();
+                int AssociatedUserID = Convert.ToInt32(HttpContext.Current.Session["UserSessionIDs"]);
+                var res = context.FAQ.Where(y => y.IsDeleted != true && y.AssocitedID == AssociatedUserID).OrderByDescending(y => y.CreatedDate).ToList();
                 return res.Select(y => new FAQ()
                 {
                     Id = y.Id,
@@ -152,7 +156,7 @@ namespace University.Repository
                     Answer = y.Answer,
                     AssocitedID=y.AssocitedID,
                     FAQDoc = null
-                }).ToList();
+                }).OrderByDescending(y => y.CreatedDate).ToList();
             }
         }
 

@@ -9,6 +9,7 @@ namespace University.Repository.Interface
 {
    public interface IUserHomeSliderRepository
     {
+       
         List<HomeSlider> GetProductUserGuideList();
         //List<ProductUserGuide> GetSearchUserGuides(string SearchTxt);
     }

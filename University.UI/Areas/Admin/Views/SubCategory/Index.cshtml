@@ -6,10 +6,11 @@
     var lst = (List<Login_tbl>)Session["UserList"];
 }
 
+
 <!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="container-fluid">
-        <div class="row mb-2">
+        <div class="row mb-2" style="margin-top:10px">
             <div class="col-sm-6">
                 <h1 class="m-0 text-dark">Category</h1>
             </div><!-- /.col -->
@@ -51,13 +52,6 @@
                             <tbody>
                                 @foreach (var item in Model)
                                 {
-                                    foreach (var items in lst)
-
-                                    {
-                                        if (item.AssocitedID == items.ID)
-                                        {
-                                            if (Convert.ToInt32(Session["UserSessionIDs"]) == item.AssocitedID)
-                                            {
                                                 <tr>
                                                     <td class="text-center">@item.Name</td>
                                                     <td class="text-center">@item.CreatedDate</td>
@@ -68,9 +62,6 @@
                                                         <input type="button" class="btn btn-primary btn-sm" value="Delete" onclick="DeleteSubCategory('@item.Id')" />*@
                                                     </td>
                                                 </tr>
-                                            }
-                                            }
-                                        }
                                     }
                                 </tbody>
                         </table>
@@ -133,7 +124,7 @@
         $('.subcategoryadd').click(function () {
             if ($('#ddlusrlst').val() == 0)
             {
-                _showSuccessMessage("First Select User");
+                _showErrorMessage("First Select User");
             }
             else
             {

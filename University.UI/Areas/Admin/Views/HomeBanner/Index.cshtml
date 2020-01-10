@@ -14,8 +14,8 @@
 <!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
+        <div class="row mb-2" style="margin-top:10px">
+            <div class="col-sm-6" >
                 <h1 class="m-0 text-dark">Home Banner</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
@@ -35,9 +35,10 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <form id="homeBannerForm" action="/Admin/HomeBanner/AddEditHomeBanner">
-                            @if (Convert.ToInt32(Session["UserSessionIDs"]) == Model.AssocitedID)
-                            {
+                        <form id="homeBannerForm" action="/Admin/HomeBanner/AddEditHomeBanner" enctype="multipart/form-data" method="post">
+                            @*@if (Convert.ToInt32(Session["UserSessionIDs"]) == Model.AssocitedID)
+                            {*@
+                           
                             <div class="row">
                                 <div class="col-sm-6">
 
@@ -79,9 +80,13 @@
                                                 <label class="custom-file-label" for="exampleInputFile">Select Image</label>
                                             </div>
                                         </div>
+
                                         @Html.ValidationMessageFor(m => m.ImageURL)
-                                        <img id="image-preview" src="@Model.ImageFullPath" alt="" class="imgStd" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" />
+                                        <img id="image-preview" src=@Model.CheckImage alt="" class="imgStd" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" />
+
+                                        @*<img id="image-preview" src="@Model.CheckImage" alt="" class="imgStd" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" />*@
                                         @*<img id="image-preview" src="~/Images/Training2.png" alt="" class="imgStd" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" />*@
+
                                     </div>
                                 </div>
                             </div>
@@ -93,7 +98,7 @@
                                 }
                                 <button onclick="Cancel()" type="button" class="btn btn-default">Cancel</button>
                             </div>
-                            }
+                            @*}*@
                         </form>
                     </div>
                     <!-- /.card-body -->
@@ -114,7 +119,18 @@
             $("#file").removeAttr("required");
         }
     });
+    $('.homebanner').click(function () {
+        if ($('#ddlusrlst').val() == 0) {
+            _showErrorMessage("First Select User");
 
+        }
+        else
+        {
+               $('#homeBannerForm').modal('show');
+        }
+
+    })
+    
     function readURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();

@@ -14,6 +14,7 @@ namespace University.Service
     public class HomeService : IHomeService
     {
         private readonly IHomeRepository _sliderRepository;
+      
         public HomeService(IHomeRepository sliderRepository)
         {
             _sliderRepository = sliderRepository;
