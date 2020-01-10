@@ -279,7 +279,7 @@ namespace University.UI.Areas.Admin.Controllers
             {
                 model.AssocitedID = Convert.ToInt32(Session["UserSessionIDs"]);
                 model.Id = Convert.ToDecimal(UserGuideId);
-                int a = 0;
+               
                 if (model.Guidefile != null)
                 {
                     model.ImageURL = UploadFileOnServer(ProductImagePath, model.Guidefile);
@@ -289,6 +289,10 @@ namespace University.UI.Areas.Admin.Controllers
                 //    model.ImageURL = "";
                 //}
                 var viewModel = AutoMapper.Mapper.Map<ProductUserGuideViewModel, ProductUserGuide>(model);
+                if (file != null)
+                {
+                    viewModel.ImageURL = UploadFileOnServer(ProductImagePath, file);
+                }
                 var res = _productService.SaveProductUserGuide(viewModel);
                 return Json(true, JsonRequestBehavior.AllowGet);
 
