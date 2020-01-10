@@ -19,6 +19,7 @@ using University.UI.Models;
 
 namespace IPSU.Web.Areas.Admin.Controllers
 {
+    [AllowAnonymous]
     public class LoginController : Controller
     {
 
@@ -55,6 +56,7 @@ namespace IPSU.Web.Areas.Admin.Controllers
             }
             else if (Result.RoleID == 4)
             {
+                FormsAuthentication.SetAuthCookie(Result.UserName, false);
                 Session["AdminLoginID"] = Result.ID;
                 Session["RoleID"] = Result.RoleID;
                 Session["AdminName"] = Result.FirstName + " " + Result.LastName;
@@ -66,6 +68,7 @@ namespace IPSU.Web.Areas.Admin.Controllers
             }
             else if (Result.RoleID == 5)
             {
+                FormsAuthentication.SetAuthCookie(Result.UserName, false);
                 Session["UserLoginID"] = Result.ID;
                 var AssocitedID = Result.ID;
                 Session["RoleID"] = Result.RoleID;
