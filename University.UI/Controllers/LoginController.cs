@@ -70,7 +70,6 @@ namespace IPSU.Web.Areas.Admin.Controllers
             {
                 FormsAuthentication.SetAuthCookie(Result.UserName, false);
                 Session["UserLoginID"] = Result.ID;
-                var AssocitedID = Result.ID;
                 Session["RoleID"] = Result.RoleID;
                 Session["UserNamee"] = Result.FirstName + " " + Result.LastName;
                 return RedirectToAction("Index", "Home");
@@ -109,8 +108,8 @@ namespace IPSU.Web.Areas.Admin.Controllers
             {
                 var smtp = new SmtpClient
                 {
-                    Host = "smtp.zoho.com",
-                    Port = 587,
+                    Host = ConfigurationManager.AppSettings["Host"],
+                    Port = Convert.ToInt32(ConfigurationManager.AppSettings["Port"]),
                     EnableSsl = true,
                     DeliveryMethod = SmtpDeliveryMethod.Network,
                     UseDefaultCredentials = false,
