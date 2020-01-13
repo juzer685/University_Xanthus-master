@@ -54,7 +54,7 @@
                                 @foreach (var item in Model)
                                 {
                                 <tr>
-                                    @if (item.AdminId == Convert.ToInt32(Session["AdminLoginID"]))
+                                    @if (4 == Convert.ToInt32(Session["AdminLoginID"]))
                                     {
                                         <td class="text-center">@item.UserName</td>
                                         <td class="text-center">@item.RoleID</td>

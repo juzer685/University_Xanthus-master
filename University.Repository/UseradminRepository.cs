@@ -16,7 +16,7 @@ namespace University.Repository
         {
             using (var context = new UniversityEntities())
             {
-                return context.Login_tbl.Where(y => y.IsDeleted != true).ToList();
+                return context.Login_tbl.Where(y => y.IsDeleted == false).ToList();
             }
         }
         //    public CategoryMaster GetCategory(Decimal id)
