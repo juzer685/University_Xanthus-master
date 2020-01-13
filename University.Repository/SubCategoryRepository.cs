@@ -16,14 +16,21 @@ namespace University.Repository
             using (var context = new UniversityEntities())
             {
                 int AssociatedUserID = Convert.ToInt32(HttpContext.Current.Session["UserSessionIDs"]);
-                return context.SubCategoryMaster.Include("CategoryMaster").Where(y => y.IsDeleted != true && y.AssocitedID == AssociatedUserID).OrderByDescending(t => t.CreatedDate).ToList();
+                //if(AssociatedUserID==0)
+                //{
+                  
+                //}
+                    return context.SubCategoryMaster.Include("CategoryMaster").Where(y => y.IsDeleted != true && y.AssocitedID == AssociatedUserID).OrderByDescending(t => t.CreatedDate).ToList();
+               
+               
             }
         }
         public IEnumerable<SubCategoryMaster> GetSubCategoryListOnlyHaveProduct()
         {
             using (var context = new UniversityEntities())
             {
-                return context.SubCategoryMaster.Include("CategoryMaster").Where(y => y.IsDeleted != true && y.Product.Count>0).ToList();
+                int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
+                return context.SubCategoryMaster.Include("CategoryMaster").Where(y => y.IsDeleted != true && y.Product.Count>0 && y.AssocitedID==UserID).ToList();
             }
         }
         public SubCategoryMaster GetSubCategory(Decimal id)
@@ -83,7 +90,8 @@ namespace University.Repository
         {
             using (var context = new UniversityEntities())
             {
-                return context.SubCategoryMaster.Where(y => y.CategoryId == id && y.IsDeleted != true).ToList();
+                
+                return context.SubCategoryMaster.Where(y => y.CategoryId == id && y.IsDeleted != true ).ToList();
             }
         }
 

@@ -416,20 +416,7 @@
                                 </a>
                             </li>
                         }
-                        @*@if (Session["RoleID"].ToString() == "4")
-        {
-
-            <li class="nav-item pointer">
-                <a href="@Url.Action("UserList","User")" class="nav-link">
-                    <a class="nav-link" href="~/Admin/User">
-                        <i class="nav-icon fas fa-user-circle"></i>
-                        <p>
-                            User List
-                        </p>
-                    </a>
-            </li>
-        }*@
-
+                        
                         @if (Session["_LayoutProductMenu"] != null && Session["RoleID"].ToString() == "5")
                         {
 
@@ -437,63 +424,68 @@
 
                             if (productMenu.Count > 0)
                             {
-                                <li id="dynamic-nested-menu-link " class="nav-item has-treeview pointer">
-                                    <a class="nav-link">
-                                        <i class="nav-icon fas fa-list-ul nav-item "></i>
+                    <li id="dynamic-nested-menu-link " class="nav-item has-treeview pointer">
+                       
+                            <a class="nav-link">
+                                <i class="nav-icon fas fa-list-ul nav-item "></i>
 
-                                        <p>
-                                            @*<span onclick="window.location='/Home/Category'">Product</span>*@
-                                            Products
-                                            <i class="right fas fa-angle-left"></i>
-                                        </p>
+                                <p>
+                                    @*<span onclick="window.location='/Home/Category'">Product</span>*@
+                                    Products
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                        
+
+                            <ul class="nav nav-treeview">
+                                    @{
+
+                                        var categories = productMenu.GroupBy(y => y.SubCategoryId).Select(y => y.FirstOrDefault());
+                                    }
+                          
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/Home/Category">
+                                        @*<i class="far fa-circle nav-icon"></i>*@
+                                        <p>Product List</p>
                                     </a>
-                                    <ul class="nav nav-treeview">
-                                        @{
-                                            var categories = productMenu.GroupBy(y => y.SubCategoryId).Select(y => y.FirstOrDefault());
-                                        }
-
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/Home/Category">
-                                                @*<i class="far fa-circle nav-icon"></i>*@
-                                                <p>Product List</p>
-                                            </a>
-                                        </li>
-                                        @foreach (var category in categories)
-                                        {
-
-                                            <li class="nav-item pointer">
-                                                <a class="nav-link">
-                                                    @*<p onclick="window.location='/Products/ProductListByCategory?id=@category.SubCategoryId'">*@
-                                                    <p>
-                                                        @System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(category.SubCategoryName.ToLower())
-                                                        <i class="right fas fa-angle-left"></i>
-                                                    </p>
-                                                </a>
-                                                <ul class="nav nav-treeview">
-                                                    <li class="nav-item">
-                                                        <a class="nav-link" href="/Products/ProductListByCategory?id=@category.SubCategoryId">
-                                                            @*<i class="far fa-circle nav-icon"></i>*@
-                                                            <p>Category List</p>
-                                                        </a>
-                                                    </li>
-                                                    @{
-                                                        var products = productMenu.Where(y => y.SubCategoryId == category.SubCategoryId).ToList();
-                                                    }
-                                                    @foreach (var product in products)
-                                                    {
-
-                                                        <li class="nav-item">
-                                                            <a class="nav-link" href="/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(product.ProductId.ToString(), System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])">
-                                                                <i class="far fa-circle nav-icon"></i>
-                                                                <p>@System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(product.ProductName.ToLower())</p>
-                                                            </a>
-                                                        </li>
-                                                    }
-                                                </ul>
-                                            </li>
-                                        }
-                                    </ul>
                                 </li>
+                                @foreach (var category in categories)
+                                {
+
+                                    <li class="nav-item pointer">
+                                        <a class="nav-link">
+                                            @*<p onclick="window.location='/Products/ProductListByCategory?id=@category.SubCategoryId'">*@
+                                            <p>
+                                                @System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(category.SubCategoryName.ToLower())
+                                                <i class="right fas fa-angle-left"></i>
+                                            </p>
+                                        </a>
+                                        <ul class="nav nav-treeview">
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="/Products/ProductListByCategory?id=@category.SubCategoryId">
+                                                    @*<i class="far fa-circle nav-icon"></i>*@
+                                                    <p>Category List</p>
+                                                </a>
+                                            </li>
+                                            @{
+                                                var products = productMenu.Where(y => y.SubCategoryId == category.SubCategoryId).ToList();
+                                            }
+                                            @foreach (var product in products)
+                                            {
+
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(product.ProductId.ToString(), System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])">
+                                                        <i class="far fa-circle nav-icon"></i>
+                                                        <p>@System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(product.ProductName.ToLower())</p>
+                                                    </a>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </li>
+                                }
+                            </ul>
+                    </li>
                             }
 
                         }
@@ -624,12 +616,7 @@
                                     </p>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="~/HomeSliderUser/SliderUser" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Home Slider</p>
-                                </a>
-                            </li>
+                           
                             <li class="nav-item">
                                 <a class="nav-link">
                                     <i class="nav-icon fas fa-th"></i>

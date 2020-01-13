@@ -32,7 +32,10 @@ namespace University.UI.Areas.Admin.Controllers
         public ActionResult Index()
         {
             var res = _productService.GetProductList().ToList();
+            res = res.Where(t => t.AssocitedID == Convert.ToInt32(Session["UserSessionIDs"])).ToList();
+            
             var viewModel = AutoMapper.Mapper.Map<List<ProductEntity>, List<ProductViewModel>>(res);
+            
             return View(viewModel);
         }
         public ActionResult AddEditProduct(string ProductId)

@@ -53,8 +53,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interface\IUserHomeSliderRepository.cs" />
-    <Compile Include="UserHomeSliderRepository.cs" />
     <Compile Include="UseradminRepository.cs" />
     <Compile Include="CategoryRepository.cs" />
     <Compile Include="FeedbackRepository.cs" />

@@ -30,6 +30,7 @@ namespace IPSU.Web.Areas.Admin.Controllers
         {
             List<ProductVideoViewModel> productVideoViewModel = new List<ProductVideoViewModel>();
             var productvideores = _productVideoService.GetProductVideoList().ToList();
+            
             var productList = _productService.GetProductList().ToList();
 
             var query = from productvideo in productvideores

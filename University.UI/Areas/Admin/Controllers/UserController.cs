@@ -33,7 +33,7 @@ namespace University.UI.Areas.Admin.Controllers
             var res = _UseradminService.GetUserList().ToList();
 
             var viewModel = AutoMapper.Mapper.Map<List<Login_tbl>, List<Login_tbl>>(res);
-
+            Session["UserList"] = viewModel;
             return View(viewModel);
         }
 
@@ -74,7 +74,8 @@ namespace University.UI.Areas.Admin.Controllers
         public ActionResult DeleteUser(string Id)
         {
             var res = _UseradminService.DeleteUser(Convert.ToDecimal(Id));
-            return Json(true, JsonRequestBehavior.AllowGet);
+            return Json(new {url = "/Admin/User"});
+          //  return Json(true, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]

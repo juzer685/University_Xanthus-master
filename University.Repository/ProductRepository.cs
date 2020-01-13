@@ -18,7 +18,7 @@ namespace University.Repository
             {
                 int AssociatedUserID = Convert.ToInt32(HttpContext.Current.Session["UserSessionIDs"]);
                 var res = (from p in context.Product.Where(y => y.IsDeleted != true && y.AssocitedID == AssociatedUserID)
-                           join s in context.SubCategoryMaster.Where(y => y.IsDeleted != true)
+                           join s in context.SubCategoryMaster.Where(y => y.IsDeleted != true && y.AssocitedID == AssociatedUserID)
                            on p.SubCategoryId equals s.Id
                            join c in context.CategoryMaster.Where(y => y.IsDeleted != true)
                            on s.CategoryId equals c.Id
@@ -35,7 +35,6 @@ namespace University.Repository
                                ImageURL = p.ImageURL,
                                IsDeleted = p.IsDeleted,
                                SubCategoryId = p.SubCategoryId,
-
                                Title = p.Title,
                                UpdatedBy = p.UpdatedBy,
                                UpdatedDate = p.UpdatedDate,
@@ -703,8 +702,9 @@ namespace University.Repository
         {
             using (var context = new UniversityEntities())
             {
-                var res = (from p in context.Product.Where(y => y.IsDeleted != true)
-                           join s in context.SubCategoryMaster.Where(y => y.IsDeleted != true)
+                int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
+                var res = (from p in context.Product.Where(y => y.IsDeleted != true && y.AssocitedID == UserID)
+                           join s in context.SubCategoryMaster.Where(y => y.IsDeleted != true && y.AssocitedID == UserID)
                            on p.SubCategoryId equals s.Id
 
                            select new ProductLayoutMenu()

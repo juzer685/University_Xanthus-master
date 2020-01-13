@@ -31,6 +31,7 @@ namespace University.UI.Areas.Admin.Controllers
             var res = _subCategoryService.GetSubCategoryList().ToList();
             var viewModel = AutoMapper.Mapper.Map<List<SubCategoryMaster>, List<SubCategoryViewModel>>(res);
             //ViewBag.CategoryList = _categoryMasterService.GetCategoryList();
+            
             return View(viewModel);
         }
 

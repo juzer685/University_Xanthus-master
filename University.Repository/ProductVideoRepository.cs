@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace University.Repository
 {
@@ -14,7 +15,8 @@ namespace University.Repository
         {
             using (var context = new UniversityEntities())
             {
-                return context.ProductVideos.Where(x=>x.IsDeleted!=true && x.Title!=null).ToList();
+                int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
+                return context.ProductVideos.Where(x=>x.IsDeleted!=true && x.Title!=null && x.AssocitedID == UserID).ToList();
             }
         }
 

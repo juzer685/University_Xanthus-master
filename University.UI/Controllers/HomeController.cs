@@ -60,7 +60,7 @@ namespace University.UI.Controllers
             ListProduct = _sliderService.ListproductbyUserId().ToList();
             RecentVisitedProduct recentVisitedProduct = new RecentVisitedProduct();
             // recentVisitedProduct =null
-            recentVisitedProduct = _sliderService.GetRecentVisitedProduct(Convert.ToInt32(Session["UserId"]));
+            recentVisitedProduct = _sliderService.GetRecentVisitedProduct(Convert.ToInt32(Session["UserLoginID"]));
 
 
             var model = _sliderService.GetFAQList().ToList();

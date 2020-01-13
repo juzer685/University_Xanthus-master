@@ -140,9 +140,11 @@
                 url: "/Admin/User/DeleteUser",
                 data: { Id: Id }, // serializes the form's elements.
                 success: function (data) {
+                    //alert(data);
                     //alert("Data Deleted Successfully"); // show response from the php script.
                     _showSuccessMessage("Data Deleted Successfully");
-                    setTimeout(function () { location.reload(); }, 1000);
+                    //setTimeout(function () { location.reload(); }, 1000);
+                     setTimeout(function () { window.location.href = data.url; }, 1000);
                 }
             });
         });

@@ -51,8 +51,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interface\IUserHomeSliderService.cs" />
-    <Compile Include="UserHomeSliderService.cs" />
     <Compile Include="UseradminService.cs" />
     <Compile Include="CategoryMasterService.cs" />
     <Compile Include="FeedbackService.cs" />
