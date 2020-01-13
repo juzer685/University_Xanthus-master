@@ -124,10 +124,12 @@ namespace IPSU.Web.Areas.Admin.Controllers
                     message.IsBodyHtml = true;
                     smtp.Send(message);
                 }
+                TempData["Message"] = "please check your email to change password";
                 return RedirectToAction("Login");
             }
             else
             {
+                TempData["Message"] = "Email does not exist.Please contact Admin for registration";
                 return RedirectToAction("Login");
             }
         }

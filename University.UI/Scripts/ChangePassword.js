@@ -11,21 +11,24 @@ function RegisterHandler() {
         var NewPass = $('input[name=NewPassword]').val();
         var ConfirmPass = $('input[name=ConfirmPassword]').val();
 
-        if (NewPass == ConfirmPass) {
+        if (NewPass == '' && ConfirmPass == '') {
+            //alert("Please enter Password and Confirm Password");
+        }
+        else if (NewPass == ConfirmPass) {
             $.ajax({
                 type: "POST",
                 url: "/Login/ChangePassword",
                 data: $('#ChangePassForm').serialize(),
                 success: function (result) {
-                    alert(result.Message);
-                    //_showSuccessMessage(result.Message);
+                    _showSuccessMessage(result.Message);
+                    //alert(result.Message);
                     setTimeout(function () { window.location.href = result.url; }, 1000);
                 }
             });
         }
         else {
-            alert("Password and Confirm Password does not match");
-            //_showSuccessMessage("Password and Confirm Password does not match");
+            _showErrorMessage("Password and Confirm Password does not match");
+            //alert("Password and Confirm Password does not match");
         }
     });
 }
