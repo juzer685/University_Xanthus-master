@@ -142,7 +142,7 @@
         transition: max-height 0.2s ease-out;
     }
 </style>
-<div>
+@*<div>
     <div class="timeline-item">
         <div class="timeline-item timeline-body logoBanner">
             <span class="img-container ">
@@ -151,7 +151,7 @@
 
         </div>
     </div>
-</div>
+</div>*@
 
 
 @*@if (Model.HomeBanners.Count() > 0)
@@ -189,24 +189,24 @@
 <div class="middleContent">
     <div class="container">
         <div class="pageBlock">
-            <div class="titleBlock" style="background-color:white;">
-                <div class="">
-                    <p class="titleTxt">
-                        Welcome back
-                        @if (Session["CustomerName"] != null)
-                        {
-                            @Session["CustomerName"].ToString()
-                        }!
-                    </p>
-                    <p class="lastView">Last viewed: <span>@Model.LastViewedProduct</span></p>
-                </div>
+            @*<div class="titleBlock" style="background-color:white;">
+            <div class="">
+                <p class="titleTxt">
+                    Welcome back
+                    @if (Session["CustomerName"] != null)
+                    {
+                        @Session["CustomerName"].ToString()
+                    }!
+                </p>
+                <p class="lastView">Last viewed: <span>@Model.LastViewedProduct</span></p>
             </div>
+        </div>*@
             @*@if (Model.BannerImage.ImageURL != null && Model.BannerImage.AssocitedID==Convert.ToInt32(Session["UserLoginID"]))
-             {*@
-                <div class="bannerContainer" style="text-align:center">
-                    @*<img class="meter-icon" src="@Model.BannerImage.ImageURL" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" alt="slide" style="cursor:pointer;width:200px;">*@
-                    <img class="meter-icon" src="~/Images/Training2.png" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" onclick="" alt="slide" style="cursor:pointer;width:200px;">
-                </div>
+        {*@
+            @*<div class="bannerContainer" style="text-align:center">
+            <img class="meter-icon" src="@Model.BannerImage.ImageURL" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" alt="slide" style="cursor:pointer;width:200px;">
+            <img class="meter-icon" src="~/Images/Training2.png" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" onclick="" alt="slide" style="cursor:pointer;width:200px;">
+        </div>*@
             @*}*@
 
 
@@ -222,38 +222,57 @@
                     </div>
                 </div>
             </div>
-
-            <div class="productListingContent">
-                <div class="row">
-
+            <br />
+            <!-- /.card-body -->
+            <div class="card-footer bg-white">
+                <ul class="mailbox-attachments d-flex align-items-stretch clearfix">
                     @foreach (var product in Model.Products)
                     {
-                        <div class="col-md-4">
-                            <div class="productContent">
-                                @*<div class="productImage background-product">
-                                        <a class="innerContent" href="/Products/ProductsById?ProductId=@product.Id">@product.Title </a>
-                                        <img class="arrow-icon" src="~/Uploads/Product/@product.ImageURL" alt="slide" width="100%">
+                        <li>
+                            <span class="mailbox-attachment-icon has-img"><img src="~/Uploads/Product/@product.ImageURL" alt="Attachment"></span>
 
-                                    </div>*@
-                                <div class="productImage background-product">
+                            <div class="mailbox-attachment-info">
+                                <a href="/Products/ProductsById?ProductId=@product.Id" class="mailbox-attachment-name">@product.Title</a>
+                                @*<span class="mailbox-attachment-size clearfix mt-1">
+                                   
+                                    <a href="/Products/ProductsById?ProductId=@product.Id" class="btn btn-default btn-sm float-right"><i class="fas fa-cloud-download-alt"></i>@product.Title</a>
+                                </span>*@
+                            </div>
+                        </li>
+                    }
+                    </ul>
+            </div>
+            @*<div class="productListingContent">
+            <div class="row">
+
+                @foreach (var product in Model.Products)
+                {
+                    <div class="col-md-4">
+                        <div class="productContent">
+                            <div class="productImage background-product">
+                                    <a class="innerContent" href="/Products/ProductsById?ProductId=@product.Id">@product.Title </a>
+                                    <img class="arrow-icon" src="~/Uploads/Product/@product.ImageURL" alt="slide" width="100%">
+
+                                </div>
+                            <div class="productImage background-product">
+                                <a class="listitemProductName" href="/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(product.Id.ToString(),System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])">
+                                    <img class="" src="~/Uploads/Product/@product.ImageURL" alt="slide" width="100%" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';">
+                                </a>
+                            </div>
+                            <div class="productDetails" style="text-align:center">
+                                <div class="productName">
                                     <a class="listitemProductName" href="/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(product.Id.ToString(),System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])">
-                                        <img class="" src="~/Uploads/Product/@product.ImageURL" alt="slide" width="100%" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';">
+                                        <h2> @product.Title</h2>
                                     </a>
                                 </div>
-                                <div class="productDetails" style="text-align:center">
-                                    <div class="productName">
-                                        <a class="listitemProductName" href="/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(product.Id.ToString(),System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])">
-                                            <h2> @product.Title</h2>
-                                        </a>
-                                    </div>
-                                </div>
-
                             </div>
+
                         </div>
-                    }
-                </div>
+                    </div>
+                }
             </div>
-            <div class="aboutBlock">
+        </div>*@
+            @*<div class="aboutBlock">
                 <div class="container">
                     <div class="row">
                         <div class="col-12 col-md-5">
@@ -263,8 +282,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="titleBlock feedback" style="margin-top:20px; background-color: white;">
+            </div>*@
+            @*<div class="titleBlock feedback" style="margin-top:20px; background-color: white;">
                 <div class="container">
                     <div class="row">
                         <div class="col-12 col-md-12">
@@ -273,10 +292,10 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
+            </div>*@
+            @*<div class="row">
                 <div class="col-md-12">
-                    <!-- textarea -->
+                     textarea 
                     <div class="form-group " style="margin-top: 10px;">
 
                         <textarea value="Feedback" id="txtFeedback" class="form-control textAreaBox" rows="8" placeholder="I would love if you guys could show me an example of how..."></textarea>
@@ -285,8 +304,8 @@
                         <button id="btnSubmit" class="btn-primary" type="button">Submit</button>
                     </div>
                 </div>
-            </div>
-            <div class="accordionBlock faq" style="background-color:white;margin-top:10px;">
+            </div>*@
+            @*<div class="accordionBlock faq" style="background-color:white;margin-top:10px;">
                 <div class="titleBlock">
                     <div class="container">
                         <p class="titleTxt black">FAQ</p>
@@ -303,26 +322,26 @@
                         </div>
                     }
                 </div>
-            </div>
+            </div>*@
 
             @*<div class="accordionBlock faq" style="background-color:white;margin-top:10px;">
-                    <div class="titleBlock">
-                        <div class="container">
-                            <p class="titleTxt black">FAQ</p>
-                        </div>
-                    </div>
+            <div class="titleBlock">
+                <div class="container">
+                    <p class="titleTxt black">FAQ</p>
+                </div>
+            </div>
 
-                    <div class="productInfo container">
-                        @foreach (var item in Model.ProductFAQs)
-                        {
-                            <button class="accordion">@item.Question</button>
-                            <div class="panel">
-                                <p>@item.Answer</p>
+            <div class="productInfo container">
+                @foreach (var item in Model.ProductFAQs)
+                {
+                    <button class="accordion">@item.Question</button>
+                    <div class="panel">
+                        <p>@item.Answer</p>
 
-                            </div>
-                        }
                     </div>
-                </div>*@
+                }
+            </div>
+        </div>*@
 
         </div>
     </div>

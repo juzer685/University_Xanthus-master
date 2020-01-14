@@ -251,8 +251,8 @@ namespace University.Repository
         {
             using (var context = new UniversityEntities())
             {
-                //int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
-                var res = (from p in context.Product.Where(y => y.IsDeleted != true)
+                int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
+                var res = (from p in context.Product.Where(y => y.IsDeleted != true && y.AssocitedID== UserID)
                            join s in context.SubCategoryMaster.Where(y => y.IsDeleted != true)
                            on p.SubCategoryId equals s.Id
                            join c in context.CategoryMaster.Where(y => y.IsDeleted != true)
