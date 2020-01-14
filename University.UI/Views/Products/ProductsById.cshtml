@@ -276,57 +276,34 @@
                                             <div class="tab-pane" id="videos">
                                                 @if (@Model.ProductVideos.Count > 0)
                                                 {
-                                                <div class="col-lg-12 row">
+                                                    <div class="col-lg-12 row">
 
-                                                    <div class="col-lg-8">
-                                                        <iframe class="video v1" width="100%" height="200" src="@Model.ProductVideos[0].VideoURL" frameborder="0" allowfullscreen autoplay></iframe>
-                                                        @*<iframe class="video v1 MainVideo" width="450" height="250" src="https://www.youtube.com/embed/tJKueryWBG0" frameborder="0" allowfullscreen></iframe>*@
-                                                        @*<iframe class="video v1 MainVideo" width="450" height="250" src="" frameborder="0" allowfullscreen></iframe>*@
-                                                    <div class="video-title " style="">@Model.ProductVideos[0].Title</div>
-                                                    <p class="video-desc">@Model.ProductVideos[0].Decription</p>
-                                                    </div>
-                                                    @foreach (var item in Model.ProductVideos)
-                                                    {
-                                                        <div class="col-lg-4" style="">
-                                                            <div>
-                                                                <a onclick="return false;">
-                                                                    <div class="col-lg-12 ppp">
-                                                                        
-                                                                        <iframe class="video v1 ChildVideo" width="180" height="100" src="@item.VideoURL" frameborder="0" enablejsapi="1" allowfullscreen></iframe>
-                                                                        <div class="overlay" style=""></div>
-
-                                                                    </div>
-                                                                </a>
-                                                                <div class="searchItemTitle">@item.Title</div>
-                                                                <p class="block-ellipsis">@item.Decription</p>
-                                                            </div>
-                                                            <div>
-                                                                <a onclick="return false;">
-                                                                    <div class="col-lg-12">
-                                                                        <iframe class="video v1 ChildVideo" width="180" height="100" src="@item.VideoURL" frameborder="0" enablejsapi="1" allowfullscreen></iframe>
-                                                                        <div class="overlay" style=""></div>
-
-                                                                    </div>
-                                                                </a>
-                                                                <div class="searchItemTitle">@item.Title</div>
-                                                                <div class="block-ellipsis">@item.Decription</div>
-                                                            </div>
-                                                            <div>
-                                                                <a onclick="return false;">
-                                                                    <div class="col-lg-12">
-                                                                        <iframe class="video v1 ChildVideo" width="180" height="100" src="@item.VideoURL" frameborder="0" enablejsapi="1" allowfullscreen></iframe>
-                                                                        <div class="overlay" style=""></div>
-
-                                                                    </div>
-                                                                </a>
-                                                                <div class="searchItemTitle">@item.Title</div>
-                                                                <p class="block-ellipsis">@item.Decription</p>
-                                                            </div>
+                                                        <div class="col-lg-8">
+                                                            <iframe class="video v1 MainVideo" width="100%" height="200" src="@Model.ProductVideos[0].VideoURL" frameborder="0" allowfullscreen autoplay></iframe>
+                                                            <div class="video-title " style="">@Model.ProductVideos[0].Title</div>
+                                                            <p class="video-desc">@Model.ProductVideos[0].Decription</p>
                                                         </div>
-                                                    }
+                                                        
+                                                        @foreach (var item in Model.ProductVideos)
+                                                        {
+                                                            <div class="col-lg-4" style="">
+                                                                <div>
+                                                                    <a onclick="return false;">
+                                                                        <div class="col-lg-12 ppp">
+                                                                            <iframe class="video v1 ChildVideo" width="180" height="100" src="@item.VideoURL" frameborder="0" enablejsapi="1" allowfullscreen></iframe>
+                                                                            <div class="overlay" style=""></div>
+                                                                        </div>
+                                                                    </a>
+                                                                    <div class="searchItemTitle">@item.Title</div>
+                                                                    <p class="block-ellipsis">@item.Decription</p>
+                                                                </div>
+                                                            </div>
+                                                        }
+
                                                     </div>
                                                 }
-                                            </div>
+
+                                                </div>
                                             <div class="tab-pane" id="faq">
                                                 <div class="productInfo">
                                                     @foreach (var item in Model.ProductFAQs)

@@ -17,31 +17,64 @@ namespace University.Repository
             using (var context = new UniversityEntities())
             {
                 int AssociatedUserID = Convert.ToInt32(HttpContext.Current.Session["UserSessionIDs"]);
-                var res = (from p in context.Product.Where(y => y.IsDeleted != true && y.AssocitedID == AssociatedUserID)
-                           join s in context.SubCategoryMaster.Where(y => y.IsDeleted != true && y.AssocitedID == AssociatedUserID)
-                           on p.SubCategoryId equals s.Id
-                           join c in context.CategoryMaster.Where(y => y.IsDeleted != true)
-                           on s.CategoryId equals c.Id
-                           select new ProductEntity()
-                           {
-                               AssocitedID=p.AssocitedID,
-                               Id = p.Id,
-                               //CategoryId = c.Id,
-                               CreatedBy = p.CreatedBy,
-                               CreatedDate = p.CreatedDate,
-                               DeletedBy = p.DeletedBy,
-                               DeletedDate = p.DeletedDate,
-                               Description = p.Description,
-                               ImageURL = p.ImageURL,
-                               IsDeleted = p.IsDeleted,
-                               SubCategoryId = p.SubCategoryId,
-                               Title = p.Title,
-                               UpdatedBy = p.UpdatedBy,
-                               UpdatedDate = p.UpdatedDate,
-                               CategoryMaster = c,
-                               SubCategoryMaster = s
-                           }).OrderByDescending(y => y.CreatedDate).ToList();
-                return res;
+                if(AssociatedUserID!=0)
+                {
+                    var res = (from p in context.Product.Where(y => y.IsDeleted != true && y.AssocitedID == AssociatedUserID)
+                               join s in context.SubCategoryMaster.Where(y => y.IsDeleted != true && y.AssocitedID == AssociatedUserID)
+                               on p.SubCategoryId equals s.Id
+                               join c in context.CategoryMaster.Where(y => y.IsDeleted != true)
+                               on s.CategoryId equals c.Id
+                               select new ProductEntity()
+                               {
+                                   AssocitedID = p.AssocitedID,
+                                   Id = p.Id,
+                                   //CategoryId = c.Id,
+                                   CreatedBy = p.CreatedBy,
+                                   CreatedDate = p.CreatedDate,
+                                   DeletedBy = p.DeletedBy,
+                                   DeletedDate = p.DeletedDate,
+                                   Description = p.Description,
+                                   ImageURL = p.ImageURL,
+                                   IsDeleted = p.IsDeleted,
+                                   SubCategoryId = p.SubCategoryId,
+                                   Title = p.Title,
+                                   UpdatedBy = p.UpdatedBy,
+                                   UpdatedDate = p.UpdatedDate,
+                                   CategoryMaster = c,
+                                   SubCategoryMaster = s
+                               }).OrderByDescending(y => y.CreatedDate).ToList();
+                    return res;
+                }
+                else
+                {
+                    int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
+                    var res = (from p in context.Product.Where(y => y.IsDeleted != true && y.AssocitedID == UserID)
+                               join s in context.SubCategoryMaster.Where(y => y.IsDeleted != true && y.AssocitedID == UserID)
+                               on p.SubCategoryId equals s.Id
+                               join c in context.CategoryMaster.Where(y => y.IsDeleted != true)
+                               on s.CategoryId equals c.Id
+                               select new ProductEntity()
+                               {
+                                   AssocitedID = p.AssocitedID,
+                                   Id = p.Id,
+                                   //CategoryId = c.Id,
+                                   CreatedBy = p.CreatedBy,
+                                   CreatedDate = p.CreatedDate,
+                                   DeletedBy = p.DeletedBy,
+                                   DeletedDate = p.DeletedDate,
+                                   Description = p.Description,
+                                   ImageURL = p.ImageURL,
+                                   IsDeleted = p.IsDeleted,
+                                   SubCategoryId = p.SubCategoryId,
+                                   Title = p.Title,
+                                   UpdatedBy = p.UpdatedBy,
+                                   UpdatedDate = p.UpdatedDate,
+                                   CategoryMaster = c,
+                                   SubCategoryMaster = s
+                               }).OrderByDescending(y => y.CreatedDate).ToList();
+                    return res;
+                }
+                
             }
         }
 
@@ -49,7 +82,8 @@ namespace University.Repository
         {
             using (var context = new UniversityEntities())
             {
-                var res = (from p in context.Product.Where(y => y.IsDeleted != true)
+               // int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
+                var res = (from p in context.Product.Where(y => y.IsDeleted != true )
                            join s in context.SubCategoryMaster.Where(y => y.IsDeleted != true)
                            on p.SubCategoryId equals s.Id
                            join c in context.CategoryMaster.Where(y => y.IsDeleted != true)
