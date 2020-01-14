@@ -175,7 +175,7 @@
                             {
                                 <div class="pointer">
                                     <select id="ddlusrlst" class="form-control pointer" style="width:208%">
-                                        <option value="0">Select User</option>
+                                        <option value="0">Select Customer</option>
                                         @foreach (var item in lst)
                                         {
                                             if (Convert.ToInt32(Session["UserSessionIDs"]) == item.ID)
@@ -403,7 +403,7 @@
                             <a class="nav-link" href="~/Admin/User">
                                 <i class="nav-icon fas fa-user-circle"></i>
                                 <p>
-                                    UserList
+                                    Customer List
                                 </p>
                             </a>
                         </li>
@@ -411,7 +411,7 @@
                                 <a class="nav-link" href="/Admin/User/Register">
                                     <i class="nav-icon fas fa-user-circle"></i>
                                     <p>
-                                        Add User
+                                        Add Customer
                                     </p>
                                 </a>
                             </li>
