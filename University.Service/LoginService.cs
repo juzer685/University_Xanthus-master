@@ -23,7 +23,7 @@ namespace IPSU.Service
             return result;
         }
 
-        public bool ForgotPassword(string Email)
+        public Login_tbl ForgotPassword(string Email)
         {
             return _LoginRepository.ForgotPassword(Email);
         }
@@ -33,9 +33,14 @@ namespace IPSU.Service
             return _LoginRepository.ChangePassword(Email,Password);
         }
 
-        public string CheckEmail(string Email,Func<string,string,bool> Func)
+        public Login_tbl CheckEmail(string Email,Func<string,string,bool> Func)
         {
             return _LoginRepository.CheckEmail(Email,Func);
+        }
+
+        public EmailInfo AddEmailInfo(int UserId)
+        {
+            return _LoginRepository.AddEmailInfo(UserId);
         }
     }
 }

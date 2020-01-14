@@ -40,6 +40,8 @@
         <AssociationConnector Association="UniversityModel.FK_Login_tbl_Role" />
         <AssociationConnector Association="UniversityModel.FK_CustomerLogin" />
         <AssociationConnector Association="UniversityModel.FK_AdminLogin" />
+        <EntityTypeShape EntityType="UniversityModel.EmailInfo" Width="1.5" PointX="14.25" PointY="2.25" />
+        <AssociationConnector Association="UniversityModel.FK_EmailInfo_tbl" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

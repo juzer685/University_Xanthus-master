@@ -24,6 +24,8 @@ public partial class Login_tbl
 
         this.Login_tbl1 = new HashSet<Login_tbl>();
 
+        this.EmailInfoes = new HashSet<EmailInfo>();
+
     }
 
 
@@ -66,6 +68,10 @@ public partial class Login_tbl
     public virtual ICollection<Login_tbl> Login_tbl1 { get; set; }
 
     public virtual Login_tbl Login_tbl2 { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<EmailInfo> EmailInfoes { get; set; }
 
 }
 

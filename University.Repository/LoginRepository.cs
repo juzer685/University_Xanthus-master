@@ -66,11 +66,12 @@ namespace University.Repository
             //}
         }
 
-        public bool ForgotPassword(string Email)
+        public Login_tbl ForgotPassword(string Email)
         {
             using (var context = new UniversityEntities())
             {
-                return context.Login_tbl.Where(y => y.UserName.Equals(Email)).Any();
+                //return context.Login_tbl.Where(y => y.UserName.Equals(Email)).Any();
+                return context.Login_tbl.FirstOrDefault(y => y.UserName.Equals(Email));
             }
         }
 
@@ -92,12 +93,37 @@ namespace University.Repository
             }
         }
 
-        public string CheckEmail(string EncyptedEmail, Func<string, string, bool> Func)
+        public Login_tbl CheckEmail(string EncyptedEmail, Func<string, string, bool> Func)
         {
             using (var context = new UniversityEntities())
             {
-                var Login_tbl = context.Login_tbl.ToList();
-                return Login_tbl.Where(y => Func(y.UserName, EncyptedEmail)).Select(y => y.UserName).FirstOrDefault();
+                //DateTime compare = DateTime.Now.Add(TimeSpan.FromMinutes(1));
+                //var EmailInfo = context.EmailInfoes.ToList();
+                var EmailInfo = context.EmailInfoes.ToList().Where(y => Func(y.ID.ToString(), EncyptedEmail)).FirstOrDefault();
+                if ((DateTime.Now.TimeOfDay - EmailInfo.SendTime) > TimeSpan.FromMinutes(30))
+                {
+                    return null;
+                }
+                else
+                {
+                    return context.Login_tbl.Where(x => x.ID == EmailInfo.UserId).FirstOrDefault();
+                }
+            }
+        }
+
+        public EmailInfo AddEmailInfo(int UserId)
+        {
+            using (var context = new UniversityEntities())
+            {
+                EmailInfo EmailInfo = new EmailInfo
+                {
+                    SendTime = DateTime.Now.TimeOfDay,
+                    UserId = UserId,
+                    CreatedDate = DateTime.Now
+                };
+                context.EmailInfoes.Add(EmailInfo);
+                context.SaveChanges();
+                return EmailInfo;
             }
         }
     }

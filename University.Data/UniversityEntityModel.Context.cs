@@ -75,6 +75,8 @@ public partial class UniversityEntities : DbContext
 
     public virtual DbSet<Login_tbl> Login_tbl { get; set; }
 
+    public virtual DbSet<EmailInfo> EmailInfoes { get; set; }
+
 
     public virtual ObjectResult<GetCustomerList_Result> GetCustomerList(Nullable<int> webUserID)
     {

@@ -103,9 +103,10 @@ namespace IPSU.Web.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult ForgotPassword(string Email)
         {
-            var Result = _loginService.ForgotPassword(Email);
-            if (Result)
+            Login_tbl Login_tbl = _loginService.ForgotPassword(Email);
+            if (Login_tbl != null)
             {
+                var EmailInfo = _loginService.AddEmailInfo(Login_tbl.ID);
                 var smtp = new SmtpClient
                 {
                     Host = ConfigurationManager.AppSettings["Host"],
@@ -118,7 +119,7 @@ namespace IPSU.Web.Areas.Admin.Controllers
                 using (var message = new MailMessage(new MailAddress(ConfigurationManager.AppSettings["AdminId"], "Admin"), new MailAddress(Email, "user"))
                 {
                     Subject = "Login Credentials",
-                    Body = "Hello,<br/><br/>Please <a href=" + ConfigurationManager.AppSettings["ChangePasswordUrl"] + "?Email=" + new MD5Hashing().GetMd5Hash(Email) + ">Click Here</a> to Change Password <br/><br/><br/>Regards<br/>Admin"
+                    Body = "Hello,<br/><br/>Please <a href=" + ConfigurationManager.AppSettings["ChangePasswordUrl"] + "/" + new MD5Hashing().GetMd5Hash(EmailInfo.ID.ToString()) + ">Click Here</a> to Change Password <br/><br/><br/>Regards<br/>Admin"
                 })
                 {
                     message.IsBodyHtml = true;
@@ -135,11 +136,19 @@ namespace IPSU.Web.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public ActionResult ChangePassword(string Email)
+        public ActionResult ChangePassword(string id)
         {
-            string UnEncryptedEmail = _loginService.CheckEmail(Email, new MD5Hashing().VerifyMd5Hash);
-            Session["UnEncryptedEmail"] = UnEncryptedEmail;
-            return View();
+            Login_tbl Login_tbl = _loginService.CheckEmail(id, new MD5Hashing().VerifyMd5Hash);
+            if (Login_tbl == null)
+            {
+                TempData["Message"] = "Your link has Expired";
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                Session["UnEncryptedEmail"] = Login_tbl.UserName;
+                return View();
+            }
         }
 
         [HttpPost]

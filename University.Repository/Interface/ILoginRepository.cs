@@ -10,8 +10,9 @@ namespace University.Repository.Interface
     public interface ILoginRepository
     {
         Login_tbl UserLogin(Login_tbl login_Tbl);
-        bool ForgotPassword(string Email);
+        Login_tbl ForgotPassword(string Email);
         bool ChangePassword(string Email,string Password);
-        string CheckEmail(string Email, Func<string, string, bool> Func);
+        Login_tbl CheckEmail(string Email, Func<string, string, bool> Func);
+        EmailInfo AddEmailInfo(int UserId);
     }
 }
