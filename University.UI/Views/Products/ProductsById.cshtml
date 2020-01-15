@@ -185,9 +185,9 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="ips-logo">
+                        @*<div class="ips-logo">
                             <img src="~/Images/university-logo.png" alt="slide" width="140" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';">
-                        </div>
+                        </div>*@
                         <div class="product-info">
                             <div class="product-title">
                                 <p>@Model.Title</p>
@@ -284,9 +284,10 @@
                                                             <p class="video-desc">@Model.ProductVideos[0].Decription</p>
                                                         </div>
                                                         
-                                                        @foreach (var item in Model.ProductVideos)
-                                                        {
-                                                            <div class="col-lg-4" style="">
+                                                        
+                                                        <div class="col-lg-4" style="">
+                                                            @foreach (var item in Model.ProductVideos)
+                                                            {
                                                                 <div>
                                                                     <a onclick="return false;">
                                                                         <div class="col-lg-12 ppp">
@@ -297,8 +298,9 @@
                                                                     <div class="searchItemTitle">@item.Title</div>
                                                                     <p class="block-ellipsis">@item.Decription</p>
                                                                 </div>
+                                                            }
                                                             </div>
-                                                        }
+                                                        
 
                                                     </div>
                                                 }

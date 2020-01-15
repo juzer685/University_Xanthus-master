@@ -19,8 +19,14 @@
     .searchItemTitle {
         font-size: 1.3rem;
         text-decoration: underline;
-        margin-top: 10px;
+        margin-top: 20px;
     }
+ .searchImage {
+    /*float:  left;
+    width:  200px;*/
+    height: 200px;
+    background-size: cover;
+}
 </style>
 
 <!-- Content Header (Page header) -->
@@ -65,7 +71,7 @@
                                             @foreach (var item in Model)
                                             {
                                                 <div class="col-lg-4" style="margin-bottom:4em">
-                                                    <div class="">
+                                                    <div class="crop">
                                                         @if (string.IsNullOrEmpty(item.ImageFullPath))
                                                         {
                                                             <a href="/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(item.ProductId.ToString(),System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])"><img class="searchImage" src="/images/NoImageAvailable.jpg" alt="searchImage" width="100%" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';"></a>

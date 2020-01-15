@@ -18,7 +18,22 @@ namespace University.Repository
             using (var context = new UniversityEntities())
             {
                 int AssociatedUserID = Convert.ToInt32(HttpContext.Current.Session["UserSessionIDs"]);
-                return context.HomeSlider.Include("Product").Where(y => y.IsDeleted != true && y.AssocitedID == AssociatedUserID).OrderByDescending(y=>y.CreatedDate).ToList();
+                if(AssociatedUserID!=0)
+                {
+                    
+                    return context.HomeSlider.Include("Product").Where(y => y.IsDeleted != true && y.AssocitedID == AssociatedUserID).OrderByDescending(y => y.CreatedDate).ToList();
+                }
+                else if(AssociatedUserID==0)
+                {
+                    int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
+                    return context.HomeSlider.Include("Product").Where(y => y.IsDeleted != true && y.AssocitedID == UserID).OrderByDescending(y => y.CreatedDate).ToList();
+
+                }
+                else
+                {
+                    return context.HomeSlider.Include("Product").Where(y => y.IsDeleted != true ).OrderByDescending(y => y.CreatedDate).ToList();
+                }
+                
             }
         }
         public HomeSlider GetHomeSlider(int id)
@@ -85,7 +100,20 @@ namespace University.Repository
             using (var context = new UniversityEntities())
             {
                 int AssociatedUserID = Convert.ToInt32(HttpContext.Current.Session["UserSessionIDs"]);
-                return context.HomeBanner.Where(y => y.IsDeleted != null && y.IsDeleted != true && y.AssocitedID== AssociatedUserID).OrderByDescending(y => y.UpdatedDate).FirstOrDefault();
+                if(AssociatedUserID!=0)
+                {
+
+                    return context.HomeBanner.Where(y => y.IsDeleted != null && y.IsDeleted != true && y.AssocitedID == AssociatedUserID).OrderByDescending(y => y.UpdatedDate).FirstOrDefault();
+
+                }
+                else
+                {
+                    int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
+
+                    return context.HomeBanner.Where(y => y.IsDeleted != null && y.IsDeleted != true && y.AssocitedID == UserID).OrderByDescending(y => y.UpdatedDate).FirstOrDefault();
+                }
+
+
             }
         }
 
@@ -148,15 +176,32 @@ namespace University.Repository
             using (var context = new UniversityEntities())
             {
                 int AssociatedUserID = Convert.ToInt32(HttpContext.Current.Session["UserSessionIDs"]);
-                var res = context.FAQ.Where(y => y.IsDeleted != true && y.AssocitedID == AssociatedUserID).OrderByDescending(y => y.CreatedDate).ToList();
-                return res.Select(y => new FAQ()
+                if(AssociatedUserID!=0)
                 {
-                    Id = y.Id,
-                    Question = y.Question,
-                    Answer = y.Answer,
-                    AssocitedID=y.AssocitedID,
-                    FAQDoc = null
-                }).OrderByDescending(y => y.CreatedDate).ToList();
+                    var res = context.FAQ.Where(y => y.IsDeleted != true && y.AssocitedID == AssociatedUserID).OrderByDescending(y => y.CreatedDate).ToList();
+                    return res.Select(y => new FAQ()
+                    {
+                        Id = y.Id,
+                        Question = y.Question,
+                        Answer = y.Answer,
+                        AssocitedID = y.AssocitedID,
+                        FAQDoc = null
+                    }).OrderByDescending(y => y.CreatedDate).ToList();
+                }
+                else
+                {
+                    int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
+                    var res = context.FAQ.Where(y => y.IsDeleted != true && y.AssocitedID == UserID).OrderByDescending(y => y.CreatedDate).ToList();
+                    return res.Select(y => new FAQ()
+                    {
+                        Id = y.Id,
+                        Question = y.Question,
+                        Answer = y.Answer,
+                        AssocitedID = y.AssocitedID,
+                        FAQDoc = null
+                    }).OrderByDescending(y => y.CreatedDate).ToList();
+                }
+              
             }
         }
 

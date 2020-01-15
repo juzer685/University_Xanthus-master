@@ -141,6 +141,26 @@
         overflow: hidden;
         transition: max-height 0.2s ease-out;
     }
+   
+    .has-img{
+       height:200px;
+    background-size: cover;
+    object-fit:scale-down;
+    }
+   
+    .imguser
+    {
+
+        
+    background-size: cover;
+    object-fit:cover;
+    vertical-align:top;
+    }
+    .mailbox-attachment-icon.has-img>img {
+    height:-webkit-fill-available;
+    max-width: 100%;
+}
+    
 </style>
 @*<div>
     <div class="timeline-item">
@@ -224,25 +244,26 @@
             </div>
             <br />
             <!-- /.card-body -->
-            <div class="card-footer bg-white">
-                <ul class="mailbox-attachments d-flex align-items-stretch clearfix">
-                    @foreach (var product in Model.Products)
+           
+
+    <div class="card-footer bg-white">
+        <ul class="mailbox-attachments d-flex align-items-stretch clearfix imgbox">
+                @foreach (var product in Model.Products)
                     {
                         <li>
-                            <span class="mailbox-attachment-icon has-img"><img src="~/Uploads/Product/@product.ImageURL" alt="Attachment"></span>
+                            <span class="mailbox-attachment-icon has-img"><img class="imguser" src="~/Uploads/Product/@product.ImageURL"  alt="Attachment"></span>
 
                             <div class="mailbox-attachment-info">
                                 <a href="/Products/ProductsById?ProductId=@product.Id" class="mailbox-attachment-name">@product.Title</a>
-                                @*<span class="mailbox-attachment-size clearfix mt-1">
-                                   
-                                    <a href="/Products/ProductsById?ProductId=@product.Id" class="btn btn-default btn-sm float-right"><i class="fas fa-cloud-download-alt"></i>@product.Title</a>
-                                </span>*@
+
                             </div>
                         </li>
                     }
-                    </ul>
-            </div>
-            @*<div class="productListingContent">
+            
+            </ul>
+        </div>
+
+    @*<div class="productListingContent">
             <div class="row">
 
                 @foreach (var product in Model.Products)
@@ -272,59 +293,40 @@
                 }
             </div>
         </div>*@
-            @*<div class="aboutBlock">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12 col-md-5">
-                            <div class="aboutTitle">About IPS University</div>
-                            <p>IPS University is an online learning resource center that provides 24/7 access to self-service training including maintenance how-to videos, technical manuals, and more. Become a pro with all the information you need to keep your IPS Smart Meters running at optimum performance. </p>
-                            <a href="/Home/about">Continue reading <img class="arrow-icon" src="/images/arrow-icon.png" alt="slide" width="18" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';"></a>
-                        </div>
+    @*<div class="aboutBlock">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-5">
+                        <div class="aboutTitle">About IPS University</div>
+                        <p>IPS University is an online learning resource center that provides 24/7 access to self-service training including maintenance how-to videos, technical manuals, and more. Become a pro with all the information you need to keep your IPS Smart Meters running at optimum performance. </p>
+                        <a href="/Home/about">Continue reading <img class="arrow-icon" src="/images/arrow-icon.png" alt="slide" width="18" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';"></a>
                     </div>
                 </div>
-            </div>*@
-            @*<div class="titleBlock feedback" style="margin-top:20px; background-color: white;">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12 col-md-12">
-                            <p class="titleTxt">Feedback</p><br />
-                            <p class="lastView">Feedback! Ideas for improvements? Or just want to chat about possiblties? Use the form  stylbelow to connect.</p>
-                        </div>
+            </div>
+        </div>*@
+    @*<div class="titleBlock feedback" style="margin-top:20px; background-color: white;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-12">
+                        <p class="titleTxt">Feedback</p><br />
+                        <p class="lastView">Feedback! Ideas for improvements? Or just want to chat about possiblties? Use the form  stylbelow to connect.</p>
                     </div>
                 </div>
-            </div>*@
-            @*<div class="row">
-                <div class="col-md-12">
-                     textarea 
-                    <div class="form-group " style="margin-top: 10px;">
+            </div>
+        </div>*@
+    @*<div class="row">
+            <div class="col-md-12">
+                 textarea
+                <div class="form-group " style="margin-top: 10px;">
 
-                        <textarea value="Feedback" id="txtFeedback" class="form-control textAreaBox" rows="8" placeholder="I would love if you guys could show me an example of how..."></textarea>
-                    </div>
-                    <div style="text-align:center">
-                        <button id="btnSubmit" class="btn-primary" type="button">Submit</button>
-                    </div>
+                    <textarea value="Feedback" id="txtFeedback" class="form-control textAreaBox" rows="8" placeholder="I would love if you guys could show me an example of how..."></textarea>
                 </div>
-            </div>*@
-            @*<div class="accordionBlock faq" style="background-color:white;margin-top:10px;">
-                <div class="titleBlock">
-                    <div class="container">
-                        <p class="titleTxt black">FAQ</p>
-                    </div>
+                <div style="text-align:center">
+                    <button id="btnSubmit" class="btn-primary" type="button">Submit</button>
                 </div>
-
-                <div class="productInfo container">
-                    @foreach (var item in Model.ProductFAQs)
-                    {
-                        <button class="accordion">@item.Question</button>
-                        <div class="panel">
-                            <p>@item.Answer</p>
-
-                        </div>
-                    }
-                </div>
-            </div>*@
-
-            @*<div class="accordionBlock faq" style="background-color:white;margin-top:10px;">
+            </div>
+        </div>*@
+    @*<div class="accordionBlock faq" style="background-color:white;margin-top:10px;">
             <div class="titleBlock">
                 <div class="container">
                     <p class="titleTxt black">FAQ</p>
@@ -343,7 +345,26 @@
             </div>
         </div>*@
 
-        </div>
+    @*<div class="accordionBlock faq" style="background-color:white;margin-top:10px;">
+            <div class="titleBlock">
+                <div class="container">
+                    <p class="titleTxt black">FAQ</p>
+                </div>
+            </div>
+
+            <div class="productInfo container">
+                @foreach (var item in Model.ProductFAQs)
+                {
+                    <button class="accordion">@item.Question</button>
+                    <div class="panel">
+                        <p>@item.Answer</p>
+
+                    </div>
+                }
+            </div>
+        </div>*@
+
+</div>
     </div>
 </div>
 <script>

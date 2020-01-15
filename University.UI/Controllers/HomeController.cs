@@ -60,9 +60,14 @@ namespace University.UI.Controllers
             ListProduct = _sliderService.ListproductbyUserId().ToList();
             RecentVisitedProduct recentVisitedProduct = new RecentVisitedProduct();
             // recentVisitedProduct =null
-            recentVisitedProduct = _sliderService.GetRecentVisitedProduct(Convert.ToInt32(Session["UserLoginID"]));
-
-
+            //if(Convert.ToInt32(Session["UserLoginID"])!= 0)
+            //{
+            //    recentVisitedProduct = _sliderService.GetRecentVisitedProduct(Convert.ToInt32(Session["UserLoginID"]));
+            //}
+            //else
+            //{
+                recentVisitedProduct = _sliderService.GetRecentVisitedProduct(Convert.ToInt32(Session["UserLoginID"]));
+            //}
             var model = _sliderService.GetFAQList().ToList();
             var FAQviewModel = AutoMapper.Mapper.Map<List<FAQ>, List<FAQViewModel>>(model);
 
@@ -84,7 +89,7 @@ namespace University.UI.Controllers
                 homeBanner.ImageURL = BannerviewModel.ImageFullPath;
                 homeBanner.LinkTo = BannerviewModel.LinkTo;
 
-
+                
             }
 
 
@@ -95,17 +100,17 @@ namespace University.UI.Controllers
 
         private void SetIdentityDetails()
         {
-            int webUserId = 95665;
+            //int webUserId = 95665;
             if (Session["Customer"] == null)
             {
                 Session["Customer"] = 1;//SSOUser.CustomerID;
             }
-            Session["CustomerName"] = "John Doe";//SSOUser.CustomerName;
-            Session["UserName"] = "System Admin";//SSOUser.UserName;
+            //Session["CustomerName"] = "John Doe";//SSOUser.CustomerName;
+            //Session["UserName"] = "System Admin";//SSOUser.UserName;
             Session["UserId"] = 95665;//SSOUser.WebUserID;
-            Session["IPSUserID"] = 95665; //SSOUser.WebUserID;
-            Session["Role"] = 1;//SSOUser.RoleID;
-            Session["UserType"] = "IPSUser";
+            //Session["IPSUserID"] = 95665; //SSOUser.WebUserID;
+            //Session["Role"] = 1;//SSOUser.RoleID;
+            //Session["UserType"] = "IPSUser";
             Session["CustomerList"] = null;//customerList;
             Session["CustomerList"] = null;//customerList;
             int Customer = Convert.ToInt32(Session["Customer"]);
