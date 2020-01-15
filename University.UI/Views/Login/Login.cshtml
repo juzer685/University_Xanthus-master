@@ -79,10 +79,10 @@
                             <input id="login" type="submit" class="btn btn-primary btn-block" value="Login" />
                             @*<button type="submit" class="btn btn-primary btn-block" value="Login">Login</button>*@
                         </div>
-                        @if (ViewBag.Message != null)
+                        @*@if (ViewBag.Message != null)
                         {
                             <h6 class="align-center red-text">@ViewBag.Message</h6>
-                        }
+                        }*@
 
                         <!-- /.col -->
                     </div>
@@ -117,11 +117,17 @@
     <script src="../../dist/js/adminlte.min.js"></script>
     <script src="~/Scripts/custom.js"></script>
     <script>
-        @*$(document).ready(function () {
-            if (@TempData["Message"] != "") {
-                _showSuccessMessage("@TempData["Message"]");
+        $(document).ready(function () {
+            var bool = "@TempData.ContainsKey("Message")";
+            if (bool == 'True') {
+                if ("@TempData["Success"]" == "True") {
+                    _showSuccessMessage("@TempData["Message"]");
+                }
+                else {
+                     _showErrorMessage("@TempData["Message"]");
+                }
             }
-        });*@
+        });
     </script>
 
 

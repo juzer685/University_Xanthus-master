@@ -51,7 +51,8 @@ namespace IPSU.Web.Areas.Admin.Controllers
             var Result = _loginService.UserLogin(login_Tbl);
             if (Result == null)
             {
-                ViewBag.Message = "You are not a valid user...Please Register..!!";
+                TempData["Success"] = "False";
+                TempData["Message"] = "You are not a valid user...Please Register..!!";
                 return View();
             }
             else if (Result.RoleID == 4)
@@ -118,18 +119,20 @@ namespace IPSU.Web.Areas.Admin.Controllers
                 };
                 using (var message = new MailMessage(new MailAddress(ConfigurationManager.AppSettings["AdminId"], "Admin"), new MailAddress(Email, "user"))
                 {
-                    Subject = "Login Credentials",
-                    Body = "Hello,<br/><br/>Please <a href=" + ConfigurationManager.AppSettings["ChangePasswordUrl"] + "/" + new MD5Hashing().GetMd5Hash(EmailInfo.ID.ToString()) + ">Click Here</a> to Change Password <br/><br/><br/>Regards<br/>Admin"
+                    Subject = "Reset Password",
+                    Body = "Hello,<br/><br/>Welcome to IPS University. We received a request to reset your password.Please Click <a href=" + ConfigurationManager.AppSettings["ChangePasswordUrl"] + "/" + new MD5Hashing().GetMd5Hash(EmailInfo.ID.ToString()) + ">Here</a> to reset Password <br/><br/><br/>Regards<br/>Admin"
                 })
                 {
                     message.IsBodyHtml = true;
                     smtp.Send(message);
                 }
+                TempData["Success"] = "True";
                 TempData["Message"] = "please check your email to change password";
                 return RedirectToAction("Login");
             }
             else
             {
+                TempData["Success"] = "False";
                 TempData["Message"] = "Email does not exist.Please contact Admin for registration";
                 return RedirectToAction("Login");
             }
@@ -141,6 +144,7 @@ namespace IPSU.Web.Areas.Admin.Controllers
             Login_tbl Login_tbl = _loginService.CheckEmail(id, new MD5Hashing().VerifyMd5Hash);
             if (Login_tbl == null)
             {
+                TempData["Success"] = "False";
                 TempData["Message"] = "Your link has Expired";
                 return RedirectToAction("Login");
             }
