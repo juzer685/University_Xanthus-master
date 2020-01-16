@@ -93,14 +93,15 @@ namespace University.Repository
             }
         }
 
-        public Login_tbl CheckEmail(string EncyptedEmail, Func<string, string, bool> Func)
+        public Login_tbl CheckEmail(string Id, Func<string, string, bool> Func)
         {
             using (var context = new UniversityEntities())
             {
                 //DateTime compare = DateTime.Now.Add(TimeSpan.FromMinutes(1));
                 //var EmailInfo = context.EmailInfoes.ToList();
-                var EmailInfo = context.EmailInfoes.ToList().Where(y => Func(y.ID.ToString(), EncyptedEmail)).FirstOrDefault();
-                if ((DateTime.Now.TimeOfDay - EmailInfo.SendTime) > TimeSpan.FromMinutes(30))
+                var EmailInfo = context.EmailInfoes.ToList().Where(y => Func(y.ID.ToString(), Id)).FirstOrDefault();
+                var CreatedDate = (DateTime)EmailInfo.CreatedDate;
+                if ((DateTime.Now.TimeOfDay - (TimeSpan)EmailInfo.SendTime).Duration() > TimeSpan.FromMinutes(30) || CreatedDate.Date != DateTime.Now.Date)
                 {
                     return null;
                 }

@@ -14,7 +14,7 @@ namespace University.Service.Interface
         // List<ProductUserGuide> GetSearchUserGuides(string SearchTxt);
         Login_tbl ForgotPassword(string Email);
         bool ChangePassword(string Email,string Password);
-        Login_tbl CheckEmail(string Email, Func<string, string, bool> Func);
+        Login_tbl CheckEmail(string Id, Func<string, string, bool> Func);
         EmailInfo AddEmailInfo(int UserId);
     }
 }
