@@ -167,7 +167,7 @@
                 <li class="nav-item dropdown pointer" style="width:180px">
                     <div class="row pointer">
                         <div class="col-sm-6 pointer">
-                            @if (Convert.ToInt32(Session["RoleID"]) == 0)
+                            @if (!string.IsNullOrEmpty(Session["RoleID"] as string))
                             {
                                 @Url.Action("Login", "Login");
                             }
@@ -321,7 +321,7 @@
                     </div>
                     <div class="info" style="padding: 2px 5px;">
                         <a class="user-name">
-                            @if (Session["RoleID"].ToString() == "")
+                            @if(!string.IsNullOrEmpty(Session["RoleID"] as string))
                             {
                                 @Url.Action("Login", "Login");
                             }
@@ -627,7 +627,7 @@
                             </li>
                         }
                         <li class="nav-item">
-                            <a class="nav-link" href="../Login/LogOut" onclick="preventBack()">
+                            <a class="nav-link" href="/Login/LogOut" onclick="preventBack()">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
                                     Log Out

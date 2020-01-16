@@ -18,12 +18,12 @@ namespace University.Repository
             using (var context = new UniversityEntities())
             {
                 int AssociatedUserID = Convert.ToInt32(HttpContext.Current.Session["UserSessionIDs"]);
-                if(AssociatedUserID!=0)
+                if (AssociatedUserID != 0)
                 {
-                    
+
                     return context.HomeSlider.Include("Product").Where(y => y.IsDeleted != true && y.AssocitedID == AssociatedUserID).OrderByDescending(y => y.CreatedDate).ToList();
                 }
-                else if(AssociatedUserID==0)
+                else if (AssociatedUserID == 0)
                 {
                     int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
                     return context.HomeSlider.Include("Product").Where(y => y.IsDeleted != true && y.AssocitedID == UserID).OrderByDescending(y => y.CreatedDate).ToList();
@@ -31,9 +31,9 @@ namespace University.Repository
                 }
                 else
                 {
-                    return context.HomeSlider.Include("Product").Where(y => y.IsDeleted != true ).OrderByDescending(y => y.CreatedDate).ToList();
+                    return context.HomeSlider.Include("Product").Where(y => y.IsDeleted != true).OrderByDescending(y => y.CreatedDate).ToList();
                 }
-                
+
             }
         }
         public HomeSlider GetHomeSlider(int id)
@@ -100,7 +100,7 @@ namespace University.Repository
             using (var context = new UniversityEntities())
             {
                 int AssociatedUserID = Convert.ToInt32(HttpContext.Current.Session["UserSessionIDs"]);
-                if(AssociatedUserID!=0)
+                if (AssociatedUserID != 0)
                 {
 
                     return context.HomeBanner.Where(y => y.IsDeleted != null && y.IsDeleted != true && y.AssocitedID == AssociatedUserID).OrderByDescending(y => y.UpdatedDate).FirstOrDefault();
@@ -176,7 +176,7 @@ namespace University.Repository
             using (var context = new UniversityEntities())
             {
                 int AssociatedUserID = Convert.ToInt32(HttpContext.Current.Session["UserSessionIDs"]);
-                if(AssociatedUserID!=0)
+                if (AssociatedUserID != 0)
                 {
                     var res = context.FAQ.Where(y => y.IsDeleted != true && y.AssocitedID == AssociatedUserID).OrderByDescending(y => y.CreatedDate).ToList();
                     return res.Select(y => new FAQ()
@@ -201,7 +201,7 @@ namespace University.Repository
                         FAQDoc = null
                     }).OrderByDescending(y => y.CreatedDate).ToList();
                 }
-              
+
             }
         }
 
@@ -287,8 +287,16 @@ namespace University.Repository
             using (var context = new UniversityEntities())
             {
                 model = context.RecentVisitedProduct.Where(x => x.UserId == Id).OrderByDescending(x => x.ViewedDate).FirstOrDefault();
-                model.Product = context.Product.Where(x => x.Id == model.ProductId).FirstOrDefault();
-                return model;
+
+                if (model == null)
+                {
+                    return new RecentVisitedProduct();
+                }
+                else
+                {
+                    model.Product = context.Product.Where(x => x.Id == model.ProductId).FirstOrDefault();
+                    return model;
+                }
             }
 
         }
@@ -297,7 +305,7 @@ namespace University.Repository
             using (var context = new UniversityEntities())
             {
                 int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
-                var res = (from p in context.Product.Where(y => y.IsDeleted != true && y.AssocitedID== UserID)
+                var res = (from p in context.Product.Where(y => y.IsDeleted != true && y.AssocitedID == UserID)
                            join s in context.SubCategoryMaster.Where(y => y.IsDeleted != true)
                            on p.SubCategoryId equals s.Id
                            join c in context.CategoryMaster.Where(y => y.IsDeleted != true)

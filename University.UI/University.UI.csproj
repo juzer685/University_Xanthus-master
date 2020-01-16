@@ -2073,6 +2073,9 @@
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Scripts\ChangePassword.js" />
     <Content Include="Scripts\custom.js" />
+    <None Include="Properties\PublishProfiles\FolderProfile10.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile8.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile9.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />

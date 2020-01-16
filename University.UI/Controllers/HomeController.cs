@@ -38,7 +38,7 @@ namespace University.UI.Controllers
         //[SsoAuth]
         public ActionResult Index()
         {
-            SetIdentityDetails();
+           // SetIdentityDetails();
 
             var res = _sliderService.GetHomeSliderList().ToList();
             var viewModel = AutoMapper.Mapper.Map<List<HomeSlider>, List<HomeSliderViewModel>>(res);
@@ -72,7 +72,7 @@ namespace University.UI.Controllers
             var FAQviewModel = AutoMapper.Mapper.Map<List<FAQ>, List<FAQViewModel>>(model);
 
             HomePageViewModel homePageViewModel = new HomePageViewModel();
-            if (recentVisitedProduct != null)
+            if (recentVisitedProduct.Product != null)
             {
                 homePageViewModel.LastViewedProduct = recentVisitedProduct.Product.Title.ToString();
             }
@@ -105,12 +105,12 @@ namespace University.UI.Controllers
             {
                 Session["Customer"] = 1;//SSOUser.CustomerID;
             }
-            //Session["CustomerName"] = "John Doe";//SSOUser.CustomerName;
-            //Session["UserName"] = "System Admin";//SSOUser.UserName;
+            Session["CustomerName"] = "John Doe";//SSOUser.CustomerName;
+            Session["UserName"] = "System Admin";//SSOUser.UserName;
             Session["UserId"] = 95665;//SSOUser.WebUserID;
-            //Session["IPSUserID"] = 95665; //SSOUser.WebUserID;
-            //Session["Role"] = 1;//SSOUser.RoleID;
-            //Session["UserType"] = "IPSUser";
+            Session["IPSUserID"] = 95665; //SSOUser.WebUserID;
+            Session["Role"] = 1;//SSOUser.RoleID;
+            Session["UserType"] = "IPSUser";
             Session["CustomerList"] = null;//customerList;
             Session["CustomerList"] = null;//customerList;
             int Customer = Convert.ToInt32(Session["Customer"]);
