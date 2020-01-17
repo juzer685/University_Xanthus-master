@@ -13,17 +13,22 @@ function RegisterHandler() {
         if (!formValid)
             return false;
         else {
-            document.getElementById('loaderring').style.display = "block";
-            $.ajax({
-                type: "POST",
-                url: "/Admin/User/Register",
-                data: $('#UserRegistrationForm').serialize(),
-                success: function (result) {
-                    _showSuccessMessage(result.Message);
-                    document.getElementById('loaderring').style.display = "none";
-                    setTimeout(function () { window.location.href = result.url; }, 1000);
-                }
-            });
+            if ($('#agreeTerms').is(':checked')) {
+                document.getElementById('loaderring').style.display = "block";
+                $.ajax({
+                    type: "POST",
+                    url: "/Admin/User/Register",
+                    data: $('#UserRegistrationForm').serialize(),
+                    success: function (result) {
+                        _showSuccessMessage(result.Message);
+                        document.getElementById('loaderring').style.display = "none";
+                        setTimeout(function () { window.location.href = result.url; }, 1000);
+                    }
+                });
+            }
+            else {
+                _showErrorMessage("Please agree to terms");
+            }
         }
     });
 }
