@@ -42,7 +42,7 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="../../index2.html"><b>University Login</a>
+            <a href="../../index2.html"><b>Online Training Portal</a>
         </div>
         <!-- /.login-logo -->
         <div class="card">
@@ -51,7 +51,7 @@
 
                 <form action="~/Login/Login" method="post">
                     <div class="input-group mb-3">
-                        <input name="UserName" type="text" class="form-control" placeholder="Email" required pattern="^\w+([-+.']\w+)*@Html.Raw("@")\w+([-.]\w+)*\.\w+([-.]\w+)*$" oninvalid="_showErrorMessage('please enter valid email id');" oninput="this.setCustomValidity('')">
+                        <input name="UserName" type="text" class="form-control" placeholder="Please enter Email" required pattern="^\w+([-+.']\w+)*@Html.Raw("@")\w+([-.]\w+)*\.\w+([-.]\w+)*$" oninvalid="this.setCustomValidity('Please Enter valid Email Id')" oninput="this.setCustomValidity('')">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -59,33 +59,35 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input name="Password" type="password" class="form-control" placeholder="Password" required oninvalid="_showErrorMessage('please enter password');" oninput="this.setCustomValidity('')">
+                        <input name="Password" type="password" class="form-control" placeholder="Please enter Password" required oninvalid="this.setCustomValidity('Please Enter Password')" oninput="this.setCustomValidity('')">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="icheck-primary">
-                                <label for="remember">
-                                    <a href="/Login/ForgotPassword">Forgot Password?</a>
-                                </label>
-                            </div>
-                        </div>
-                        <!-- /.col -->
+                    <div class="row" style="justify-content:center;">
                         <div class="col-4">
                             <input id="login" type="submit" class="btn btn-primary btn-block" value="Login" />
                             @*<button type="submit" class="btn btn-primary btn-block" value="Login">Login</button>*@
                         </div>
-                        @*@if (ViewBag.Message != null)
-                        {
-                            <h6 class="align-center red-text">@ViewBag.Message</h6>
-                        }*@
-
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            @*<div class="icheck-primary">*@
+                                <label for="remember">
+                                    <a href="/Login/ForgotPassword">Forgot Password?</a>
+                                </label>
+                            @*</div>*@
+                        </div>
                         <!-- /.col -->
                     </div>
+                    @if (ViewBag.Message != null)
+                    {
+                        <h6 class="align-center red-text">@ViewBag.Message</h6>
+                    }
+
+                    <!-- /.col -->
                 </form>
 
                 @*<div class="social-auth-links text-center mb-3">

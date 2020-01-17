@@ -51,8 +51,9 @@ namespace IPSU.Web.Areas.Admin.Controllers
             var Result = _loginService.UserLogin(login_Tbl);
             if (Result == null)
             {
-                TempData["Success"] = "False";
-                TempData["Message"] = "You are not a valid user...Please Register..!!";
+                //TempData["Success"] = "False";
+                //TempData["Message"] = "You are not a valid user...Please Register..!!";
+                ViewBag.Message = "You are not a valid user...Please Register..!!";
                 return View();
             }
             else if (Result.RoleID == 4)
@@ -120,7 +121,7 @@ namespace IPSU.Web.Areas.Admin.Controllers
                 using (var message = new MailMessage(new MailAddress(ConfigurationManager.AppSettings["AdminId"], "Admin"), new MailAddress(Email, "user"))
                 {
                     Subject = "Reset Password",
-                    Body = "Hello,<br/><br/>Welcome to IPS University. We received a request to reset your password.Please Click <a href=" + ConfigurationManager.AppSettings["ChangePasswordUrl"] + "/" + new MD5Hashing().GetMd5Hash(EmailInfo.ID.ToString()) + ">Here</a> to reset Password <br/><br/><br/>Regards<br/>Admin"
+                    Body = "Hello,<br/><br/>Welcome to Online Training Portal. We received a request to reset your password.Please <a href=" + ConfigurationManager.AppSettings["ChangePasswordUrl"] + "/" + new MD5Hashing().GetMd5Hash(EmailInfo.ID.ToString()) + ">Click Here</a> to reset Password <br/><br/><br/>Regards,<br/>Admin"
                 })
                 {
                     message.IsBodyHtml = true;

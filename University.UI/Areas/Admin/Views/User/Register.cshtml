@@ -5,7 +5,7 @@
 }
 
 @section styles{
-   
+
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- icheck bootstrap -->
@@ -25,7 +25,6 @@
 
     <div class="card">
         <div class="card-body register-card-body">
-            <p class="login-box-msg" style="margin-top:10px">Register a new user</p>
 
             <form action="/Admin/User/Register" method="post" id="UserRegistrationForm">
                 @Html.ValidationMessageFor(x => x.FirstName, null, new { @class = "", style = "color:red;" })
@@ -44,7 +43,7 @@
                     @*<input type="text" class="form-control" name="LastName" placeholder="LastName">*@
                     <div class="input-group-append">
                         <div class="input-group-text">
-                            <span class="fas fa-envelope"></span>
+                            <span class="fas fa-user"></span>
                         </div>
                     </div>
                 </div>
@@ -54,7 +53,7 @@
                     @*<input type="text" class="form-control" name="MobileNo" placeholder="Mobile Number">*@
                     <div class="input-group-append">
                         <div class="input-group-text">
-                            <span class="fas fa-envelope"></span>
+                            <span class="fas fa-mobile"></span>
                         </div>
                     </div>
                 </div>
@@ -102,7 +101,7 @@
                     @Html.DropDownListFor(x => x.CustomerId, new SelectList(Model.CustomerList, "CustomerID", "CompanyName"), "Select Customer", new { @class = "form-control" })
                     <div class="input-group-append">
                         <div class="input-group-text">
-                            <span class="fas fa-envelope"></span>
+                            <span class="fas fa-user"></span>
                         </div>
                     </div>
                 </div>
@@ -116,11 +115,13 @@
                         </div>
                     </div>
                     <!-- /.col -->
+                    <!-- /.col -->
+                </div>
+                <div class="row" style="justify-content:center;">
                     <div class="col-4">
                         @*<button type="submit" class="btn btn-primary btn-block">Register</button>*@
                         <input type="submit" id="UserRegisterationBtn" class="btn btn-primary btn-block" value="Register">
                     </div>
-                    <!-- /.col -->
                 </div>
             </form>
 
