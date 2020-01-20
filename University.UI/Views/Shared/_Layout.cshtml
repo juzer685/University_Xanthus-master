@@ -34,7 +34,7 @@
     <link rel="stylesheet" href="../../plugins/toastr/toastr.min.css">
 
     <!-- Theme style -->
-    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="../../dist/css/adminlte.css">
     @RenderSection("styles", required: false)
     <style>
 
@@ -555,22 +555,14 @@
                                     </p>
                                 </a>
                                 <ul class="nav nav-treeview">
-                                    @*<li class="nav-item">
+                                    <li class="nav-item">
                                             <a href="~/Admin/SubCategory" class="nav-link">
                                                 <i class="far fa-circle nav-icon"></i>
                                                 <p>Category</p>
                                             </a>
-                                        </li>*@
+                                        </li>
 
-                                    <li class="nav-item has-treeview">
-                                        <a href="~/Admin/SubCategory" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>
-                                                Category
-                                                @*<i class="right fas fa-angle-left"></i>*@
-                                            </p>
-                                        </a>
-                                        <ul class="nav nav-treeview">
+                                  
                                             <li class="nav-item">
                                                 <a href="#" class="nav-link">
                                                     <i class="far fa-dot-circle nav-icon"></i>
@@ -578,27 +570,25 @@
                                                 </a>
                                             </li>
 
-                                        </ul>
-                                    </li>
 
 
 
                                     <li class="nav-item">
                                         <a href="~/Admin/Product" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
+                                            <i class="fab fa-product-hunt nav-icon"></i>
                                             <p>Product</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="~/Admin/HomeSlider" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
+                                            <i class="fas fa-home nav-icon"></i>
                                             <p>Home Slider</p>
                                         </a>
                                     </li>
 
                                     <li class="nav-item">
                                         <a href="~/Admin/HomeBanner" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
+                                            <i class="fas fa-home nav-icon"></i>
                                             <p>Home Banner</p>
                                         </a>
                                     </li>
@@ -611,13 +601,13 @@
                                     </li>
                                     <li class="nav-item">
                                         <a href="~/Admin/ProductFeedback" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
+                                            <i class="far fa-comments nav-icon"></i>
                                             <p>Product Feedback</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a href="~/Admin/GeneralFeedback" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
+                                            <i class="far fa-comments nav-icon"></i>
                                             <p>Feedback</p>
                                         </a>
                                     </li>
@@ -648,7 +638,7 @@
                             <a class="nav-link" href="/Login/LogOut" onclick="preventBack()">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>
-                                    Log Out
+                                    LOGOUT
                                 </p>
                             </a>
                         </li>
@@ -667,7 +657,7 @@
         </aside>
         <!-- /.control-sidebar -->
         <!-- Main Footer -->
-        <footer class="main-footer">
+        <footer class="main-footer" style="text-align: end;">
             <strong>Copyright &copy; 2020-2021 <a href="">Xanthus</a>.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">

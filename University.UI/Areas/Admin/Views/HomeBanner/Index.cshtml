@@ -15,11 +15,11 @@
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2" style="margin-top:10px">
-            <div class="col-sm-6" >
+            <div class="col-sm-12" >
                 <h1 class="m-0 text-dark">Home</h1>
             </div><!-- /.col -->
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
+            <div class="col-sm-12">
+                <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Administration</a></li>
                     <li class="breadcrumb-item active">Home Banner</li>
                 </ol>
@@ -126,7 +126,7 @@
         }
         else
         {
-               $('#homeBannerForm').modal('show');
+               //$('#homeBannerForm').modal('show');
         }
 
     })
@@ -174,6 +174,7 @@
             success: function (data) {
                 $('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
                 //alert("Data Saved Successfully"); // show response from the php script.
+                _showSuccessMessage("Home Banner Saved Succesfully");
                 setTimeout(function () {
                     location.reload();
                 }, 1500);
@@ -183,6 +184,6 @@
         e.preventDefault();
     });
     function Cancel() {
-        window.location.href = '/Home';
+        window.location.href = '/Home/index';
     }
 </script>
