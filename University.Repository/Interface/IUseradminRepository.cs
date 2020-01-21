@@ -15,7 +15,8 @@ namespace University.Repository.Interface
         bool DeleteUser(Decimal id);
         //List<CategoryMaster> GetCategoryMasters();
         //List<SmartSerach_Result> SmartSearch(string freeText);
-        bool RegisterUser(Login_tbl Login_tbl);
+        (bool, bool) RegisterUser(Login_tbl Login_tbl);
         List<Customer> GetCustomerList();
+        Login_tbl EditUser(int id);
     }
 }

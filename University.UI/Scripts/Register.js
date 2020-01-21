@@ -19,10 +19,17 @@ function RegisterHandler() {
                     type: "POST",
                     url: "/Admin/User/Register",
                     data: $('#UserRegistrationForm').serialize(),
-                    success: function (result) {
-                        _showSuccessMessage(result.Message);
-                        document.getElementById('loaderring').style.display = "none";
-                        setTimeout(function () { window.location.href = result.url; }, 1000);
+                    success: function (data) {
+                        if (data.result == "true") {
+                            _showSuccessMessage(data.Message);
+                            document.getElementById('loaderring').style.display = "none";
+                            setTimeout(function () { window.location.href = data.url; }, 2000);
+                        }
+                        else {
+                            _showErrorMessage(data.Message);
+                            document.getElementById('loaderring').style.display = "none";
+                            setTimeout(function () { window.location.href = data.url; }, 2000);
+                        }
                     }
                 });
             }

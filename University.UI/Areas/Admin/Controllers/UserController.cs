@@ -31,7 +31,6 @@ namespace University.UI.Areas.Admin.Controllers
         public ActionResult index()
         {
             var res = _UseradminService.GetUserList().ToList();
-
             var viewModel = AutoMapper.Mapper.Map<List<Login_tbl>, List<Login_tbl>>(res);
             Session["UserList"] = viewModel;
             return View(viewModel);
@@ -74,15 +73,33 @@ namespace University.UI.Areas.Admin.Controllers
         public ActionResult DeleteUser(string Id)
         {
             var res = _UseradminService.DeleteUser(Convert.ToDecimal(Id));
-            return Json(new {url = "/Admin/User"});
-          //  return Json(true, JsonRequestBehavior.AllowGet);
+            return Json(new { url = "/Admin/User" });
+            //  return Json(true, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
         public ActionResult Register()
         {
             var res = _UseradminService.GetCustomerList();
-            return View("Register", new RegistrationVM { CustomerList = res });
+            if (TempData["EditUserId"] != null)
+            {
+                //int id = Convert.ToInt32(TempData["EditUserId"]);
+                Login_tbl Login_tbl = _UseradminService.EditUser(Convert.ToInt32(TempData["EditUserId"]));
+                return View("Register", new RegistrationVM
+                {
+                    ID = Login_tbl.ID,
+                    FirstName = Login_tbl.FirstName,
+                    LastName = Login_tbl.LastName,
+                    Email = Login_tbl.UserName,
+                    MobileNo = Login_tbl.MobileNo,
+                    CustomerId = Login_tbl.CustomerId,
+                    CustomerList = res
+                });
+            }
+            else
+            {
+                return View("Register", new RegistrationVM { CustomerList = res });
+            }
         }
 
         [HttpPost]
@@ -102,25 +119,32 @@ namespace University.UI.Areas.Admin.Controllers
                 IsDeleted = false,
                 AdminId = Convert.ToInt32(Session["AdminLoginID"])
             });
-            if (res == true)
+            if (res.Item1 == true)
             {
-                bool success = SendEmail(p_RegistrationVM.Email,p_RegistrationVM.Password, p_RegistrationVM.FirstName);
+                bool success = SendEmail(p_RegistrationVM.Email, p_RegistrationVM.Password, p_RegistrationVM.FirstName);
                 if (success)
                 {
-                    return Json(new { Message = "User Registration Successful and Email Sent", url = "/Admin/User" });
+                    return Json(new { result = true, Message = "User Registration Successful and Email Sent", url = "/Admin/User" });
                 }
                 else
                 {
-                    return Json(new { Message = "User Registration Successful but Email not sent", url = "/Admin/User" });
+                    return Json(new { result = true, Message = "User Registration Successful but Email not sent", url = "/Admin/User" });
                 }
             }
             else
             {
-                return Json(new { Message = "User Registration UnSuccessful", url = "/Admin/User/Register" });
+                if (res.Item2 == true)
+                {
+                    return Json(new { result = false, Message = "Email already Exists.", url = "/Admin/User/Register" });
+                }
+                else
+                {
+                    return Json(new { result = false, Message = "something went wrong,please try again.", url = "/Admin/User/Register" });
+                }
             }
         }
 
-        public bool SendEmail(string p_Email,string p_Password, string FirstName)
+        public bool SendEmail(string p_Email, string p_Password, string FirstName)
         {
             try
             {
@@ -136,7 +160,7 @@ namespace University.UI.Areas.Admin.Controllers
                 using (var message = new MailMessage(new MailAddress(ConfigurationManager.AppSettings["AdminId"], "Admin"), new MailAddress(p_Email, "user"))
                 {
                     Subject = "Login Credentials",
-                    Body = "Hello "+ FirstName + ",<br/><br/>Welcome to Online Training Portal.Below are the login credentials for the system <br/><br/>Username: " + p_Email + " <br/>Password: " + p_Password + "<br/><br/>Please <a href=" + ConfigurationManager.AppSettings["LoginUrl"] + ">Click Here</a> to login <br/><br/><br/>Regards,<br/>Admin"
+                    Body = "Hello " + FirstName + ",<br/><br/>Welcome to Online Training Portal.Below are the login credentials for the system <br/><br/>Username: " + p_Email + " <br/>Password: " + p_Password + "<br/><br/>Please <a href=" + ConfigurationManager.AppSettings["LoginUrl"] + ">Click Here</a> to login <br/><br/><br/>Regards,<br/>Admin"
                 })
                 {
                     message.IsBodyHtml = true;
@@ -144,10 +168,17 @@ namespace University.UI.Areas.Admin.Controllers
                 }
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return false;
             }
+        }
+
+        [HttpGet]
+        public ActionResult EditUser(int id)
+        {
+            TempData["EditUserId"] = id;
+            return RedirectToAction("Register");
         }
     }
 }

@@ -40,6 +40,7 @@ namespace University.UI.Areas.Admin.Models
 
         [Required(ErrorMessage = "Please enter Mobile Number")]
         [RegularExpression("([0-9]+)",ErrorMessage ="Only Numbers are Allowed")]
+        [StringLength(10, ErrorMessage = "Do not enter more than 10 Numbers")]
         public string MobileNo { get; set; }
         public List<Customer> CustomerList { get; set; }
     }

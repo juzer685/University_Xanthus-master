@@ -9,7 +9,7 @@ using University.Repository.Interface;
 
 namespace University.Repository
 {
-    public class UseradminRepository: IUseradminRepository
+    public class UseradminRepository : IUseradminRepository
     {
 
         public IEnumerable<Login_tbl> GetUserList()
@@ -42,20 +42,27 @@ namespace University.Repository
             }
         }
 
-        public bool RegisterUser(Login_tbl Login_tbl)
+        public (bool,bool) RegisterUser(Login_tbl Login_tbl)
         {
             try
             {
                 using (var context = new UniversityEntities())
                 {
-                    context.Login_tbl.Add(Login_tbl);
-                    context.SaveChanges();
-                    return true;
+                    if (context.Login_tbl.Any(x => x.UserName.Equals(Login_tbl.UserName)))
+                    {
+                        return (false,true);
+                    }
+                    else
+                    {
+                        context.Login_tbl.Add(Login_tbl);
+                        context.SaveChanges();
+                        return (true, false);
+                    }
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                return false;
+                return (false, false);
             }
         }
 
@@ -64,6 +71,14 @@ namespace University.Repository
             using (var context = new UniversityEntities())
             {
                 return context.Customer.ToList();
+            }
+        }
+
+        public Login_tbl EditUser(int id)
+        {
+            using (var context = new UniversityEntities())
+            {
+                return context.Login_tbl.FirstOrDefault(x => x.ID == id);
             }
         }
 
@@ -109,5 +124,5 @@ namespace University.Repository
         //    }
     }
 
-    
+
 }

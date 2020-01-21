@@ -37,7 +37,7 @@ namespace University.Service
         {
             return _UseradminRepository.DeleteUser(id);
         }
-        public bool RegisterUser(Login_tbl Login_tbl)
+        public (bool, bool) RegisterUser(Login_tbl Login_tbl)
         {
             return _UseradminRepository.RegisterUser(Login_tbl);
         }
@@ -45,6 +45,11 @@ namespace University.Service
         public List<Customer> GetCustomerList()
         {
             return _UseradminRepository.GetCustomerList();
+        }
+
+        public Login_tbl EditUser(int id)
+        {
+            return _UseradminRepository.EditUser(id);
         }
 
         //public List<CategoryMaster> GetCategoryMasters()
