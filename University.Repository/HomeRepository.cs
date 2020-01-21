@@ -25,8 +25,8 @@ namespace University.Repository
                 }
                 else if (AssociatedUserID == 0)
                 {
-                    int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
-                    return context.HomeSlider.Include("Product").Where(y => y.IsDeleted != true && y.AssocitedID == UserID).OrderByDescending(y => y.CreatedDate).ToList();
+                    //int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
+                    return context.HomeSlider.Include("Product").Where(y => y.IsDeleted != true ).OrderByDescending(y => y.CreatedDate).ToList();
 
                 }
                 else
@@ -304,8 +304,8 @@ namespace University.Repository
         {
             using (var context = new UniversityEntities())
             {
-                int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
-                var res = (from p in context.Product.Where(y => y.IsDeleted != true && y.AssocitedID == UserID)
+                //int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
+                var res = (from p in context.Product.Where(y => y.IsDeleted != true)
                            join s in context.SubCategoryMaster.Where(y => y.IsDeleted != true)
                            on p.SubCategoryId equals s.Id
                            join c in context.CategoryMaster.Where(y => y.IsDeleted != true)

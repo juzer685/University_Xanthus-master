@@ -67,7 +67,7 @@ namespace University.UI.Areas.Admin.Controllers
             }
 
             var productList = _productService.GetProductList();
-            productList = productList.Where(t => t.AssocitedID == Convert.ToInt32(Session["UserSessionIDs"])).ToList();
+           // productList = productList.Where(t => t.AssocitedID == Convert.ToInt32(Session["UserSessionIDs"])).ToList();
             var result = AutoMapper.Mapper.Map<IEnumerable<ProductEntity>, List<ProductDropdownListViewModel>>(productList);
             model.Products = result;
 

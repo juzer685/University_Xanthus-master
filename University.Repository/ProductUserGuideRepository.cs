@@ -15,8 +15,8 @@ namespace University.Repository
         {
             using (var context = new UniversityEntities())
             {
-                int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
-                return context.ProductUserGuide.Where(y=>y.IsDeleted != true && y.Title!=null && y.Product.SubCategoryMaster.IsDeleted == false && y.AssocitedID == UserID).ToList();
+               // int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
+                return context.ProductUserGuide.Where(y=>y.IsDeleted != true && y.Title!=null && y.Product.SubCategoryMaster.IsDeleted == false).ToList();
             }
         }
 

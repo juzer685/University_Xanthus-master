@@ -32,7 +32,7 @@ namespace University.UI.Areas.Admin.Controllers
         public ActionResult Index()
         {
             var res = _productService.GetProductList().ToList();
-            res = res.Where(t => t.AssocitedID == Convert.ToInt32(Session["UserSessionIDs"])).ToList();
+            //res = res.Where(t => t.AssocitedID == Convert.ToInt32(Session["UserSessionIDs"])).ToList();
             
             var viewModel = AutoMapper.Mapper.Map<List<ProductEntity>, List<ProductViewModel>>(res);
             
@@ -52,7 +52,7 @@ namespace University.UI.Areas.Admin.Controllers
                 viewModel = new ProductViewModel();
             }
             var subcategorys = _subCategoryService.GetSubCategoryList().ToList();
-            subcategorys = subcategorys.Where(t => t.AssocitedID == Convert.ToInt32(Session["UserSessionIDs"])).ToList();
+            //subcategorys = subcategorys.Where(t => t.AssocitedID == Convert.ToInt32(Session["UserSessionIDs"])).ToList();
             ViewBag.SubCategoryList = subcategorys;
             return View(viewModel);
         }
@@ -62,6 +62,7 @@ namespace University.UI.Areas.Admin.Controllers
             if (!string.IsNullOrEmpty(ProductId) && !ProductId.Equals("0"))
             {
                 var res = _productService.GetProduct(Convert.ToDecimal(ProductId));
+                res.AssocitedCustID = Convert.ToInt32(Session["AdminLoginID"]);
                 viewModel = AutoMapper.Mapper.Map<ProductEntity, ProductViewModel>(res);
                 if (viewModel.ProductUserGuide == null) { viewModel.ProductUserGuide = new ProductUserGuideViewModel(); }
             }
@@ -99,6 +100,7 @@ namespace University.UI.Areas.Admin.Controllers
                 {
                     res.ImageURL = UploadFileOnServer(ProductImagePath, file);
                 }
+                res.AssocitedCustID = Convert.ToInt32(Session["AdminLoginID"]);
                 var productId = _productService.AddUpdateProductBasic(res);
                 return Json(productId, JsonRequestBehavior.AllowGet);
             }
@@ -109,6 +111,7 @@ namespace University.UI.Areas.Admin.Controllers
                 {
                     res.ImageURL = UploadFileOnServer(ProductImagePath, file);
                 }
+                res.AssocitedCustID = Convert.ToInt32(Session["AdminLoginID"]);
                 var productId = _productService.AddUpdateProductBasic(res);
                 return Json(productId, JsonRequestBehavior.AllowGet);
 
@@ -125,7 +128,7 @@ namespace University.UI.Areas.Admin.Controllers
         {
             if (FaqId.ToString() == "0")
             {
-                model.AssocitedID = Convert.ToInt32(Session["UserSessionIDs"]);
+                model.AssocitedCustID = Convert.ToInt32(Session["AdminLoginID"]);
                 model.Id = Convert.ToDecimal(FaqId);
                 var res = AutoMapper.Mapper.Map<ProductFaqViewModel, ProductFAQs>(model);
                 var productFaqId = _productService.SaveProductFAQ(res);
@@ -136,7 +139,7 @@ namespace University.UI.Areas.Admin.Controllers
             }
             else
             {
-                model.AssocitedID = Convert.ToInt32(Session["UserSessionIDs"]);
+                model.AssocitedCustID = Convert.ToInt32(Session["AdminLoginID"]);
                 model.Id = Convert.ToDecimal(FaqId);
                 var res = AutoMapper.Mapper.Map<ProductFaqViewModel, ProductFAQs>(model);
                 var productFaqId = _productService.SaveProductFAQ(res);
@@ -191,6 +194,7 @@ namespace University.UI.Areas.Admin.Controllers
         }
         public ActionResult SaveProductProductFAQVideo(ProductFAQVideoViewModel model, int FaqVideoId)
         {
+            model.AssocitedCustID = Convert.ToInt32(Session["AdminLoginID"]);
             model.Id = FaqVideoId;
             var res = AutoMapper.Mapper.Map<ProductFAQVideoViewModel, ProductFAQVideos>(model);
             if (model.FAQVideo != null)
@@ -231,6 +235,7 @@ namespace University.UI.Areas.Admin.Controllers
         {
             if (SpecId.ToString() == "0")
             {
+                model.AssocitedCustID = Convert.ToInt32(Session["AdminLoginID"]);
                 model.Id = Convert.ToDecimal(SpecId);
                 var viewModel = AutoMapper.Mapper.Map<ProductSpecViewModel, ProductSpec>(model);
                 var res = _productService.SaveProductSpecification(viewModel);
@@ -238,7 +243,7 @@ namespace University.UI.Areas.Admin.Controllers
             }
             else
             {
-
+                model.AssocitedCustID = Convert.ToInt32(Session["AdminLoginID"]);
                 model.Id = Convert.ToDecimal(SpecId);
                 var viewModel = AutoMapper.Mapper.Map<ProductSpecViewModel, ProductSpec>(model);
                 var res = _productService.SaveProductSpecification(viewModel);
@@ -260,7 +265,7 @@ namespace University.UI.Areas.Admin.Controllers
         {
             if (UserGuideId.ToString() == "0")
             {
-                model.AssocitedID = Convert.ToInt32(Session["UserSessionIDs"]);
+                model.AssocitedCustID = Convert.ToInt32(Session["AdminLoginID"]);
                 model.Id = Convert.ToDecimal(UserGuideId);
                 if (model.Guidefile != null)
                 {
@@ -280,7 +285,7 @@ namespace University.UI.Areas.Admin.Controllers
             }
             else
             {
-                model.AssocitedID = Convert.ToInt32(Session["UserSessionIDs"]);
+                model.AssocitedCustID = Convert.ToInt32(Session["AdminLoginID"]);
                 model.Id = Convert.ToDecimal(UserGuideId);
                
                 if (model.Guidefile != null)
@@ -316,7 +321,7 @@ namespace University.UI.Areas.Admin.Controllers
             
             if (ProductVideoId.ToString() == "0")
             {
-                model.AssocitedID = Convert.ToInt32(Session["UserSessionIDs"]);
+                model.AssocitedCustID = Convert.ToInt32(Session["AdminLoginID"]);
                 model.Id = Convert.ToDecimal(ProductVideoId);
                 var res = AutoMapper.Mapper.Map<ProductVideoViewModel, ProductVideos>(model);
                 if (model.ProductVideo != null)
@@ -336,7 +341,7 @@ namespace University.UI.Areas.Admin.Controllers
             }
             else
             {
-                model.AssocitedID = Convert.ToInt32(Session["UserSessionIDs"]);
+                model.AssocitedCustID = Convert.ToInt32(Session["AdminLoginID"]);
                 model.Id = Convert.ToDecimal(ProductVideoId);
                 var res = AutoMapper.Mapper.Map<ProductVideoViewModel, ProductVideos>(model);
                 if (model.ProductVideo != null)
@@ -379,7 +384,7 @@ namespace University.UI.Areas.Admin.Controllers
         {
             if (ProductDocumentId.ToString() == "0")
             {
-                model.AssocitedID = Convert.ToInt32(Session["UserSessionIDs"]);
+                model.AssocitedCustID = Convert.ToInt32(Session["AdminLoginID"]);
                 model.Id = Convert.ToDecimal(ProductDocumentId);
                 var res = AutoMapper.Mapper.Map<ProductDocumentViewModel, ProductDocuments>(model);
                 if (model.ProductDocumentFile != null)
@@ -395,7 +400,7 @@ namespace University.UI.Areas.Admin.Controllers
             }
             else
             {
-                model.AssocitedID = Convert.ToInt32(Session["UserSessionIDs"]);
+                model.AssocitedCustID = Convert.ToInt32(Session["AdminLoginID"]);
                 model.Id = Convert.ToDecimal(ProductDocumentId);
                 var res = AutoMapper.Mapper.Map<ProductDocumentViewModel, ProductDocuments>(model);
                 if (model.ProductDocumentFile != null)

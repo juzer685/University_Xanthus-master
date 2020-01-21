@@ -31,7 +31,7 @@
                     <div class="card-header">
                         <h3 class="card-title">
                             @*<button type="button" class="btn btn-primary btn-sm b-w-80" onclick="AddProduct()">*@
-                            <button type="button" class="btn btn-primary btn-sm b-w-80 addproduct" >
+                            <button type="button" class="btn btn-primary btn-sm b-w-80" onclick="AddProduct()">
                                 Add
                             </button>
                         </h3>
@@ -82,16 +82,17 @@
 </div>
 
 <script>
-    $('.addproduct').click(function () {
-        if ($('#ddlusrlst').val() == 0) {
-            _showErrorMessage("First Select User");
-        }
-        else
-        {
-            AddProduct();
-        }
+    //$('.addproduct').click(function () {
+    //    if ($('#ddlusrlst').val() == 0) {
+    //        _showErrorMessage("First Select User");
+    //    }
+    //    else
+    //    {
+    //        AddProduct();
+    //    }
 
-    })
+    //})
+
 
 
     $(document).ready(function () {

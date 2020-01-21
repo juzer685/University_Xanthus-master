@@ -9,6 +9,9 @@ namespace University.Repository.Interface
 {
     public interface ISubCategoryRepository
     {
+        List<CategoryUserMapping> GetCategoryUserMappingGrid();
+        (List<Login_tbl>, List<SubCategoryMaster>) GetCategoryUserMappingList();
+        bool AddCategoryUserMapping(CategoryUserMapping model);
         IEnumerable<SubCategoryMaster> GetSubCategoryList();
         List<SubCategoryMaster> GetSubCategoryListById(Decimal id);
         SubCategoryMaster GetSubCategory(Decimal id);
