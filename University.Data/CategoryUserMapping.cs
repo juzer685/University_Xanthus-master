@@ -12,14 +12,12 @@ namespace University.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class ProductVideos
+    public partial class CategoryUserMapping
     {
-        public decimal Id { get; set; }
-        public string Title { get; set; }
-        public string Decription { get; set; }
-        public string VideoURL { get; set; }
-        public string ThumbnailURL { get; set; }
-        public decimal ProductId { get; set; }
+        public decimal ID { get; set; }
+        public Nullable<decimal> CategoryID { get; set; }
+        public Nullable<int> UserID { get; set; }
+        public Nullable<int> AdminID { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<decimal> CreatedBy { get; set; }
@@ -27,8 +25,9 @@ namespace University.Data
         public Nullable<decimal> DeletedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public Nullable<decimal> UpdatedBy { get; set; }
-        public Nullable<int> AssocitedCustID { get; set; }
     
-        public virtual Product Product { get; set; }
+        public virtual Login_tbl Login_tbl { get; set; }
+        public virtual Login_tbl Login_tbl1 { get; set; }
+        public virtual SubCategoryMaster SubCategoryMaster { get; set; }
     }
 }

@@ -56,6 +56,9 @@
     <Compile Include="CategoryMaster.cs">
       <DependentUpon>UniversityEntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="CategoryUserMapping.cs">
+      <DependentUpon>UniversityEntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Class1.cs" />
     <Compile Include="CustomEntities\ProductEntity.cs" />
     <Compile Include="CustomEntities\ProductLayoutMenu.cs" />
@@ -142,9 +145,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>UniversityEntityModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Web_Login.cs">
-      <DependentUpon>UniversityEntityModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
