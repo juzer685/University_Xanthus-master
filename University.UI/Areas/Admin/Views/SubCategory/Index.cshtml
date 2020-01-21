@@ -33,7 +33,7 @@
                     <div class="card-header">
                         <h3 class="card-title">
                             @*<button type="button" class="btn btn-primary btn-sm b-w-80 subcategoryadd" data-toggle="modal" data-target="#AddSubCategoryModal">*@
-                            <button type="button" class="btn btn-primary btn-sm b-w-80 subcategoryadd" data-toggle="modal">
+                            <button type="button" class="btn btn-primary btn-sm b-w-80 subcategoryadd" data-toggle="modal" data-target="#AddSubCategoryModal">
                                 Add
                             </button>
                             @*<input type="button" class="btn btn-primary btn-sm b-w-80" value="Add" onclick="AddSubCategory()" />*@
@@ -122,20 +122,20 @@
             //    'aTargets': ['nosort']
             //}]
         );
-        $('.subcategoryadd').click(function () {
-            if ($('#ddlusrlst').val() == 0)
-            {
-                _showErrorMessage("First Select User");
-            }
-            else
-            {
-                $('#AddSubCategoryModal').modal('show');
-            }
+        //$('.subcategoryadd').click(function () {
+        //    if ($('#ddlusrlst').val() == 0)
+        //    {
+        //        _showErrorMessage("First Select User");
+        //    }
+        //    else
+        //    {
+        //        $('#AddSubCategoryModal').modal('show');
+        //    }
 
-        })
+        //})
 
         $(document).on('submit', '#subCategoryForm', function (e) {
-           $('#SubcategoryAssocitedID').val($("#ddlusrlst").val());
+         //  $('#SubcategoryAssocitedID').val($("#ddlusrlst").val());
             
                 var form = $(this);
                 var url = form.attr('action');

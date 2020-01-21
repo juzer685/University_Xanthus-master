@@ -17,6 +17,10 @@ namespace University.Service
             _subCategoryRepository = subCategoryRepository;
 
         }
+        public bool AddCategoryUserMapping(CategoryUserMapping model)
+        {
+            return _subCategoryRepository.AddCategoryUserMapping(model);
+        }
         public bool AddOrUpdateSubCategory(SubCategoryMaster model)
         {
             return _subCategoryRepository.AddOrUpdateSubCategory(model);
@@ -30,6 +34,14 @@ namespace University.Service
         public SubCategoryMaster GetSubCategory(Decimal id)
         {
             return _subCategoryRepository.GetSubCategory(id);
+        }
+        public (List<Login_tbl>, List<SubCategoryMaster>) GetCategoryUserMappingList()
+        {
+            return _subCategoryRepository.GetCategoryUserMappingList();
+        }
+        public List<CategoryUserMapping> GetCategoryUserMappingGrid()
+        {
+            return _subCategoryRepository.GetCategoryUserMappingGrid();
         }
 
         public IEnumerable<SubCategoryMaster> GetSubCategoryList()

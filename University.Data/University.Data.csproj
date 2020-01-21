@@ -115,6 +115,7 @@
     <Compile Include="ProductVideos.cs">
       <DependentUpon>UniversityEntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ProperrtiesLayer\CategoryUserMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RecentVisitedProduct.cs">
       <DependentUpon>UniversityEntityModel.tt</DependentUpon>

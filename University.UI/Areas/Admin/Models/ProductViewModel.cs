@@ -68,7 +68,7 @@ namespace University.UI.Areas.Admin.Models
         public virtual CategoryMaster CategoryMaster { get; set; }
         public virtual List<ProductDocumentViewModel> ProductDocuments { get; set; }
 
-        public int AssocitedID { get; set; }
+        public int AssocitedCustID { get; set; }
 
         public string CheckImage { 
             get {

@@ -52,6 +52,6 @@ namespace University.UI.Areas.Admin.Models
         public Nullable<Decimal> UpdatedBy { get; set; }
         public HttpPostedFileBase ProductVideoImg { get; set; }
         public HttpPostedFileBase ProductVideo { get; set; }
-        public Decimal AssocitedID { get; set; }
+        public Decimal AssocitedCustID  { get; set; }
     }
 }

@@ -19,8 +19,8 @@ namespace University.Data
         {
             this.CategoryUserMapping = new HashSet<CategoryUserMapping>();
             this.CategoryUserMapping1 = new HashSet<CategoryUserMapping>();
-            this.EmailInfo = new HashSet<EmailInfo>();
             this.Login_tbl1 = new HashSet<Login_tbl>();
+            this.EmailInfoes = new HashSet<EmailInfo>();
         }
     
         public int ID { get; set; }
@@ -44,10 +44,10 @@ namespace University.Data
         public virtual ICollection<CategoryUserMapping> CategoryUserMapping1 { get; set; }
         public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EmailInfo> EmailInfo { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Login_tbl> Login_tbl1 { get; set; }
         public virtual Login_tbl Login_tbl2 { get; set; }
         public virtual Role Role { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EmailInfo> EmailInfoes { get; set; }
     }
 }

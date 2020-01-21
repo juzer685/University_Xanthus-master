@@ -11,16 +11,60 @@ namespace University.Repository
 {
     public class SubCategoryRepository : ISubCategoryRepository
     {
+        public (List<Login_tbl>, List<SubCategoryMaster>) GetCategoryUserMappingList()
+        {
+            using (var context = new UniversityEntities())
+            {
+                int AdminId = Convert.ToInt32(HttpContext.Current.Session["AdminLoginID"]);
+                List<Login_tbl> obj1 = context.Login_tbl.Where(y => y.IsDeleted == false && y.AdminId == AdminId).ToList();
+                List<SubCategoryMaster> obj2 = context.SubCategoryMaster.Include("CategoryMaster").Where(y => y.IsDeleted != true && y.AssocitedCustID == AdminId).OrderByDescending(t => t.CreatedDate).ToList();
+                return (obj1, obj2);
+            }
+        }
+        public List<CategoryUserMapping> GetCategoryUserMappingGrid()
+        {
+            using (var context = new UniversityEntities())
+            {
+                int AdminId = Convert.ToInt32(HttpContext.Current.Session["AdminLoginID"]);
+                var Obj = context.CategoryUserMapping
+                    .Where(x => x.AdminID == AdminId && x.IsDeleted != true)
+                    .Select(x => new { x.Login_tbl.ID, x.Login_tbl.FirstName, x.Login_tbl.LastName, x.Login_tbl.AdminId, x.SubCategoryMaster.CategoryId, x.SubCategoryMaster.Name })
+                    .ToList()
+                    .Select(x => new CategoryUserMapping
+                    {
+                        ID = x.ID,
+                        UserFirstName = x.FirstName,
+                        UserLastName = x.LastName,
+                        AdminID = x.AdminId,
+                        CategoryID = x.CategoryId,
+                        CategoryName = x.Name
+                    }).ToList();
+                var AdminDetails = context.Login_tbl.FirstOrDefault(x => x.ID == AdminId);
+                foreach (var item in Obj)
+                {
+                    item.AdminFirstName = AdminDetails.FirstName;
+                    item.AdminLastName = AdminDetails.LastName;
+                }
+                return Obj;
+            }
+        }
+
+
+
+
+
+
+
         public IEnumerable<SubCategoryMaster> GetSubCategoryList()
         {
             using (var context = new UniversityEntities())
             {
-                int AssociatedUserID = Convert.ToInt32(HttpContext.Current.Session["UserSessionIDs"]);
+                int AdminId = Convert.ToInt32(HttpContext.Current.Session["AdminLoginID"]);
                 //if(AssociatedUserID==0)
                 //{
-                  
+
                 //}
-                    return context.SubCategoryMaster.Include("CategoryMaster").Where(y => y.IsDeleted != true && y.AssocitedID == AssociatedUserID).OrderByDescending(t => t.CreatedDate).ToList();
+                return context.SubCategoryMaster.Include("CategoryMaster").Where(y => y.IsDeleted != true && y.AssocitedCustID == AdminId).OrderByDescending(t => t.CreatedDate).ToList();
                
                
             }
@@ -29,8 +73,8 @@ namespace University.Repository
         {
             using (var context = new UniversityEntities())
             {
-                int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
-                return context.SubCategoryMaster.Include("CategoryMaster").Where(y => y.IsDeleted != true && y.Product.Count>0 && y.AssocitedID==UserID).ToList();
+               // int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
+                return context.SubCategoryMaster.Include("CategoryMaster").Where(y => y.IsDeleted != true && y.Product.Count>0).ToList();
             }
         }
         public SubCategoryMaster GetSubCategory(Decimal id)
@@ -68,6 +112,7 @@ namespace University.Repository
                     {
                         subcategory.ImageURL = model.ImageURL;
                     }
+                    subcategory.AssocitedCustID = Convert.ToInt32(HttpContext.Current.Session["AdminLoginID"]);
                     subcategory.Name = model.Name;
                     subcategory.CategoryId = categoryId;
                     subcategory.UpdatedDate = DateTime.UtcNow;
@@ -76,6 +121,7 @@ namespace University.Repository
                 }
                 else
                 {
+                    model.AssocitedCustID = Convert.ToInt32(HttpContext.Current.Session["AdminLoginID"]);
                     model.CategoryId = categoryId;
                     model.CreatedDate = DateTime.UtcNow;
                     model.IsDeleted = false;
@@ -85,6 +131,32 @@ namespace University.Repository
                 return true;
             }
         }
+        public bool AddCategoryUserMapping(CategoryUserMapping model)
+        {
+            using (var context = new UniversityEntities())
+            {
+                var categoryMapping = context.CategoryUserMapping.FirstOrDefault(y => y.ID == model.ID && y.IsDeleted != true);
+                // var categoryId = context.CategoryMaster.FirstOrDefault().Id;
+                if (categoryMapping != null)
+                {
+                    categoryMapping.AdminID = Convert.ToInt32(HttpContext.Current.Session["AdminLoginID"]);
+                    categoryMapping.CategoryID = model.CategoryID;
+                    categoryMapping.UpdatedDate = DateTime.UtcNow;
+                    context.SaveChanges();
+                }
+                else
+                {
+                    model.AdminID = Convert.ToInt32(HttpContext.Current.Session["AdminLoginID"]);
+                    //model.CategoryID = categoryId;
+                    model.CreatedDate = DateTime.UtcNow;
+                    model.IsDeleted = false;
+                    context.CategoryUserMapping.Add(model);
+                    context.SaveChanges();
+                }
+                return true;
+            }
+        }
+
 
         public List<SubCategoryMaster> GetSubCategoryListById(Decimal id)
         {

@@ -16,17 +16,17 @@ namespace University.Repository
         {
             using (var context = new UniversityEntities())
             {
-                int AssociatedUserID = Convert.ToInt32(HttpContext.Current.Session["UserSessionIDs"]);
-                if(AssociatedUserID!=0)
+                int AdminID = Convert.ToInt32(HttpContext.Current.Session["AdminLoginID"]);
+                if (AdminID != 0)
                 {
-                    var res = (from p in context.Product.Where(y => y.IsDeleted != true && y.AssocitedID == AssociatedUserID)
-                               join s in context.SubCategoryMaster.Where(y => y.IsDeleted != true && y.AssocitedID == AssociatedUserID)
+                    var res = (from p in context.Product.Where(y => y.IsDeleted != true && y.AssocitedCustID == AdminID)
+                               join s in context.SubCategoryMaster.Where(y => y.IsDeleted != true )
                                on p.SubCategoryId equals s.Id
                                join c in context.CategoryMaster.Where(y => y.IsDeleted != true)
                                on s.CategoryId equals c.Id
                                select new ProductEntity()
                                {
-                                   AssocitedID = p.AssocitedID,
+                                   //AssocitedID = p.AssocitedID,
                                    Id = p.Id,
                                    //CategoryId = c.Id,
                                    CreatedBy = p.CreatedBy,
@@ -48,14 +48,14 @@ namespace University.Repository
                 else
                 {
                     int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
-                    var res = (from p in context.Product.Where(y => y.IsDeleted != true && y.AssocitedID == UserID)
-                               join s in context.SubCategoryMaster.Where(y => y.IsDeleted != true && y.AssocitedID == UserID)
+                    var res = (from p in context.Product.Where(y => y.IsDeleted != true )
+                               join s in context.SubCategoryMaster.Where(y => y.IsDeleted != true)
                                on p.SubCategoryId equals s.Id
                                join c in context.CategoryMaster.Where(y => y.IsDeleted != true)
                                on s.CategoryId equals c.Id
                                select new ProductEntity()
                                {
-                                   AssocitedID = p.AssocitedID,
+                                   //AssocitedID = p.AssocitedID,
                                    Id = p.Id,
                                    //CategoryId = c.Id,
                                    CreatedBy = p.CreatedBy,
@@ -82,7 +82,8 @@ namespace University.Repository
         {
             using (var context = new UniversityEntities())
             {
-               // int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
+                int AssocitedCustID = Convert.ToInt32(HttpContext.Current.Session["AdminLoginID"]);
+                // int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
                 var res = (from p in context.Product.Where(y => y.IsDeleted != true )
                            join s in context.SubCategoryMaster.Where(y => y.IsDeleted != true)
                            on p.SubCategoryId equals s.Id
@@ -101,6 +102,7 @@ namespace University.Repository
                            select new ProductEntity()
                            {
                                Id = p.Id,
+                               AssocitedCustID=AssocitedCustID,
                                //CategoryId = c.Id,
                                CreatedBy = p.CreatedBy,
                                CreatedDate = p.CreatedDate,
@@ -275,7 +277,7 @@ namespace University.Repository
                     product.Description = model.Description;
                     product.UpdatedDate = DateTime.UtcNow;
                     product.ImageALT = model.ImageALT;
-                    product.AssocitedID = model.AssocitedID;
+                    product.AssocitedCustID = model.AssocitedCustID;
                     context.SaveChanges();
                     return product.Id;
                 }
@@ -288,7 +290,7 @@ namespace University.Repository
                     Productobj.ImageURL = model.ImageURL;
                     Productobj.SubCategoryId = model.SubCategoryId;
                     Productobj.ImageALT = model.ImageALT;
-                    Productobj.AssocitedID = model.AssocitedID;
+                    Productobj.AssocitedCustID = model.AssocitedCustID;
                     context.Product.Add(Productobj);
                     context.SaveChanges();
                     return Productobj.Id;
@@ -361,6 +363,7 @@ namespace University.Repository
                 var productFaq = context.ProductFAQs.FirstOrDefault(y => y.Id == productFAQ.Id && y.IsDeleted != true);
                 if (productFaq != null)
                 {
+                    productFaq.AssocitedCustID = productFAQ.AssocitedCustID;
                     productFaq.UpdatedDate = DateTime.UtcNow;
                     productFaq.Question = productFAQ.Question;
                     productFaq.Answer = productFAQ.Answer;
@@ -525,7 +528,7 @@ namespace University.Repository
                 {
                     spec.Description = productSpec.Description;
                     spec.Title = productSpec.Title;
-                    spec.AssocitedID = productSpec.AssocitedID;
+                    spec.AssocitedCustID = productSpec.AssocitedCustID;
                     spec.UpdatedDate = DateTime.UtcNow;
                     context.SaveChanges();
                 }
@@ -557,6 +560,7 @@ namespace University.Repository
                 var guide = context.ProductUserGuide.FirstOrDefault(y => y.Id == productUserGuide.Id && y.IsDeleted != true);
                 if (guide != null)
                 {
+                    guide.AssocitedCustID = productUserGuide.AssocitedCustID;
                     guide.Description = productUserGuide.Description;
                     guide.Title = productUserGuide.Title;
                     guide.DocumentURL = productUserGuide.DocumentURL;
@@ -568,6 +572,7 @@ namespace University.Repository
                 }
                 else
                 {
+                
                     productUserGuide.CreatedDate = DateTime.UtcNow;
                     context.ProductUserGuide.Add(productUserGuide);
                     context.SaveChanges();
@@ -588,7 +593,7 @@ namespace University.Repository
                     productvideo.Title = model.Title;
                     productvideo.ProductId = model.ProductId;
                     productvideo.ThumbnailURL = model.ThumbnailURL;
-                    productvideo.AssocitedID = model.AssocitedID;
+                    //productvideo.AssocitedID = model.AssocitedID;
                     if (!string.IsNullOrWhiteSpace(model.VideoURL))
                     {
                         productvideo.VideoURL = model.VideoURL;
@@ -617,6 +622,7 @@ namespace University.Repository
                 var productVideoExising = context.ProductVideos.FirstOrDefault(y => y.Id == productVideo.Id && y.IsDeleted != true);
                 if (productVideoExising != null)
                 {
+                    productVideoExising.AssocitedCustID = productVideo.AssocitedCustID;
                     productVideoExising.UpdatedDate = DateTime.UtcNow;
                     productVideoExising.Title = productVideo.Title;
                     productVideoExising.Decription = productVideo.Decription;
@@ -673,6 +679,7 @@ namespace University.Repository
                 var productDocumentExising = context.ProductDocuments.FirstOrDefault(y => y.Id == productDocument.Id && y.IsDeleted != true);
                 if (productDocumentExising != null)
                 {
+                    productDocument.AssocitedCustID = productDocument.AssocitedCustID;
                     productDocumentExising.UpdatedDate = DateTime.UtcNow;
                     if (!string.IsNullOrWhiteSpace(productDocument.DocumentURL))
                     {
@@ -736,9 +743,9 @@ namespace University.Repository
         {
             using (var context = new UniversityEntities())
             {
-                int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
-                var res = (from p in context.Product.Where(y => y.IsDeleted != true && y.AssocitedID == UserID)
-                           join s in context.SubCategoryMaster.Where(y => y.IsDeleted != true && y.AssocitedID == UserID)
+                //int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
+                var res = (from p in context.Product.Where(y => y.IsDeleted != true )
+                           join s in context.SubCategoryMaster.Where(y => y.IsDeleted != true )
                            on p.SubCategoryId equals s.Id
 
                            select new ProductLayoutMenu()

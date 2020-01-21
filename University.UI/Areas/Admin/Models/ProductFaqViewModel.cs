@@ -13,7 +13,7 @@ namespace University.UI.Areas.Admin.Models
             ProductFAQVideoList = new List<ProductFAQVideoViewModel>();
         }
         public Decimal Id { get; set; }
-        public Decimal AssocitedID { get; set; }
+        public Decimal AssocitedCustID { get; set; }
         public string Question { get; set; }
         public string Answer { get; set; }
         public Decimal ProductId { get; set; }

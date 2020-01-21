@@ -17,12 +17,14 @@ namespace University.UI.Areas.Admin.Controllers
         string SubCategoryImagePath = WebConfigurationManager.AppSettings["SubCategoryImagePath"];
         private ICategoryMasterService _categoryMasterService;
         private ISubCategoryService _subCategoryService;
-       
+        private IUseradminService _UseradminService;
+
         public SubCategoryController(ICategoryMasterService categoryMasterService, ISubCategoryService subCategoryService)
         {
             _categoryMasterService = categoryMasterService;
             _subCategoryService = subCategoryService;
-            
+            _UseradminService = new UseradminService();
+
         }
 
         // GET: Admin/SubCategory
@@ -74,5 +76,28 @@ namespace University.UI.Areas.Admin.Controllers
             var res = _subCategoryService.DeleteSubCategory(Convert.ToDecimal(Id));
             return Json(true, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult CategoryUserMappingList()
+        {
+            var res = _subCategoryService.GetCategoryUserMappingList();
+            var res1 = _subCategoryService.GetCategoryUserMappingGrid();
+            var viewModel = new CategoryMappingModel
+            {
+                Logintbllst = res.Item1,
+                SubCategoryMasterlst = res.Item2,
+                CategoryUserMapping = res1
+            };
+            //var viewModel = AutoMapper.Mapper.Map<List<CategoryUserMapping>, List<CategoryMappingModel>>(res);
+            // var viewModel = AutoMapper.Mapper.Map<CategoryUserMapping, CategoryMappingModel>(res);
+            return View(viewModel);
+        }
+        public ActionResult AddCategoryUserMapping(CategoryUserMapping model)
+        {
+            // var res = AutoMapper.Mapper.Map<CategoryMappingModel, CategoryUserMapping>(model);
+            var isSuccess = _subCategoryService.AddCategoryUserMapping(model);
+            return Json(isSuccess, JsonRequestBehavior.AllowGet);
+            //return RedirectToAction("CategoryUserMapping");
+        }
+
     }
 }

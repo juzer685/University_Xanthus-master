@@ -24,7 +24,7 @@ namespace University.UI.Areas.Admin.Models
             }
         }
         public Decimal Id { get; set; }
-        public Decimal AssocitedID { get; set; }
+        public Decimal AssocitedCustID { get; set; }
         public string Description { get; set; }
         public string ImageURL { get; set; }
         public string Title { get; set; }

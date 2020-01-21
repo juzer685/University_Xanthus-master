@@ -9,7 +9,7 @@ namespace University.Data.CustomEntities
     public class ProductEntity
     {
         public Decimal Id { get; set; }
-        public int? AssocitedID { get; set; }
+        public int? AssocitedCustID { get; set; }
         public string Title { get; set; }
         public string ImageURL { get; set; }
         public string ImageALT { get; set; }

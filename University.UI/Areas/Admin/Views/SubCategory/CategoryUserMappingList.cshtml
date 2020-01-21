@@ -1,0 +1,197 @@
+﻿@model University.UI.Areas.Admin.Models.CategoryMappingModel
+@*@model University.UI.Areas.Admin.Models.CategoryMappingModel*@
+@using University.Data;
+@{
+    ViewBag.Title = "CategoryUserMappingList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<h2>CategoryUserMappingList</h2>*@
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2" style="margin-top:10px">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">Category User mapping List</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Administration</a></li>
+                    <li class="breadcrumb-item active">Categoru User Mapping</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row justify-center">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <button type="button" class="btn btn-primary btn-sm b-w-80 subcategoryadd" data-toggle="modal" data-target="#AddCategoryMapping">
+                                Add
+                            </button>
+                        </h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="SubCategoryTable" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">ID</th>
+                                    <th class="text-center">Admin Names</th>
+                                    <th class="text-center">User Names</th>
+                                    <th class="text-center">Category Names</th>
+                                    <th class="text-center nosort">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.CategoryUserMapping)
+                                {
+                                    <tr>
+                                        <td class="text-center">@item.ID</td>
+                                        <td class="text-center">@item.AdminFirstName @item.AdminLastName</td>
+                                        <td class="text-center">@item.UserFirstName @item.UserLastName</td>
+                                        <td class="text-center">@item.CategoryName</td>
+                                        <td class="text-center">
+                                            <i class="fas fa-edit" onclick="AddSubCategory('@item.ID')"></i>
+                                            <i class="fas fa-trash" onclick="DeleteSubCategory('@item.ID')"></i>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+
+
+<div class="modal fade subcatmodel" id="AddCategoryMapping">
+    <div class="modal-dialog">
+        <form action="/Admin/SubCategory/AddCategoryUserMapping" id="CategoryMapping" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Category User Mapping</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <div class="modal-body" id="popupBody">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Choose Category</label>
+                                <select name="CategoryID" class="form-control" style="width: 100%;">
+                                    <option value="0" selected>Select Category</option>
+                                    @foreach (var item in Model.SubCategoryMasterlst)
+                                    {
+
+                                        if (item.AssocitedCustID == Convert.ToInt32(Session["AdminLoginID"]))
+                                        {
+                                            <option value="@item.Id" name="CategoryID">@item.Name</option>
+                                        }
+
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Choose User</label>
+                                <select name="UserID" class="form-control select2" style="width: 100%;">
+                                    <option value="0" selected>Select User</option>
+                                    @foreach (var item in Model.Logintbllst)
+                                    {
+                                        if (item.RoleID.ToString() == "5")
+                                        {
+                                            <option value="@item.ID" id="useridd">@item.FirstName @item.LastName</option>
+                                        }
+                                    }
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" id="">Submit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<script>
+    $(document).ready(function () {
+
+        $('#SubCategoryTable').DataTable();
+
+        $("#CategoryMapping").on('submit', function (e) {
+            var form = $(this);
+            var url = form.attr('action');
+            var formData = new FormData($(this)[0]);
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: formData, // serializes the form's elements.
+                enctype: 'multipart/form-data',
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    _showSuccessMessage("Data Saved Successfully");
+                    setTimeout(function () { location.reload(); }, 1000);
+                }
+            });
+            e.preventDefault();
+
+        });
+    });
+
+            //function AddSubCategory(Id) {
+            //    $("#Name").val('');
+            //    $("#Id").val('');
+            //    $.ajax({
+            //        type: "POST",
+            //        url: "/Admin/SubCategory/GetSubCategory",
+            //        data: { Id: Id }, // serializes the form's elements.
+            //        success: function (data) {
+            //            $("#popupBody").html(data);
+            //            $("#AddSubCategoryModal").modal('show');
+            //        }
+            //    });
+            //}
+
+            //function DeleteSubCategory(Id) {
+            //    $("#DeleteConfirmationModal").modal('show');
+            //    $(document).on('click', 'button#confirmation-yes', function () {
+            //        $.ajax({
+            //            type: "POST",
+            //            url: "/Admin/SubCategory/DeleteSubCategory",
+            //            data: { Id: Id }, // serializes the form's elements.
+            //            success: function (data) {
+            //                //alert("Data Deleted Successfully"); // show response from the php script.
+            //                _showSuccessMessage("Data Deleted Successfully");
+            //                setTimeout(function () { location.reload(); }, 1000);
+            //            }
+            //        });
+            //    });
+            //}
+</script>

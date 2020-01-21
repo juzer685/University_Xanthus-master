@@ -8,7 +8,7 @@ namespace University.UI.Areas.Admin.Models
     public class ProductSpecViewModel
     {
         public Decimal Id { get; set; }
-        public Decimal AssocitedID { get; set; }
+        public Decimal AssocitedCustID { get; set; }
         public Decimal ProductId { get; set; }
         public string Title { get; set; }
         public string ImageURL { get; set; }
