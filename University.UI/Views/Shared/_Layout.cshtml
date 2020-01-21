@@ -416,6 +416,10 @@
                                 </a>
                             </li>*@
                         }
+                        @if (Session["RoleID"].ToString() == "5")
+                        {
+
+
                         <li class="nav-item">
                             <a href="~/Home/Category" class="nav-link">
                                 <i class="nav-icon fas fa-list-ul"></i>
@@ -490,14 +494,15 @@
                                                 }
                                             </ul>
                                         </li>
-                                    }
+                                                    }
                                     </ul>
                                     @*</li>*@
-                                }
+                                                        }
 
 
-                            }
+                                                    }
                         </li>
+                                                    }
 
                         @if (Session["RoleID"].ToString() == "5")
                         {
