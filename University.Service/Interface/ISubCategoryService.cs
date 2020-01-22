@@ -13,6 +13,7 @@ namespace University.Service.Interface
         (List<Login_tbl>, List<SubCategoryMaster>) GetCategoryUserMappingList();
         IEnumerable<SubCategoryMaster> GetSubCategoryList();
         List<SubCategoryMaster> GetSubCategoryListById(Decimal id);
+        CategoryUserMapping GetCategoryUserMapping(Decimal id);
         SubCategoryMaster GetSubCategory(Decimal id);
         bool AddOrUpdateSubCategory(SubCategoryMaster model);
         bool AddCategoryUserMapping(CategoryUserMapping model);

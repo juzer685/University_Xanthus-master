@@ -743,17 +743,23 @@ namespace University.Repository
         {
             using (var context = new UniversityEntities())
             {
-                //int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
-                var res = (from p in context.Product.Where(y => y.IsDeleted != true )
+                int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
+                var res = (from p in context.Product.Where(y => y.IsDeleted != true)
                            join s in context.SubCategoryMaster.Where(y => y.IsDeleted != true )
                            on p.SubCategoryId equals s.Id
+                           join cm in context.CategoryUserMapping.Where(y=>y.IsDeleted!=true)
+                           on s.Id equals cm.CategoryID
+                           join l in context.Login_tbl.Where(y => y.ID == UserID)
+                           on cm.UserID equals l.ID
 
                            select new ProductLayoutMenu()
                            {
                                ProductId = p.Id,
                                ProductName = p.Title,
                                SubCategoryId = s.Id,
-                               SubCategoryName = s.Name
+                               SubCategoryName = s.Name,
+                               CategoryMappID=cm.ID,
+                               CategoryUserMappID=l.ID
                            }).ToList();
 
                 return res;

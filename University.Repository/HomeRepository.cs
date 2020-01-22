@@ -304,10 +304,14 @@ namespace University.Repository
         {
             using (var context = new UniversityEntities())
             {
-                //int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
+                int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
                 var res = (from p in context.Product.Where(y => y.IsDeleted != true)
                            join s in context.SubCategoryMaster.Where(y => y.IsDeleted != true)
                            on p.SubCategoryId equals s.Id
+                           //join cm in context.CategoryUserMapping.Where(y=>y.IsDeleted !=true )
+                           //on s.Id equals cm.CategoryID
+                           //join l in context.Login_tbl.Where(y=>y.IsDeleted!=true)
+                           //on cm.UserID equals l.ID 
                            join c in context.CategoryMaster.Where(y => y.IsDeleted != true)
                            on s.CategoryId equals c.Id
                            join g in context.ProductUserGuide.Where(y => y.IsDeleted != true)
@@ -334,8 +338,9 @@ namespace University.Repository
                                CategoryMaster = c,
                                SubCategoryMaster = s,
                                ProductUserGuide = guide,
-                               ProductVideos = context.ProductVideos.Where(y => y.IsDeleted != true).ToList(),
-                               ProductDocuments = context.ProductDocuments.Where(y => y.IsDeleted != true).ToList()
+                               Categorymapp = context.CategoryUserMapping.Where(x=> x.IsDeleted != true && x.UserID == UserID).ToList(),
+                               ProductVideos = context.ProductVideos.Where(x => x.IsDeleted != true).ToList(),
+                               ProductDocuments = context.ProductDocuments.Where( x=> x.IsDeleted != true).ToList()
                            }).ToList();
                 return res.OrderByDescending(x => x.CreatedDate).Take(6);
             }

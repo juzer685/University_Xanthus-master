@@ -59,7 +59,7 @@
                                         <td class="text-center">@item.UserFirstName @item.UserLastName</td>
                                         <td class="text-center">@item.CategoryName</td>
                                         <td class="text-center">
-                                            <i class="fas fa-edit" onclick="AddSubCategory('@item.ID')"></i>
+                                            <i class="fas fa-edit" onclick="AddCategoryMapp('@item.ID')"></i>
                                             <i class="fas fa-trash" onclick="DeleteSubCategory('@item.ID')"></i>
                                         </td>
                                     </tr>
@@ -87,6 +87,7 @@
                 </div>
 
                 <div class="modal-body" id="popupBody">
+
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -98,7 +99,7 @@
 
                                         if (item.AssocitedCustID == Convert.ToInt32(Session["AdminLoginID"]))
                                         {
-                                            <option value="@item.Id" name="CategoryID">@item.Name</option>
+                                            <option value="@item.Id" name="CategoryID" id="CategoryID">@item.Name</option>
                                         }
 
                                     }
@@ -124,6 +125,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
 
                 <div class="modal-footer">
@@ -165,19 +167,19 @@
         });
     });
 
-            //function AddSubCategory(Id) {
-            //    $("#Name").val('');
-            //    $("#Id").val('');
-            //    $.ajax({
-            //        type: "POST",
-            //        url: "/Admin/SubCategory/GetSubCategory",
-            //        data: { Id: Id }, // serializes the form's elements.
-            //        success: function (data) {
-            //            $("#popupBody").html(data);
-            //            $("#AddSubCategoryModal").modal('show');
-            //        }
-            //    });
-            //}
+            function AddCategoryMapp(Id) {
+                $("#CategoryID").val('');
+                $("#useridd").val('');
+                $.ajax({
+                    type: "POST",
+                    url: "/Admin/SubCategory/GetCategoryUserMapping",
+                    data: { Id: Id }, // serializes the form's elements.
+                    success: function (data) {
+                        $("#popupBody").html(data);
+                        $("#AddCategoryMapping").modal('show');
+                    }
+                });
+            }
 
             //function DeleteSubCategory(Id) {
             //    $("#DeleteConfirmationModal").modal('show');

@@ -91,6 +91,23 @@ namespace University.UI.Areas.Admin.Controllers
             // var viewModel = AutoMapper.Mapper.Map<CategoryUserMapping, CategoryMappingModel>(res);
             return View(viewModel);
         }
+        public ActionResult GetCategoryUserMapping(string Id)
+        {
+            CategoryMappingModel model;
+            // var res="";
+             
+            if (!string.IsNullOrEmpty(Id))
+            {
+                var  res = _subCategoryService.GetCategoryUserMapping(Convert.ToDecimal(Id));
+                model = AutoMapper.Mapper.Map<CategoryUserMapping, CategoryMappingModel>(res);
+            }
+            else
+            {
+                model = new CategoryMappingModel();
+            }
+            //ViewBag.CategoryList = _categoryMasterService.GetCategoryList();
+            return RedirectToAction("CategoryUserMappingList", model);
+        }
         public ActionResult AddCategoryUserMapping(CategoryUserMapping model)
         {
             // var res = AutoMapper.Mapper.Map<CategoryMappingModel, CategoryUserMapping>(model);

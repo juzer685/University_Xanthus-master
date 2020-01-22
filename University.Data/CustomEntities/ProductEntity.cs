@@ -30,5 +30,6 @@ namespace University.Data.CustomEntities
         public virtual ProductSpec ProductSpec { get; set; }
         public virtual ICollection<ProductFAQs> ProductFAQs { get; set; }
         public virtual ICollection<ProductDocuments> ProductDocuments { get; set; }
+        public virtual ICollection<CategoryUserMapping> Categorymapp { get; set; }
     }
 }

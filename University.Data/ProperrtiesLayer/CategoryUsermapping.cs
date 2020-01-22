@@ -13,5 +13,7 @@ namespace University.Data
         public string UserFirstName { get; set; }
         public string UserLastName { get; set; }
         public string CategoryName { get; set; }
+        public List<Login_tbl> Logintbllst { get; set; }
+        public List<SubCategoryMaster> SubCategoryMasterlst { get; set; }
     }
 }

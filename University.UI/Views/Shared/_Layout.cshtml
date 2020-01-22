@@ -435,19 +435,6 @@
 
                             if (productMenu.Count > 0)
                             {
-                                @*<li id="dynamic-nested-menu-link " class="nav-item has-treeview pointer">
-
-                                    <a class="nav-link">
-                                        <i class="nav-icon fas fa-list-ul nav-item "></i>
-
-                                        <p>
-                                            <span onclick="window.location='/Home/Category'">Product</span>
-                                            Products
-                                            <i class="right fas fa-angle-left"></i>
-                                        </p>
-                                    </a>*@
-
-
                                 <ul class="nav nav-treeview">
                                     @{
 
@@ -458,7 +445,7 @@
                                     <li class="nav-item">
                                         <a class="nav-link" href="/Home/Category">
                                             @*<i class="far fa-circle nav-icon"></i>*@
-                                            <p>Product List</p>
+                                            <p>Category List</p>
                                         </a>
                                         @*</li>*@
                                         @foreach (var category in categories)
@@ -476,7 +463,7 @@
                                                 <li class="nav-item">
                                                     <a class="nav-link" href="/Products/ProductListByCategory?id=@category.SubCategoryId">
                                                         @*<i class="far fa-circle nav-icon"></i>*@
-                                                        <p>Category List</p>
+                                                        <p>Product List</p>
                                                     </a>
                                                 </li>
                                                 @{
@@ -506,6 +493,7 @@
 
                         @if (Session["RoleID"].ToString() == "5")
                         {
+                            
                             <li class="nav-item">
                                 <a href="~/UserGuide/UserGuide" class="nav-link">
                                     <i class="nav-icon fas fa-book-open"></i>

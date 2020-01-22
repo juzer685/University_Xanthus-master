@@ -235,8 +235,8 @@
                                         <div class="tab-content">
                                             <div class="tab-pane active" id="user-guide">
                                                
-                                                    @if (Convert.ToInt32(Session["UserLoginID"]) == Model.ProductUserGuide.AssocitedID)
-                                                    {
+                                                    @*@if (Convert.ToInt32(Session["UserLoginID"]) == Model.ProductUserGuide.ass)
+                                                    {*@
                                                         <div class="product-guide">
                                                             <div class="product-title"> @Model.ProductUserGuide.Title</div>
                                                             <p class="product-desc">@Model.ProductUserGuide.Description</p>
@@ -270,7 +270,7 @@
                                                                 </div>
                                                                 }
                                                         </div>
-                                                    }
+                                                   
                                                 
                                                 </div>
                                             <div class="tab-pane" id="videos">

@@ -14,6 +14,7 @@ namespace University.Repository.Interface
         bool AddCategoryUserMapping(CategoryUserMapping model);
         IEnumerable<SubCategoryMaster> GetSubCategoryList();
         List<SubCategoryMaster> GetSubCategoryListById(Decimal id);
+        CategoryUserMapping GetCategoryUserMapping(Decimal id);
         SubCategoryMaster GetSubCategory(Decimal id);
         bool AddOrUpdateSubCategory(SubCategoryMaster model);
         bool DeleteSubCategory(Decimal id);

@@ -25,6 +25,7 @@ namespace University.Data
             this.ProductVideos = new HashSet<ProductVideos>();
             this.RecentVisitedProduct = new HashSet<RecentVisitedProduct>();
             this.ProductDocuments = new HashSet<ProductDocuments>();
+            this.CategoryUserMappings = new HashSet<CategoryUserMapping>();
         }
     
         public decimal Id { get; set; }
@@ -59,5 +60,7 @@ namespace University.Data
         public virtual ICollection<RecentVisitedProduct> RecentVisitedProduct { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductDocuments> ProductDocuments { get; set; }
+
+        public virtual ICollection<CategoryUserMapping> CategoryUserMappings { get; set; }
     }
 }

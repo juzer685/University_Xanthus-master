@@ -49,12 +49,6 @@ namespace University.Repository
             }
         }
 
-
-
-
-
-
-
         public IEnumerable<SubCategoryMaster> GetSubCategoryList()
         {
             using (var context = new UniversityEntities())
@@ -75,6 +69,14 @@ namespace University.Repository
             {
                // int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
                 return context.SubCategoryMaster.Include("CategoryMaster").Where(y => y.IsDeleted != true && y.Product.Count>0).ToList();
+            }
+        }
+
+        public CategoryUserMapping GetCategoryUserMapping(Decimal id )
+        {
+            using (var context =new UniversityEntities())
+            {
+                return context.CategoryUserMapping.FirstOrDefault(y => y.ID == id && y.IsDeleted != true);
             }
         }
         public SubCategoryMaster GetSubCategory(Decimal id)

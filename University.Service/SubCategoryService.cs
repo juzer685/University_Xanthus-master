@@ -31,6 +31,11 @@ namespace University.Service
             return _subCategoryRepository.DeleteSubCategory(id);
         }
 
+        public CategoryUserMapping GetCategoryUserMapping(Decimal id)
+        {
+            return _subCategoryRepository.GetCategoryUserMapping(id);
+        }
+
         public SubCategoryMaster GetSubCategory(Decimal id)
         {
             return _subCategoryRepository.GetSubCategory(id);
