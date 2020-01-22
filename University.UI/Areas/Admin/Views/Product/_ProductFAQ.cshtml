@@ -48,7 +48,7 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
         </div>
 
@@ -69,7 +69,7 @@
 
     function SaveProductFormFaq(e) {
         $('#ProductFAQAssocitedID').val($("#ddlusrlst").val());
-       // alert($("#ddlusrlst").val());
+        // alert($("#ddlusrlst").val());
         var form = $(e.target);
         var url = form.attr('action');
         var formData = new FormData($(e.target)[0]);
@@ -86,8 +86,8 @@
                 //alert("Data Saved Successfully"); // show response from the php script.
                 //Cancel();
                 $(form).replaceWith(data);
-                 _showSuccessMessage("Data Saved Successfully");
-                 setTimeout(function () { $('#spec').trigger('click'); }, 1500);
+                _showSuccessMessage("Data Saved Successfully");
+                setTimeout(function () { $('#spec').trigger('click'); }, 1500);
             }
         });
 
@@ -118,6 +118,26 @@
             });
         });
     }
+
+
+    function DeleteFAQVideo(event, id) {
+        //$("#DeleteConfirmationModal").modal('show');
+        //$(document).on('click', 'button#confirmation-yes', function () {
+        $.ajax({
+            type: "POST",
+            url: "/Admin/Product/DeleteProductFAQVideo",
+            data: { FaqVideoId: id }, // serializes the form's elements.
+            cache: false,
+            success: function (data) {
+                //$('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
+                _showSuccessMessage("Deletion Successful");
+                $("#FaqVideoPopup").modal('hide');
+            }
+        });
+        //});
+    }
+
+
     var emptyGuid = '0';
     function AddEditFAQVideos(faqId) {
         if (faqId == emptyGuid) {
@@ -143,7 +163,7 @@
         var Vtemplate = $('#FAQVideoTemplate').html();
         $('#faqVideoGrid').append(Vtemplate);
     }
-    
+
     function getVideoFile(event) {
         debugger;
         var input = $(event).siblings("[name=FAQVideo]");
@@ -187,7 +207,7 @@
             processData: false,
             success: function (data) {
                 $('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
-                //alert("Data Saved Successfully"); // show response from the php script.
+                _showSuccessMessage("Data Saved Successfully"); // show response from the php script.
                 //Cancel();
                 $(form).replaceWith(data);
             }

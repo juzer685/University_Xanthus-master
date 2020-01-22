@@ -209,7 +209,7 @@ namespace University.Repository
         {
             using (var context = new UniversityEntities())
             {
-                return context.FAQ.Include("FAQDocs").FirstOrDefault(y => y.Id == id && y.IsDeleted != true);
+                return context.FAQ.FirstOrDefault(y => y.Id == id && y.IsDeleted != true);
             }
         }
         public bool DeleteFAQ(Decimal id)

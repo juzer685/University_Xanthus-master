@@ -34,7 +34,11 @@ namespace University.UI.Areas.Admin.Controllers
             if (!string.IsNullOrEmpty(id))
             {
                 var model = _homeService.GetFAQ(Convert.ToDecimal(id));
-                viewModel = AutoMapper.Mapper.Map<FAQ, FAQViewModel>(model);
+                viewModel.Id = model.Id;
+                viewModel.Question = model.Question;
+                viewModel.Answer = model.Answer;
+                viewModel.AssocitedID = model.AssocitedID;
+                //viewModel = AutoMapper.Mapper.Map<FAQ, FAQViewModel>(model);
             }
             return View("_AddEditFAQ", viewModel);
         }

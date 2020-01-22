@@ -8,8 +8,8 @@
             <div class="col">
                 @Html.HiddenFor(y => y.ProductFAQsId)
                 @Html.Hidden("FaqVideoId", Model.Id)
+                @Html.TextBoxFor(m => m.VideoURL, new { @class = "form-control", @required = "required" })
                 @*@Html.TextBoxFor(m => m.VideoURL, new { @class = "form-control", @required = "required", @pattern = @"^https?:\/\/[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-/]+$", title = "Ex : https://player.vimeo.com/video/322925106" })*@
-@Html.TextBoxFor(m => m.VideoURL, new { @class = "form-control", @required = "required"})
             </div>
         }
         else
@@ -17,11 +17,12 @@
             <div class="col">
                 @Html.HiddenFor(y => y.ProductFAQsId)
                 @Html.Hidden("FaqVideoId", Model.Id)
-                @Html.TextBoxFor(m => m.VideoURL, new { @class = "form-control", @required = "required", @pattern = @"^https?:\/\/[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-/]+$", title = "Ex : https://player.vimeo.com/video/322925106" })
+                @Html.TextBoxFor(m => m.VideoURL, new { @class = "form-control", @required = "required" })
+                @* @Html.TextBoxFor(m => m.VideoURL, new { @class = "form-control", @required = "required", @pattern = @"^https?:\/\/[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-/]+$", title = "Ex : https://player.vimeo.com/video/322925106" })*@
                 @*@Html.TextBoxFor(m => m.VideoURL, new { @class = "form-control", @required = "required"})*@
             </div>
         }
-            @*<div class="col">
+        @*<div class="col">
                 @if (!string.IsNullOrWhiteSpace(Model.VideoFullPath))
                 {
                     <a onclick="window.open('/Admin/Product/PlayVideo?url=@Model.VideoURL', ''); return false;" href="" target_="blank"><img width="100px" height="70px" class="Thumbnail" src="@Model.ImageFullPath" onerror="this.onerror = null; this.src = '/images/PreviewNotAvailable.jpg';"/></a>
@@ -34,8 +35,8 @@
                 <input type="file" onchange="readURLThumnale(this);" class="FileInput" name="FAQVideoImg" accept="image/*" />
             </div>*@
         <div class="col">
-            <input type="submit" class="btn-primary-ips" value="Save" /></br>
-            <input type="button" class="btn-primary-ips" value="Delete" onclick="DeleteFAQVideo(this,'@Model.Id')" />
+            <input type="submit" class="btn btn-primary" value="Save" />
+            <input type="button" class="btn btn-primary" value="Delete" onclick="DeleteFAQVideo(this,'@Model.Id')" />
         </div>
 
     </div>
