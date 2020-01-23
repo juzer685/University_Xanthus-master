@@ -20,7 +20,7 @@ function RegisterHandler() {
                     url: "/Admin/User/Register",
                     data: $('#UserRegistrationForm').serialize(),
                     success: function (data) {
-                        if (data.result == "true") {
+                        if (data.result == true) {
                             _showSuccessMessage(data.Message);
                             document.getElementById('loaderring').style.display = "none";
                             setTimeout(function () { window.location.href = data.url; }, 2000);
