@@ -150,8 +150,8 @@ namespace University.UI.Areas.Admin.Controllers
             {
                 var smtp = new SmtpClient
                 {
-                    Host = "smtp.zoho.com",
-                    Port = 587,
+                    Host = ConfigurationManager.AppSettings["Host"],
+                    Port = Convert.ToInt32(ConfigurationManager.AppSettings["Port"]),
                     EnableSsl = true,
                     DeliveryMethod = SmtpDeliveryMethod.Network,
                     UseDefaultCredentials = false,
