@@ -39,48 +39,58 @@
     <!-- PAGE SCRIPTS -->
     <script src="~/Scripts/custom.js"></script>
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" style="background:#1f2d3d;">
     <div class="login-box">
-        <div class="login-logo">
-            <a href="../../index2.html"><b>Online Training Portal</a>
-        </div>
         <!-- /.login-logo -->
         <div class="card">
             <div class="card-body login-card-body">
+                <div class="login-logo">
+                    <a href="../../index2.html"><b>Online Training Portal</a>
+                </div>
                 <p class="login-box-msg"></p>
 
                 <form action="~/Login/Login" method="post">
-                    <div class="input-group mb-3">
-                        <input name="UserName" type="text" class="form-control" placeholder="Email" required pattern="^\w+([-+.']\w+)*@Html.Raw("@")\w+([-.]\w+)*\.\w+([-.]\w+)*$" oninvalid="this.setCustomValidity('Please Enter valid Email Id')" oninput="this.setCustomValidity('')">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-envelope"></span>
+                    <div class="form-group">
+                        <label class="fontSize" for="email">Email</label>
+                        <div class="input-group mb-3">
+                            <input name="UserName" type="text" class="form-control" placeholder="Please enter email" required pattern="^\w+([-+.']\w+)*@Html.Raw("@")\w+([-.]\w+)*\.\w+([-.]\w+)*$" oninvalid="this.setCustomValidity('Please Enter valid Email Id')" oninput="this.setCustomValidity('')">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-envelope"></span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="input-group mb-3">
-                        <input name="Password" type="password" class="form-control" placeholder="Password" required oninvalid="this.setCustomValidity('Please Enter Password')" oninput="this.setCustomValidity('')">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
+                    <div class="form-group">
+                        <label class="fontSize" for="password">Password</label>
+                        <div class="input-group mb-3">
+                            <input name="Password" type="password" class="form-control" placeholder="Please enter password" required oninvalid="this.setCustomValidity('Please Enter Password')" oninput="this.setCustomValidity('')">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-lock"></span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row" style="justify-content:center;">
-                        <div class="col-4">
-                            <input id="login" type="submit" class="btn btn-primary btn-block" value="LOGIN" />
-                            @*<button type="submit" class="btn btn-primary btn-block" value="Login">Login</button>*@
+                    <div class="form-group text-center">
+                        <div class="row" style="justify-content:center;">
+                            <div class="col-4">
+                                <input id="login" type="submit" class="btn btn-primary btn-block" value="LOGIN" />
+                                @*<button type="submit" class="btn btn-primary btn-block" value="Login">Login</button>*@
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="form-group">
+                        @* <div class="row">*@
                         <div class="col-8">
                             @*<div class="icheck-primary">*@
-                                <label for="remember">
-                                    <a href="/Login/ForgotPassword">Forgot Password?</a>
-                                </label>
+                            <label for="remember">
+                                <a href="/Login/ForgotPassword" style="font-family: auto;">Forgot Password?</a>
+                            </label>
                             @*</div>*@
                         </div>
                         <!-- /.col -->
+                        @*</div>*@
                     </div>
                     @if (ViewBag.Message != null)
                     {
@@ -98,27 +108,40 @@
                         <a href="#" class="btn btn-block btn-danger">
                             <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
                         </a>
+                    </div>*@@*<div class="social-auth-links text-center mb-3">
+                        <p></p>
+                        <a href="#" class="btn btn-block btn-primary">
+                            <i class="fab fa-facebook mr-2"></i>
+                        </a>
+                        <a href="#" class="btn btn-block btn-danger">
+                            <i class="fab fa-google-plus mr-2"></i>
+                        </a>
                     </div>*@
-                <!-- /.social-auth-links -->
-                @*<p class="mb-1">
-                        <a href="forgot-password.html">I forgot my password</a>
-                    </p>
-                    <p class="mb-0">
-                        <a href="register.html" class="text-center">Register a new membership</a>
-                    </p>*@
+                    <!-- /.social-auth-links -->
+                    @*<p class="mb-1">
+                            <a href="forgot-password.html">I forgot my password</a>
+                        </p>
+                        <p class="mb-0">
+                            <a href="register.html" class="text-center">Register a new membership</a>
+                        </p>*@@*<p class="mb-1">
+                            <a href="forgot-password.html"></a>
+                        </p>
+                        <p class="mb-0">
+                            <a href="register.html" class="text-center"></a>
+                        </p>*@
+                    </div>
+                    <!-- /.login-card-body -->
+                </div>
             </div>
-            <!-- /.login-card-body -->
-        </div>
-    </div>
-    <!-- /.login-box -->
-    <!-- jQuery -->
-    <script src="../../plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="../../dist/js/adminlte.min.js"></script>
-    <script src="~/Scripts/custom.js"></script>
-    <script>
+            <!-- /.login-box -->
+            <!-- jQuery -->
+            <script src="../../plugins/jquery/jquery.min.js"></script>
+            <!-- Bootstrap 4 -->
+            <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <!-- AdminLTE App -->
+            <script src="../../dist/js/adminlte.min.js"></script>
+            <script src="~/Scripts/custom.js"></script>
+            <script>
         $(document).ready(function () {
             var bool = "@TempData.ContainsKey("Message")";
             if (bool == 'True') {
@@ -130,8 +153,8 @@
                 }
             }
         });
-    </script>
+            </script>
 
 
-</body>
-</html>
+        </body>
+    </html>
