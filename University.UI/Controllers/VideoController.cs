@@ -37,7 +37,7 @@ namespace IPSU.Web.Areas.Admin.Controllers
             {
                 res = res.Where(x => x.Title.ToLower().Contains(SearchString.ToLower())).ToList();
             }
-            //List<ProductVideos> productvideo = new List<ProductVideos>();
+          
             foreach (var pvideo in res)
             {
                 productVideoViewModel.Add(new ProductVideoViewModel{
@@ -48,30 +48,12 @@ namespace IPSU.Web.Areas.Admin.Controllers
                 });
                 
             }
+            if (!String.IsNullOrEmpty(SearchString))
+            {
+             productVideoViewModel = productVideoViewModel.Where(x => x.Title.ToLower().Contains(SearchString.ToLower())).ToList();
+            }
 
             return View(productVideoViewModel);
-
-
-            //var productvideores = _productVideoService.GetProductVideoList();
-            //var productList = _productService.GetProductList().ToList();
-
-            //var query = from productvideo in productvideores
-            //            join product in productList
-            //            on productvideo.ProductId equals product.Id
-
-            //            select new ProductVideoViewModel
-            //            {
-            //                Title = productvideo.Title,
-            //                Decription = productvideo.Decription,
-            //                ProductId = productvideo.ProductId,
-            //                VideoURL = productvideo.VideoURL
-            //            };
-            //if (!String.IsNullOrEmpty(SearchString))
-            //{
-            //    query = query.Where(x => x.Title.ToLower().Contains(SearchString.ToLower())).ToList();
-            //}
-            //return View(query);
-
         }
     }
 }

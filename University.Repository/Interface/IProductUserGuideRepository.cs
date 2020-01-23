@@ -11,5 +11,6 @@ namespace University.Repository.Interface
     {
         List<ProductUserGuide> GetProductUserGuideList();
         List<ProductUserGuide> GetSearchUserGuides(string SearchTxt);
+        IEnumerable<ProductUserGuide> GetUserGuideList();
     }
 }
