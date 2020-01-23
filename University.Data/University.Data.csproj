@@ -62,6 +62,7 @@
     <Compile Include="Class1.cs" />
     <Compile Include="CustomEntities\ProductEntity.cs" />
     <Compile Include="CustomEntities\ProductLayoutMenu.cs" />
+    <Compile Include="CustomEntities\ProductVideosEntity.cs" />
     <Compile Include="CustomEntities\SubCategoryLayoutMenu.cs" />
     <Compile Include="Customer.cs">
       <DependentUpon>UniversityEntityModel.tt</DependentUpon>

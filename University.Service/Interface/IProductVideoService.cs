@@ -9,6 +9,8 @@ namespace University.Service.Interface
 {
     public interface IProductVideoService
     {
-        List<ProductVideos> GetProductVideoList();
+       // (List<ProductVideos>, List<CategoryUserMapping>) GetProductVideoList();
+         List<ProductVideos> GetProductVideoList();
+        IEnumerable<ProductVideos> GetUserVideosList();
     }
 }

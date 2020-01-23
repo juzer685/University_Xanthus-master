@@ -37,6 +37,7 @@ namespace University.UI.Areas.Admin.Models
                 }
             }
         }
+        public int?  cateuserid { get; set; }
         public Decimal Id { get; set; }
         public string Title { get; set; }
         public string Decription { get; set; }

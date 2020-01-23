@@ -33,7 +33,7 @@ namespace University.UI.Areas.Admin.Controllers
             var res = _subCategoryService.GetSubCategoryList().ToList();
             var viewModel = AutoMapper.Mapper.Map<List<SubCategoryMaster>, List<SubCategoryViewModel>>(res);
             //ViewBag.CategoryList = _categoryMasterService.GetCategoryList();
-            
+
             return View(viewModel);
         }
 
@@ -87,27 +87,58 @@ namespace University.UI.Areas.Admin.Controllers
                 SubCategoryMasterlst = res.Item2,
                 CategoryUserMapping = res1
             };
-            //var viewModel = AutoMapper.Mapper.Map<List<CategoryUserMapping>, List<CategoryMappingModel>>(res);
-            // var viewModel = AutoMapper.Mapper.Map<CategoryUserMapping, CategoryMappingModel>(res);
+
             return View(viewModel);
         }
         public ActionResult GetCategoryUserMapping(string Id)
         {
             CategoryMappingModel model;
             // var res="";
-             
+
             if (!string.IsNullOrEmpty(Id))
             {
-                var  res = _subCategoryService.GetCategoryUserMapping(Convert.ToDecimal(Id));
-                model = AutoMapper.Mapper.Map<CategoryUserMapping, CategoryMappingModel>(res);
+                var Tablelst = _subCategoryService.GetCategoryUserMappingList();
+                var res = _subCategoryService.GetCategoryUserMapping(Convert.ToDecimal(Id));
+                model = new CategoryMappingModel
+                {
+                    ID = Convert.ToInt32(res.ID),
+                    UserID=res.UserID ?? 0,
+                    FirstName = res.UserFirstName,
+                    LastName = res.UserLastName,
+                    Id = res.CategoryID ?? 0,
+                    CategoryName = res.CategoryName,
+                    Logintbllst = Tablelst.Item1,
+                    SubCategoryMasterlst = Tablelst.Item2
+                };
+                //model = AutoMapper.Mapper.Map<CategoryUserMapping, CategoryMappingModel>(res);
             }
             else
             {
                 model = new CategoryMappingModel();
+                //model = new CategoryMappingModel();
             }
+            return Json(RenderRazorViewToString("AddEditCategoryMapp", model), JsonRequestBehavior.AllowGet);
+
             //ViewBag.CategoryList = _categoryMasterService.GetCategoryList();
-            return RedirectToAction("CategoryUserMappingList", model);
+            //return RedirectToAction("CategoryUserMappingList", model);
         }
+
+        [NonAction]
+        public string RenderRazorViewToString(string viewName, object model)
+        {
+            ViewData.Model = model;
+            using (var sw = new StringWriter())
+            {
+                var viewResult = ViewEngines.Engines.FindPartialView(ControllerContext,
+                                                                         viewName);
+                var viewContext = new ViewContext(ControllerContext, viewResult.View,
+                                             ViewData, TempData, sw);
+                viewResult.View.Render(viewContext, sw);
+                viewResult.ViewEngine.ReleaseView(ControllerContext, viewResult.View);
+                return sw.GetStringBuilder().ToString();
+            }
+        }
+
         public ActionResult AddCategoryUserMapping(CategoryUserMapping model)
         {
             // var res = AutoMapper.Mapper.Map<CategoryMappingModel, CategoryUserMapping>(model);

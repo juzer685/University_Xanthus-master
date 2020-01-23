@@ -9,10 +9,13 @@ namespace University.UI.Areas.Admin.Models
     public class CategoryMappingModel
     {
         public int ID { get; set; }
+        public int UserID { get; set; }
         public Nullable<int> AdminID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public Decimal CategoryID { get; set; }
+        
+        //CategoryId
+        public decimal Id { get; set; }
         public string CategoryName { get; set; }
         public List<Login_tbl> Logintbllst { get; set; }
         public List<SubCategoryMaster> SubCategoryMasterlst { get; set; }

@@ -56,20 +56,22 @@
                         <div class="row">
                             @foreach (var item in Model)
                             {
-                              
+                                //if (Convert.ToInt32(Session["UserLoginID"]) == item.cateuserid)
+                                //       {
                                 <div class="col-lg-4">
                                     <iframe class="video v1" width="100%" height="200" src="@item.VideoURL" frameborder="0" allowfullscreen autoplay></iframe>
                                     <div class="col-12 col-md-10">
                                         <div class="searchItemTitle">
-                                            <a class="searchItemTitle" href="~/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(item.ProductId.ToString(),System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])">
+                                            <a class="searchItemTitle" href="~/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(item.ProductId.ToString(), System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])">
                                                 @item.Title
                                             </a>
                                         </div>
                                         <p class="block-ellipsis" title="@item.Decription">@item.Decription</p>
                                     </div>
                                 </div>
+                                //}
                             }
-          
+
                         </div>
                     </div>
                     <!-- /.card-body -->
