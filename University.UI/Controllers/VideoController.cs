@@ -31,68 +31,46 @@ namespace IPSU.Web.Areas.Admin.Controllers
         public ActionResult Video(string SearchString)
         {
             List<ProductVideoViewModel> productVideoViewModel = new List<ProductVideoViewModel>();
+
+            var res = _productVideoService.GetUserVideosList().ToList();
+            if (!String.IsNullOrEmpty(SearchString))
+            {
+                res = res.Where(x => x.Title.ToLower().Contains(SearchString.ToLower())).ToList();
+            }
+            //List<ProductVideos> productvideo = new List<ProductVideos>();
+            foreach (var pvideo in res)
+            {
+                productVideoViewModel.Add(new ProductVideoViewModel{
+                    Id = pvideo.Id,
+                    Title = pvideo.Title,
+                    Decription = pvideo.Decription,
+                    VideoURL = pvideo.VideoURL
+                });
+                
+            }
+
+            return View(productVideoViewModel);
+
+
             //var productvideores = _productVideoService.GetProductVideoList();
             //var productList = _productService.GetProductList().ToList();
-            ////var categorymapp = _subCategoryService.GetCategoryUserMappingGrid();
-            ////var res = _subCategoryService.GetSubCategoryList().ToList();
 
             //var query = from productvideo in productvideores
             //            join product in productList
             //            on productvideo.ProductId equals product.Id
-            //            //join categoryusermapp in categorymapp
-            //            //on product.SubCategoryId equals categoryusermapp.CategoryID
-            //            //join subcat in res
-            //            //on categoryusermapp.CategoryID equals subcat.Id
 
             //            select new ProductVideoViewModel
             //            {
             //                Title = productvideo.Title,
             //                Decription = productvideo.Decription,
             //                ProductId = productvideo.ProductId,
-            //                VideoURL = productvideo.VideoURL,
-            //                //cateuserid = categoryusermapp.UserID
+            //                VideoURL = productvideo.VideoURL
             //            };
-            ////var query = from categoryusermapp in categorymapp
-            ////            join product in productList
-            ////            on categoryusermapp.CategoryID equals product.SubCategoryId
-            ////            join productvideo in productvideores
-            ////            on product.Id equals productvideo.ProductId
-            ////            select new ProductVideoViewModel
-            ////            {
-            ////                Title = productvideo.Title,
-            ////                Decription = productvideo.Decription,
-            ////                ProductId = productvideo.ProductId,
-            ////                VideoURL = productvideo.VideoURL,
-            ////                cateuserid=categoryusermapp.UserID
-            ////            };
-            //if (!string.IsNullOrEmpty(SearchString))
-            //            {
-            //                query = query.Where(x => x.Title.ToLower().Contains(SearchString.ToLower())).ToList();
-
-            //             }
-
-
-
+            //if (!String.IsNullOrEmpty(SearchString))
+            //{
+            //    query = query.Where(x => x.Title.ToLower().Contains(SearchString.ToLower())).ToList();
+            //}
             //return View(query);
-            var productvideores = _productVideoService.GetProductVideoList();
-            var productList = _productService.GetProductList().ToList();
-
-            var query = from productvideo in productvideores
-                        join product in productList
-                        on productvideo.ProductId equals product.Id
-
-                        select new ProductVideoViewModel
-                        {
-                            Title = productvideo.Title,
-                            Decription = productvideo.Decription,
-                            ProductId = productvideo.ProductId,
-                            VideoURL = productvideo.VideoURL
-                        };
-            if (!String.IsNullOrEmpty(SearchString))
-            {
-                query = query.Where(x => x.Title.ToLower().Contains(SearchString.ToLower())).ToList();
-            }
-            return View(query);
 
         }
     }

@@ -11,5 +11,6 @@ namespace University.Repository.Interface
     {
       //  (List<ProductVideos>, List<CategoryUserMapping>) GetProductVideoList();
          List<ProductVideos> GetProductVideoList();
+        IEnumerable<ProductVideos> GetUserVideosList();
     }
 }

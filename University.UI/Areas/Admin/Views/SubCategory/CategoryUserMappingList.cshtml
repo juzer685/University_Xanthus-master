@@ -54,7 +54,7 @@
                                 @foreach (var item in Model.CategoryUserMapping)
                                 {
                                     <tr>
-                                        <td class="text-center">@item.ID</td>
+                                        <td class="text-center">@item.UserID</td>
                                         <td class="text-center">@item.AdminFirstName @item.AdminLastName</td>
                                         <td class="text-center">@item.UserFirstName @item.UserLastName</td>
                                         <td class="text-center">@item.CategoryName</td>
@@ -87,8 +87,8 @@
                 </div>
 
                 <div class="modal-body" id="popupBody">
-                    @*@Html.Partial("AddEditCategoryMapp", new University.UI.Areas.Admin.Models.CategoryMappingModel())*@
-                    <div class="row">
+                    @Html.Partial("AddEditCategoryMapp", Model)
+                    @*<div class="row">
             <div class="col-md-6">
                 <div class="form-group">
                     <label>Choose Category</label>
@@ -124,7 +124,7 @@
                     </select>
                 </div>
             </div>
-        </div>
+        </div>*@
 
                 </div>
 

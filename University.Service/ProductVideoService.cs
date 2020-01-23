@@ -21,5 +21,9 @@ namespace University.Service
         {
             return _productVideoRepository.GetProductVideoList();
         }
+        public IEnumerable<ProductVideos> GetUserVideosList() 
+        {
+            return _productVideoRepository.GetUserVideosList();
+        }
     }
 }

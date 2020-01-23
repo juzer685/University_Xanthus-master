@@ -24,11 +24,11 @@ namespace University.Repository
             {
                 int AdminId = Convert.ToInt32(HttpContext.Current.Session["AdminLoginID"]);
 
-                    List<Login_tbl> obj1 = context.Login_tbl.Where(y => y.IsDeleted == false && y.AdminId == AdminId).ToList();
-                    List<SubCategoryMaster> obj2 = context.SubCategoryMaster.Include("CategoryMaster").Where(y => y.IsDeleted != true && y.AssocitedCustID == AdminId).OrderByDescending(t => t.CreatedDate).ToList();
-                    return (obj1, obj2);
-               
-               
+                List<Login_tbl> obj1 = context.Login_tbl.Where(y => y.IsDeleted != true && y.AdminId == AdminId).ToList();
+                List<SubCategoryMaster> obj2 = context.SubCategoryMaster.Include("CategoryMaster").Where(y => y.IsDeleted != true && y.AssocitedCustID == AdminId).OrderByDescending(t => t.CreatedDate).ToList();
+                return (obj1, obj2);
+
+
             }
 
         }
@@ -41,16 +41,18 @@ namespace University.Repository
                 {
                     var Obj = context.CategoryUserMapping
                         .Where(x => x.AdminID == AdminId && x.IsDeleted != true)
-                        .Select(x => new { x.Login_tbl.ID, x.Login_tbl.FirstName, x.Login_tbl.LastName, x.Login_tbl.AdminId, x.SubCategoryMaster.CategoryId, x.SubCategoryMaster.Name })
+                        .Select(x => new {  id=x.ID,x.Login_tbl.ID, x.Login_tbl.FirstName, x.Login_tbl.LastName, x.Login_tbl.AdminId, x.SubCategoryMaster.Id, x.SubCategoryMaster.Name })
                         .ToList()
                         .Select(x => new CategoryUserMapping
                         {
-                            ID = x.ID,
+                            ID=x.id,
+                            UserID = x.ID,
                             UserFirstName = x.FirstName,
                             UserLastName = x.LastName,
                             AdminID = x.AdminId,
-                            CategoryID = x.CategoryId,
-                            CategoryName = x.Name
+                            CategoryID = x.Id,
+                            CategoryName = x.Name,
+                            
                         }).ToList();
                     var AdminDetails = context.Login_tbl.FirstOrDefault(x => x.ID == AdminId);
                     foreach (var item in Obj)
@@ -65,20 +67,20 @@ namespace University.Repository
                     int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
                     var Obj = context.CategoryUserMapping
                        .Where(x => x.UserID == UserID && x.IsDeleted != true)
-                       .Select(x => new { x.Login_tbl.ID, x.Login_tbl.FirstName, x.Login_tbl.LastName, x.Login_tbl.AdminId, x.SubCategoryMaster.CategoryId, x.SubCategoryMaster.Name })
+                       .Select(x => new { x.Login_tbl.ID, x.Login_tbl.FirstName, x.Login_tbl.LastName, x.Login_tbl.AdminId, x.SubCategoryMaster.Id, x.SubCategoryMaster.Name })
                        .ToList()
                        .Select(x => new CategoryUserMapping
                        {
                            ID = x.ID,
-                          UserID=x.ID,
+                           UserID = x.ID,
                            UserFirstName = x.FirstName,
                            UserLastName = x.LastName,
                            AdminID = x.AdminId,
-                           CategoryID = x.CategoryId,
+                           CategoryID = x.Id,
                            CategoryName = x.Name
-                           
-                           
-                          
+
+
+
                        }).ToList();
                     var AdminDetails = context.Login_tbl.FirstOrDefault(x => x.ID == UserID);
                     foreach (var item in Obj)
@@ -97,7 +99,7 @@ namespace University.Repository
             using (var context = new UniversityEntities())
             {
                 int AdminId = Convert.ToInt32(HttpContext.Current.Session["AdminLoginID"]);
-                if(AdminId!=0)
+                if (AdminId != 0)
                 {
                     return context.SubCategoryMaster.Include("CategoryMaster").Where(y => y.IsDeleted != true && y.AssocitedCustID == AdminId).OrderByDescending(t => t.CreatedDate).ToList();
                 }
@@ -105,26 +107,40 @@ namespace University.Repository
                 {
                     return context.SubCategoryMaster.Include("CategoryMaster").Where(y => y.IsDeleted != true).OrderByDescending(t => t.CreatedDate).ToList();
                 }
-                
-               
-               
-               
+
+
+
+
             }
         }
         public IEnumerable<SubCategoryMaster> GetSubCategoryListOnlyHaveProduct()
         {
             using (var context = new UniversityEntities())
             {
-               // int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
-                return context.SubCategoryMaster.Include("CategoryMaster").Where(y => y.IsDeleted != true && y.Product.Count>0).ToList();
+                // int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
+                return context.SubCategoryMaster.Include("CategoryMaster").Where(y => y.IsDeleted != true && y.Product.Count > 0).ToList();
             }
         }
 
-        public CategoryUserMapping GetCategoryUserMapping(Decimal id )
+        public CategoryUserMapping GetCategoryUserMapping(Decimal CatMappid)
         {
-            using (var context =new UniversityEntities())
+            using (var context = new UniversityEntities())
             {
-                return context.CategoryUserMapping.FirstOrDefault(y => y.ID == id && y.IsDeleted != true);
+                var Obj = context.CategoryUserMapping
+                       .Where(x => x.ID == CatMappid && x.IsDeleted != true)
+                       .Select(x => new { id=x.ID,x.Login_tbl.ID, x.Login_tbl.FirstName, x.Login_tbl.LastName, x.Login_tbl.AdminId, x.SubCategoryMaster.Id, x.SubCategoryMaster.Name })
+                       .FirstOrDefault();
+                return new CategoryUserMapping
+                {
+                    ID = Obj.id,
+                    UserID=Obj.ID,
+                    UserFirstName = Obj.FirstName,
+                    UserLastName = Obj.LastName,
+                    AdminID = Obj.AdminId,
+                    CategoryID = Obj.Id,
+                    CategoryName = Obj.Name
+                };
+                //return context.CategoryUserMapping.FirstOrDefault(y => y.ID == id && y.IsDeleted != true);
             }
         }
         public SubCategoryMaster GetSubCategory(Decimal id)
@@ -212,8 +228,8 @@ namespace University.Repository
         {
             using (var context = new UniversityEntities())
             {
-                
-                return context.SubCategoryMaster.Where(y => y.CategoryId == id && y.IsDeleted != true ).ToList();
+
+                return context.SubCategoryMaster.Where(y => y.CategoryId == id && y.IsDeleted != true).ToList();
             }
         }
 
