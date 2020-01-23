@@ -29,13 +29,38 @@ namespace IPSU.Web.Controllers
         }
         public ActionResult UserGuide(string SearchString)
         {
-            var userGuides = _productUserGuideService.GetProductUserGuideList().ToList();
-            var viewModel = AutoMapper.Mapper.Map<List<ProductUserGuide>, List<ProductUserGuideViewModel>>(userGuides);
+            //var userGuides = _productUserGuideService.GetProductUserGuideList().ToList();
+            //var viewModel = AutoMapper.Mapper.Map<List<ProductUserGuide>, List<ProductUserGuideViewModel>>(userGuides);
+            //if (!String.IsNullOrEmpty(SearchString))
+            //{
+            //    viewModel = viewModel.Where(x => x.Title.ToLower().Contains(SearchString.ToLower())).ToList();
+            //}
+            //return View(viewModel);
+            List<ProductUserGuideViewModel> productUserGuideViewModels = new List<ProductUserGuideViewModel>();
+
+            var res = _productUserGuideService.GetUserGuideList().ToList();
             if (!String.IsNullOrEmpty(SearchString))
             {
-                viewModel = viewModel.Where(x => x.Title.ToLower().Contains(SearchString.ToLower())).ToList();
+                res = res.Where(x => x.Title.ToLower().Contains(SearchString.ToLower())).ToList();
             }
-            return View(viewModel);
+
+            foreach (var pvideo in res)
+            {
+                productUserGuideViewModels.Add(new ProductUserGuideViewModel
+                {
+                    Id = pvideo.Id,
+                    Title = pvideo.Title,
+                    Description = pvideo.Description,
+                    ImageURL = pvideo.ImageURL
+                });
+
+            }
+            if (!String.IsNullOrEmpty(SearchString))
+            {
+                productUserGuideViewModels = productUserGuideViewModels.Where(x => x.Title.ToLower().Contains(SearchString.ToLower())).ToList();
+            }
+
+            return View(productUserGuideViewModels);
         }
     }
 

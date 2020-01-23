@@ -26,5 +26,10 @@ namespace University.Service
         {
             return _productUserGuideRepository.GetSearchUserGuides(SearchTxt);
         }
+
+        public IEnumerable<ProductUserGuide> GetUserGuideList ()
+        {
+            return _productUserGuideRepository.GetUserGuideList();
+        }
     }
 }
