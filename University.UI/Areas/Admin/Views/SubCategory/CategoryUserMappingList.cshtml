@@ -87,44 +87,44 @@
                 </div>
 
                 <div class="modal-body" id="popupBody">
-
+                    @*@Html.Partial("AddEditCategoryMapp", new University.UI.Areas.Admin.Models.CategoryMappingModel())*@
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Choose Category</label>
-                                <select name="CategoryID" class="form-control" style="width: 100%;">
-                                    <option value="0" selected>Select Category</option>
-                                    @foreach (var item in Model.SubCategoryMasterlst)
-                                    {
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Choose Category</label>
+                    <select name="CategoryID" class="form-control" style="width: 100%;">
+                        <option value="0" selected>Select Category</option>
+                        @foreach (var item in Model.SubCategoryMasterlst)
+                        {
 
-                                        if (item.AssocitedCustID == Convert.ToInt32(Session["AdminLoginID"]))
-                                        {
-                                            <option value="@item.Id" name="CategoryID" id="CategoryID">@item.Name</option>
-                                        }
+                            if (item.AssocitedCustID == Convert.ToInt32(Session["AdminLoginID"]))
+                            {
+                                <option value="@item.Id" name="CategoryID" id="CategoryID">@item.Name</option>
+                            }
 
-                                    }
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Choose User</label>
-                                <select name="UserID" class="form-control select2" style="width: 100%;">
-                                    <option value="0" selected>Select User</option>
-                                    @foreach (var item in Model.Logintbllst)
-                                    {
-                                        if (item.RoleID.ToString() == "5")
-                                        {
-                                            <option value="@item.ID" id="useridd">@item.FirstName @item.LastName</option>
-                                        }
-                                    }
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Choose User</label>
+                    <select name="UserID" class="form-control select2" style="width: 100%;">
+                        <option value="0" selected>Select User</option>
+                        @foreach (var item in Model.Logintbllst)
+                        {
+                            if (item.RoleID.ToString() == "5")
+                            {
+                                <option value="@item.ID" id="useridd">@item.FirstName @item.LastName</option>
+                            }
+                        }
 
-                                </select>
-                            </div>
-                        </div>
-                    </div>
+                    </select>
+                </div>
+            </div>
+        </div>
 
                 </div>
 

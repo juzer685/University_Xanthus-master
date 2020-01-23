@@ -11,41 +11,84 @@ namespace University.Repository
 {
     public class SubCategoryRepository : ISubCategoryRepository
     {
+        //public List<CategoryUserMapping> GetCategoryUservideoMappingList()
+        //{
+        //    using (var context = new UniversityEntities())
+        //    {
+        //        List<SubCategoryMaster> obj2 = context.SubCategoryMaster.Include("CategoryMaster").Where(y => y.IsDeleted != true && y.AssocitedCustID == AdminId).OrderByDescending(t => t.CreatedDate).ToList();
+        //    }
+        //}
         public (List<Login_tbl>, List<SubCategoryMaster>) GetCategoryUserMappingList()
         {
             using (var context = new UniversityEntities())
             {
                 int AdminId = Convert.ToInt32(HttpContext.Current.Session["AdminLoginID"]);
-                List<Login_tbl> obj1 = context.Login_tbl.Where(y => y.IsDeleted == false && y.AdminId == AdminId).ToList();
-                List<SubCategoryMaster> obj2 = context.SubCategoryMaster.Include("CategoryMaster").Where(y => y.IsDeleted != true && y.AssocitedCustID == AdminId).OrderByDescending(t => t.CreatedDate).ToList();
-                return (obj1, obj2);
+
+                    List<Login_tbl> obj1 = context.Login_tbl.Where(y => y.IsDeleted == false && y.AdminId == AdminId).ToList();
+                    List<SubCategoryMaster> obj2 = context.SubCategoryMaster.Include("CategoryMaster").Where(y => y.IsDeleted != true && y.AssocitedCustID == AdminId).OrderByDescending(t => t.CreatedDate).ToList();
+                    return (obj1, obj2);
+               
+               
             }
+
         }
         public List<CategoryUserMapping> GetCategoryUserMappingGrid()
         {
             using (var context = new UniversityEntities())
             {
                 int AdminId = Convert.ToInt32(HttpContext.Current.Session["AdminLoginID"]);
-                var Obj = context.CategoryUserMapping
-                    .Where(x => x.AdminID == AdminId && x.IsDeleted != true)
-                    .Select(x => new { x.Login_tbl.ID, x.Login_tbl.FirstName, x.Login_tbl.LastName, x.Login_tbl.AdminId, x.SubCategoryMaster.CategoryId, x.SubCategoryMaster.Name })
-                    .ToList()
-                    .Select(x => new CategoryUserMapping
-                    {
-                        ID = x.ID,
-                        UserFirstName = x.FirstName,
-                        UserLastName = x.LastName,
-                        AdminID = x.AdminId,
-                        CategoryID = x.CategoryId,
-                        CategoryName = x.Name
-                    }).ToList();
-                var AdminDetails = context.Login_tbl.FirstOrDefault(x => x.ID == AdminId);
-                foreach (var item in Obj)
+                if (AdminId != 0)
                 {
-                    item.AdminFirstName = AdminDetails.FirstName;
-                    item.AdminLastName = AdminDetails.LastName;
+                    var Obj = context.CategoryUserMapping
+                        .Where(x => x.AdminID == AdminId && x.IsDeleted != true)
+                        .Select(x => new { x.Login_tbl.ID, x.Login_tbl.FirstName, x.Login_tbl.LastName, x.Login_tbl.AdminId, x.SubCategoryMaster.CategoryId, x.SubCategoryMaster.Name })
+                        .ToList()
+                        .Select(x => new CategoryUserMapping
+                        {
+                            ID = x.ID,
+                            UserFirstName = x.FirstName,
+                            UserLastName = x.LastName,
+                            AdminID = x.AdminId,
+                            CategoryID = x.CategoryId,
+                            CategoryName = x.Name
+                        }).ToList();
+                    var AdminDetails = context.Login_tbl.FirstOrDefault(x => x.ID == AdminId);
+                    foreach (var item in Obj)
+                    {
+                        item.AdminFirstName = AdminDetails.FirstName;
+                        item.AdminLastName = AdminDetails.LastName;
+                    }
+                    return Obj;
                 }
-                return Obj;
+                else
+                {
+                    int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
+                    var Obj = context.CategoryUserMapping
+                       .Where(x => x.UserID == UserID && x.IsDeleted != true)
+                       .Select(x => new { x.Login_tbl.ID, x.Login_tbl.FirstName, x.Login_tbl.LastName, x.Login_tbl.AdminId, x.SubCategoryMaster.CategoryId, x.SubCategoryMaster.Name })
+                       .ToList()
+                       .Select(x => new CategoryUserMapping
+                       {
+                           ID = x.ID,
+                          UserID=x.ID,
+                           UserFirstName = x.FirstName,
+                           UserLastName = x.LastName,
+                           AdminID = x.AdminId,
+                           CategoryID = x.CategoryId,
+                           CategoryName = x.Name
+                           
+                           
+                          
+                       }).ToList();
+                    var AdminDetails = context.Login_tbl.FirstOrDefault(x => x.ID == UserID);
+                    foreach (var item in Obj)
+                    {
+                        item.AdminFirstName = AdminDetails.FirstName;
+                        item.AdminLastName = AdminDetails.LastName;
+                    }
+                    return Obj;
+
+                }
             }
         }
 
@@ -54,11 +97,16 @@ namespace University.Repository
             using (var context = new UniversityEntities())
             {
                 int AdminId = Convert.ToInt32(HttpContext.Current.Session["AdminLoginID"]);
-                //if(AssociatedUserID==0)
-                //{
-
-                //}
-                return context.SubCategoryMaster.Include("CategoryMaster").Where(y => y.IsDeleted != true && y.AssocitedCustID == AdminId).OrderByDescending(t => t.CreatedDate).ToList();
+                if(AdminId!=0)
+                {
+                    return context.SubCategoryMaster.Include("CategoryMaster").Where(y => y.IsDeleted != true && y.AssocitedCustID == AdminId).OrderByDescending(t => t.CreatedDate).ToList();
+                }
+                else
+                {
+                    return context.SubCategoryMaster.Include("CategoryMaster").Where(y => y.IsDeleted != true).OrderByDescending(t => t.CreatedDate).ToList();
+                }
+                
+               
                
                
             }

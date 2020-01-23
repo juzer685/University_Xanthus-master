@@ -40,6 +40,10 @@ namespace University.Service
         {
             return _subCategoryRepository.GetSubCategory(id);
         }
+        //public List<SubCategoryMaster> GetCategoryUservideoMappingList()
+        //{
+        //    return _subCategoryRepository.GetCategoryUservideoMappingList();
+        //}
         public (List<Login_tbl>, List<SubCategoryMaster>) GetCategoryUserMappingList()
         {
             return _subCategoryRepository.GetCategoryUserMappingList();

@@ -87,18 +87,17 @@ namespace University.UI.Areas.Admin.Controllers
                 SubCategoryMasterlst = res.Item2,
                 CategoryUserMapping = res1
             };
-            //var viewModel = AutoMapper.Mapper.Map<List<CategoryUserMapping>, List<CategoryMappingModel>>(res);
-            // var viewModel = AutoMapper.Mapper.Map<CategoryUserMapping, CategoryMappingModel>(res);
+          
             return View(viewModel);
         }
         public ActionResult GetCategoryUserMapping(string Id)
         {
             CategoryMappingModel model;
             // var res="";
-             
+
             if (!string.IsNullOrEmpty(Id))
             {
-                var  res = _subCategoryService.GetCategoryUserMapping(Convert.ToDecimal(Id));
+                var res = _subCategoryService.GetCategoryUserMapping(Convert.ToDecimal(Id));
                 model = AutoMapper.Mapper.Map<CategoryUserMapping, CategoryMappingModel>(res);
             }
             else
@@ -106,7 +105,8 @@ namespace University.UI.Areas.Admin.Controllers
                 model = new CategoryMappingModel();
             }
             //ViewBag.CategoryList = _categoryMasterService.GetCategoryList();
-            return RedirectToAction("CategoryUserMappingList", model);
+            return Json(model, JsonRequestBehavior.AllowGet);
+            //return RedirectToAction("CategoryUserMappingList", model);
         }
         public ActionResult AddCategoryUserMapping(CategoryUserMapping model)
         {

@@ -9,6 +9,7 @@ namespace University.Repository.Interface
 {
     public interface IProductVideoRepository
     {
+      //  (List<ProductVideos>, List<CategoryUserMapping>) GetProductVideoList();
          List<ProductVideos> GetProductVideoList();
     }
 }
