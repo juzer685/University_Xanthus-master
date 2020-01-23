@@ -44,14 +44,14 @@ namespace IPSU.Web.Controllers
                 res = res.Where(x => x.Title.ToLower().Contains(SearchString.ToLower())).ToList();
             }
 
-            foreach (var pvideo in res)
+            foreach (var pGuide  in res)
             {
                 productUserGuideViewModels.Add(new ProductUserGuideViewModel
                 {
-                    Id = pvideo.Id,
-                    Title = pvideo.Title,
-                    Description = pvideo.Description,
-                    ImageURL = pvideo.ImageURL
+                    Id = pGuide.Id,
+                    Title = pGuide.Title,
+                    Description = pGuide.Description,
+                    ImageURL = pGuide.ImageURL
                 });
 
             }
