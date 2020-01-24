@@ -300,26 +300,22 @@ namespace University.Repository
             }
 
         }
+
         public IEnumerable<ProductEntity> ListproductbyUserId()
         {
             using (var context = new UniversityEntities())
             {
                 int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
-                var res = (from p in context.Product.Where(y => y.IsDeleted != true)
-                           join s in context.SubCategoryMaster.Where(y => y.IsDeleted != true)
-                           on p.SubCategoryId equals s.Id
-                           //join cm in context.CategoryUserMapping.Where(y=>y.IsDeleted !=true )
-                           //on s.Id equals cm.CategoryID
-                           //join l in context.Login_tbl.Where(y=>y.IsDeleted!=true)
-                           //on cm.UserID equals l.ID 
-                           join c in context.CategoryMaster.Where(y => y.IsDeleted != true)
-                           on s.CategoryId equals c.Id
-                           join g in context.ProductUserGuide.Where(y => y.IsDeleted != true)
-                           on p.Id equals g.ProductId into temp
-                           from guide in temp.DefaultIfEmpty()
-                               //join v in context.ProductVideos.Where(y => y.IsDeleted != true)
-                               //on p.Id equals v.ProductId into tempV
-                               //from videos in tempV.DefaultIfEmpty()
+                var res = (from l in context.Login_tbl.Where(y => y.IsDeleted != true && y.ID == UserID)
+                           join cm in context.CategoryUserMapping.Where(y => y.IsDeleted != true && y.UserID == UserID)
+                           on l.ID equals cm.UserID
+                           join c in context.SubCategoryMaster.Where(y => y.IsDeleted != true)
+                           on cm.CategoryID equals c.Id
+                           join p in context.Product.Where(y => y.IsDeleted != true)
+                           on c.Id equals p.SubCategoryId
+                         
+                           orderby p.CreatedDate
+
 
                            select new ProductEntity()
                            {
@@ -335,16 +331,61 @@ namespace University.Repository
                                Title = p.Title,
                                UpdatedBy = p.UpdatedBy,
                                UpdatedDate = p.UpdatedDate,
-                               CategoryMaster = c,
-                               SubCategoryMaster = s,
-                               ProductUserGuide = guide,
-                               Categorymapp = context.CategoryUserMapping.Where(x=> x.IsDeleted != true && x.UserID == UserID).ToList(),
+                               //CategoryMaster = c,
+                              // SubCategoryMaster = s,
+                              // ProductUserGuide = guide,
+                               Categorymapp = context.CategoryUserMapping.Where(x => x.IsDeleted != true && x.UserID == UserID).ToList(),
                                ProductVideos = context.ProductVideos.Where(x => x.IsDeleted != true).ToList(),
-                               ProductDocuments = context.ProductDocuments.Where( x=> x.IsDeleted != true).ToList()
+                               ProductDocuments = context.ProductDocuments.Where(x => x.IsDeleted != true).ToList()
                            }).ToList();
                 return res.OrderByDescending(x => x.CreatedDate).Take(6);
             }
         }
+        //public IEnumerable<ProductEntity> ListproductbyUserId()
+        //{
+        //    using (var context = new UniversityEntities())
+        //    {
+        //        int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
+        //        var res = (from p in context.Product.Where(y => y.IsDeleted != true)
+        //                   join s in context.SubCategoryMaster.Where(y => y.IsDeleted != true)
+        //                   on p.SubCategoryId equals s.Id
+        //                   //join cm in context.CategoryUserMapping.Where(y=>y.IsDeleted !=true )
+        //                   //on s.Id equals cm.CategoryID
+        //                   //join l in context.Login_tbl.Where(y=>y.IsDeleted!=true)
+        //                   //on cm.UserID equals l.ID 
+        //                   join c in context.CategoryMaster.Where(y => y.IsDeleted != true)
+        //                   on s.CategoryId equals c.Id
+        //                   join g in context.ProductUserGuide.Where(y => y.IsDeleted != true)
+        //                   on p.Id equals g.ProductId into temp
+        //                   from guide in temp.DefaultIfEmpty()
+        //                       //join v in context.ProductVideos.Where(y => y.IsDeleted != true)
+        //                       //on p.Id equals v.ProductId into tempV
+        //                       //from videos in tempV.DefaultIfEmpty()
+
+        //                   select new ProductEntity()
+        //                   {
+        //                       Id = p.Id,
+        //                       CreatedBy = p.CreatedBy,
+        //                       CreatedDate = p.CreatedDate,
+        //                       DeletedBy = p.DeletedBy,
+        //                       DeletedDate = p.DeletedDate,
+        //                       Description = p.Description,
+        //                       ImageURL = p.ImageURL,
+        //                       IsDeleted = p.IsDeleted,
+        //                       SubCategoryId = p.SubCategoryId,
+        //                       Title = p.Title,
+        //                       UpdatedBy = p.UpdatedBy,
+        //                       UpdatedDate = p.UpdatedDate,
+        //                       CategoryMaster = c,
+        //                       SubCategoryMaster = s,
+        //                       ProductUserGuide = guide,
+        //                       Categorymapp = context.CategoryUserMapping.Where(x=> x.IsDeleted != true && x.UserID == UserID).ToList(),
+        //                       ProductVideos = context.ProductVideos.Where(x => x.IsDeleted != true).ToList(),
+        //                       ProductDocuments = context.ProductDocuments.Where( x=> x.IsDeleted != true).ToList()
+        //                   }).ToList();
+        //        return res.OrderByDescending(x => x.CreatedDate).Take(6);
+        //    }
+        //}
         #endregion
     }
 
