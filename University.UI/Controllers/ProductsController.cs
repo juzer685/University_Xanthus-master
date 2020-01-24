@@ -100,7 +100,7 @@ namespace IPSU.Web.Controllers
 
             ViewBag.SubCategoryList = _subCategoryService.GetSubCategoryList();
             //_homeService.AddProductToRecentViewed(new RecentVisitedProduct() { ProductId = ProductId, UserId = Guid.Parse("6A68CDB1-167F-4323-9D90-34602D20E06D") });
-            _homeService.AddProductToRecentViewed(new RecentVisitedProduct() { ProductId = Convert.ToDecimal(UrlSecurityManager.Decrypt(ProductId, "iPsWeBApi2018")), UserId = Convert.ToInt32(Session["UserLoginID"]) });
+            _homeService.AddProductToRecentViewed(new RecentVisitedProduct() { ProductId = Convert.ToDecimal(UrlSecurityManager.Decrypt(ProductId, "iPsUniversity2020")), UserId = Convert.ToInt32(Session["UserLoginID"]) });
 
             return View(viewModel);
         }

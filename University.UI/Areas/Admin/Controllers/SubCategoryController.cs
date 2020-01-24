@@ -105,7 +105,7 @@ namespace University.UI.Areas.Admin.Controllers
                     UserID=res.UserID ?? 0,
                     FirstName = res.UserFirstName,
                     LastName = res.UserLastName,
-                    Id = res.CategoryID ?? 0,
+                    CategoryId = res.CategoryID ?? 0,
                     CategoryName = res.CategoryName,
                     Logintbllst = Tablelst.Item1,
                     SubCategoryMasterlst = Tablelst.Item2
@@ -139,10 +139,15 @@ namespace University.UI.Areas.Admin.Controllers
             }
         }
 
-        public ActionResult AddCategoryUserMapping(CategoryUserMapping model)
+        public ActionResult AddCategoryUserMapping(CategoryMappingModel model)
         {
             // var res = AutoMapper.Mapper.Map<CategoryMappingModel, CategoryUserMapping>(model);
-            var isSuccess = _subCategoryService.AddCategoryUserMapping(model);
+
+            var isSuccess = _subCategoryService.AddCategoryUserMapping(new CategoryUserMapping { 
+                ID = model.ID,
+                CategoryID = model.CategoryId,
+                UserID = model.UserID
+            });
             return Json(isSuccess, JsonRequestBehavior.AllowGet);
             //return RedirectToAction("CategoryUserMapping");
         }

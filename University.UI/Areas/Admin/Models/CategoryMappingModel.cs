@@ -15,7 +15,7 @@ namespace University.UI.Areas.Admin.Models
         public string LastName { get; set; }
         
         //CategoryId
-        public decimal Id { get; set; }
+        public decimal CategoryId { get; set; }
         public string CategoryName { get; set; }
         public List<Login_tbl> Logintbllst { get; set; }
         public List<SubCategoryMaster> SubCategoryMasterlst { get; set; }

@@ -7,7 +7,7 @@
             <label>Choose Category</label>
             @Html.HiddenFor(y => y.ID)
           
-            @Html.DropDownListFor(x => x.Id, new SelectList(Model.SubCategoryMasterlst, "Id", "Name"), "Select Category", new { @class = "form-control" })
+            @Html.DropDownListFor(x => x.CategoryId, new SelectList(Model.SubCategoryMasterlst, "Id", "Name"), "Select Category", new { @class = "form-control" })
             @*<select name="CategoryID" class="form-control" style="width: 100%;">
             <option value="0" selected>Select Category</option>
             @foreach (var item in Model.SubCategoryMasterlst)
