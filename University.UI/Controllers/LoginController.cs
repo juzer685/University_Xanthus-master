@@ -47,7 +47,7 @@ namespace IPSU.Web.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Login(Login_tbl login_Tbl)
         {
-            login_Tbl.Password = new MD5Hashing().GetMd5Hash(login_Tbl.Password);
+            login_Tbl.Password = UrlSecurityManager.Encrypt(login_Tbl.Password, ConfigurationManager.AppSettings["SecurityKey"]);
             var Result = _loginService.UserLogin(login_Tbl);
             if (Result == null)
             {
@@ -121,7 +121,7 @@ namespace IPSU.Web.Areas.Admin.Controllers
                 using (var message = new MailMessage(new MailAddress(ConfigurationManager.AppSettings["AdminId"], "Admin"), new MailAddress(Email, "user"))
                 {
                     Subject = "Reset Password",
-                    Body = "Hello,<br/><br/>Welcome to Online Training Portal. We received a request to reset your password.Please <a href=" + ConfigurationManager.AppSettings["ChangePasswordUrl"] + "/" + new MD5Hashing().GetMd5Hash(EmailInfo.ID.ToString()) + ">Click Here</a> to reset Password <br/><br/><br/>Regards,<br/>Admin"
+                    Body = "Hello,<br/><br/>Welcome to Online Training Portal. We received a request to reset your password.Please <a href=" + ConfigurationManager.AppSettings["ChangePasswordUrl"] + "/" + UrlSecurityManager.Encrypt(EmailInfo.ID.ToString(), ConfigurationManager.AppSettings["SecurityKey"]) + ">Click Here</a> to reset Password <br/><br/><br/>Regards,<br/>Admin"
                 })
                 {
                     message.IsBodyHtml = true;
@@ -142,7 +142,7 @@ namespace IPSU.Web.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult ChangePassword(string id)
         {
-            Login_tbl Login_tbl = _loginService.CheckEmail(id, new MD5Hashing().VerifyMd5Hash);
+            Login_tbl Login_tbl = _loginService.CheckEmail(id, UrlSecurityManager.Decrypt);
             if (Login_tbl == null)
             {
                 TempData["Success"] = "False";
@@ -161,7 +161,7 @@ namespace IPSU.Web.Areas.Admin.Controllers
         {
             if (ChangePasswordVM.NewPassword.Equals(ChangePasswordVM.ConfirmPassword))
             {
-                var Result = _loginService.ChangePassword(Session["UnEncryptedEmail"].ToString(), new MD5Hashing().GetMd5Hash(ChangePasswordVM.NewPassword));
+                var Result = _loginService.ChangePassword(Session["UnEncryptedEmail"].ToString(), UrlSecurityManager.Encrypt(ChangePasswordVM.NewPassword, ConfigurationManager.AppSettings["SecurityKey"]));
                 if (Result)
                 {
                     return Json(new { Message = "Change Password Successful", url = "/Login/Login" });

@@ -33,7 +33,7 @@ namespace IPSU.Service
             return _LoginRepository.ChangePassword(Email,Password);
         }
 
-        public Login_tbl CheckEmail(string Id, Func<string,string,bool> Func)
+        public Login_tbl CheckEmail(string Id, Func<string,string,string> Func)
         {
             return _LoginRepository.CheckEmail(Id, Func);
         }

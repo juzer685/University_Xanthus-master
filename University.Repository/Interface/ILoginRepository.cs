@@ -12,7 +12,7 @@ namespace University.Repository.Interface
         Login_tbl UserLogin(Login_tbl login_Tbl);
         Login_tbl ForgotPassword(string Email);
         bool ChangePassword(string Email,string Password);
-        Login_tbl CheckEmail(string Id, Func<string, string, bool> Func);
+        Login_tbl CheckEmail(string Id, Func<string, string, string> Func);
         EmailInfo AddEmailInfo(int UserId);
     }
 }

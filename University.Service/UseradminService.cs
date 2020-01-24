@@ -42,6 +42,10 @@ namespace University.Service
             return _UseradminRepository.RegisterUser(Login_tbl);
         }
 
+        public (bool, bool) SaveEditUserDetails(Login_tbl Login_tbl)
+        {
+            return _UseradminRepository.SaveEditUserDetails(Login_tbl);
+        }
         public List<Customer> GetCustomerList()
         {
             return _UseradminRepository.GetCustomerList();

@@ -83,7 +83,6 @@ namespace University.UI.Areas.Admin.Controllers
             var res = _UseradminService.GetCustomerList();
             if (TempData["EditUserId"] != null)
             {
-                //int id = Convert.ToInt32(TempData["EditUserId"]);
                 Login_tbl Login_tbl = _UseradminService.EditUser(Convert.ToInt32(TempData["EditUserId"]));
                 return View("Register", new RegistrationVM
                 {
@@ -91,6 +90,8 @@ namespace University.UI.Areas.Admin.Controllers
                     FirstName = Login_tbl.FirstName,
                     LastName = Login_tbl.LastName,
                     Email = Login_tbl.UserName,
+                    Password = UrlSecurityManager.Decrypt(Login_tbl.Password, ConfigurationManager.AppSettings["SecurityKey"]),
+                    ConfirmPassword = UrlSecurityManager.Decrypt(Login_tbl.Password, ConfigurationManager.AppSettings["SecurityKey"]),
                     MobileNo = Login_tbl.MobileNo,
                     CustomerId = Login_tbl.CustomerId,
                     CustomerList = res
@@ -105,41 +106,85 @@ namespace University.UI.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Register(RegistrationVM p_RegistrationVM)
         {
-            var res = _UseradminService.RegisterUser(new Login_tbl
+            if (p_RegistrationVM.ID != 0)
             {
-                FirstName = p_RegistrationVM.FirstName,
-                LastName = p_RegistrationVM.LastName,
-                UserName = p_RegistrationVM.Email,
-                Password = new MD5Hashing().GetMd5Hash(p_RegistrationVM.Password), //p_RegistrationVM.Password,
-                CustomerId = p_RegistrationVM.CustomerId,
-                MobileNo = p_RegistrationVM.MobileNo,
-                RoleID = 5,
-                CreatedDate = DateTime.Now,
-                CreatedBy = Convert.ToDecimal(Session["RoleID"]),
-                IsDeleted = false,
-                AdminId = Convert.ToInt32(Session["AdminLoginID"])
-            });
-            if (res.Item1 == true)
-            {
-                bool success = SendEmail(p_RegistrationVM.Email, p_RegistrationVM.Password, p_RegistrationVM.FirstName);
-                if (success)
+                var res = _UseradminService.SaveEditUserDetails(new Login_tbl
                 {
-                    return Json(new { result = true, Message = "User Registration Successful and Email Sent", url = "/Admin/User" });
+                    ID = p_RegistrationVM.ID,
+                    FirstName = p_RegistrationVM.FirstName,
+                    LastName = p_RegistrationVM.LastName,
+                    UserName = p_RegistrationVM.Email,
+                    Password = UrlSecurityManager.Encrypt(p_RegistrationVM.Password, ConfigurationManager.AppSettings["SecurityKey"]), //p_RegistrationVM.Password,
+                    CustomerId = p_RegistrationVM.CustomerId,
+                    MobileNo = p_RegistrationVM.MobileNo,
+                    RoleID = 5,
+                    CreatedDate = DateTime.Now,
+                    CreatedBy = Convert.ToDecimal(Session["RoleID"]),
+                    IsDeleted = false,
+                    AdminId = Convert.ToInt32(Session["AdminLoginID"])
+                });
+                if (res.Item1 == true)
+                {
+                    bool success = SendEmail(p_RegistrationVM.Email, p_RegistrationVM.Password, p_RegistrationVM.FirstName);
+                    if (success)
+                    {
+                        return Json(new { result = true, Message = "User Registration Successful and Email Sent", url = "/Admin/User" });
+                    }
+                    else
+                    {
+                        return Json(new { result = true, Message = "User Registration Successful but Email not sent", url = "/Admin/User" });
+                    }
                 }
                 else
                 {
-                    return Json(new { result = true, Message = "User Registration Successful but Email not sent", url = "/Admin/User" });
+                    if (res.Item2 == true)
+                    {
+                        return Json(new { result = false, Message = "Email already Exists.", url = "/Admin/User/Register" });
+                    }
+                    else
+                    {
+                        return Json(new { result = false, Message = "something went wrong,please try again.", url = "/Admin/User/Register" });
+                    }
                 }
             }
             else
             {
-                if (res.Item2 == true)
+                var res = _UseradminService.RegisterUser(new Login_tbl
                 {
-                    return Json(new { result = false, Message = "Email already Exists.", url = "/Admin/User/Register" });
+                    FirstName = p_RegistrationVM.FirstName,
+                    LastName = p_RegistrationVM.LastName,
+                    UserName = p_RegistrationVM.Email,
+                    Password = UrlSecurityManager.Encrypt(p_RegistrationVM.Password, ConfigurationManager.AppSettings["SecurityKey"]), //p_RegistrationVM.Password,
+                    CustomerId = p_RegistrationVM.CustomerId,
+                    MobileNo = p_RegistrationVM.MobileNo,
+                    RoleID = 5,
+                    CreatedDate = DateTime.Now,
+                    CreatedBy = Convert.ToDecimal(Session["RoleID"]),
+                    IsDeleted = false,
+                    AdminId = Convert.ToInt32(Session["AdminLoginID"])
+                });
+                if (res.Item1 == true)
+                {
+                    bool success = SendEmail(p_RegistrationVM.Email, p_RegistrationVM.Password, p_RegistrationVM.FirstName);
+                    if (success)
+                    {
+                        return Json(new { result = true, Message = "User Registration Successful and Email Sent", url = "/Admin/User" });
+                    }
+                    else
+                    {
+                        return Json(new { result = true, Message = "User Registration Successful but Email not sent", url = "/Admin/User" });
+                    }
                 }
                 else
                 {
-                    return Json(new { result = false, Message = "something went wrong,please try again.", url = "/Admin/User/Register" });
+                    if (res.Item2 == true)
+                    {
+                        return Json(new { result = false, Message = "Email already Exists.", url = "/Admin/User/Register" });
+                    }
+                    else
+                    {
+                        return Json(new { result = false, Message = "something went wrong,please try again.", url = "/Admin/User/Register" });
+                    }
                 }
             }
         }

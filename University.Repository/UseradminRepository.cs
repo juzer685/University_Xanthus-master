@@ -48,7 +48,7 @@ namespace University.Repository
             {
                 using (var context = new UniversityEntities())
                 {
-                    if (context.Login_tbl.Any(x => x.UserName.Equals(Login_tbl.UserName)))
+                    if (context.Login_tbl.Any(x => x.UserName.Equals(Login_tbl.UserName) && x.IsDeleted == false))
                     {
                         return (false,true);
                     }
@@ -58,6 +58,43 @@ namespace University.Repository
                         context.SaveChanges();
                         return (true, false);
                     }
+                }
+            }
+            catch (Exception e)
+            {
+                return (false, false);
+            }
+        }
+
+        public (bool, bool) SaveEditUserDetails(Login_tbl Login_tbl)
+        {
+            try
+            {
+                using (var context = new UniversityEntities())
+                {
+                    Login_tbl Logintbl = context.Login_tbl.FirstOrDefault(x => x.ID == Login_tbl.ID);
+                    Logintbl.FirstName = Login_tbl.FirstName;
+                    Logintbl.LastName = Login_tbl.LastName;
+                    Logintbl.MobileNo = Login_tbl.MobileNo;
+                    Logintbl.UserName = Login_tbl.UserName;
+                    Logintbl.Password = Login_tbl.Password;
+                    Logintbl.CustomerId = Login_tbl.CustomerId;
+                    Logintbl.RoleID = Login_tbl.RoleID;
+                    Logintbl.CreatedDate = Login_tbl.CreatedDate;
+                    Logintbl.CreatedBy = Login_tbl.CreatedBy;
+                    Logintbl.IsDeleted = Login_tbl.IsDeleted;
+                    Logintbl.AdminId = Login_tbl.AdminId;
+                    context.SaveChanges();
+                    return (true, false);
+                    //if (context.Login_tbl.Any(x => x.UserName.Equals(Login_tbl.UserName) && x.IsDeleted == false))
+                    //{
+                    //    return (false, true);
+                    //}
+                    //else
+                    //{
+                    //    context.Login_tbl.Add(Login_tbl);
+                    //    return (true, false);
+                    //}
                 }
             }
             catch (Exception e)

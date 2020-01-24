@@ -19,7 +19,7 @@ namespace University.Repository
         {
             using (var context = new UniversityEntities())
             {
-                var t = context.Login_tbl.Where(y => y.UserName == login_Tbl.UserName && y.Password == login_Tbl.Password).FirstOrDefault();
+                var t = context.Login_tbl.Where(y => y.UserName == login_Tbl.UserName && y.Password == login_Tbl.Password && y.IsDeleted != true).FirstOrDefault();
                 return t;
 
             }
@@ -93,13 +93,14 @@ namespace University.Repository
             }
         }
 
-        public Login_tbl CheckEmail(string Id, Func<string, string, bool> Func)
+        public Login_tbl CheckEmail(string Id, Func<string, string, string> Func)
         {
             using (var context = new UniversityEntities())
             {
                 //DateTime compare = DateTime.Now.Add(TimeSpan.FromMinutes(1));
-                //var EmailInfo = context.EmailInfoes.ToList();
-                var EmailInfo = context.EmailInfoes.ToList().Where(y => Func(y.ID.ToString(), Id)).FirstOrDefault();
+                //var EmailInfo = context.EmailInfoes.ToList();;
+                int id = Convert.ToInt32(Func(Id, ConfigurationManager.AppSettings["SecurityKey"]));
+                var EmailInfo = context.EmailInfoes.FirstOrDefault(y => y.ID == id);
                 var CreatedDate = (DateTime)EmailInfo.CreatedDate;
                 if ((DateTime.Now.TimeOfDay - (TimeSpan)EmailInfo.SendTime).Duration() > TimeSpan.FromMinutes(30) || CreatedDate.Date != DateTime.Now.Date)
                 {
