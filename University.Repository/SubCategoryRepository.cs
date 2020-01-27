@@ -117,8 +117,44 @@ namespace University.Repository
         {
             using (var context = new UniversityEntities())
             {
-                // int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
-                return context.SubCategoryMaster.Include("CategoryMaster").Where(y => y.IsDeleted != true && y.Product.Count > 0).ToList();
+                //int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
+                //return context.SubCategoryMaster.Include("CategoryMaster").Where(y => y.IsDeleted != true && y.Product.Count > 0).ToList();
+                int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
+
+                var res = (from l in context.Login_tbl.Where(y => y.IsDeleted != true && y.ID == UserID)
+                           join cm in context.CategoryUserMapping.Where(y => y.IsDeleted != true && y.UserID == UserID)
+                           on l.ID equals cm.UserID
+                           join c in context.SubCategoryMaster.Where(y => y.IsDeleted != true)
+                           on cm.CategoryID equals c.Id
+                          // join p in context.Product.Where(y => y.IsDeleted != true)
+                          // on c.Id equals p.SubCategoryId
+                          // join pv in context.ProductVideos.Where(y => y.IsDeleted != true)
+                          // on p.Id equals pv.ProductId
+                           orderby c.CreatedDate
+                           select new
+                           {
+                               c.Id,
+                               c.Name,
+                               c.ImageURL
+                               //c.ProductId,
+                              // c.
+                           }
+
+                           ).ToList();
+                List<SubCategoryMaster> subCategoryMasters  = new List<SubCategoryMaster>();
+                foreach (var subcategory in res)
+                {
+                    subCategoryMasters.Add(new SubCategoryMaster
+                    {
+                        Id = subcategory.Id,
+                        Name = subcategory.Name,
+                        ImageURL = subcategory.ImageURL
+                        //VideoURL = subcategory.VideoURL
+
+                    });
+                    
+                }
+                return subCategoryMasters;
             }
         }
 
