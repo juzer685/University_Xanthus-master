@@ -44,9 +44,7 @@ namespace University.UI.Controllers
             var viewModel = AutoMapper.Mapper.Map<List<HomeSlider>, List<HomeSliderViewModel>>(res);
 
             var Bannermodel = _sliderService.GetHomeBanner();
-            var BannerviewModel = AutoMapper.Mapper.Map<HomeBanner, HomeBannerViewModel>(Bannermodel);
-
-
+            var BannerviewModel = AutoMapper.Mapper.Map<HomeBanner,HomeBannerViewModel>(Bannermodel);
             List<ProductFAQs> ListProductFAQ = new List<ProductFAQs>();
             ProductFAQs PF = new ProductFAQs();
             PF.Question = "How does credit card acceptance work?";

@@ -18,6 +18,20 @@ namespace University.Repository
         //        List<SubCategoryMaster> obj2 = context.SubCategoryMaster.Include("CategoryMaster").Where(y => y.IsDeleted != true && y.AssocitedCustID == AdminId).OrderByDescending(t => t.CreatedDate).ToList();
         //    }
         //}
+        public bool DeleteCategoryUseerMapping(Decimal id)
+        {
+            using (var context = new UniversityEntities())
+            {
+                var categoryUserMapping = context.CategoryUserMapping.FirstOrDefault(y => y.ID == id && y.IsDeleted != true);
+                if (categoryUserMapping != null)
+                {
+                    categoryUserMapping.IsDeleted = true;
+                    categoryUserMapping.DeletedDate = DateTime.UtcNow;
+                    context.SaveChanges();
+                }
+                return true;
+            }
+        }
         public (List<Login_tbl>, List<SubCategoryMaster>) GetCategoryUserMappingList()
         {
             using (var context = new UniversityEntities())
@@ -136,8 +150,7 @@ namespace University.Repository
                                c.Id,
                                c.Name,
                                c.ImageURL
-                               //c.ProductId,
-                              // c.
+                              
                            }
 
                            ).ToList();
