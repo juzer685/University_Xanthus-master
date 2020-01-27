@@ -103,7 +103,7 @@
                 var loadurl = $(this).attr('href');
                 var targ = $(this).attr('data-target');
                 var HdProductId = $("#HdProductId").val();
-                if (HdProductId == blankId) { alert("Please Save Product Basic Details !"); return false; }
+                if (HdProductId == "0") { _showErrorMessage("Please Save Product Basic Details First!"); return false; }
                 $.get(loadurl + "?productId=" + HdProductId, function (data) {
                     $(targ).html(data);
                 });
