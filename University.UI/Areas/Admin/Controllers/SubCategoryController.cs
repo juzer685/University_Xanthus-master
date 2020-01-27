@@ -152,5 +152,10 @@ namespace University.UI.Areas.Admin.Controllers
             //return RedirectToAction("CategoryUserMapping");
         }
 
+        public ActionResult DeleteCategoryUseerMapping(string Id)
+        {
+            var res = _subCategoryService.DeleteCategoryUseerMapping(Convert.ToDecimal(Id));
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
     }
 }

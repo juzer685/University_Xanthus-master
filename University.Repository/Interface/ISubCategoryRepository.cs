@@ -9,6 +9,7 @@ namespace University.Repository.Interface
 {
     public interface ISubCategoryRepository
     {
+        bool DeleteCategoryUseerMapping(Decimal id);
         List<CategoryUserMapping> GetCategoryUserMappingGrid();
         (List<Login_tbl>, List<SubCategoryMaster>) GetCategoryUserMappingList();
         bool AddCategoryUserMapping(CategoryUserMapping model);

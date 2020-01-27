@@ -183,13 +183,14 @@
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 
                 <div class="carousel-inner">
-                    @*@foreach (var item in Model.HomeBanners)
-            {*@
+                    @foreach (var item in Model.HomeBanners)
+                    {
                     <div class="carousel-item active">
-                        <img class="img-responsive img-rounded" src="~/images/training1.png" alt="slide" width="100%" style="cursor:pointer" onerror="this.onerror = null; this.src = '/images/noimageavailable.jpg';">
-                        @*<img class="img-responsive img-rounded" src="~/Images/Training1.png" alt="slide" width="100%" onclick="window.location.href='/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(item.ProductId.ToString(), System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])'" style="cursor:pointer" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';">*@
+                        @*<img class="img-responsive img-rounded" src="~/images/training1.png" alt="slide" width="100%" style="cursor:pointer" onerror="this.onerror = null; this.src = '/images/noimageavailable.jpg';">*@
+                        @*<img class="img-responsive img-rounded" src="@item.ImageURL" alt="slide" width="100%" onclick="window.location.href='/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(item.ProductId.ToString(), System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])'" style="cursor:pointer" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';">*@
+                        <img class="img-responsive img-rounded" src="@item.ImageFullPath" alt="slide" width="100%" onclick="window.location.href='/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(item.ProductId.ToString(),System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])'" style="cursor:pointer" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';">
                     </div>
-                    @*}*@
+                    }
                 </div>
                 @*href="carouselExampleIndicators"*@
                 <a class="carousel-control-prev" role="button" data-slide="prev">

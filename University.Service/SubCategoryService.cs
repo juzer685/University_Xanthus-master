@@ -12,6 +12,10 @@ namespace University.Service
     public class SubCategoryService : ISubCategoryService
     {
         private readonly ISubCategoryRepository _subCategoryRepository;
+        public bool DeleteCategoryUseerMapping (Decimal id)
+        {
+            return _subCategoryRepository.DeleteCategoryUseerMapping(id);
+        }
         public SubCategoryService(ISubCategoryRepository subCategoryRepository)
         {
             _subCategoryRepository = subCategoryRepository;

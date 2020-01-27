@@ -17,22 +17,22 @@ namespace University.Repository
         {
             using (var context = new UniversityEntities())
             {
-                int AssociatedUserID = Convert.ToInt32(HttpContext.Current.Session["UserSessionIDs"]);
-                if (AssociatedUserID != 0)
+                int AdminID = Convert.ToInt32(HttpContext.Current.Session["AdminLoginID"]);
+                if (AdminID != 0)
                 {
 
-                    return context.HomeSlider.Include("Product").Where(y => y.IsDeleted != true && y.AssocitedID == AssociatedUserID).OrderByDescending(y => y.CreatedDate).ToList();
-                }
-                else if (AssociatedUserID == 0)
-                {
-                    //int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
-                    return context.HomeSlider.Include("Product").Where(y => y.IsDeleted != true ).OrderByDescending(y => y.CreatedDate).ToList();
-
+                    return context.HomeSlider.Include("Product").Where(y => y.IsDeleted != true && y.AssocitedID == AdminID).OrderByDescending(y => y.CreatedDate).ToList();
                 }
                 else
                 {
-                    return context.HomeSlider.Include("Product").Where(y => y.IsDeleted != true).OrderByDescending(y => y.CreatedDate).ToList();
+                    int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
+                    return context.HomeSlider.Include("Product").Where(y => y.IsDeleted != true && y.AssocitedID==UserID  ).OrderByDescending(y => y.CreatedDate).ToList();
+
                 }
+                //else
+                //{
+                //    return context.HomeSlider.Include("Product").Where(y => y.IsDeleted != true).OrderByDescending(y => y.CreatedDate).ToList();
+                //}
 
             }
         }
