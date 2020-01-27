@@ -45,7 +45,7 @@
                             <thead>
                                 <tr>
                                     <th class="text-center">Category Name</th>
-                                    <th class="text-center">Date </th>
+                                    @*<th class="text-center">Date </th>*@
                                     <th class="text-center nosort">Action</th>
                                 </tr>
                             </thead>
@@ -54,7 +54,7 @@
                                 {
                                                 <tr>
                                                     <td class="text-center">@item.Name</td>
-                                                    <td class="text-center">@item.CreatedDate</td>
+                                                    @*<td class="text-center">@item.CreatedDate</td>*@
                                                     <td class="text-center">
                                                         <i title="Edit" class="fas fa-edit" onclick="AddSubCategory('@item.Id')"></i>
                                                         <i title="Delete" class="fas fa-trash" onclick="DeleteSubCategory('@item.Id')"></i>
