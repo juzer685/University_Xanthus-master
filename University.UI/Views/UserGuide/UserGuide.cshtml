@@ -82,7 +82,8 @@
                                                         }
                                                     </div>
                                                     <div class="text-center">
-                                                        <a href="/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(item.ProductId.ToString(),System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])"><div class="searchItemTitle">@item.Title</div></a>
+                                                        @*<a href="/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(item.ProductId.ToString(),System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])"><div class="searchItemTitle">@item.Title</div></a>*@
+                                                        <a href="">@item.Title</div></a>
                                                         <p title="@item.Description" class="block-ellipsis">@item.Description</p>
                                                         @*<a class="readMore" href="/Products/ProductsById?ProductId=@item.ProductId">Read More</a>*@
                                                     </div>

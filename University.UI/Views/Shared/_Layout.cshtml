@@ -167,11 +167,12 @@
                 <li class="nav-item dropdown pointer" style="width:180px">
                     <div class="row pointer">
                         <div class="col-sm-6 pointer">
-                            @if (!string.IsNullOrEmpty(Session["RoleID"] as string))
+                            @*@if (string.IsNullOrEmpty(Convert.ToString(Session["RoleID"])))
                             {
                                 @Url.Action("Login", "Login");
                             }
-                            else if (Session["RoleID"].ToString() == "4")
+                            else*@ 
+                            @if (Session["RoleID"].ToString() == "4")
                             {
                                 <div class="pointer">
                                     <select id="ddlusrlst" class="form-control pointer" style="width:208%">
@@ -196,6 +197,7 @@
                                     </select>
                                 </div>
                             }
+  
                         </div>
                     </div>
                 </li>
@@ -295,7 +297,7 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="~/home" class="brand-link">
+            <a href="" class="brand-link">
 
                 @*<span class="brand-text font-weight-light">Universität</span>*@
                 <span class="brand-text font-weight-light">Online Training Portal</span>
@@ -321,15 +323,16 @@
                     </div>
                     <div class="info" style="padding: 2px 5px;">
                         <a class="user-name">
-                            @if (!string.IsNullOrEmpty(Session["RoleID"] as string))
+                            @*@if (string.IsNullOrEmpty(Convert.ToString(Session["RoleID"])))
                             {
                                 @Url.Action("Login", "Login");
                             }
-                            else if (Session["RoleID"].ToString() == "4")
+                            else*@ 
+                            @if (Session["RoleID"].ToString() == "4")
                             {
                                 @Session["AdminName"].ToString();
                             }
-                            else if (Session["RoleID"].ToString() == "5")
+                            else
                             {
                                 @Session["UserNamee"].ToString();
                             }

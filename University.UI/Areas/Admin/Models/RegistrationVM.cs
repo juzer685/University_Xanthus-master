@@ -12,12 +12,12 @@ namespace University.UI.Areas.Admin.Models
     {
         public int ID { get; set; }
 
-        [Required(ErrorMessage = "Please enter FirstName")]
+        [Required(ErrorMessage = "Please enter First Name")]
         [StringLength(30, ErrorMessage = "Do not enter more than 30 characters")]
         [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Special character should not be entered")]
         public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "Please enter LastName")]
+        [Required(ErrorMessage = "Please enter Last Name")]
         [StringLength(30, ErrorMessage = "Do not enter more than 30 characters")]
         [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Special character should not be entered")]
         public string LastName { get; set; }
@@ -35,7 +35,7 @@ namespace University.UI.Areas.Admin.Models
 
         public int RoleID { get; set; }
 
-        [Required(ErrorMessage = "Please enter Customer Id")]
+        [Required(ErrorMessage = "Please enter Customer")]
         public decimal? CustomerId { get; set; }
 
         [Required(ErrorMessage = "Please enter Mobile Number")]
