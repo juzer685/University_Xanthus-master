@@ -96,16 +96,16 @@
                             </div>
                         </div>
                     </div>*@
-                @Html.ValidationMessageFor(x => x.CustomerId, null, new { @class = "", style = "color:red;" })
+                @*@Html.ValidationMessageFor(x => x.CustomerId, null, new { @class = "", style = "color:red;" })
                 <div class="input-group mb-3">
-                    @*<input type="email" class="form-control" placeholder="Customer">*@
+                    <input type="email" class="form-control" placeholder="Customer">
                     @Html.DropDownListFor(x => x.CustomerId, new SelectList(Model.CustomerList, "CustomerID", "CompanyName"), "Select Customer", new { @class = "form-control" })
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-user"></span>
                         </div>
                     </div>
-                </div>
+                </div>*@
                 <div class="row">
                     <div class="col-8">
                         <div class="icheck-primary">
