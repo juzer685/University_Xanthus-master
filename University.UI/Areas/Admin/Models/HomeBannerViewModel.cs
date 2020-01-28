@@ -22,7 +22,7 @@ namespace University.UI.Areas.Admin.Models
         public Nullable<Decimal> DeletedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public Nullable<Decimal> UpdatedBy { get; set; }
-        public Decimal AssocitedID { get; set; }
+        public Decimal AssocitedCustID { get; set; }
         public string ImageFullPath
         {
             get

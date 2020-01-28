@@ -36,6 +36,7 @@ namespace University.UI.Areas.Admin.Controllers
         public ActionResult AddEditHomeSlider(HomeSliderViewModel model, HttpPostedFileBase file)
         {
             var res = AutoMapper.Mapper.Map<HomeSliderViewModel, HomeSlider>(model);
+            
             if (file != null)
             {
                 res.ImageURL = UploadFileOnServer(HomeSliderImagePath, file);

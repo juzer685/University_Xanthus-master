@@ -33,8 +33,6 @@ namespace University.Data
         public virtual DbSet<FAQ> FAQ { get; set; }
         public virtual DbSet<FAQDoc> FAQDoc { get; set; }
         public virtual DbSet<GeneralFeedback> GeneralFeedback { get; set; }
-        public virtual DbSet<HomeBanner> HomeBanner { get; set; }
-        public virtual DbSet<HomeSlider> HomeSlider { get; set; }
         public virtual DbSet<Login_tbl> Login_tbl { get; set; }
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<ProductFAQs> ProductFAQs { get; set; }
@@ -48,6 +46,8 @@ namespace University.Data
         public virtual DbSet<SubCategoryMaster> SubCategoryMaster { get; set; }
         public virtual DbSet<ProductDocuments> ProductDocuments { get; set; }
         public virtual DbSet<EmailInfo> EmailInfoes { get; set; }
+        public virtual DbSet<HomeSlider> HomeSlider { get; set; }
+        public virtual DbSet<HomeBanner> HomeBanner { get; set; }
     
         public virtual ObjectResult<GetCustomerList_Result> GetCustomerList(Nullable<int> webUserID)
         {

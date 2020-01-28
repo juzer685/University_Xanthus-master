@@ -31,8 +31,8 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">
-                            @*<button type="button" class="btn btn-primary btn-sm b-w-80 homeslideradd" onclick="AddHomeSlider()">*@
-                                <button type="button" class="btn btn-primary btn-sm b-w-80 homeslideradd" >
+                            <button type="button" class="btn btn-primary btn-sm b-w-80 homeslideradd" onclick="AddHomeSlider()">
+                                @*<button type="button" class="btn btn-primary btn-sm b-w-80 homeslideradd" >*@
                                     Add
                                 </button>
                         </h3>
@@ -102,17 +102,17 @@
 <!-- /Add Home Slider modal-dialog -->
 
 <script>
-    $('.homeslideradd').click(function () {
-        if ($('#ddlusrlst').val() == 0) {
-            _showErrorMessage("First Select User");
+    //$('.homeslideradd').click(function () {
+    //    if ($('#ddlusrlst').val() == 0) {
+    //        _showErrorMessage("First Select User");
 
-        }
-        else
-        {
-            AddHomeSlider();
-        }
+    //    }
+    //    else
+    //    {
+    //        AddHomeSlider();
+    //    }
 
-    })
+    //})
     $(document).ready(function () {
         $('#HomeSliderTable').DataTable();
 

@@ -27,7 +27,7 @@ namespace University.Data
         public Nullable<decimal> DeletedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public Nullable<decimal> UpdatedBy { get; set; }
-        public Nullable<int> AssocitedID { get; set; }
+        public Nullable<int> AssocitedCustID { get; set; }
     
         public virtual Product Product { get; set; }
     }

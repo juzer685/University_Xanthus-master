@@ -11,8 +11,6 @@
         <EntityTypeShape EntityType="UniversityModel.FAQ" Width="1.5" PointX="2.75" PointY="1" />
         <EntityTypeShape EntityType="UniversityModel.FAQDoc" Width="1.5" PointX="5" PointY="1" />
         <EntityTypeShape EntityType="UniversityModel.GeneralFeedback" Width="1.5" PointX="7.75" PointY="0.75" />
-        <EntityTypeShape EntityType="UniversityModel.HomeBanner" Width="1.5" PointX="7.75" PointY="4.75" />
-        <EntityTypeShape EntityType="UniversityModel.HomeSlider" Width="1.5" PointX="7.5" PointY="31.875" />
         <EntityTypeShape EntityType="UniversityModel.Login_tbl" Width="1.5" PointX="3" PointY="9.375" />
         <EntityTypeShape EntityType="UniversityModel.Product" Width="1.5" PointX="5.25" PointY="23.625" />
         <EntityTypeShape EntityType="UniversityModel.ProductFAQs" Width="1.5" PointX="7.5" PointY="14.125" />
@@ -30,7 +28,6 @@
         <AssociationConnector Association="UniversityModel.FK_CategoryUserMapping_SubCategoryMaster" />
         <AssociationConnector Association="UniversityModel.FK_CustomerLogin" />
         <AssociationConnector Association="UniversityModel.FK_FAQDoc_FAQ" />
-        <AssociationConnector Association="UniversityModel.FK_HomeSlider_HomeSlider" />
         <AssociationConnector Association="UniversityModel.FK_AdminLogin" />
         <AssociationConnector Association="UniversityModel.FK_Login_tbl_Role" />
         <AssociationConnector Association="UniversityModel.FK_Product_SubCategoryMaster" />
@@ -45,6 +42,9 @@
         <AssociationConnector Association="UniversityModel.FK_ProductDocuments_Product" />
         <EntityTypeShape EntityType="UniversityModel.EmailInfo" Width="1.5" PointX="5.25" PointY="10.875" />
         <AssociationConnector Association="UniversityModel.FK_EmailInfo_tbl" />
+        <EntityTypeShape EntityType="UniversityModel.HomeSlider" Width="1.5" PointX="7.5" PointY="44.375" />
+        <AssociationConnector Association="UniversityModel.FK_HomeSlider_HomeSlider" />
+        <EntityTypeShape EntityType="UniversityModel.HomeBanner" Width="1.5" PointX="7.375" PointY="4.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
