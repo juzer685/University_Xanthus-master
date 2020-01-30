@@ -43,7 +43,8 @@ namespace University.UI
             container.RegisterType<IProductUserGuideRepository, ProductUserGuideRepository>();
             container.RegisterType<IHomeService, HomeService>();
             container.RegisterType<IHomeRepository, HomeRepository>();
-
+            container.RegisterType<IPaymentGatewayService, PaymentGatewayService>();
+            container.RegisterType<IPaymentGatewayRepository, PaymentGatewayRepository>();
 
 
             RegisterTypes(container);

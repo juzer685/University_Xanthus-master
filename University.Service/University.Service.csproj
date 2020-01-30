@@ -51,6 +51,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interface\IPaymentGatewayService.cs" />
+    <Compile Include="PaymentGatewayService.cs" />
     <Compile Include="UseradminService.cs" />
     <Compile Include="CategoryMasterService.cs" />
     <Compile Include="FeedbackService.cs" />
