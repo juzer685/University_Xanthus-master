@@ -255,6 +255,7 @@ namespace University.Repository
                 if (categoryMapping != null)
                 {
                     categoryMapping.AdminID = Convert.ToInt32(HttpContext.Current.Session["AdminLoginID"]);
+                    categoryMapping.UserID = model.UserID;
                     categoryMapping.CategoryID = model.CategoryID;
                     categoryMapping.UpdatedDate = DateTime.UtcNow;
                     context.SaveChanges();

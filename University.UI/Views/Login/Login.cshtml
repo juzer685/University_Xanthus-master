@@ -64,7 +64,10 @@
                     <div class="form-group">
                         <label class="fontSize" for="password">Password</label>
                         <div class="input-group mb-3">
-                            <input name="Password" type="password" class="form-control" placeholder="Please enter password" required oninvalid="this.setCustomValidity('Please Enter Password')" oninput="this.setCustomValidity('')">
+                            <input name="Password" id="pwd" type="password" class="form-control " placeholder="Please enter password" required oninvalid="this.setCustomValidity('Please Enter Password')" oninput="this.setCustomValidity('')">
+                            <span>
+                                <img src="~/Images/eye-16.png" alt="eye" onclick="showHide()" id="eye" style="margin-top: 10px;"/>
+                            </span>
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-lock"></span>
@@ -142,17 +145,45 @@
             <script src="../../dist/js/adminlte.min.js"></script>
             <script src="~/Scripts/custom.js"></script>
             <script>
-        $(document).ready(function () {
-            var bool = "@TempData.ContainsKey("Message")";
-            if (bool == 'True') {
-                if ("@TempData["Success"]" == "True") {
-                    _showSuccessMessage("@TempData["Message"]");
+                $(document).ready(function () {
+                    var bool = "@TempData.ContainsKey("Message")";
+                    if (bool == 'True') {
+                        if ("@TempData["Success"]" == "True") {
+                            _showSuccessMessage("@TempData["Message"]");
+                        }
+                        else {
+                             _showErrorMessage("@TempData["Message"]");
+                        }
+                    }
+                });
+
+               function showHide() {
+                if (pwd.type == 'text') {
+                    pwd.type = 'password';
                 }
                 else {
-                     _showErrorMessage("@TempData["Message"]");
+                    pwd.type = 'text';
                 }
             }
-        });
+                function show()
+                {
+                    var a = document.getElementById("pwd");
+                    var b = document.getElementById("EYE");
+                    if (a.type == "password")
+                    {
+                        a.type = "text";
+                        b.src = "https://i.stack.imgur.com/waw4z.png";
+                    }
+                    else
+                    {
+                        a.type = "password";
+                        b.src = "https://i.stack.imgur.com/Oyk1g.png";
+                    }
+                }
+
+
+
+
             </script>
 
 

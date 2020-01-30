@@ -20,7 +20,7 @@
 </div>
 <div class="register-box" style="margin:auto;">
     <div class="register-logo">
-        <a href="../../index2.html" style="margin-top:10px"><b>User Registration</b></a>
+        <a href="#" style="margin-top:10px"><b>User Registration</b></a>
     </div>
 
     <div class="card">
@@ -79,15 +79,16 @@
                     </div>
                 </div>
                 @Html.ValidationMessageFor(x => x.ConfirmPassword, null, new { @class = "", style = "color:red;" })
-                <div class="input-group mb-3">
-                    @Html.PasswordFor(x => x.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password", value = Model.Password })
-                    @*<input type="password" class="form-control" name="Password" placeholder="Password">*@
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-lock"></span>
-                        </div>
+            <div class="input-group mb-3">
+                @Html.PasswordFor(x => x.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password", value = Model.Password })
+                @*<input type="password" class="form-control" name="Password" placeholder="Password">*@
+                
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-lock"></span>
                     </div>
                 </div>
+            </div>
                 @*<div class="input-group mb-3">
                         <input type="password" class="form-control" name="ConfirmPassword" placeholder="Retype password">
                         <div class="input-group-append">
@@ -156,6 +157,7 @@
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/Scripts/Register.js"></script>
 }
+
 
 
 

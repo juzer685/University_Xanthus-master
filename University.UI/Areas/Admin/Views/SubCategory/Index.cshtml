@@ -7,6 +7,9 @@
 }
 
 
+
+
+
 <!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="container-fluid">
@@ -52,18 +55,18 @@
                             <tbody>
                                 @foreach (var item in Model)
                                 {
-                                                <tr>
-                                                    <td class="text-center">@item.Name</td>
-                                                    @*<td class="text-center">@item.CreatedDate</td>*@
-                                                    <td class="text-center">
-                                                        <i title="Edit" class="fas fa-edit" onclick="AddSubCategory('@item.Id')"></i>
-                                                        <i title="Delete" class="fas fa-trash" onclick="DeleteSubCategory('@item.Id')"></i>
-                                                        @*<input type="button" class="btn btn-primary btn-sm" value="Edit" onclick="AddSubCategory('@item.Id')" />
-                                                        <input type="button" class="btn btn-primary btn-sm" value="Delete" onclick="DeleteSubCategory('@item.Id')" />*@
-                                                    </td>
-                                                </tr>
-                                    }
-                                </tbody>
+                                    <tr>
+                                        <td class="text-center">@item.Name</td>
+                                        @*<td class="text-center">@item.CreatedDate</td>*@
+                                        <td class="text-center">
+                                            <i title="Edit" class="fas fa-edit" onclick="AddSubCategory('@item.Id')"></i>
+                                            <i title="Delete" class="fas fa-trash" onclick="DeleteSubCategory('@item.Id')"></i>
+                                            @*<input type="button" class="btn btn-primary btn-sm" value="Edit" onclick="AddSubCategory('@item.Id')" />
+                                                <input type="button" class="btn btn-primary btn-sm" value="Delete" onclick="DeleteSubCategory('@item.Id')" />*@
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
                         </table>
                     </div>
                     <!-- /.card-body -->
@@ -80,14 +83,14 @@
         <form id="subCategoryForm" action="/Admin/SubCategory/AddEditSubCategory">
             <!-- Modal content-->
             <div>
-                <input name="AssocitedID" id="SubcategoryAssocitedID" type="hidden"/>
+                <input name="AssocitedID" id="SubcategoryAssocitedID" type="hidden" />
             </div>
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">Add Category</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                
+
                 <div class="modal-body" id="popupBody">
                     @Html.Partial("AddEditSubCategory", new University.UI.Areas.Admin.Models.SubCategoryViewModel())
                 </div>
@@ -105,9 +108,10 @@
 <!-- /Add SubCategory modal-dialog -->
 
 <script>
-   
-   // alert($("#ddlusrlst").val());
+
+    // alert($("#ddlusrlst").val());
     $(document).ready(function () {
+       
         //$('#SubCategoryTable').DataTable({
         //    "paging": true,
         //    "lengthChange": false,
@@ -135,33 +139,33 @@
         //})
 
         $(document).on('submit', '#subCategoryForm', function (e) {
-         //  $('#SubcategoryAssocitedID').val($("#ddlusrlst").val());
-            
-                var form = $(this);
-                var url = form.attr('action');
-                var formData = new FormData($(this)[0]);
-                $.ajax({
-                    type: "POST",
-                    url: url,
-                    data: formData, // serializes the form's elements.
-                    enctype: 'multipart/form-data',
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    success: function (data) {
-                        //$('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
-                        ////alert("Data Saved Successfully"); // show response from the php script.
-                        //setTimeout(function () {
-                        //    location.reload();
-                        //}, 1500);
-                        $("#AddSubCategoryModal").modal("hide");
-                        _showSuccessMessage("Data Saved Successfully");
-                        setTimeout(function () { location.reload(); }, 1000);
-                    }
-                });
-                e.preventDefault();
-            
-            
+            //  $('#SubcategoryAssocitedID').val($("#ddlusrlst").val());
+
+            var form = $(this);
+            var url = form.attr('action');
+            var formData = new FormData($(this)[0]);
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: formData, // serializes the form's elements.
+                enctype: 'multipart/form-data',
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    //$('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
+                    ////alert("Data Saved Successfully"); // show response from the php script.
+                    //setTimeout(function () {
+                    //    location.reload();
+                    //}, 1500);
+                    $("#AddSubCategoryModal").modal("hide");
+                    _showSuccessMessage("Data Saved Successfully");
+                    setTimeout(function () { location.reload(); }, 1000);
+                }
+            });
+            e.preventDefault();
+
+
         });
     });
 

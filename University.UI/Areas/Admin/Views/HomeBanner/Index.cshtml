@@ -94,7 +94,7 @@
                                 <button type="submit" class="btn btn-primary homebanner">Save</button>
                                 @if (Model != null && Model.ImageFullPath != null)
                                 {
-                                    <input type="button" class="btn btn-primary" value="Delete" onclick="DeleteBanner('@Model.Id')" />
+                                    <input type="button" class="btn btn-primary ConfirmBtn" value="Delete"  onclick="DeleteBanner('@Model.Id')"/>
                                 }
                                 <button onclick="Cancel()" type="button" class="btn btn-default">Cancel</button>
                             </div>
@@ -142,7 +142,8 @@
     }
 
     function DeleteBanner(Id) {
-        $('.overlayDelete').css({ "visibility": "visible", "opacity": "1" });
+        alert();
+      //  $('.overlayDelete').css({ "visibility": "visible", "opacity": "1" });
         $(document).on('click', '.ConfirmBtn', function () {
             $.ajax({
                 type: "POST",
