@@ -21,7 +21,6 @@ namespace University.Repository
             {
                 var t = context.Login_tbl.Where(y => y.UserName == login_Tbl.UserName && y.Password == login_Tbl.Password && y.IsDeleted != true).FirstOrDefault();
                 return t;
-
             }
             //string consql = "data source=DESKTOP-M1MKH53\\SQLEXPRESS;initial catalog=IPSU_DEV_V5;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework";
             //DataTable dt = new DataTable();

@@ -48,6 +48,7 @@ namespace University.Data
         public virtual DbSet<SubCategoryMaster> SubCategoryMaster { get; set; }
         public virtual DbSet<ProductDocuments> ProductDocuments { get; set; }
         public virtual DbSet<EmailInfo> EmailInfoes { get; set; }
+        public virtual DbSet<CardTransactionDetail> CardTransactionDetails { get; set; }
     
         public virtual ObjectResult<GetCustomerList_Result> GetCustomerList(Nullable<int> webUserID)
         {

@@ -5,13 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using University.UI.Models;
 
 namespace University.UI.Utilities
 {
     public class PaymentGatewayUtility
     {
-		//hello
-		public static void Run(String ApiLoginID, String ApiTransactionKey)
+		public static createTransactionResponse Run(String ApiLoginID, String ApiTransactionKey, PaymentGatewayVM PaymentGatewayVM)
 		{
 			System.Diagnostics.Debug.WriteLine("Charge Credit Card Sample");
 
@@ -27,8 +27,8 @@ namespace University.UI.Utilities
 
 			var creditCard = new creditCardType
 			{
-				cardNumber = "4111111111111111",
-				expirationDate = "0722"
+				cardNumber = PaymentGatewayVM.CardNumber,
+				expirationDate = PaymentGatewayVM.MonthAndYear //"0722"
 			};
 
 			//standard api call to retrieve response
@@ -66,6 +66,7 @@ namespace University.UI.Utilities
 				}
 			}
 
+			return response;
 		}
 	}
 }

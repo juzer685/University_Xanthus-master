@@ -211,6 +211,7 @@
     <Compile Include="Models\ChangePasswordVM.cs" />
     <Compile Include="Models\DropDownViewModel.cs" />
     <Compile Include="Models\HomePageViewModel.cs" />
+    <Compile Include="Models\PaymentGatewayVM.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\MD5Hashing.cs" />
@@ -2098,6 +2099,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\PaymentGateway.js" />
     <Content Include="Scripts\Register.js" />
     <Content Include="Uploads\Product\20646dcafe2e40df8dd3cf40daa0404f.pdf" />
     <Content Include="Uploads\Product\2152030334fa4e58a98caa25337e16cc.doc" />
@@ -2587,11 +2589,11 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Login\ForgotPassword.cshtml" />
     <Content Include="Views\Shared\ChangePassword.cshtml" />
+    <Content Include="Views\PaymentGateway\PaymentGateway.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
-    <Folder Include="Views\PaymentGateway\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="build\js\.jscsrc" />

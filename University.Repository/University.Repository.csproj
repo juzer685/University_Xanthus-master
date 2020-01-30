@@ -53,6 +53,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interface\IPaymentGatewayRepository.cs" />
+    <Compile Include="PaymentGatewayRepository.cs" />
     <Compile Include="UseradminRepository.cs" />
     <Compile Include="CategoryRepository.cs" />
     <Compile Include="FeedbackRepository.cs" />
