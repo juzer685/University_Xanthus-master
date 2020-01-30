@@ -17,7 +17,7 @@ namespace University.UI.Areas.Admin.Models
         public Nullable<Decimal> DeletedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public Nullable<Decimal> UpdatedBy { get; set; }
-        public Nullable<int> AssocitedID { get; set; }
+        public Nullable<int> AssocitedCustID { get; set; }
        
         public virtual ICollection<FAQDocViewModel> FAQDoc { get; set; }
 

@@ -30,8 +30,8 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">
-                            @*<button type="button" class="btn btn-primary btn-sm b-w-80" onclick="AddFAQ()">*@
-                            <button type="button" class="btn btn-primary btn-sm b-w-80 FAQadd" >
+                            <button type="button" class="btn btn-primary btn-sm b-w-80" onclick="AddFAQ()">
+                            @*<button type="button" class="btn btn-primary btn-sm b-w-80 FAQadd" >*@
                             Add
                             </button>
                         </h3>
@@ -95,23 +95,23 @@
 <!-- /Add Home Slider modal-dialog -->
 
 <script>
-    $('.FAQadd').click(function () {
-        if ($('#ddlusrlst').val() == 0)
-        {
-            _showErrorMessage("First Select User");
-        }
-        else
-        {
-            AddFAQ();
-        }
-    })
+    //$('.FAQadd').click(function () {
+    //    if ($('#ddlusrlst').val() == 0)
+    //    {
+    //        _showErrorMessage("First Select User");
+    //    }
+    //    else
+    //    {
+    //        AddFAQ();
+    //    }
+    //})
 
     $(document).ready(function () {
         $('#FAQTable').DataTable();
 
         $(document).on('submit', '#faqForm', function (e) {
             // code
-             $('#FAQAssocitedID').val($("#ddlusrlst").val());
+           //  $('#FAQAssocitedID').val($("#ddlusrlst").val());
             
             var form = $(this);
             var url = form.attr('action');

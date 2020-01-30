@@ -189,29 +189,29 @@ namespace University.Repository
         {
             using (var context = new UniversityEntities())
             {
-                int AssociatedUserID = Convert.ToInt32(HttpContext.Current.Session["UserSessionIDs"]);
-                if (AssociatedUserID != 0)
+                int AdminID = Convert.ToInt32(HttpContext.Current.Session["AdminLoginID"]);
+                if (AdminID != 0)
                 {
-                    var res = context.FAQ.Where(y => y.IsDeleted != true && y.AssocitedID == AssociatedUserID).OrderByDescending(y => y.CreatedDate).ToList();
+                    var res = context.FAQ.Where(y => y.IsDeleted == false && y.AssocitedCustID == AdminID).OrderByDescending(y => y.CreatedDate ).ToList();
                     return res.Select(y => new FAQ()
                     {
                         Id = y.Id,
                         Question = y.Question,
                         Answer = y.Answer,
-                        AssocitedID = y.AssocitedID,
+                        AssocitedCustID = AdminID,
                         FAQDoc = null
                     }).OrderByDescending(y => y.CreatedDate).ToList();
                 }
                 else
                 {
                     int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
-                    var res = context.FAQ.Where(y => y.IsDeleted != true && y.AssocitedID == UserID).OrderByDescending(y => y.CreatedDate).ToList();
+                    var res = context.FAQ.Where(y => y.IsDeleted != true ).OrderByDescending(y => y.CreatedDate).ToList();
                     return res.Select(y => new FAQ()
                     {
                         Id = y.Id,
                         Question = y.Question,
                         Answer = y.Answer,
-                        AssocitedID = y.AssocitedID,
+                        //AssocitedID = y.AssocitedID,
                         FAQDoc = null
                     }).OrderByDescending(y => y.CreatedDate).ToList();
                 }
@@ -245,38 +245,79 @@ namespace University.Repository
         {
             using (var context = new UniversityEntities())
             {
+                int AdminID = Convert.ToInt32(HttpContext.Current.Session["AdminLoginID"]);
                 var faq = context.FAQ.Include("FAQDoc").FirstOrDefault(y => y.Id == model.Id && y.IsDeleted != true);
-                if (faq != null)
+                if (AdminID != 0)
                 {
-                    faq.Question = model.Question;
-                    faq.Answer = model.Answer;
-                    faq.AssocitedID = model.AssocitedID;
+                    if (faq != null)
+                    {
+                        faq.Question = model.Question;
+                        faq.Answer = model.Answer;
+                        faq.AssocitedCustID = AdminID ;
+                        faq.IsDeleted = false;
 
 
-                    if (faq.FAQDoc.Count > 0)
-                    {
-                        foreach (var faqdoc in faq.FAQDoc)
-                            faq.FAQDoc.Remove(faqdoc);
+                        if (faq.FAQDoc.Count > 0)
+                        {
+                            foreach (var faqdoc in faq.FAQDoc)
+                                faq.FAQDoc.Remove(faqdoc);
+                        }
+                        if (model.FAQDoc.Count > 0)
+                        {
+                            foreach (var faqdoc in model.FAQDoc)
+                                faq.FAQDoc.Add(faqdoc);
+                        }
+                        //if (!string.IsNullOrWhiteSpace(model.ImageURL))
+                        //{
+                        //    faq.ImageURL = model.ImageURL;
+                        //}
+                        faq.UpdatedDate = DateTime.UtcNow;
+                        context.SaveChanges();
                     }
-                    if (model.FAQDoc.Count > 0)
+                    else
                     {
-                        foreach (var faqdoc in model.FAQDoc)
-                            faq.FAQDoc.Add(faqdoc);
+                        model.CreatedDate = DateTime.UtcNow;
+                        model.IsDeleted = false;
+                        model.AssocitedCustID = AdminID;
+                        context.FAQ.Add(model);
+                        context.SaveChanges();
                     }
-                    //if (!string.IsNullOrWhiteSpace(model.ImageURL))
-                    //{
-                    //    faq.ImageURL = model.ImageURL;
-                    //}
-                    faq.UpdatedDate = DateTime.UtcNow;
-                    context.SaveChanges();
+                    return true;
                 }
                 else
                 {
-                    model.CreatedDate = DateTime.UtcNow;
-                    context.FAQ.Add(model);
-                    context.SaveChanges();
+                    if (faq != null)
+                    {
+                        faq.Question = model.Question;
+                        faq.Answer = model.Answer;
+                        // faq.AssocitedID = model.AssocitedID;
+
+
+                        if (faq.FAQDoc.Count > 0)
+                        {
+                            foreach (var faqdoc in faq.FAQDoc)
+                                faq.FAQDoc.Remove(faqdoc);
+                        }
+                        if (model.FAQDoc.Count > 0)
+                        {
+                            foreach (var faqdoc in model.FAQDoc)
+                                faq.FAQDoc.Add(faqdoc);
+                        }
+                        //if (!string.IsNullOrWhiteSpace(model.ImageURL))
+                        //{
+                        //    faq.ImageURL = model.ImageURL;
+                        //}
+                        faq.UpdatedDate = DateTime.UtcNow;
+                        context.SaveChanges();
+                    }
+                    else
+                    {
+                        model.CreatedDate = DateTime.UtcNow;
+                        context.FAQ.Add(model);
+                        context.SaveChanges();
+                    }
+                    return true;
                 }
-                return true;
             }
         }
 

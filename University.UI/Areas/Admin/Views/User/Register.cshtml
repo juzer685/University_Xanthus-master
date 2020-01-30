@@ -59,15 +59,24 @@
                     </div>
                 </div>
                 @Html.ValidationMessageFor(x => x.Email, null, new { @class = "", style = "color:red;" })
-                <div class="input-group mb-3">
-                    @Html.TextBoxFor(x => x.Email, new { @class = "form-control", placeholder = "Email" })
-                    @*<input type="text" class="form-control" name="Email" placeholder="Email">*@
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-envelope"></span>
-                        </div>
+            <div class="input-group mb-3">
+                @if (Model.ID != 0)
+                {
+                    @Html.TextBoxFor(x => x.Email, new { @class = "form-control", placeholder = "Email", Model.ReadOnly })
+
+                }
+                else
+                {
+                    @Html.TextBoxFor(x => x.Email, new { @class = "form-control", placeholder = "Email"})
+                }
+                @*<input type="text" class="form-control" name="Email" placeholder="Email">*@
+                <p id="GFG" style="font-size:25px;"></p>
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-envelope"></span>
                     </div>
                 </div>
+            </div>
                 @Html.ValidationMessageFor(x => x.Password, null, new { @class = "", style = "color:red;" })
                 <div class="input-group mb-3">
                     @Html.PasswordFor(x => x.Password, new { @class = "form-control", placeholder = "Password" , value = Model.Password })

@@ -30,7 +30,7 @@ namespace University.Data
         public Nullable<decimal> DeletedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public Nullable<decimal> UpdatedBy { get; set; }
-        public Nullable<int> AssocitedID { get; set; }
+        public Nullable<int> AssocitedCustID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FAQDoc> FAQDoc { get; set; }

@@ -37,7 +37,8 @@ namespace University.UI.Areas.Admin.Controllers
                 viewModel.Id = model.Id;
                 viewModel.Question = model.Question;
                 viewModel.Answer = model.Answer;
-                viewModel.AssocitedID = model.AssocitedID;
+                viewModel.AssocitedCustID = model.AssocitedCustID;
+                viewModel.IsDeleted = model.IsDeleted;
                 //viewModel = AutoMapper.Mapper.Map<FAQ, FAQViewModel>(model);
             }
             return View("_AddEditFAQ", viewModel);
