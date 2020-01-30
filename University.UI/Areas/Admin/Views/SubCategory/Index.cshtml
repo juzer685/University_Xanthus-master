@@ -97,7 +97,7 @@
 
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Submit</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default " data-dismiss="modal" onclick="RemoveSubcategory();">Close</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -168,10 +168,22 @@
 
         });
     });
+    function RemoveSubcategory() {
+        $("#Id").val('');
+        $("#Name").val('');
+        $("#file").val('');
+        $("#image-preview").val('');
+        $("#ImageALT").val('');
+    }
+
 
     function AddSubCategory(Id) {
         $("#Name").val('');
         $("#Id").val('');
+        $("#file").val('');
+        $('#image-preview').attr('src', '');
+       //  $("#image-preview").val('');
+        $("#ImageALT").val('');
         $.ajax({
             type: "POST",
             url: "/Admin/SubCategory/GetSubCategory",

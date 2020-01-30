@@ -163,17 +163,10 @@
             </ul>
 
             <!-- Right navbar links -->
-            <ul class="navbar-nav ml-auto pointer">
+            @*<ul class="navbar-nav ml-auto pointer">
                 <li class="nav-item dropdown pointer" style="width:180px">
                     <div class="row pointer">
                         <div class="col-sm-6 pointer">
-                            @*@if (string.IsNullOrEmpty(Convert.ToString(Session["RoleID"])))
-        {
-            @Url.Action("Login", "Login");
-        }
-        else*@
-                            
-
                                 @if (Session["RoleID"].ToString() == "4")
                                 {
                                     <div class="pointer">
@@ -204,8 +197,8 @@
                         </div>
                     </div>
                 </li>
-                <!-- Messages Dropdown Menu -->
-                @*<li class="nav-item dropdown">
+                 Messages Dropdown Menu 
+                <li class="nav-item dropdown">
                         <a class="nav-link" data-toggle="dropdown" href="#">
                             <i class="far fa-comments"></i>
                             <span class="badge badge-danger navbar-badge">3</span>
@@ -261,9 +254,9 @@
                             <div class="dropdown-divider"></div>
                             <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
                         </div>
-                    </li>*@
-                <!-- Notifications Dropdown Menu -->
-                @*<li class="nav-item dropdown">
+                    </li>
+                 Notifications Dropdown Menu 
+                <li class="nav-item dropdown">
                         <a class="nav-link" data-toggle="dropdown" href="#">
                             <i class="far fa-bell"></i>
                             <span class="badge badge-warning navbar-badge">15</span>
@@ -288,13 +281,13 @@
                             <div class="dropdown-divider"></div>
                             <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
                         </div>
-                    </li>*@
-                @*<li class="nav-item">
+                    </li>
+                <li class="nav-item">
                         <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">
                             <i class="fas fa-th-large"></i>
                         </a>
-                    </li>*@
-            </ul>
+                    </li>
+            </ul>*@
         </nav>
         <!-- /.navbar -->
         <!-- Main Sidebar Container -->
