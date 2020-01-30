@@ -401,6 +401,7 @@
     <Content Include="Images\edit-small-icon.png" />
     <Content Include="Images\email.png" />
     <Content Include="Images\event-icon.png" />
+    <Content Include="Images\eye-16.png" />
     <Content Include="Images\feature-product-1.jpg" />
     <Content Include="Images\feature-product-2.jpg" />
     <Content Include="Images\feature-product-3.jpg" />
@@ -2092,6 +2093,7 @@
     <None Include="Properties\PublishProfiles\FolderProfile17.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile18.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile19.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile20.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile8.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile9.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />

@@ -180,24 +180,30 @@
     <div class="attachment-block clearfix">
 
         <div class="card-body">
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-
-                <div class="carousel-inner">
+            <div id="carouselExampleIndicators" class="carousel slide imgbox clearfix" data-ride="carousel">
+                @*<ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                   
+                </ol>*@
+                <div class="carousel-inner" style="height:250px">
+                    @{ int i = 0;}
                     @foreach (var item in Model.HomeBanners)
-                    {
-                    <div class="carousel-item active">
-                        @*<img class="img-responsive img-rounded" src="~/images/training1.png" alt="slide" width="100%" style="cursor:pointer" onerror="this.onerror = null; this.src = '/images/noimageavailable.jpg';">*@
-                        @*<img class="img-responsive img-rounded" src="@item.ImageURL" alt="slide" width="100%" onclick="window.location.href='/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(item.ProductId.ToString(), System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])'" style="cursor:pointer" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';">*@
-                        <img class="img-responsive img-rounded" src="@item.ImageFullPath" alt="slide" width="100%" onclick="window.location.href='/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(item.ProductId.ToString(),System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])'" style="cursor:pointer" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';">
-                    </div>
+                        {
+                            i++;
+                            var active = i == 1 ? "active" : "";
+                        <div class="carousel-item @active">
+                            @*<img class="img-responsive img-rounded" src="~/images/training1.png" alt="slide" width="100%" style="cursor:pointer" onerror="this.onerror = null; this.src = '/images/noimageavailable.jpg';">*@
+                            @*<img class="img-responsive img-rounded" src="@item.ImageURL" alt="slide" width="100%" onclick="window.location.href='/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(item.ProductId.ToString(), System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])'" style="cursor:pointer" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';">*@
+                            <img class="img-responsive img-rounded" src="@item.ImageFullPath" alt="slide" width="100%" onclick="window.location.href='/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(item.ProductId.ToString(),System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])'" style="cursor:pointer" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';">
+                        </div>
                     }
                 </div>
-                @*href="carouselExampleIndicators"*@
-                <a class="carousel-control-prev" role="button" data-slide="prev">
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="sr-only">Previous</span>
                 </a>
-                <a class="carousel-control-next" role="button" data-slide="next">
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="sr-only">Next</span>
                 </a>
@@ -223,13 +229,13 @@
                 <p class="lastView">Last viewed: <span>@Model.LastViewedProduct</span></p>
             </div>
         </div>*@
-            @*@if (Model.BannerImage.ImageURL != null && Model.BannerImage.AssocitedID==Convert.ToInt32(Session["UserLoginID"]))
-        {*@
-            @*<div class="bannerContainer" style="text-align:center">
-            <img class="meter-icon" src="@Model.BannerImage.ImageURL" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" alt="slide" style="cursor:pointer;width:200px;">
-            <img class="meter-icon" src="~/Images/Training2.png" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" onclick="" alt="slide" style="cursor:pointer;width:200px;">
-        </div>*@
-            @*}*@
+            @if (Model.BannerImage.ImageURL != null )
+            {
+               <div class="bannerContainer" style="text-align:center">
+                <img class="meter-icon" src="@Model.BannerImage.ImageURL" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" alt="slide" style="cursor:pointer;width:200px;">
+                @*<img class="meter-icon" src="~/Images/Training2.png" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" onclick="" alt="slide" style="cursor:pointer;width:200px;">*@
+                </div>
+            }
 
 
             <div class="searchBlock whiteBg row clearfix" style="display:block;margin-top: 40px;">

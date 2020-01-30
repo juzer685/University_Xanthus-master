@@ -37,7 +37,7 @@ namespace University.UI.Controllers
 
         //[SsoAuth]
         public ActionResult Index()
-        {
+         {
            // SetIdentityDetails();
 
             var res = _sliderService.GetHomeSliderList().ToList();

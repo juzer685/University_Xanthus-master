@@ -33,7 +33,7 @@ namespace University.UI.Areas.Admin.Models
                 }
             }
         }
-        public int AssocitedID { get; set; }
+        public int AssocitedCustID { get; set; }
         
 
     }

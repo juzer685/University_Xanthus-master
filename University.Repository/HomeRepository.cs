@@ -21,12 +21,12 @@ namespace University.Repository
                 if (AdminID != 0)
                 {
 
-                    return context.HomeSlider.Include("Product").Where(y => y.IsDeleted != true && y.AssocitedID == AdminID).OrderByDescending(y => y.CreatedDate).ToList();
+                    return context.HomeSlider.Include("Product").Where(y => y.IsDeleted != true ).OrderByDescending(y => y.CreatedDate).ToList();
                 }
                 else
                 {
                     int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
-                    return context.HomeSlider.Include("Product").Where(y => y.IsDeleted != true && y.AssocitedID==UserID  ).OrderByDescending(y => y.CreatedDate).ToList();
+                    return context.HomeSlider.Include("Product").Where(y => y.IsDeleted != true).OrderByDescending(y => y.CreatedDate).ToList();
 
                 }
                 //else
@@ -63,27 +63,36 @@ namespace University.Repository
         {
             using (var context = new UniversityEntities())
             {
+                int AdminID = Convert.ToInt32(HttpContext.Current.Session["AdminLoginID"]);
+                
                 var slider = context.HomeSlider.FirstOrDefault(y => y.Id == model.Id && y.IsDeleted != true);
-                if (slider != null)
-                {
-                    slider.ProductId = model.ProductId;
-                    slider.TextDescription = model.TextDescription;
-                    slider.Link = model.Link;
-                    slider.ImageALT = model.ImageALT;
-                    if (!string.IsNullOrWhiteSpace(model.ImageURL))
+                
+                    if (slider != null)
                     {
-                        slider.ImageURL = model.ImageURL;
+                        slider.ProductId = model.ProductId;
+                        slider.AssocitedCustID = AdminID;
+                        slider.TextDescription = model.TextDescription;
+                        slider.Link = model.Link;
+                        slider.ImageALT = model.ImageALT;
+                        slider.IsDeleted = false;
+                        if (!string.IsNullOrWhiteSpace(model.ImageURL))
+                        {
+                            slider.ImageURL = model.ImageURL;
+                        }
+                        slider.UpdatedDate = DateTime.UtcNow;
+                        context.SaveChanges();
                     }
-                    slider.UpdatedDate = DateTime.UtcNow;
-                    context.SaveChanges();
-                }
-                else
-                {
-                    model.CreatedDate = DateTime.UtcNow;
-                    context.HomeSlider.Add(model);
-                    context.SaveChanges();
-                }
-                return true;
+                    else
+                    {
+                        model.AssocitedCustID = AdminID;
+                        model.IsDeleted = false;
+                        model.CreatedDate = DateTime.UtcNow;
+                        context.HomeSlider.Add(model);
+                        context.SaveChanges();
+                    }
+                    return true;
+                
+               
             }
         }
 
@@ -99,18 +108,18 @@ namespace University.Repository
         {
             using (var context = new UniversityEntities())
             {
-                int AssociatedUserID = Convert.ToInt32(HttpContext.Current.Session["UserSessionIDs"]);
-                if (AssociatedUserID != 0)
+                int AssocitedCustID = Convert.ToInt32(HttpContext.Current.Session["AdminLoginID"]);
+                if (AssocitedCustID != 0)
                 {
 
-                    return context.HomeBanner.Where(y => y.IsDeleted != null && y.IsDeleted != true && y.AssocitedID == AssociatedUserID).OrderByDescending(y => y.UpdatedDate).FirstOrDefault();
+                    return context.HomeBanner.Where(y => y.IsDeleted != null && y.IsDeleted != true ).OrderByDescending(y => y.UpdatedDate).FirstOrDefault();
 
                 }
                 else
                 {
                     int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
 
-                    return context.HomeBanner.Where(y => y.IsDeleted != null && y.IsDeleted != true && y.AssocitedID == UserID).OrderByDescending(y => y.UpdatedDate).FirstOrDefault();
+                    return context.HomeBanner.Where(y => y.IsDeleted != null && y.IsDeleted != true).OrderByDescending(y => y.UpdatedDate).FirstOrDefault();
                 }
 
 
@@ -121,14 +130,18 @@ namespace University.Repository
         {
             using (var context = new UniversityEntities())
             {
+                int AssocitedCustID = Convert.ToInt32(HttpContext.Current.Session["AdminLoginID"]);
+                
                 var banner = context.HomeBanner.FirstOrDefault(y => y.Id == model.Id && y.IsDeleted != true);
+
                 if (banner != null)
                 {
                     banner.Description = model.Description;
+                   
                     banner.Title = model.Title;
                     banner.ImageALT = model.ImageALT;
                     banner.LinkTo = model.LinkTo;
-                    banner.AssocitedID = model.AssocitedID;
+                    banner.AssocitedCustID = AssocitedCustID;
                     if (!string.IsNullOrWhiteSpace(model.ImageURL))
                     {
                         banner.ImageURL = model.ImageURL;
@@ -139,6 +152,7 @@ namespace University.Repository
                 }
                 else
                 {
+                    model.AssocitedCustID = AssocitedCustID;
                     model.CreatedDate = DateTime.UtcNow;
                     model.IsDeleted = false;
                     context.HomeBanner.Add(model);

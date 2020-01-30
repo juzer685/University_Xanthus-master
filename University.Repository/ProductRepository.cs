@@ -20,7 +20,7 @@ namespace University.Repository
                 if (AdminID != 0)
                 {
                     var res = (from p in context.Product.Where(y => y.IsDeleted != true && y.AssocitedCustID == AdminID)
-                               join s in context.SubCategoryMaster.Where(y => y.IsDeleted != true )
+                               join s in context.SubCategoryMaster.Where(y => y.IsDeleted != true)
                                on p.SubCategoryId equals s.Id
                                join c in context.CategoryMaster.Where(y => y.IsDeleted != true)
                                on s.CategoryId equals c.Id

@@ -94,7 +94,7 @@
                                 <button type="submit" class="btn btn-primary homebanner">Save</button>
                                 @if (Model != null && Model.ImageFullPath != null)
                                 {
-                                    <input type="button" class="btn btn-primary" value="Delete" onclick="DeleteBanner('@Model.Id')" />
+                                    <input type="button" class="btn btn-primary ConfirmBtn" value="Delete"  onclick="DeleteBanner('@Model.Id')"/>
                                 }
                                 <button onclick="Cancel()" type="button" class="btn btn-default">Cancel</button>
                             </div>
@@ -119,17 +119,17 @@
             $("#file").removeAttr("required");
         }
     });
-    $('.homebanner').click(function () {
-        if ($('#ddlusrlst').val() == 0) {
-            _showErrorMessage("First Select User");
+    //$('.homebanner').click(function () {
+    //    if ($('#ddlusrlst').val() == 0) {
+    //        _showErrorMessage("First Select User");
 
-        }
-        else
-        {
-               //$('#homeBannerForm').modal('show');
-        }
+    //    }
+    //    else
+    //    {
+    //           //$('#homeBannerForm').modal('show');
+    //    }
 
-    })
+    //})
     
     function readURL(input) {
         if (input.files && input.files[0]) {
@@ -142,7 +142,8 @@
     }
 
     function DeleteBanner(Id) {
-        $('.overlayDelete').css({ "visibility": "visible", "opacity": "1" });
+        alert();
+      //  $('.overlayDelete').css({ "visibility": "visible", "opacity": "1" });
         $(document).on('click', '.ConfirmBtn', function () {
             $.ajax({
                 type: "POST",
@@ -158,7 +159,7 @@
 
     $(document).on('submit', '#homeBannerForm', function (e) {
         // code
-        $('#HomebannerAssocitedID').val($("#ddlusrlst").val());
+       // $('#HomebannerAssocitedID').val($("#ddlusrlst").val());
        // alert($("#ddlusrlst").val());
         var form = $(this);
         var url = form.attr('action');

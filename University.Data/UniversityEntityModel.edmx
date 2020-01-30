@@ -179,7 +179,7 @@
           <Property Name="DeletedBy" Type="numeric" Precision="18" Scale="0" />
           <Property Name="UpdatedDate" Type="datetime" />
           <Property Name="UpdatedBy" Type="numeric" Precision="18" Scale="0" />
-          <Property Name="AssocitedID" Type="int" />
+          <Property Name="AssocitedCustID" Type="int" />
         </EntityType>
         <EntityType Name="HomeSlider">
           <Key>
@@ -198,7 +198,7 @@
           <Property Name="DeletedBy" Type="numeric" Precision="18" Scale="0" />
           <Property Name="UpdatedDate" Type="datetime" />
           <Property Name="UpdatedBy" Type="numeric" Precision="18" Scale="0" />
-          <Property Name="AssocitedID" Type="int" />
+          <Property Name="AssocitedCustID" Type="int" />
         </EntityType>
         <EntityType Name="Login_tbl">
           <Key>
@@ -789,8 +789,6 @@
           <EntitySet Name="FAQ" EntityType="UniversityModel.FAQ" />
           <EntitySet Name="FAQDoc" EntityType="UniversityModel.FAQDoc" />
           <EntitySet Name="GeneralFeedback" EntityType="UniversityModel.GeneralFeedback" />
-          <EntitySet Name="HomeBanner" EntityType="UniversityModel.HomeBanner" />
-          <EntitySet Name="HomeSlider" EntityType="UniversityModel.HomeSlider" />
           <EntitySet Name="Login_tbl" EntityType="UniversityModel.Login_tbl" />
           <EntitySet Name="Product" EntityType="UniversityModel.Product" />
           <EntitySet Name="ProductFAQs" EntityType="UniversityModel.ProductFAQs" />
@@ -825,10 +823,6 @@
           <AssociationSet Name="FK_FAQDoc_FAQ" Association="UniversityModel.FK_FAQDoc_FAQ">
             <End Role="FAQ" EntitySet="FAQ" />
             <End Role="FAQDoc" EntitySet="FAQDoc" />
-          </AssociationSet>
-          <AssociationSet Name="FK_HomeSlider_HomeSlider" Association="UniversityModel.FK_HomeSlider_HomeSlider">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="HomeSlider" EntitySet="HomeSlider" />
           </AssociationSet>
           <AssociationSet Name="FK_AdminLogin" Association="UniversityModel.FK_AdminLogin">
             <End Role="Login_tbl" EntitySet="Login_tbl" />
@@ -879,11 +873,6 @@
           <AssociationSet Name="FK_EmailInfo_tbl" Association="UniversityModel.FK_EmailInfo_tbl">
             <End Role="Login_tbl" EntitySet="Login_tbl" />
             <End Role="EmailInfo" EntitySet="EmailInfoes" />
-          </AssociationSet>
-          <EntitySet Name="CardTransactionDetails" EntityType="UniversityModel.CardTransactionDetail" />
-          <AssociationSet Name="FK_CardTransactionDetails_Login_tbl" Association="UniversityModel.FK_CardTransactionDetails_Login_tbl">
-            <End Role="Login_tbl" EntitySet="Login_tbl" />
-            <End Role="CardTransactionDetail" EntitySet="CardTransactionDetails" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="GetCustomerList_Result">
@@ -1041,45 +1030,6 @@
           <Property Name="UpdatedBy" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="AssocitedID" Type="Int32" />
         </EntityType>
-        <EntityType Name="HomeBanner">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="LinkTo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="ImageALT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ImageURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IsDeleted" Type="Boolean" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
-          <Property Name="DeletedBy" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedBy" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="AssocitedID" Type="Int32" />
-        </EntityType>
-        <EntityType Name="HomeSlider">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProductId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Link" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TextDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ImageURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ImageALT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IsDeleted" Type="Boolean" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="CreatedBy" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
-          <Property Name="DeletedBy" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
-          <Property Name="UpdatedBy" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="AssocitedID" Type="Int32" />
-          <NavigationProperty Name="Product" Relationship="UniversityModel.FK_HomeSlider_HomeSlider" FromRole="HomeSlider" ToRole="Product" />
-        </EntityType>
         <EntityType Name="Login_tbl">
           <Key>
             <PropertyRef Name="ID" />
@@ -1125,7 +1075,6 @@
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
           <Property Name="UpdatedBy" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="AssocitedCustID" Type="Int32" />
-          <NavigationProperty Name="HomeSlider" Relationship="UniversityModel.FK_HomeSlider_HomeSlider" FromRole="Product" ToRole="HomeSlider" />
           <NavigationProperty Name="SubCategoryMaster" Relationship="UniversityModel.FK_Product_SubCategoryMaster" FromRole="Product" ToRole="SubCategoryMaster" />
           <NavigationProperty Name="ProductFAQs" Relationship="UniversityModel.FK_ProductFAQs_Product" FromRole="Product" ToRole="ProductFAQs" />
           <NavigationProperty Name="ProductFeedback" Relationship="UniversityModel.FK_ProductFeedback_Product" FromRole="Product" ToRole="ProductFeedback" />
@@ -1134,6 +1083,7 @@
           <NavigationProperty Name="ProductVideos" Relationship="UniversityModel.FK_ProductVideos_Product" FromRole="Product" ToRole="ProductVideos" />
           <NavigationProperty Name="RecentVisitedProduct" Relationship="UniversityModel.FK_RecentVisitedProduct_Product" FromRole="Product" ToRole="RecentVisitedProduct" />
           <NavigationProperty Name="ProductDocuments" Relationship="UniversityModel.FK_ProductDocuments_Product" FromRole="Product" ToRole="ProductDocuments" />
+          <NavigationProperty Name="HomeSlider" Relationship="UniversityModel.FK_HomeSlider_HomeSlider" FromRole="Product" ToRole="HomeSlider" />
         </EntityType>
         <EntityType Name="ProductFAQs">
           <Key>
@@ -1368,18 +1318,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_HomeSlider_HomeSlider">
-          <End Type="UniversityModel.Product" Role="Product" Multiplicity="1" />
-          <End Type="UniversityModel.HomeSlider" Role="HomeSlider" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="HomeSlider">
-              <PropertyRef Name="ProductId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_AdminLogin">
           <End Type="UniversityModel.Login_tbl" Role="Login_tbl" Multiplicity="0..1" />
           <End Type="UniversityModel.Login_tbl" Role="Login_tbl1" Multiplicity="*" />
@@ -1554,36 +1492,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="CardTransactionDetail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CardHolderName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CardNumber" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Expiration" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="CVV" Type="Int32" />
-          <Property Name="ResultCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="AccountType" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="TransId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="ResponseCode" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Login_tbl" Relationship="UniversityModel.FK_CardTransactionDetails_Login_tbl" FromRole="CardTransactionDetail" ToRole="Login_tbl" />
-        </EntityType>
-        <Association Name="FK_CardTransactionDetails_Login_tbl">
-          <End Type="UniversityModel.Login_tbl" Role="Login_tbl" Multiplicity="1" />
-          <End Type="UniversityModel.CardTransactionDetail" Role="CardTransactionDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Login_tbl">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="CardTransactionDetail">
-              <PropertyRef Name="CreatedBy" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1753,46 +1661,6 @@
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="FeedbackDescription" ColumnName="FeedbackDescription" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="HomeBanner">
-            <EntityTypeMapping TypeName="UniversityModel.HomeBanner">
-              <MappingFragment StoreEntitySet="HomeBanner">
-                <ScalarProperty Name="AssocitedID" ColumnName="AssocitedID" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
-                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
-                <ScalarProperty Name="ImageALT" ColumnName="ImageALT" />
-                <ScalarProperty Name="LinkTo" ColumnName="LinkTo" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="HomeSlider">
-            <EntityTypeMapping TypeName="UniversityModel.HomeSlider">
-              <MappingFragment StoreEntitySet="HomeSlider">
-                <ScalarProperty Name="AssocitedID" ColumnName="AssocitedID" />
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
-                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
-                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="ImageALT" ColumnName="ImageALT" />
-                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
-                <ScalarProperty Name="TextDescription" ColumnName="TextDescription" />
-                <ScalarProperty Name="Link" ColumnName="Link" />
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2025,24 +1893,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CardTransactionDetails">
-            <EntityTypeMapping TypeName="UniversityModel.CardTransactionDetail">
-              <MappingFragment StoreEntitySet="CardTransactionDetails">
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="ResponseCode" ColumnName="ResponseCode" />
-                <ScalarProperty Name="TransId" ColumnName="TransId" />
-                <ScalarProperty Name="AccountType" ColumnName="AccountType" />
-                <ScalarProperty Name="Message" ColumnName="Message" />
-                <ScalarProperty Name="ResultCode" ColumnName="ResultCode" />
-                <ScalarProperty Name="CVV" ColumnName="CVV" />
-                <ScalarProperty Name="Expiration" ColumnName="Expiration" />
-                <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
-                <ScalarProperty Name="CardHolderName" ColumnName="CardHolderName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -2057,7 +1907,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
