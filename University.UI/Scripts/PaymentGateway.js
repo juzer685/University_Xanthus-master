@@ -9,11 +9,10 @@ function RegisterHandler() {
     });
 
     $('#btnPaymentGateway').click(function () {
-        //var formValid = $('#PaymentGatewayForm').validate().form();
-        //if (!formValid)
-        //    return false;
-        //else {
-            //if ($('#agreeTerms').is(':checked')) {
+        var formValid = $('#PaymentGatewayForm').validate().form();
+        if (!formValid)
+            return false;
+        else {
                 //document.getElementById('loaderring').style.display = "block";
                 $.ajax({
                     type: "POST",
@@ -23,19 +22,15 @@ function RegisterHandler() {
                         if (data.result == true) {
                             _showSuccessMessage(data.Message);
                             //document.getElementById('loaderring').style.display = "none";
-                            //setTimeout(function () { window.location.href = data.url; }, 2000);
+                            setTimeout(function () { window.location.href = "/Home/index"; }, 2000);
                         }
                         else {
                             _showErrorMessage(data.Message);
                             //document.getElementById('loaderring').style.display = "none";
-                            //setTimeout(function () { window.location.href = data.url; }, 2000);
+                            setTimeout(function () { window.location.href = "/Home/index"; }, 2000);
                         }
                     }
                 });
-            //}
-            //else {
-            //    _showErrorMessage("Please agree to terms");
-            //}
-        //}
+        }
     });
 }

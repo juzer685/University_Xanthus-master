@@ -25,6 +25,8 @@ namespace University.UI.Controllers
             return View("PaymentGateway");
         }
 
+        [ValidateAntiForgeryToken]
+        [HttpPost]
         public ActionResult PaymentInfo(PaymentGatewayVM PaymentGatewayVM)
         {
             createTransactionResponse response = PaymentGatewayUtility.Run("8JJhA42nA", "8u5wP48YKh8BA8JY", PaymentGatewayVM);
