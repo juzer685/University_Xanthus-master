@@ -9,7 +9,6 @@
 
 
 
-
 <!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="container-fluid">
@@ -80,6 +79,8 @@
 <!-- /Add SubCategory modal-dialog -->
 <div class="modal fade subcatmodel" id="AddSubCategoryModal">
     <div class="modal-dialog">
+
+        
         <form id="subCategoryForm" action="/Admin/SubCategory/AddEditSubCategory">
             <!-- Modal content-->
             <div>
@@ -88,7 +89,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">Add Category</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button"  class="close reset" data-dismiss="modal">&times;</button>
                 </div>
 
                 <div class="modal-body" id="popupBody">
@@ -97,7 +98,7 @@
 
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Submit</button>
-                    <button type="button" class="btn btn-default " data-dismiss="modal" onclick="RemoveSubcategory();">Close</button>
+                    <button type="button"   class="btn btn-default reset" data-dismiss="modal">Close</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -108,10 +109,23 @@
 <!-- /Add SubCategory modal-dialog -->
 
 <script>
+    $(document).ready(function() {
+        $(".reset").click(function ()
+        {
+            $("#Id").val('');
+            $("#Name").val('');
+            $('#CategoryFileLabel').text('');
+            //$("#file label").val('Category Image');
+            $('#image-preview').attr('src', ' ');
+            $('#image-preview').attr('onerror', ' ');
+            $("#ImageALT").val('');
+    });
+});
 
     // alert($("#ddlusrlst").val());
     $(document).ready(function () {
-       
+
+        
         //$('#SubCategoryTable').DataTable({
         //    "paging": true,
         //    "lengthChange": false,
@@ -168,22 +182,12 @@
 
         });
     });
-    function RemoveSubcategory() {
-        $("#Id").val('');
-        $("#Name").val('');
-        $("#file").val('');
-        $("#image-preview").val('');
-        $("#ImageALT").val('');
-    }
-
-
+   
     function AddSubCategory(Id) {
         $("#Name").val('');
         $("#Id").val('');
-        $("#file").val('');
-        $('#image-preview').attr('src', '');
-       //  $("#image-preview").val('');
-        $("#ImageALT").val('');
+         $("#file").val('');
+       
         $.ajax({
             type: "POST",
             url: "/Admin/SubCategory/GetSubCategory",
