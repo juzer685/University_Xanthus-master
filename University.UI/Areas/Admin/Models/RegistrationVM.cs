@@ -47,14 +47,7 @@ namespace University.UI.Areas.Admin.Models
         {
             get
             {
-                if (ID != 0)
-                {
-                    return "readonly";
-                }
-                else
-                {
-                    return "";
-                }
+                return ID != 0 ? "readonly" : "";
             }
         }
 
@@ -62,14 +55,7 @@ namespace University.UI.Areas.Admin.Models
         {
             get
             {
-                if (ID != 0)
-                {
-                    return "checked";
-                }
-                else
-                {
-                    return "";
-                }
+               return ID != 0 ?  "checked" : "";
             }
         }
     }
