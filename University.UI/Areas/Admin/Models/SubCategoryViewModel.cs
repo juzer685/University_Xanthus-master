@@ -37,6 +37,6 @@ namespace University.UI.Areas.Admin.Models
                 }
             }
         }
-        public Decimal AssocitedID { get; set; }
+        public Decimal AssocitedCustID { get; set; }
     }
 }
