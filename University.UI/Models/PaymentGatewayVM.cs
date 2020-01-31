@@ -31,7 +31,7 @@ namespace University.UI.Models
         {
             get
             {
-                return Month.ToString() + Year.ToString();
+                return Month > 9 ? Month.ToString() + Year.ToString() : "0" + Month.ToString() + Year.ToString();
             }
         }
     }
