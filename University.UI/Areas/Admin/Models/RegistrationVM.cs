@@ -57,5 +57,20 @@ namespace University.UI.Areas.Admin.Models
                 }
             }
         }
+
+        public string Checked
+        {
+            get
+            {
+                if (ID != 0)
+                {
+                    return "checked";
+                }
+                else
+                {
+                    return "";
+                }
+            }
+        }
     }
 }
