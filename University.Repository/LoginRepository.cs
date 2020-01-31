@@ -71,7 +71,7 @@ namespace University.Repository
             using (var context = new UniversityEntities())
             {
                 //return context.Login_tbl.Where(y => y.UserName.Equals(Email)).Any();
-                return context.Login_tbl.FirstOrDefault(y => y.UserName.Equals(Email));
+                return context.Login_tbl.FirstOrDefault(y => y.UserName.Equals(Email) && y.IsDeleted != true);
             }
         }
 
@@ -81,7 +81,7 @@ namespace University.Repository
             {
                 using (var context = new UniversityEntities())
                 {
-                    Login_tbl Login_tbl = context.Login_tbl.Where(y => y.UserName.Equals(Email)).FirstOrDefault();
+                    Login_tbl Login_tbl = context.Login_tbl.Where(y => y.UserName.Equals(Email) && y.IsDeleted != true).FirstOrDefault();
                     Login_tbl.Password = Password;
                     context.SaveChanges();
                     return true;
@@ -97,10 +97,7 @@ namespace University.Repository
         {
             using (var context = new UniversityEntities())
             {
-                //DateTime compare = DateTime.Now.Add(TimeSpan.FromMinutes(1));
-                //var EmailInfo = context.EmailInfoes.ToList();;
-                int id = Convert.ToInt32(Func(Id, ConfigurationManager.AppSettings["SecurityKey"]));
-                var EmailInfo = context.EmailInfoes.FirstOrDefault(y => y.ID == id);
+                var EmailInfo = context.EmailInfoes.FirstOrDefault(y => y.ID == Convert.ToInt32(Func(Id, ConfigurationManager.AppSettings["SecurityKey"])));
                 var CreatedDate = (DateTime)EmailInfo.CreatedDate;
                 if ((DateTime.Now.TimeOfDay - (TimeSpan)EmailInfo.SendTime).Duration() > TimeSpan.FromMinutes(30) || CreatedDate.Date != DateTime.Now.Date)
                 {
@@ -108,7 +105,7 @@ namespace University.Repository
                 }
                 else
                 {
-                    return context.Login_tbl.Where(x => x.ID == EmailInfo.UserId).FirstOrDefault();
+                    return context.Login_tbl.Where(x => x.ID == EmailInfo.UserId && x.IsDeleted != true).FirstOrDefault();
                 }
             }
         }

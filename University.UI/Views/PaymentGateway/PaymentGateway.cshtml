@@ -1,14 +1,16 @@
-﻿@{
+﻿@model University.UI.Models.PaymentGatewayVM
+
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
 @section styles{
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<!------ Include the above in your HEAD tag ---------->
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <!------ Include the above in your HEAD tag ---------->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 }
 
@@ -25,7 +27,9 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fa fa-user"></i></span>
                                 </div>
-                                <input type="text" class="form-control" name="CardHolderName" placeholder="" required="">
+                                @Html.TextBoxFor(x => x.CardHolderName, new { @class = "form-control", placeholder = "Full name" })
+                                @Html.ValidationMessageFor(x => x.CardHolderName, null, new { @class = "", style = "color:red;" })
+                                @*<input type="text" class="form-control" name="CardHolderName" placeholder="" required="">*@
                             </div> <!-- input-group.// -->
                         </div> <!-- form-group.// -->
 
@@ -35,7 +39,9 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fa fa-credit-card"></i></span>
                                 </div>
-                                <input type="text" class="form-control" name="CardNumber" placeholder="">
+                                @Html.TextBoxFor(x => x.CardNumber, new { @class = "form-control", placeholder = "Card Number" })
+                                @Html.ValidationMessageFor(x => x.CardNumber, null, new { @class = "", style = "color:red;" })
+                                @*<input type="text" class="form-control" name="CardNumber" placeholder="">*@
                             </div> <!-- input-group.// -->
                         </div> <!-- form-group.// -->
 
@@ -93,5 +99,5 @@
 </div>
 
 @section scripts{
-<script src="~/Scripts/PaymentGateway.js"></script>
+    <script src="~/Scripts/PaymentGateway.js"></script>
 }
