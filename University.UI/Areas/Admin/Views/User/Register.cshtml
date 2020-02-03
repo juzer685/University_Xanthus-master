@@ -79,7 +79,7 @@
             </div>
                 @Html.ValidationMessageFor(x => x.Password, null, new { @class = "", style = "color:red;" })
                 <div class="input-group mb-3">
-                    @Html.PasswordFor(x => x.Password, new { @class = "form-control", placeholder = "Password" , value = Model.Password })
+                    @Html.PasswordFor(x => x.Password, new { @class = "form-control", placeholder = "Password" , value = Model.Password})
                     @*<input type="password" class="form-control" name="Password" placeholder="Password">*@
                     <div class="input-group-append">
                         <div class="input-group-text">
@@ -91,7 +91,7 @@
             <div class="input-group mb-3">
                 @Html.PasswordFor(x => x.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password", value = Model.Password })
                 @*<input type="password" class="form-control" name="Password" placeholder="Password">*@
-                
+                ,
                 <div class="input-group-append">
                     <div class="input-group-text">
                         <span class="fas fa-lock"></span>
@@ -166,6 +166,7 @@
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/Scripts/Register.js"></script>
 }
+
 
 
 

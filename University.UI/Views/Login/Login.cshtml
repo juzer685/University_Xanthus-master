@@ -45,7 +45,7 @@
         <div class="card">
             <div class="card-body login-card-body">
                 <div class="login-logo">
-                    <a href="../../index2.html">Online Training Portal</a>
+                    <a href="">Online Training Portal</a>
                 </div>
                 <p class="login-box-msg"></p>
 
@@ -64,9 +64,9 @@
                     <div class="form-group">
                         <label class="fontSize" for="password">Password</label>
                         <div class="input-group mb-3">
-                            <input name="Password" id="pwd" type="password" class="form-control " placeholder="Please enter password" required oninvalid="this.setCustomValidity('Please Enter Password')" oninput="this.setCustomValidity('')">
+                            <input name="Password" id="Password" type="password" class="form-control"  placeholder="Please enter password" required oninvalid="this.setCustomValidity('Please Enter Password')" oninput="this.setCustomValidity('')">
                             <span>
-                                <img src="~/Images/eye-16.png" alt="eye" onclick="showHide()" id="eye" style="margin-top: 10px;"/>
+                                <img src="~/Images/eye-16.png" alt="eye" onclick="showHide()" id="eye" style="margin-top: 10px;" />
                             </span>
                             <div class="input-group-append">
                                 <div class="input-group-text">
@@ -167,7 +167,7 @@
             }
                 function show()
                 {
-                    var a = document.getElementById("pwd");
+                    var a = document.getElementById("Password");
                     var b = document.getElementById("EYE");
                     if (a.type == "password")
                     {
@@ -181,10 +181,13 @@
                     }
                 }
 
+                
+                
 
 
 
             </script>
+           
 
 
         </body>

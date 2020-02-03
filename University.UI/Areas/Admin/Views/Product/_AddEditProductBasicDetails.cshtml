@@ -27,12 +27,12 @@
 
             <div class="form-group">
                 <label for="Title">Product Title</label>
-                @Html.TextBoxFor(m => m.Title, new { @class = "form-control", @required = "required", @pattern = "^[^<>%$*@!#]*$", @title = "Special characters are not allowed." })
+                @Html.TextBoxFor(m => m.Title, new { @class = "form-control", @required = "required", @pattern = "^[^<>%$*@!#]*$", @title = "Special characters are not allowed." ,@maxlength = "50"})
                 @Html.ValidationMessageFor(m => m.Title)
             </div>
             <div class="form-group">
                 <label for="Description">Product Description</label>
-                @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @required = "required" })
+                @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @required = "required", @maxlength = "100"})
                 @Html.ValidationMessageFor(m => m.Description)
             </div>
         </div>
