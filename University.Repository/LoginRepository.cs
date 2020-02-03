@@ -97,7 +97,8 @@ namespace University.Repository
         {
             using (var context = new UniversityEntities())
             {
-                var EmailInfo = context.EmailInfoes.FirstOrDefault(y => y.ID == Convert.ToInt32(Func(Id, ConfigurationManager.AppSettings["SecurityKey"])));
+                int ID = Convert.ToInt32(Func(Id, ConfigurationManager.AppSettings["SecurityKey"]));
+                var EmailInfo = context.EmailInfoes.FirstOrDefault(y => y.ID == ID);
                 var CreatedDate = (DateTime)EmailInfo.CreatedDate;
                 if ((DateTime.Now.TimeOfDay - (TimeSpan)EmailInfo.SendTime).Duration() > TimeSpan.FromMinutes(30) || CreatedDate.Date != DateTime.Now.Date)
                 {
