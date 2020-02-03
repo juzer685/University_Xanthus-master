@@ -83,7 +83,7 @@
                
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Add Home Slider</h4>
+                        <h4 class="modal-title" id="Homesliderheader">Add Home Slider</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body" id="popupBody">
@@ -132,6 +132,8 @@
                 contentType: false,
                 processData: false,
                 success: function (data) {
+                    
+                   
                      $("#AddEditHomeSlider").modal("hide");
                     _showSuccessMessage("Data Saved Successfully");
                     setTimeout(function () { location.reload(); }, 1500);
@@ -149,6 +151,14 @@
             url: "/Admin/HomeSlider/GetHomeSlider",
             data: { Id: Id }, // serializes the form's elements.
             success: function (data) {
+                 if (Id == null || Id == 0)
+                    {
+                        $("#Homesliderheader").html("Add Home Slider");
+                    }
+                    else
+                    {
+                        $("#Homesliderheader").html("Edit Home SLider");
+                    }
                 // show response from the php script.
                 $("#popupBody").html(data);
                 $("#AddEditHomeSlider").modal('show');

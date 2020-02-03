@@ -10,7 +10,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Add/Edit Product</h1>
+                <h1 class="m-0 text-dark" id="Productheader">Add/Edit Product</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -150,7 +150,7 @@
                 contentType: false,
                 processData: false,
                 success: function (data) {
-                    $('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
+                    
                     //alert("Data Saved Successfully");
                     _showSuccessMessage("Data Saved Successfully");
                     setTimeout(function () { $('#howto').trigger('click'); }, 1500);

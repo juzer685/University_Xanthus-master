@@ -79,7 +79,7 @@
             <div class="modal-content">
                 <input name="AssocitedID" id="FAQAssocitedID" type="hidden" />
                 <div class="modal-header">
-                    <h4 class="modal-title">FAQ</h4>
+                    <h4 class="modal-title" id="FAQheader">FAQ</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body" id="popupBody">
@@ -142,6 +142,14 @@
             url: "/Admin/FAQ/GetFAQ",
             data: { id: Id }, // serializes the form's elements.
             success: function (data) {
+                 if (Id == null || Id == 0)
+                    {
+                        $("#FAQheader").html("Add FAQ");
+                    }
+                    else
+                    {
+                        $("#FAQheader").html("Edit FAQ");
+                    }
                 // show response from the php script.
                 $("#popupBody").html(data);
                 $("#AddEditFAQ").modal('show');

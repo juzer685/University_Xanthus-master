@@ -2,7 +2,7 @@
 @*@model University.UI.Areas.Admin.Models.CategoryMappingModel*@
 @using University.Data;
 @{
-    ViewBag.Title = "CategoryUserMapping";
+    ViewBag.Title = "Category User Mapping";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -13,7 +13,7 @@
     <div class="container-fluid">
         <div class="row mb-2" style="margin-top:10px">
             <div class="col-sm-12">
-                <h1 class="m-0 text-dark">Category User mapping List</h1>
+                <h1 class="m-0 text-dark">Category User Mapping List</h1>
             </div><!-- /.col -->
             <div class="col-sm-12">
                 <ol class="breadcrumb">
@@ -82,7 +82,7 @@
         <form action="/Admin/SubCategory/AddCategoryUserMapping" id="CategoryMapping" method="post">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Add Category User Mapping</h4>
+                    <h4 class="modal-title" id="categoryMappheader">Add Category User Mapping</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
@@ -175,6 +175,14 @@
                     url: "/Admin/SubCategory/GetCategoryUserMapping",
                     data: { Id: Id }, // serializes the form's elements.
                     success: function (data) {
+                    if (Id == null || Id == 0)
+                    {
+                        $("#categoryMappheader").html("Add Category User Mapping");
+                    }
+                    else
+                    {
+                        $("#categoryMappheader").html("Edit Category User Mapping");
+                    }
                         $("#popupBody").html(data);
                         $("#AddCategoryMapping").modal('show');
                     }
