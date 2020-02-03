@@ -22,12 +22,12 @@ function RegisterHandler() {
                         if (data.result == true) {
                             _showSuccessMessage(data.Message);
                             //document.getElementById('loaderring').style.display = "none";
-                            setTimeout(function () { window.location.href = "/Home/index"; }, 2000);
+                            setTimeout(function () { window.location.href = "/PaymentGateway/PaymentStatus"; }, 2000);
                         }
                         else {
                             _showErrorMessage(data.Message);
                             //document.getElementById('loaderring').style.display = "none";
-                            setTimeout(function () { window.location.href = "/Home/index"; }, 2000);
+                            setTimeout(function () { window.location.href = "/PaymentGateway/PaymentStatus"; }, 2000);
                         }
                     }
                 });

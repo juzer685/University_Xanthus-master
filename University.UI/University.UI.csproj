@@ -2594,6 +2594,7 @@
     <Content Include="Views\Login\ForgotPassword.cshtml" />
     <Content Include="Views\Shared\ChangePassword.cshtml" />
     <Content Include="Views\PaymentGateway\PaymentGateway.cshtml" />
+    <Content Include="Views\PaymentGateway\PaymentStatus.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

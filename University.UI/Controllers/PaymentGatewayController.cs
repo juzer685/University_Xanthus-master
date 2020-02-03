@@ -50,17 +50,26 @@ namespace University.UI.Controllers
                 });
                 if (TransResult)
                 {
+                    TempData["PaymentStatus"] = true;
                     return Json(new { result = true, Message = response.messages.message[0].text });
                 }
                 else
                 {
+                    TempData["PaymentStatus"] = true;
                     return Json(new { result = true, Message = response.messages.message[0].text });
                 }
             }
             else
             {
+                TempData["PaymentStatus"] = false;
                 return Json(new { result = false, Message = response.messages.message[0].text });
             }
+        }
+
+        [HttpGet]
+        public ActionResult PaymentStatus()
+        {
+            return View("PaymentStatus");
         }
     }
 }

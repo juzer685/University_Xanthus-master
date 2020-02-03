@@ -1,0 +1,126 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>PaymentStatus</title>
+    <style>
+        .loader {
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #3498db;
+            width: 50px;
+            height: 50px;
+            -webkit-animation: spin 2s linear infinite; /* Safari */
+            animation: spin 2s linear infinite;
+        }
+
+        /* Safari */
+        @@-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @@keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div id="content" class="col-full">
+
+            <div id="main-sidebar-container">
+
+                <!-- #main Starts -->
+                <section id="main">
+                    <article class="post-828 page type-page status-publish hentry">
+                        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                        @*<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53ea5bd41ad58524"></script>*@
+                        @*<header>
+                                <h1 class="title">Payment Successful!</h1>
+                            </header>*@
+
+                        <section class="entry">
+                        @*    <div class="mailmunch-forms-before-post" style="display: none !important;"></div>*@
+                        <div class="vc_row wpb_row vc_row-fluid">
+                                <div class="wpb_column vc_column_container vc_col-sm-12">
+                                    <div class="vc_column-inner ">
+                                        <div class="wpb_wrapper">
+                                            <div id="ts-vcsc-box-icon-4225973" class="ts-vcsc-box-icon   icon_top-style ts-box-icon  " style="margin-bottom:0px; margin-top:0px;">
+                                                <div class="ts-css-shadow  " style="background-color: #ffffff;">
+                                                    <div class="ts-icon-box-inner top-side   " style="border: 2px solid #adadad; padding: 10px 10px 10px 10px; ">
+                                                        @*  <i style="margin: 0 auto 10px auto; float: none; color:#81d742;padding: 5px 5px; background-color:; width: 36px; height: 36px; font-size: 36px; line-height: 36px; " class="ts-box-icon-title-icon ts-awesome-check-circle-o ts-main-ico ts-font-icon  "></i><div class="box-detail-wrapper" style="clear: both;">*@
+                                                        @if ((bool)TempData["PaymentStatus"])
+                                                        {
+                                                            <div class="loader" style="margin:auto;"></div>
+                                                            <div class="ts-box-icon-title" style="width: auto !important; color:#000000; font-size:24px; font-weight:inhert; text-align:center; ">Payment Successful!</div><div class="ts-icon-box-content" style="margin-top: 10px; font-size: 14px; line-height: 14px; ">
+                                                                <p></p>
+                                                                <p style="text-align: center;">Thank you very much for your purchase!</p>
+                                                                <p style="text-align: center;">Your page will be redirected to your merchant website in 5 seconds</p>
+                                                                @*  <p style="text-align: center;">Your credit card will reflect a payment from <strong>PAYPAL *FLOWFINDERS</strong></p><div class="mailmunch-forms-in-post-middle" style="display: none !important;"></div>*@
+                                                                @* <p style="text-align: center;">You can view your purchases and invoice information on your ‘<a title="My Account" href="https://www.flowcanvas.com/my-account">My Account</a>‘ page.</p>*@
+                                                                @*   <p style="text-align: center;">Your transaction has been completed, and a receipt for your purchase has been emailed to you. You may log into your account at <a href="http://www.paypal.com/za" target="_blank">www.paypal.com/za</a> to view details of this transaction.</p>*@
+                                                                <p></p>
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="loader" style="margin:auto;"></div>
+                                                            <div class="ts-box-icon-title" style="width: auto !important; color:#000000; font-size:24px; font-weight:inhert; text-align:center; ">Payment UnSuccessful!</div><div class="ts-icon-box-content" style="margin-top: 10px; font-size: 14px; line-height: 14px; ">
+                                                                <p></p>
+                                                                <p style="text-align: center;">Please try again!</p>
+                                                                <p style="text-align: center;">Your page will be redirected to your merchant website in 5 seconsd</p>
+                                                                @*  <p style="text-align: center;">Your credit card will reflect a payment from <strong>PAYPAL *FLOWFINDERS</strong></p><div class="mailmunch-forms-in-post-middle" style="display: none !important;"></div>*@
+                                                                @* <p style="text-align: center;">You can view your purchases and invoice information on your ‘<a title="My Account" href="https://www.flowcanvas.com/my-account">My Account</a>‘ page.</p>*@
+                                                                @*   <p style="text-align: center;">Your transaction has been completed, and a receipt for your purchase has been emailed to you. You may log into your account at <a href="http://www.paypal.com/za" target="_blank">www.paypal.com/za</a> to view details of this transaction.</p>*@
+                                                                <p></p>
+                                                            </div>
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <div class="clearboth"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+            @*<div class="mailmunch-forms-after-post" style="display: none !important;"></div>*@
+            </section><!-- /.entry -->
+            <div class="fix"></div>
+            </article><!-- /.post -->
+            </section><!-- /#main -->
+
+
+        </div><!-- /#main-sidebar-container -->
+
+
+    </div>
+    </div>
+    <script>
+        // self executing function here
+        (function () {
+             setTimeout(function () { window.location.href = "/Home/Index"; }, 6000);
+            // your page initialization code here
+            // the DOM will be available here
+
+        })();
+    </script>
+</body>
+</html>
