@@ -8,6 +8,7 @@ using University.UI.Utilities;
 using AuthorizeNet.Api.Contracts.V1;
 using University.Service.Interface;
 using University.Data;
+using System.Configuration;
 
 namespace University.UI.Controllers
 {
@@ -29,7 +30,7 @@ namespace University.UI.Controllers
         [HttpPost]
         public ActionResult PaymentInfo(PaymentGatewayVM PaymentGatewayVM)
         {
-            createTransactionResponse response = PaymentGatewayUtility.Run("8JJhA42nA", "8u5wP48YKh8BA8JY", PaymentGatewayVM);
+            createTransactionResponse response = PaymentGatewayUtility.Run(ConfigurationManager.AppSettings["ApiLoginID"], ConfigurationManager.AppSettings["ApiTransactionKey"], PaymentGatewayVM);
             if (response.messages.resultCode == messageTypeEnum.Ok)
             {
                 bool TransResult = _PaymentGatewayService.SaveTransactionDetails(new CardTransactionDetails
