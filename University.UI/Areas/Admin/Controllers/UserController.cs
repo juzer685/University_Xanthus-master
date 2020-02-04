@@ -125,26 +125,26 @@ namespace University.UI.Areas.Admin.Controllers
                 });
                 if (res.Item1 == true)
                 {
-                    bool success = SendEmail(p_RegistrationVM.Email, p_RegistrationVM.Password, p_RegistrationVM.FirstName);
-                    if (success)
-                    {
-                        return Json(new { result = true, Message = "User Registration Successful and Email Sent", url = "/Admin/User" });
-                    }
-                    else
-                    {
-                        return Json(new { result = true, Message = "User Registration Successful but Email not sent", url = "/Admin/User" });
-                    }
+                    //bool success = SendEmail(p_RegistrationVM.Email, p_RegistrationVM.Password, p_RegistrationVM.FirstName);
+                    //if (success)
+                    //{
+                        return Json(new { result = true, Message = "User Update Successful", url = "/Admin/User" });
+                    //}
+                    //else
+                    //{
+                    //    return Json(new { result = true, Message = "User Registration Successful but Email not sent", url = "/Admin/User" });
+                    //}
                 }
                 else
                 {
-                    if (res.Item2 == true)
-                    {
-                        return Json(new { result = false, Message = "Email already Exists.", url = "/Admin/User/Register" });
-                    }
-                    else
-                    {
+                    //if (res.Item2 == true)
+                    //{
+                    //    return Json(new { result = false, Message = "Email already Exists.", url = "/Admin/User/Register" });
+                    //}
+                    //else
+                    //{
                         return Json(new { result = false, Message = "something went wrong,please try again.", url = "/Admin/User/Register" });
-                    }
+                    //}
                 }
             }
             else
