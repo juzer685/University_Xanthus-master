@@ -25,7 +25,7 @@ namespace University.UI.Models
         [Required(ErrorMessage = "Please enter CVV")]
         [RegularExpression("([0-9]+)", ErrorMessage = "Only Numbers are Allowed")]
         [Range(1, 999999, ErrorMessage = "Do not enter more than 6 Numbers")]
-        public string CVV { get; set; }
+        public int CVV { get; set; }
 
         public string MonthAndYear
         {
