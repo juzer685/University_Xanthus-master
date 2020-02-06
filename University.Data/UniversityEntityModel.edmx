@@ -435,18 +435,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_CardDetails_Login_tbl">
-          <End Role="Login_tbl" Type="Self.Login_tbl" Multiplicity="1" />
-          <End Role="CardDetails" Type="Self.CardDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Login_tbl">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="CardDetails">
-              <PropertyRef Name="CreatedBy" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_CardTransactionDetails_Login_tbl">
           <End Role="Login_tbl" Type="Self.Login_tbl" Multiplicity="1" />
           <End Role="CardTransactionDetails" Type="Self.CardTransactionDetails" Multiplicity="*" />
@@ -690,7 +678,6 @@
           <Parameter Name="Password" Type="varchar" Mode="In" />
         </Function>
         <EntityContainer Name="UniversityModelStoreContainer">
-          <EntitySet Name="CardDetails" EntityType="Self.CardDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CardTransactionDetails" EntityType="Self.CardTransactionDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CategoryMaster" EntityType="Self.CategoryMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CategoryUserMapping" EntityType="Self.CategoryUserMapping" Schema="dbo" store:Type="Tables" />
@@ -716,10 +703,6 @@
           <AssociationSet Name="FK_AdminLogin" Association="Self.FK_AdminLogin">
             <End Role="Login_tbl" EntitySet="Login_tbl" />
             <End Role="Login_tbl1" EntitySet="Login_tbl" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CardDetails_Login_tbl" Association="Self.FK_CardDetails_Login_tbl">
-            <End Role="Login_tbl" EntitySet="Login_tbl" />
-            <End Role="CardDetails" EntitySet="CardDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_CardTransactionDetails_Login_tbl" Association="Self.FK_CardTransactionDetails_Login_tbl">
             <End Role="Login_tbl" EntitySet="Login_tbl" />
@@ -2104,24 +2087,6 @@
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="Answer" ColumnName="Answer" />
                 <ScalarProperty Name="Question" ColumnName="Question" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CardTransactionDetails">
-            <EntityTypeMapping TypeName="UniversityModel.CardTransactionDetails">
-              <MappingFragment StoreEntitySet="CardTransactionDetails">
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="ResponseCode" ColumnName="ResponseCode" />
-                <ScalarProperty Name="TransId" ColumnName="TransId" />
-                <ScalarProperty Name="AccountType" ColumnName="AccountType" />
-                <ScalarProperty Name="Message" ColumnName="Message" />
-                <ScalarProperty Name="ResultCode" ColumnName="ResultCode" />
-                <ScalarProperty Name="CVV" ColumnName="CVV" />
-                <ScalarProperty Name="Expiration" ColumnName="Expiration" />
-                <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
-                <ScalarProperty Name="CardHolderName" ColumnName="CardHolderName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

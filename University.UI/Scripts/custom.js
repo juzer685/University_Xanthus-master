@@ -129,37 +129,58 @@ $(document).ready(function () {
         var _URL = window.URL || window.webkitURL;
 
         $(document).on("change", "input[type='file'].validateHeightWidth", function (e) {
+            var imageName = $("#lblImageName").text();
+            $("#lblImageName").text('');
             var file = $(this)[0].files[0];
             var _this = $(this);
+            var fileExt = file.name.substr(file.name.lastIndexOf(".") + 1);
+            if (fileExt.toUpperCase() != "gif".toUpperCase() && fileExt.toUpperCase() != "png".toUpperCase() && fileExt.toUpperCase() != "jpeg".toUpperCase() && fileExt.toUpperCase() != "jpg".toUpperCase()) {
+                $('.overlaySizeAlert').css({ "visibility": "visible", "opacity": "1" });
+                $(_this).val('');
+                $(_this).parent().find('img.imgStd').attr('src', fileOriginalIndex);
+                $("#DeleteImage").hide();
+                $("#file").val('');
+                e.preventDefault();
+                return false;
+            }
+            //var _this = $(this);
             img = new Image();
             var imgwidth = 0;
             var imgheight = 0;
+            var imgseiz = file.size;
             var maxwidth = 250;
             var maxheight = 250;
-         //   const fileType = file['type'];
-            const validImageTypes = ['image/jpeg'];
-            var src = _URL.createObjectURL(file);
+            var maxSize = 2000000;
+            img.src = _URL.createObjectURL(file);
             img.onload = function () {
                 imgwidth = this.width;
                 imgheight = this.height;
-
-                if (imgwidth == maxwidth && imgheight == maxheight && validImageTypes.includes(src)) {
+                if (imgwidth <= maxwidth && imgheight <= maxheight && imgseiz <= maxSize) {
                     return true;
-                } else {
+                }
+                else
+                {
                     $('.overlaySizeAlert').css({ "visibility": "visible", "opacity": "1" });
                     //alert("This image does not meet the size and format requirements. Please choose another image and try again");
                     $(_this).val('');
-                    $(_this).parent().parent().parent().find('img.imgStd').attr('src', null);
-                   // $(_this).parent().parent().find('input.iamgeselect').attr('input', null);
-                   
+                    //$(_this).parent().find('img.imgStd').attr('src', null);
+                    //$(_this).parent().find('img.imgStd').attr('src', '/images/NoImageAvailable250.jpg');
+                    if (typeof fileOriginalIndex === "undefined") {
+                        $(_this).parent().find('img.imgStd').attr('src', '/images/NoImageAvailable250.jpg');
+                        return false;
+                    }
+                    else
+                    {
+                        $(_this).parent().find('img.imgStd').attr('src', fileOriginalIndex);
+                        $("#lblImageName").text(imageName);
+                        $("#lblImageName").css("font-weight", "Bold");
+                    }
                     $("#DeleteImage").hide();
                 }
             };
             img.onerror = function () {
-
                 //$("#response").text("not a valid file: " + file.type);
             }
-
         });
     });
 
