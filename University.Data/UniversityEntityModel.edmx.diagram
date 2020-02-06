@@ -34,8 +34,6 @@
         <EntityTypeShape EntityType="UniversityModel.HomeBanner" Width="1.5" PointX="7.375" PointY="4.75" />
         <EntityTypeShape EntityType="UniversityModel.FAQ" Width="1.5" PointX="2.75" PointY="0.75" />
         <AssociationConnector Association="UniversityModel.FK_FAQDoc_FAQ" />
-        <EntityTypeShape EntityType="UniversityModel.CardTransactionDetails" Width="1.5" PointX="5.25" PointY="14.25" />
-        <AssociationConnector Association="UniversityModel.FK_CardTransactionDetails_Login_tbl" />
         <EntityTypeShape EntityType="UniversityModel.Product" Width="1.5" PointX="5.25" PointY="49.125" />
         <AssociationConnector Association="UniversityModel.FK_HomeSlider_HomeSlider" />
         <AssociationConnector Association="UniversityModel.FK_Product_SubCategoryMaster" />
@@ -47,6 +45,10 @@
         <AssociationConnector Association="UniversityModel.FK_RecentVisitedProduct_Product" />
         <EntityTypeShape EntityType="UniversityModel.ProductVideos" Width="1.5" PointX="7.5" PointY="49.75" />
         <AssociationConnector Association="UniversityModel.FK_ProductVideos_Product" />
+        <EntityTypeShape EntityType="UniversityModel.CardDetails" Width="1.5" PointX="5.25" PointY="23.625" />
+        <EntityTypeShape EntityType="UniversityModel.CardTransactionDetails" Width="1.5" PointX="5.25" PointY="14.25" />
+        <AssociationConnector Association="UniversityModel.FK_CardDetails_Login_tbl" />
+        <AssociationConnector Association="UniversityModel.FK_CardTransactionDetails_Login_tbl" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

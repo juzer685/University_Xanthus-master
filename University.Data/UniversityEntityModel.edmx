@@ -5,6 +5,22 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="UniversityModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CardDetails">
+          <Key>
+            <PropertyRef Name="DetailsId" />
+          </Key>
+          <Property Name="DetailsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CardNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CardHolderName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ExpiryMonth" Type="int" Nullable="false" />
+          <Property Name="ExpiryYear" Type="int" Nullable="false" />
+          <Property Name="CustomerProfileId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PaymentProfileId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ShippingProfileId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="CardTransactionDetails">
           <Key>
             <PropertyRef Name="Id" />
@@ -13,7 +29,7 @@
           <Property Name="CardHolderName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CardNumber" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="Expiration" Type="nvarchar" MaxLength="20" />
-          <Property Name="CVV" Type="nvarchar" MaxLength="10" />
+          <Property Name="CVV" Type="int" />
           <Property Name="ResultCode" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
           <Property Name="AccountType" Type="nvarchar" MaxLength="30" Nullable="false" />
@@ -419,6 +435,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CardDetails_Login_tbl">
+          <End Role="Login_tbl" Type="Self.Login_tbl" Multiplicity="1" />
+          <End Role="CardDetails" Type="Self.CardDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login_tbl">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CardDetails">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CardTransactionDetails_Login_tbl">
           <End Role="Login_tbl" Type="Self.Login_tbl" Multiplicity="1" />
           <End Role="CardTransactionDetails" Type="Self.CardTransactionDetails" Multiplicity="*" />
@@ -662,6 +690,7 @@
           <Parameter Name="Password" Type="varchar" Mode="In" />
         </Function>
         <EntityContainer Name="UniversityModelStoreContainer">
+          <EntitySet Name="CardDetails" EntityType="Self.CardDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CardTransactionDetails" EntityType="Self.CardTransactionDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CategoryMaster" EntityType="Self.CategoryMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CategoryUserMapping" EntityType="Self.CategoryUserMapping" Schema="dbo" store:Type="Tables" />
@@ -687,6 +716,10 @@
           <AssociationSet Name="FK_AdminLogin" Association="Self.FK_AdminLogin">
             <End Role="Login_tbl" EntitySet="Login_tbl" />
             <End Role="Login_tbl1" EntitySet="Login_tbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CardDetails_Login_tbl" Association="Self.FK_CardDetails_Login_tbl">
+            <End Role="Login_tbl" EntitySet="Login_tbl" />
+            <End Role="CardDetails" EntitySet="CardDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_CardTransactionDetails_Login_tbl" Association="Self.FK_CardTransactionDetails_Login_tbl">
             <End Role="Login_tbl" EntitySet="Login_tbl" />
@@ -843,11 +876,6 @@
             <End Role="FAQ" EntitySet="FAQ" />
             <End Role="FAQDoc" EntitySet="FAQDoc" />
           </AssociationSet>
-          <EntitySet Name="CardTransactionDetails" EntityType="UniversityModel.CardTransactionDetails" />
-          <AssociationSet Name="FK_CardTransactionDetails_Login_tbl" Association="UniversityModel.FK_CardTransactionDetails_Login_tbl">
-            <End Role="Login_tbl" EntitySet="Login_tbl" />
-            <End Role="CardTransactionDetails" EntitySet="CardTransactionDetails" />
-          </AssociationSet>
           <EntitySet Name="Product" EntityType="UniversityModel.Product" />
           <AssociationSet Name="FK_HomeSlider_HomeSlider" Association="UniversityModel.FK_HomeSlider_HomeSlider">
             <End Role="Product" EntitySet="Product" />
@@ -885,6 +913,16 @@
           <AssociationSet Name="FK_ProductVideos_Product" Association="UniversityModel.FK_ProductVideos_Product">
             <End Role="Product" EntitySet="Product" />
             <End Role="ProductVideos" EntitySet="ProductVideos" />
+          </AssociationSet>
+          <EntitySet Name="CardDetails" EntityType="UniversityModel.CardDetails" />
+          <EntitySet Name="CardTransactionDetails" EntityType="UniversityModel.CardTransactionDetails" />
+          <AssociationSet Name="FK_CardDetails_Login_tbl" Association="UniversityModel.FK_CardDetails_Login_tbl">
+            <End Role="Login_tbl" EntitySet="Login_tbl" />
+            <End Role="CardDetails" EntitySet="CardDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CardTransactionDetails_Login_tbl" Association="UniversityModel.FK_CardTransactionDetails_Login_tbl">
+            <End Role="Login_tbl" EntitySet="Login_tbl" />
+            <End Role="CardTransactionDetails" EntitySet="CardTransactionDetails" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="GetCustomerList_Result">
@@ -1050,6 +1088,7 @@
           <NavigationProperty Name="Login_tbl2" Relationship="UniversityModel.FK_AdminLogin" FromRole="Login_tbl1" ToRole="Login_tbl" />
           <NavigationProperty Name="Role" Relationship="UniversityModel.FK_Login_tbl_Role" FromRole="Login_tbl" ToRole="Role" />
           <NavigationProperty Name="EmailInfoes" Relationship="UniversityModel.FK_EmailInfo_tbl" FromRole="Login_tbl" ToRole="EmailInfo" />
+          <NavigationProperty Name="CardDetails" Relationship="UniversityModel.FK_CardDetails_Login_tbl" FromRole="Login_tbl" ToRole="CardDetails" />
           <NavigationProperty Name="CardTransactionDetails" Relationship="UniversityModel.FK_CardTransactionDetails_Login_tbl" FromRole="Login_tbl" ToRole="CardTransactionDetails" />
         </EntityType>
         <EntityType Name="ProductFAQs">
@@ -1399,36 +1438,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="CardTransactionDetails">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CardHolderName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CardNumber" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Expiration" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="CVV" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="ResultCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="AccountType" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="TransId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="ResponseCode" Type="Int32" Nullable="false" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Login_tbl" Relationship="UniversityModel.FK_CardTransactionDetails_Login_tbl" FromRole="CardTransactionDetails" ToRole="Login_tbl" />
-        </EntityType>
-        <Association Name="FK_CardTransactionDetails_Login_tbl">
-          <End Type="UniversityModel.Login_tbl" Role="Login_tbl" Multiplicity="1" />
-          <End Type="UniversityModel.CardTransactionDetails" Role="CardTransactionDetails" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Login_tbl">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="CardTransactionDetails">
-              <PropertyRef Name="CreatedBy" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="Id" />
@@ -1583,6 +1592,65 @@
             </Principal>
             <Dependent Role="ProductVideos">
               <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CardDetails">
+          <Key>
+            <PropertyRef Name="DetailsId" />
+          </Key>
+          <Property Name="DetailsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CardNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CardHolderName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ExpiryMonth" Type="Int32" Nullable="false" />
+          <Property Name="ExpiryYear" Type="Int32" Nullable="false" />
+          <Property Name="CustomerProfileId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PaymentProfileId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ShippingProfileId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Login_tbl" Relationship="UniversityModel.FK_CardDetails_Login_tbl" FromRole="CardDetails" ToRole="Login_tbl" />
+        </EntityType>
+        <EntityType Name="CardTransactionDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CardHolderName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CardNumber" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Expiration" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CVV" Type="Int32" />
+          <Property Name="ResultCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AccountType" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="TransId" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ResponseCode" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Login_tbl" Relationship="UniversityModel.FK_CardTransactionDetails_Login_tbl" FromRole="CardTransactionDetails" ToRole="Login_tbl" />
+        </EntityType>
+        <Association Name="FK_CardDetails_Login_tbl">
+          <End Type="UniversityModel.Login_tbl" Role="Login_tbl" Multiplicity="1" />
+          <End Type="UniversityModel.CardDetails" Role="CardDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login_tbl">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CardDetails">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CardTransactionDetails_Login_tbl">
+          <End Type="UniversityModel.Login_tbl" Role="Login_tbl" Multiplicity="1" />
+          <End Type="UniversityModel.CardTransactionDetails" Role="CardTransactionDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login_tbl">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CardTransactionDetails">
+              <PropertyRef Name="CreatedBy" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1987,24 +2055,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CardTransactionDetails">
-            <EntityTypeMapping TypeName="UniversityModel.CardTransactionDetails">
-              <MappingFragment StoreEntitySet="CardTransactionDetails">
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="ResponseCode" ColumnName="ResponseCode" />
-                <ScalarProperty Name="TransId" ColumnName="TransId" />
-                <ScalarProperty Name="AccountType" ColumnName="AccountType" />
-                <ScalarProperty Name="Message" ColumnName="Message" />
-                <ScalarProperty Name="ResultCode" ColumnName="ResultCode" />
-                <ScalarProperty Name="CVV" ColumnName="CVV" />
-                <ScalarProperty Name="Expiration" ColumnName="Expiration" />
-                <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
-                <ScalarProperty Name="CardHolderName" ColumnName="CardHolderName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Product">
             <EntityTypeMapping TypeName="UniversityModel.Product">
               <MappingFragment StoreEntitySet="Product">
@@ -2042,6 +2092,41 @@
                 <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
                 <ScalarProperty Name="Decription" ColumnName="Decription" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CardDetails">
+            <EntityTypeMapping TypeName="UniversityModel.CardDetails">
+              <MappingFragment StoreEntitySet="CardDetails">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ShippingProfileId" ColumnName="ShippingProfileId" />
+                <ScalarProperty Name="PaymentProfileId" ColumnName="PaymentProfileId" />
+                <ScalarProperty Name="CustomerProfileId" ColumnName="CustomerProfileId" />
+                <ScalarProperty Name="ExpiryYear" ColumnName="ExpiryYear" />
+                <ScalarProperty Name="ExpiryMonth" ColumnName="ExpiryMonth" />
+                <ScalarProperty Name="CardHolderName" ColumnName="CardHolderName" />
+                <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
+                <ScalarProperty Name="DetailsId" ColumnName="DetailsId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CardTransactionDetails">
+            <EntityTypeMapping TypeName="UniversityModel.CardTransactionDetails">
+              <MappingFragment StoreEntitySet="CardTransactionDetails">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ResponseCode" ColumnName="ResponseCode" />
+                <ScalarProperty Name="TransId" ColumnName="TransId" />
+                <ScalarProperty Name="AccountType" ColumnName="AccountType" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="ResultCode" ColumnName="ResultCode" />
+                <ScalarProperty Name="CVV" ColumnName="CVV" />
+                <ScalarProperty Name="Expiration" ColumnName="Expiration" />
+                <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
+                <ScalarProperty Name="CardHolderName" ColumnName="CardHolderName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

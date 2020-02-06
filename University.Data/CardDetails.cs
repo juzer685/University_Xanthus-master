@@ -12,20 +12,19 @@ namespace University.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class CardTransactionDetails
+    public partial class CardDetails
     {
-        public decimal Id { get; set; }
-        public string CardHolderName { get; set; }
+        public int DetailsId { get; set; }
         public string CardNumber { get; set; }
-        public string Expiration { get; set; }
-        public Nullable<int> CVV { get; set; }
-        public string ResultCode { get; set; }
-        public string Message { get; set; }
-        public string AccountType { get; set; }
-        public string TransId { get; set; }
-        public int ResponseCode { get; set; }
-        public System.DateTime CreatedDate { get; set; }
+        public string CardHolderName { get; set; }
+        public int ExpiryMonth { get; set; }
+        public int ExpiryYear { get; set; }
+        public string CustomerProfileId { get; set; }
+        public string PaymentProfileId { get; set; }
+        public string ShippingProfileId { get; set; }
         public int CreatedBy { get; set; }
+        public System.DateTime CreatedDate { get; set; }
+        public bool IsDeleted { get; set; }
     
         public virtual Login_tbl Login_tbl { get; set; }
     }
