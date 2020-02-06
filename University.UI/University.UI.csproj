@@ -2080,6 +2080,7 @@
     <Content Include="plugins\toastr\toastr.min.css" />
     <Content Include="plugins\toastr\toastr.min.js" />
     <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Scripts\CardDetails.js" />
     <Content Include="Scripts\ChangePassword.js" />
     <Content Include="Scripts\custom.js" />
     <Content Include="Areas\Admin\Views\SubCategory\CategoryUserMappingList.cshtml" />
@@ -2595,6 +2596,8 @@
     <Content Include="Views\Shared\ChangePassword.cshtml" />
     <Content Include="Views\PaymentGateway\PaymentGateway.cshtml" />
     <Content Include="Views\PaymentGateway\PaymentStatus.cshtml" />
+    <Content Include="Views\PaymentGateway\_CardDetailsForm.cshtml" />
+    <Content Include="Views\PaymentGateway\CardDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

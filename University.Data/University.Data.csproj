@@ -53,6 +53,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CardDetails.cs">
+      <DependentUpon>UniversityEntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="CardTransactionDetails.cs">
       <DependentUpon>UniversityEntityModel.tt</DependentUpon>
     </Compile>

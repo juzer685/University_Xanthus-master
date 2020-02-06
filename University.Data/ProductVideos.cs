@@ -28,6 +28,7 @@ namespace University.Data
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public Nullable<decimal> UpdatedBy { get; set; }
         public Nullable<int> AssocitedCustID { get; set; }
+        public Nullable<decimal> VideoRate { get; set; }
     
         public virtual Product Product { get; set; }
     }

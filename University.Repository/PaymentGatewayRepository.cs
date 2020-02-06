@@ -26,5 +26,22 @@ namespace University.Repository
                 return false;
             }
         }
+
+        public bool SaveCardDetails(CardDetails CardDetails)
+        {
+            try
+            {
+                using (var context = new UniversityEntities())
+                {
+                    context.CardDetails.Add(CardDetails);
+                    context.SaveChanges();
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
     }
 }

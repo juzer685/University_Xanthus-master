@@ -47,6 +47,8 @@
         <AssociationConnector Association="UniversityModel.FK_FAQDoc_FAQ" />
         <EntityTypeShape EntityType="UniversityModel.CardTransactionDetails" Width="1.5" PointX="5.25" PointY="14.25" />
         <AssociationConnector Association="UniversityModel.FK_CardTransactionDetails_Login_tbl" />
+        <EntityTypeShape EntityType="UniversityModel.CardDetails" Width="1.5" PointX="3.375" PointY="5.75" />
+        <AssociationConnector Association="UniversityModel.FK_CardDetails_Login_tbl" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

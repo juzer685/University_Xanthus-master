@@ -49,6 +49,7 @@ namespace University.Data
         public virtual DbSet<HomeBanner> HomeBanner { get; set; }
         public virtual DbSet<FAQ> FAQ { get; set; }
         public virtual DbSet<CardTransactionDetails> CardTransactionDetails { get; set; }
+        public virtual DbSet<CardDetails> CardDetails { get; set; }
     
         public virtual ObjectResult<GetCustomerList_Result> GetCustomerList(Nullable<int> webUserID)
         {

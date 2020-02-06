@@ -26,11 +26,12 @@ namespace University.UI.Controllers
             return View("PaymentGateway");
         }
 
+        //change admin email and ID to user when migrating to user
         [ValidateAntiForgeryToken]
         [HttpPost]
         public ActionResult PaymentInfo(PaymentGatewayVM PaymentGatewayVM)
         {
-            createTransactionResponse response = PaymentGatewayUtility.Run(ConfigurationManager.AppSettings["ApiLoginID"], ConfigurationManager.AppSettings["ApiTransactionKey"], PaymentGatewayVM);
+            createTransactionResponse response = PaymentGatewayUtility.MakePayment(ConfigurationManager.AppSettings["ApiLoginID"], ConfigurationManager.AppSettings["ApiTransactionKey"], PaymentGatewayVM);
             if (response.messages.resultCode == messageTypeEnum.Ok)
             {
                 bool TransResult = _PaymentGatewayService.SaveTransactionDetails(new CardTransactionDetails
@@ -70,6 +71,57 @@ namespace University.UI.Controllers
         public ActionResult PaymentStatus()
         {
             return View("PaymentStatus");
+        }
+
+        [HttpGet]
+        public ActionResult SaveCardDetails()
+        {
+            return View("CardDetails", new PaymentGatewayVM());
+        }
+
+        //change admin email and ID to user when migrating to user
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SaveCardDetails(PaymentGatewayVM PaymentGatewayVM)
+        {
+            createCustomerProfileResponse response = PaymentGatewayUtility.CreateCustomerProfile(ConfigurationManager.AppSettings["ApiLoginID"], ConfigurationManager.AppSettings["ApiTransactionKey"], Session["AdminEmail"].ToString(), PaymentGatewayVM);
+            if (response.messages.resultCode == messageTypeEnum.Ok)
+            {
+                if (response.messages.message != null)
+                {
+                    bool TransResult = _PaymentGatewayService.SaveCardDetails(new CardDetails
+                    {
+                        CardHolderName = PaymentGatewayVM.CardHolderName,
+                        CardNumber = PaymentGatewayVM.CardNumber,
+                        ExpiryMonth = PaymentGatewayVM.Month,
+                        ExpiryYear = PaymentGatewayVM.Year,
+                        CustomerProfileId = response.customerProfileId,
+                        PaymentProfileId = response.customerPaymentProfileIdList[0],
+                        ShippingProfileId = response.customerShippingAddressIdList[0],
+                        //change for user to userloginid
+                        CreatedBy = Convert.ToInt32(Session["AdminLoginID"]),
+                        CreatedDate = DateTime.Now,
+                        IsDeleted = false
+                    });
+
+                    if (TransResult)
+                    {
+                        return Json(new { result = true, Message = "Transaction succeded" });
+                    }
+                    else
+                    {
+                        return Json(new { result = false, Message = "Transaction Failed" });
+                    }
+                }
+                else
+                {
+                    return Json(new { result = false, Message = "Transaction Failed" });
+                }
+            }
+            else
+            {
+                return Json(new { result = false, Message = "Transaction Failed" });
+            }
         }
     }
 }

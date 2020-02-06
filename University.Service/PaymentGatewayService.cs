@@ -21,5 +21,10 @@ namespace University.Service
         {
             return _PaymentGatewayRepository.SaveTransactionDetails(CardTransactionDetail);
         }
+
+        public bool SaveCardDetails(CardDetails CardDetails)
+        {
+            return _PaymentGatewayRepository.SaveCardDetails(CardDetails);
+        }
     }
 }
