@@ -23,7 +23,6 @@ namespace University.Data
             this.EmailInfoes = new HashSet<EmailInfo>();
             this.CardDetails = new HashSet<CardDetails>();
             this.CardTransactionDetails = new HashSet<CardTransactionDetails>();
-            this.CardDetails = new HashSet<CardDetails>();
         }
     
         public int ID { get; set; }
@@ -56,7 +55,5 @@ namespace University.Data
         public virtual ICollection<CardDetails> CardDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CardTransactionDetails> CardTransactionDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CardDetails> CardDetails { get; set; }
     }
 }
