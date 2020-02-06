@@ -62,6 +62,7 @@ namespace IPSU.Web.Areas.Admin.Controllers
                 Session["AdminLoginID"] = Result.ID;
                 Session["RoleID"] = Result.RoleID;
                 Session["AdminName"] = Result.FirstName + " " + Result.LastName;
+                Session["AdminEmail"] = Result.UserName;
                 var res = _UseradminService.GetUserList().ToList();
                 var viewModel = AutoMapper.Mapper.Map<List<Login_tbl>, List<Login_tbl>>(res);
                 Session["UserList"] = viewModel;
@@ -74,6 +75,7 @@ namespace IPSU.Web.Areas.Admin.Controllers
                 Session["UserLoginID"] = Result.ID;
                 Session["RoleID"] = Result.RoleID;
                 Session["UserNamee"] = Result.FirstName + " " + Result.LastName;
+                Session["UserEmail"] = Result.UserName;
                 return RedirectToAction("Index", "Home");
             }
             else

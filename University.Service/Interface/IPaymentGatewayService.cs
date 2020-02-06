@@ -10,5 +10,6 @@ namespace University.Service.Interface
     public interface IPaymentGatewayService
     {
         bool SaveTransactionDetails(CardTransactionDetails CardTransactionDetail);
+        bool SaveCardDetails(CardDetails CardDetails);
     }
 }

@@ -385,39 +385,47 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column nav-legacy nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
-                        with font-awesome or any other icon font library -->
+    with font-awesome or any other icon font library -->
                         @*<li class="nav-item pointer">
-                                <a class="nav-link">
-                                    <i class="nav-icon fas fa-user-circle"></i>
-                                    <p>
-                                        My IPSU Account
-                                    </p>
-                                </a>
-                            </li>*@
+            <a class="nav-link">
+                <i class="nav-icon fas fa-user-circle"></i>
+                <p>
+                    My IPSU Account
+                </p>
+            </a>
+        </li>*@
                         @if (Session["RoleID"].ToString() == "4")
                         {
                             @*<li class="nav-item pointer">
-                                    <a href="~/Admin/User" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>UserList</p>
-                                    </a>
-                                </li>*@
+                <a href="~/Admin/User" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>UserList</p>
+                </a>
+            </li>*@
                             <li class="nav-item pointer">
                                 <a class="nav-link" href="~/Admin/User">
                                     <i class="nav-icon fas fa-user-circle"></i>
                                     <p>
                                         User List
                                     </p>
+                                </a>    
+                            </li>
+                            <li class="nav-item pointer">
+                                <a class="nav-link" href="~/PaymentGateway/SaveCardDetails">
+                                    <i class="nav-icon fas fa-user-circle"></i>
+                                    <p>
+                                        Add Card
+                                    </p>
                                 </a>
                             </li>
                             @*<li class="nav-item pointer">
-                                    <a class="nav-link" href="/Admin/User/Register">
-                                        <i class="nav-icon fas fa-user-circle"></i>
-                                        <p>
-                                            Add User
-                                        </p>
-                                    </a>
-                                </li>*@
+                <a class="nav-link" href="/Admin/User/Register">
+                    <i class="nav-icon fas fa-user-circle"></i>
+                    <p>
+                        Add User
+                    </p>
+                </a>
+            </li>*@
                         }
                         @if (Session["RoleID"].ToString() == "5")
                         {

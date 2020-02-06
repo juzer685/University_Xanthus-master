@@ -1,0 +1,120 @@
+﻿@model University.UI.Models.PaymentGatewayVM
+
+
+<div class="container">
+    <div class="row">
+        <div class="offset-sm-3 col-sm-6">
+            <article class="card">
+                <div class="card-body p-5">
+
+                    <form role="form" id="PaymentGatewayForm">
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            <label for="username">Full name (on the card)</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                </div>
+                                @Html.TextBoxFor(x => x.CardHolderName, new { @class = "form-control", placeholder = "Full name" })
+                                @*<input type="text" class="form-control" name="CardHolderName" placeholder="" required="">*@
+                            </div> <!-- input-group.// -->
+                            @Html.ValidationMessageFor(x => x.CardHolderName, null, new { @class = "", style = "color:red;" })
+                        </div> <!-- form-group.// -->
+
+                        <div class="form-group">
+                            <label for="cardNumber">Card number</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-credit-card"></i></span>
+                                </div>
+                                @Html.TextBoxFor(x => x.CardNumber, new { @class = "form-control", placeholder = "Card Number" })
+                                @*<input type="text" class="form-control" name="CardNumber" placeholder="">*@
+                            </div> <!-- input-group.// -->
+                            @Html.ValidationMessageFor(x => x.CardNumber, null, new { @class = "", style = "color:red;" })
+                        </div> <!-- form-group.// -->
+
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="form-group">
+                                    <label><span class="hidden-xs">Expiration</span> </label>
+                                    <div class="form-inline">
+                                        @Html.DropDownListFor(x => x.Month, new SelectList(new List<object>
+                                                            {
+                                                                new { value = 01,text = 01 },
+                                                                new { value = 02,text = 02 },
+                                                                new { value = 03,text = 03 },
+                                                                new { value = 04,text = 04 },
+                                                                new { value = 05,text = 05 },
+                                                                new { value = 06,text = 06 },
+                                                                new { value = 07,text = 07 },
+                                                                new { value = 08,text = 08 },
+                                                                new { value = 09,text = 09 },
+                                                                new { value = 10,text = 10 },
+                                                                new { value = 11,text = 11 },
+                                                                new { value = 12,text = 12 }
+                                                            }, "value", "text"), "MM", new { @class = "form-control", style = "width:45%" })
+                                        @*<select class="form-control" style="width:45%" name="Month">
+                                                <option>MM</option>
+                                                <option value="01">01</option>
+                                                <option value="02">02</option>
+                                                <option value="03">03</option>
+                                                <option value="04">04</option>
+                                                <option value="05">05</option>
+                                                <option value="06">06</option>
+                                                <option value="07">07</option>
+                                                <option value="08">08</option>
+                                                <option value="09">09</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                            </select>*@
+                                        <span style="width:10%; text-align: center"> / </span>
+                                        @Html.DropDownListFor(x => x.Year, new SelectList(new List<object>
+                                        {
+                                            new { value = 20,text = 20 },
+                                            new { value = 21,text = 21 },
+                                            new { value = 22,text = 22 },
+                                            new { value = 23,text = 23 },
+                                            new { value = 24,text = 24 },
+                                            new { value = 25,text = 25 },
+                                            new { value = 26,text = 26 },
+                                            new { value = 27,text = 27 },
+                                            new { value = 28,text = 28 },
+                                            new { value = 29,text = 29 },
+                                            new { value = 30,text = 30 }
+                                        }, "value", "text"), "YY", new { @class = "form-control", style = "width:45%" })
+                                        @Html.ValidationMessageFor(x => x.Month, null, new { @class = "", style = "color:red;margin-right:15px" })
+                                        @Html.ValidationMessageFor(x => x.Year, null, new { @class = "", style = "color:red;" })
+                                        @*<select class="form-control" style="width:45%" name="Year">
+                                                <option>YY</option>
+                                                <option value="20">20</option>
+                                                <option value="21">21</option>
+                                                <option value="22">22</option>
+                                                <option value="23">23</option>
+                                                <option value="24">24</option>
+                                                <option value="25">25</option>
+                                                <option value="26">26</option>
+                                                <option value="27">27</option>
+                                                <option value="28">28</option>
+                                                <option value="29">29</option>
+                                                <option value="30">30</option>
+                                            </select>*@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label data-toggle="tooltip" title="" data-original-title="3 digits code on back side of the card">CVV <i class="fa fa-question-circle"></i></label>
+                                    @*<input class="form-control" required="" type="text" name="CVV">*@
+                                    @Html.TextBoxFor(x => x.CVV, new { @class = "form-control", placeholder = "CVV" })
+                                    @Html.ValidationMessageFor(x => x.CVV, null, new { @class = "", style = "color:red;" })
+                                </div> <!-- form-group.// -->
+                            </div>
+                        </div> <!-- row.// -->
+                        <button class="subscribe btn btn-primary btn-block" type="submit" id="btnPaymentGateway"> Confirm  </button>
+                    </form>
+                </div> <!-- card-body.// -->
+            </article> <!-- card.// -->
+        </div>
+    </div>
+</div>
