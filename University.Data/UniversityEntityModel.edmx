@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="UniversityModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="UniversityModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CardDetails">
           <Key>
             <PropertyRef Name="DetailsId" />
@@ -798,17 +798,16 @@
             <End Role="SubCategoryMaster" EntitySet="SubCategoryMaster" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="UniversityModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="UniversityEntities" annotation:LazyLoadingEnabled="true">
           <FunctionImport Name="GetCustomerList" ReturnType="Collection(UniversityModel.GetCustomerList_Result)">
-            <Parameter Name="WebUserID" Mode="In" Type="Int32" />
+          <Parameter Name="WebUserID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SmartSerach" ReturnType="Collection(UniversityModel.SmartSerach_Result)">
-            <Parameter Name="freeText" Mode="In" Type="String" />
+          <Parameter Name="freeText" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_LoginUniersity" ReturnType="Collection(String)">
             <Parameter Name="UserName" Mode="In" Type="String" />
