@@ -10,6 +10,8 @@ namespace University.Repository.Interface
 {
     public interface IProductRepository
     {
+        //IEnumerable<Product> GetUserVideosList();
+        IEnumerable<ProductVideos> GetUserVideosList();
         IEnumerable<ProductEntity> GetProductList();
         ProductEntity GetProduct(Decimal Id);
         //bool AddOrUpdateProduct(ProductEntity model);

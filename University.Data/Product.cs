@@ -17,14 +17,14 @@ namespace University.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
+            this.HomeSlider = new HashSet<HomeSlider>();
+            this.ProductDocuments = new HashSet<ProductDocuments>();
             this.ProductFAQs = new HashSet<ProductFAQs>();
             this.ProductFeedback = new HashSet<ProductFeedback>();
             this.ProductSpec = new HashSet<ProductSpec>();
             this.ProductUserGuide = new HashSet<ProductUserGuide>();
-            this.ProductVideos = new HashSet<ProductVideos>();
             this.RecentVisitedProduct = new HashSet<RecentVisitedProduct>();
-            this.ProductDocuments = new HashSet<ProductDocuments>();
-            this.HomeSlider = new HashSet<HomeSlider>();
+            this.ProductVideos = new HashSet<ProductVideos>();
         }
     
         public decimal Id { get; set; }
@@ -42,7 +42,11 @@ namespace University.Data
         public Nullable<decimal> UpdatedBy { get; set; }
         public Nullable<int> AssocitedCustID { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HomeSlider> HomeSlider { get; set; }
         public virtual SubCategoryMaster SubCategoryMaster { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProductDocuments> ProductDocuments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductFAQs> ProductFAQs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -52,12 +56,8 @@ namespace University.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductUserGuide> ProductUserGuide { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductVideos> ProductVideos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RecentVisitedProduct> RecentVisitedProduct { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductDocuments> ProductDocuments { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HomeSlider> HomeSlider { get; set; }
+        public virtual ICollection<ProductVideos> ProductVideos { get; set; }
     }
 }

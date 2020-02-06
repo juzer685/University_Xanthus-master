@@ -10,6 +10,8 @@ namespace University.Service.Interface
 {
     public interface IProductService
     {
+        //IEnumerable<Product> GetUserVideosList();
+        IEnumerable<ProductVideos> GetUserVideosList();
         IEnumerable<ProductEntity> GetProductList();
         ProductEntity GetProduct(Decimal Id);
         bool AddOrUpdateProduct(ProductEntity model);

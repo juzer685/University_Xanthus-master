@@ -43,6 +43,7 @@
                                 <tr>
                                     <th>Category Name</th>
                                     <th>Product Title</th>
+                                    <th>Total Video Rate</th>
                                     <th>Action</th>
 
                                 </tr>
@@ -51,8 +52,9 @@
                                 @foreach (var item in Model)
                                 {
                                         <tr>
-                                            <td>@item.SubCategoryMaster.Name</td>
+                                            <td>@item.subcat</td>
                                             <td>@item.Title</td>
+                                            <td>@item.sumvideorate</td>
                                             <td>
                                                 @*<input name="AssocitedID" id="BasicDeatilsAssocitedID" type="hidden" />*@
                                                 <i class="fas fa-edit" onclick="AddProduct('@item.Id')"></i>
@@ -116,7 +118,9 @@
                 data: { Id: Id }, // serializes the form's elements.
                 success: function (data) {
                     //alert("Data Deleted Successfully"); // show response from the php script.
-                    location.reload();
+                   // location.reload();
+                     _showSuccessMessage("Data Deleted Successfully");
+                     setTimeout(function () { location.reload(); }, 1000);
                 }
             });
         });

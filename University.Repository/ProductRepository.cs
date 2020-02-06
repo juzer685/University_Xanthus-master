@@ -12,6 +12,99 @@ namespace University.Repository
 {
     public class ProductRepository : IProductRepository
     {
+        //public IEnumerable<Product> GetUserVideosList()
+        //{
+        //    using (var context = new UniversityEntities())
+        //    {
+
+        //        int AssocitedCustID = Convert.ToInt32(HttpContext.Current.Session["AdminLoginID"]);
+        //        var res = (from p in context.Product.Where(y => y.IsDeleted != true && y.AssocitedCustID == AssocitedCustID)
+        //                   join s in context.SubCategoryMaster.Where(y => y.IsDeleted != true)
+        //                   on p.SubCategoryId equals s.Id
+        //                   join c in context.CategoryMaster.Where(y => y.IsDeleted != true)
+        //                   on s.CategoryId equals c.Id
+
+        //                   select new
+        //                   {
+        //                       p.Id,
+        //                       p.Title,
+        //                       subcatid = c.Id,
+        //                       c.Name,
+        //                       VideoRateSum = p.ProductVideos.Sum(x => x.VideoRate)
+        //                   }
+        //                   ).ToList();
+        //        List<Product> productvideo = new List<Product>();
+        //        foreach (var prodvideo in res)
+        //        {
+        //            productvideo.Add(new Product
+        //            {
+        //                Id = prodvideo.Id,
+        //                Title = prodvideo.Title,
+        //                //subcategoryname = prodvideo.Name,
+        //                //catid = prodvideo.subcatid,
+        //                //VideoRate = prodvideo.VideoRateSum
+
+        //            });
+
+        //        }
+        //        return productvideo;
+        //    }
+        //}
+
+
+        public IEnumerable<ProductVideos> GetUserVideosList()
+        {
+            using (var context = new UniversityEntities())
+            {
+                // int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
+                int AssocitedCustID = Convert.ToInt32(HttpContext.Current.Session["AdminLoginID"]);
+                //var res = (from l in context.Login_tbl.Where(y => y.IsDeleted != true && y.ID == AssocitedCustID)
+                //           join cm in context.CategoryUserMapping.Where(y => y.IsDeleted != true && y.AdminID == AssocitedCustID)
+                //           on l.ID equals cm.AdminID
+                //           join c in context.SubCategoryMaster.Where(y => y.IsDeleted != true)
+                //           on cm.CategoryID equals c.Id
+                //           join p in context.Product.Where(y => y.IsDeleted != true)
+                //           on c.Id equals p.SubCategoryId
+                //           join pv in context.ProductVideos.Where(y => y.IsDeleted != true)
+                //           on p.Id equals pv.ProductId
+                //           orderby pv.CreatedDate
+                var res = (from p in context.Product.Where(y => y.IsDeleted != true && y.AssocitedCustID == AssocitedCustID)
+                            join s in context.SubCategoryMaster.Where(y => y.IsDeleted != true)
+                            on p.SubCategoryId equals s.Id
+                            join c in context.CategoryMaster.Where(y => y.IsDeleted != true)
+                            on s.CategoryId equals c.Id
+                               //group p by p.Id into g
+                           select new
+                           {
+                               p.Id,
+                               p.Title,
+                               subcatid = c.Id,
+                               c.Name,
+                               VideoRateSum = p.ProductVideos.Sum(x => x.VideoRate)
+                           }
+                           ).ToList();
+                List<ProductVideos> productvideo = new List<ProductVideos>();
+                foreach (var prodvideo in res)
+                {
+                    productvideo.Add(new ProductVideos
+                    {
+                        Id = prodvideo.Id,
+                        Title = prodvideo.Title,
+                        subcategoryname = prodvideo.Name,
+                        catid = prodvideo.subcatid,
+                        VideoRate = prodvideo.VideoRateSum
+
+                    });
+
+                }
+                return productvideo;
+            }
+        }
+
+
+
+
+
         public IEnumerable<ProductEntity> GetProductList()
         {
             using (var context = new UniversityEntities())
@@ -24,8 +117,11 @@ namespace University.Repository
                                on p.SubCategoryId equals s.Id
                                join c in context.CategoryMaster.Where(y => y.IsDeleted != true)
                                on s.CategoryId equals c.Id
+
+
                                select new ProductEntity()
                                {
+
                                    //AssocitedID = p.AssocitedID,
                                    Id = p.Id,
                                    //CategoryId = c.Id,
@@ -41,7 +137,10 @@ namespace University.Repository
                                    UpdatedBy = p.UpdatedBy,
                                    UpdatedDate = p.UpdatedDate,
                                    CategoryMaster = c,
-                                   SubCategoryMaster = s
+                                   SubCategoryMaster = s,
+                                  // ProductVideos = context.ProductVideos.Where(x => x.IsDeleted == false && x.AssocitedCustID== AdminID).ToList()
+                                   //VideoRateSum = p.ProductVideos.Sum(x => x.VideoRate)
+
                                }).OrderByDescending(y => y.CreatedDate).ToList();
                     return res;
                 }
@@ -626,6 +725,9 @@ namespace University.Repository
                     productVideoExising.UpdatedDate = DateTime.UtcNow;
                     productVideoExising.Title = productVideo.Title;
                     productVideoExising.Decription = productVideo.Decription;
+                    productVideoExising.VideoRate = productVideo.VideoRate;
+                    
+
                     if (!string.IsNullOrWhiteSpace(productVideo.VideoURL))
                     {
                         productVideoExising.VideoURL = productVideo.VideoURL;

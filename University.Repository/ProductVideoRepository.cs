@@ -24,8 +24,8 @@ namespace University.Repository
         {
             using (var context = new UniversityEntities())
             {
-                int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
-
+               int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
+                //int AssocitedCustID = Convert.ToInt32(HttpContext.Current.Session["AdminLoginID"]);
                 var res = (from l in context.Login_tbl.Where(y => y.IsDeleted != true && y.ID == UserID)
                            join cm in context.CategoryUserMapping.Where(y => y.IsDeleted != true && y.UserID == UserID)
                            on l.ID equals cm.UserID

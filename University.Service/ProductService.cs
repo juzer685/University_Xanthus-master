@@ -20,6 +20,14 @@ namespace University.Service
             _productRepository = productRepository;
 
         }
+        //public IEnumerable<Product> GetUserVideosList()
+        //{
+        //    return _productRepository.GetUserVideosList();
+        //}
+        public IEnumerable<ProductVideos> GetUserVideosList()
+        {
+            return _productRepository.GetUserVideosList();
+        }
 
         public IEnumerable<ProductEntity> GetProductList()
         {
@@ -96,6 +104,10 @@ namespace University.Service
         {
             return _productRepository.SaveProductVideo(productVideo);
         }
+        //public Decimal SaveProductVideoRate(ProductVideos productVideo)
+        //{
+        //    return _productRepository.SaveProductVideo(productVideo);
+        //}
         public bool DeleteProductVideo(Decimal productVideoId)
         {
             return _productRepository.DeleteProductVideo(productVideoId);

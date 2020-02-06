@@ -20,22 +20,41 @@ namespace University.UI.Areas.Admin.Controllers
         private ICategoryMasterService _categoryMasterService;
         private ISubCategoryService _subCategoryService;
         private IProductService _productService;
-        
+        //private IProductVideoService _productVideoService;
+
 
         public ProductController(ICategoryMasterService categoryMasterService, ISubCategoryService subCategoryService, IProductService productService)
         {
             _categoryMasterService = categoryMasterService;
             _subCategoryService = subCategoryService;
             _productService = productService;
+          //  _productVideoService = productVideoService;
+
         }
         // GET: Admin/Product
         public ActionResult Index()
         {
-            var res = _productService.GetProductList().ToList();
-            //res = res.Where(t => t.AssocitedID == Convert.ToInt32(Session["UserSessionIDs"])).ToList();
             
-            var viewModel = AutoMapper.Mapper.Map<List<ProductEntity>, List<ProductViewModel>>(res);
-            
+            //var res = _productService.GetProductList().ToList();
+            var res= _productService.GetUserVideosList().ToList();
+            List<ProductViewModel> productViewModel = new List<ProductViewModel>();
+            foreach (var prod in res)
+            {
+                    productViewModel.Add(new ProductViewModel
+                    {
+                        Id = prod.Id,
+                        Title = prod.Title,
+                        subcat = prod.subcategoryname,
+                        sumvideorate = prod.VideoRate
+                    });
+                
+            }
+
+            //  var  viewModel = AutoMapper.Mapper.Map<List<ProductEntity>, List<ProductViewModel>>(res);
+
+            var viewModel = productViewModel;
+
+
             return View(viewModel);
         }
         public ActionResult AddEditProduct(string ProductId)
@@ -334,6 +353,7 @@ namespace University.UI.Areas.Admin.Controllers
                 }
                 //model.isproductvideofiled = 1;
                 var productVideoId = _productService.SaveProductVideo(res);
+                //var productVideoRate = _productService.SaveProductVideoRate(res);
                 var productVideo = _productService.GetProductVideo(productVideoId);
                 var viewModel = AutoMapper.Mapper.Map<ProductVideos, ProductVideoViewModel>(productVideo);
                 if (viewModel == null) { viewModel = new ProductVideoViewModel(); }
@@ -343,7 +363,9 @@ namespace University.UI.Areas.Admin.Controllers
             {
                 model.AssocitedCustID = Convert.ToInt32(Session["AdminLoginID"]);
                 model.Id = Convert.ToDecimal(ProductVideoId);
+
                 var res = AutoMapper.Mapper.Map<ProductVideoViewModel, ProductVideos>(model);
+               
                 if (model.ProductVideo != null)
                 {
                     res.VideoURL = UploadFileOnServer(ProductImagePath, model.ProductVideo);
