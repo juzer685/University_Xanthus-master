@@ -8,6 +8,7 @@ namespace University.Data.CustomEntities
 {
     public class ProductEntity
     {
+        public decimal? VideoRateSum { get; set; }
         public Decimal Id { get; set; }
         public int? AssocitedCustID { get; set; }
         public string Title { get; set; }
