@@ -125,8 +125,7 @@
 
         // alert($("#ddlusrlst").val());
         $(document).ready(function () {
-
-
+            var fileOriginalIndex = "";
             //$('#SubCategoryTable').DataTable({
             //    "paging": true,
             //    "lengthChange": false,
@@ -205,6 +204,7 @@
                         $("#categoryheader").html("Edit Category");
                     }
                     $("#popupBody").html(data);
+                    fileOriginalIndex = $("#image-preview").attr('src');
                     $("#AddSubCategoryModal").modal('show');
                 }
             });
