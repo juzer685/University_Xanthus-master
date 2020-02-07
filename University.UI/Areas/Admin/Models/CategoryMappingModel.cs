@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using University.Data;
@@ -15,8 +15,9 @@ namespace University.UI.Areas.Admin.Models
         //public string FullName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        
+
         //CategoryId
+        //[Required(ErrorMessage = "Error: Must Choose a Country")]
         public decimal CategoryId { get; set; }
         public string CategoryName { get; set; }
         public List<Login_tbl> Logintbllst { get; set; }

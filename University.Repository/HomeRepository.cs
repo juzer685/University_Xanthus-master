@@ -21,7 +21,7 @@ namespace University.Repository
                 if (AdminID != 0)
                 {
 
-                    return context.HomeSlider.Include("Product").Where(y => y.IsDeleted != true ).OrderByDescending(y => y.CreatedDate).ToList();
+                    return context.HomeSlider.Include("Product").Where(y => y.IsDeleted != true).OrderByDescending(y => y.CreatedDate).ToList();
                 }
                 else
                 {
@@ -64,35 +64,35 @@ namespace University.Repository
             using (var context = new UniversityEntities())
             {
                 int AdminID = Convert.ToInt32(HttpContext.Current.Session["AdminLoginID"]);
-                
+
                 var slider = context.HomeSlider.FirstOrDefault(y => y.Id == model.Id && y.IsDeleted != true);
-                
-                    if (slider != null)
+
+                if (slider != null)
+                {
+                    slider.ProductId = model.ProductId;
+                    slider.AssocitedCustID = AdminID;
+                    slider.TextDescription = model.TextDescription;
+                    slider.Link = model.Link;
+                    slider.ImageALT = model.ImageALT;
+                    slider.IsDeleted = false;
+                    if (!string.IsNullOrWhiteSpace(model.ImageURL))
                     {
-                        slider.ProductId = model.ProductId;
-                        slider.AssocitedCustID = AdminID;
-                        slider.TextDescription = model.TextDescription;
-                        slider.Link = model.Link;
-                        slider.ImageALT = model.ImageALT;
-                        slider.IsDeleted = false;
-                        if (!string.IsNullOrWhiteSpace(model.ImageURL))
-                        {
-                            slider.ImageURL = model.ImageURL;
-                        }
-                        slider.UpdatedDate = DateTime.UtcNow;
-                        context.SaveChanges();
+                        slider.ImageURL = model.ImageURL;
                     }
-                    else
-                    {
-                        model.AssocitedCustID = AdminID;
-                        model.IsDeleted = false;
-                        model.CreatedDate = DateTime.UtcNow;
-                        context.HomeSlider.Add(model);
-                        context.SaveChanges();
-                    }
-                    return true;
-                
-               
+                    slider.UpdatedDate = DateTime.UtcNow;
+                    context.SaveChanges();
+                }
+                else
+                {
+                    model.AssocitedCustID = AdminID;
+                    model.IsDeleted = false;
+                    model.CreatedDate = DateTime.UtcNow;
+                    context.HomeSlider.Add(model);
+                    context.SaveChanges();
+                }
+                return true;
+
+
             }
         }
 
@@ -112,7 +112,7 @@ namespace University.Repository
                 if (AssocitedCustID != 0)
                 {
 
-                    return context.HomeBanner.Where(y => y.IsDeleted != null && y.IsDeleted != true ).OrderByDescending(y => y.UpdatedDate).FirstOrDefault();
+                    return context.HomeBanner.Where(y => y.IsDeleted != null && y.IsDeleted != true).OrderByDescending(y => y.UpdatedDate).FirstOrDefault();
 
                 }
                 else
@@ -131,13 +131,13 @@ namespace University.Repository
             using (var context = new UniversityEntities())
             {
                 int AssocitedCustID = Convert.ToInt32(HttpContext.Current.Session["AdminLoginID"]);
-                
+
                 var banner = context.HomeBanner.FirstOrDefault(y => y.Id == model.Id && y.IsDeleted != true);
 
                 if (banner != null)
                 {
                     banner.Description = model.Description;
-                   
+
                     banner.Title = model.Title;
                     banner.ImageALT = model.ImageALT;
                     banner.LinkTo = model.LinkTo;
@@ -192,7 +192,7 @@ namespace University.Repository
                 int AdminID = Convert.ToInt32(HttpContext.Current.Session["AdminLoginID"]);
                 if (AdminID != 0)
                 {
-                    var res = context.FAQ.Where(y => y.IsDeleted == false && y.AssocitedCustID == AdminID).OrderByDescending(y => y.CreatedDate ).ToList();
+                    var res = context.FAQ.Where(y => y.IsDeleted == false && y.AssocitedCustID == AdminID).OrderByDescending(y => y.CreatedDate).ToList();
                     return res.Select(y => new FAQ()
                     {
                         Id = y.Id,
@@ -205,7 +205,7 @@ namespace University.Repository
                 else
                 {
                     int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
-                    var res = context.FAQ.Where(y => y.IsDeleted != true ).OrderByDescending(y => y.CreatedDate).ToList();
+                    var res = context.FAQ.Where(y => y.IsDeleted != true).OrderByDescending(y => y.CreatedDate).ToList();
                     return res.Select(y => new FAQ()
                     {
                         Id = y.Id,
@@ -253,7 +253,7 @@ namespace University.Repository
                     {
                         faq.Question = model.Question;
                         faq.Answer = model.Answer;
-                        faq.AssocitedCustID = AdminID ;
+                        faq.AssocitedCustID = AdminID;
                         faq.IsDeleted = false;
 
 
@@ -361,6 +361,32 @@ namespace University.Repository
             using (var context = new UniversityEntities())
             {
                 int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
+                var res1 = (from l in context.Login_tbl.Where(y => y.IsDeleted != true && y.ID == UserID)
+                            join cm in context.CategoryUserMapping.Where(y => y.IsDeleted != true && y.UserID == UserID)
+                            on l.ID equals cm.UserID
+                            join c in context.SubCategoryMaster.Where(y => y.IsDeleted != true)
+                            on cm.CategoryID equals c.Id
+                            join p in context.Product.Where(y => y.IsDeleted != true)
+                            on c.Id equals p.SubCategoryId
+                            join pv in context.ProductVideos
+                            on p.Id equals pv.ProductId
+                            orderby p.CreatedDate
+                            group pv by pv.ProductId into g
+                            select new 
+                            { 
+                                g.Key, videosSum = g.ToList().Sum(x => x.VideoRate) 
+                            });
+                //select new { ProductId = pvs.Key, videos = pvs.ToList() });
+                            //var Productlst = new List<ProductEntity>();
+                            //foreach (var videos in res1)
+                            //{
+                            //    Productlst.Add(new ProductEntity
+                            //    {
+                            //        Id = videos.Key,
+                            //        VideoRateSum = videos.videosSum
+                            //    });
+                            //}
+                //int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
                 var res = (from l in context.Login_tbl.Where(y => y.IsDeleted != true && y.ID == UserID)
                            join cm in context.CategoryUserMapping.Where(y => y.IsDeleted != true && y.UserID == UserID)
                            on l.ID equals cm.UserID
@@ -368,10 +394,7 @@ namespace University.Repository
                            on cm.CategoryID equals c.Id
                            join p in context.Product.Where(y => y.IsDeleted != true)
                            on c.Id equals p.SubCategoryId
-                         
                            orderby p.CreatedDate
-
-
                            select new ProductEntity()
                            {
                                Id = p.Id,
@@ -386,14 +409,22 @@ namespace University.Repository
                                Title = p.Title,
                                UpdatedBy = p.UpdatedBy,
                                UpdatedDate = p.UpdatedDate,
+                               //VideoRateSum=p.sumvideorate,
                                //CategoryMaster = c,
-                              // SubCategoryMaster = s,
-                              // ProductUserGuide = guide,
+                               // SubCategoryMaster = s,
+                               // ProductUserGuide = guide,
                                Categorymapp = context.CategoryUserMapping.Where(x => x.IsDeleted != true && x.UserID == UserID).ToList(),
                                ProductVideos = context.ProductVideos.Where(x => x.IsDeleted != true).ToList(),
                                ProductDocuments = context.ProductDocuments.Where(x => x.IsDeleted != true).ToList()
                            }).ToList();
-                return res.OrderByDescending(x => x.CreatedDate).Take(6);
+
+                foreach (var item in res)
+                {
+                    item.VideoRateSum = res1.Where(x => x.Key == item.Id).Select(x => x.videosSum).FirstOrDefault(); 
+                }
+
+
+                return res;
             }
         }
         //public IEnumerable<ProductEntity> ListproductbyUserId()
