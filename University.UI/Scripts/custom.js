@@ -135,11 +135,12 @@ $(document).ready(function () {
             var _this = $(this);
             var fileExt = file.name.substr(file.name.lastIndexOf(".") + 1);
             if (fileExt.toUpperCase() != "gif".toUpperCase() && fileExt.toUpperCase() != "png".toUpperCase() && fileExt.toUpperCase() != "jpeg".toUpperCase() && fileExt.toUpperCase() != "jpg".toUpperCase()) {
+               // $('.overlaySizeAlert').css({ "visibility": "visible", "opacity": "1" });
                 $('.overlaySizeAlert').css({ "visibility": "visible", "opacity": "1" });
                 $(_this).val('');
                 $(_this).parent().find('img.imgStd').attr('src', fileOriginalIndex);
                 $("#DeleteImage").hide();
-                $("#file").val('');
+                $("#categoryfile").val('');
                 e.preventDefault();
                 return false;
             }

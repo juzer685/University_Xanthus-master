@@ -37,7 +37,7 @@ namespace University.UI.Areas.Admin.Models
                 }
             }
         }
-        public int?  cateuserid { get; set; }
+        public int? cateuserid { get; set; }
         public Decimal Id { get; set; }
         public string Title { get; set; }
         public string Decription { get; set; }
@@ -53,7 +53,10 @@ namespace University.UI.Areas.Admin.Models
         public Nullable<Decimal> UpdatedBy { get; set; }
         public HttpPostedFileBase ProductVideoImg { get; set; }
         public HttpPostedFileBase ProductVideo { get; set; }
-        public Decimal AssocitedCustID  { get; set; }
-        public decimal? VideoRate { get; set; }
+        public Decimal AssocitedCustID { get; set; }
+        public decimal VideoRate { get; set; }
+
+
+
     }
 }

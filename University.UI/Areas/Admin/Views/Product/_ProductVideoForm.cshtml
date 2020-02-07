@@ -9,12 +9,12 @@
             @Html.TextBoxFor(m => m.Title, new { @class = "form-control", @required = "required", @pattern = "^[^<>%$*@!#]*$", @title = "Special characters are not allowed." })
             @Html.ValidationMessageFor(m => m.Title)
         </div>
-        <div class="col">
-            @Html.TextBoxFor(m => m.VideoRate, new { @class = "form-control", @required = "required", @pattern = "^[^<>%$*@!#]*$" })
-          
+        <div class="col input-icon ">
+            @Html.TextBoxFor(m => m.VideoRate,"{0}", new { @class = "form-control", @required = "required"})
+            <i>$</i>
         </div>
         <div class="col">
-            @Html.TextAreaFor(m => m.Decription, new { @class = "form-control", rows = "1", @required = "required" })
+            @Html.TextAreaFor(m => m.Decription, new { @class = "form-control", rows = "1", @required = "required" ,})
             @Html.ValidationMessageFor(m => m.Decription)
         </div>
         @if (string.IsNullOrWhiteSpace(Model.VideoURL))

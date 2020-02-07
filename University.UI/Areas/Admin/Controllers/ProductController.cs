@@ -45,7 +45,7 @@ namespace University.UI.Areas.Admin.Controllers
                         Id = prod.Id,
                         Title = prod.Title,
                         subcat = prod.subcategoryname,
-                        sumvideorate = prod.VideoRate
+                        sumvideorate = prod.VideoRate ?? 0
                     });
                 
             }

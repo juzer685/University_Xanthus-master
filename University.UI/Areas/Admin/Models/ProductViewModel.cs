@@ -37,7 +37,7 @@ namespace University.UI.Areas.Admin.Models
             }
         }
         public Decimal Id { get; set; }
-        public decimal? sumvideorate { get; set; }
+        public decimal sumvideorate { get; set; }
         public string Title { get; set; }
         public string ImageURL { get; set; }
         public string subcat { get; set; }
