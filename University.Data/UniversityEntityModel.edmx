@@ -20,6 +20,7 @@
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CardType" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="CardTransactionDetails">
           <Key>
@@ -1611,6 +1612,7 @@
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Login_tbl" Relationship="UniversityModel.FK_CardDetails_Login_tbl" FromRole="CardDetails" ToRole="Login_tbl" />
+          <Property Name="CardType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="CardTransactionDetails">
           <Key>
@@ -2099,6 +2101,7 @@
           <EntitySetMapping Name="CardDetails">
             <EntityTypeMapping TypeName="UniversityModel.CardDetails">
               <MappingFragment StoreEntitySet="CardDetails">
+                <ScalarProperty Name="CardType" ColumnName="CardType" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />

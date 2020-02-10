@@ -11,6 +11,8 @@ namespace University.UI.Utilities
 {
     public class PaymentGatewayUtility
     {
+
+        //To make payment using credit card
 		public static createTransactionResponse MakePayment(String ApiLoginID, String ApiTransactionKey, PaymentGatewayVM PaymentGatewayVM)
 		{
 			System.Diagnostics.Debug.WriteLine("Charge Credit Card Sample");
@@ -92,6 +94,7 @@ namespace University.UI.Utilities
 			return response;
 		}
 
+        //To create customer profile on server
         public static createCustomerProfileResponse CreateCustomerProfile(string ApiLoginID, string ApiTransactionKey, string emailId, PaymentGatewayVM PaymentGatewayVM)
         {
             Console.WriteLine("Create Customer Profile Sample");
@@ -110,7 +113,8 @@ namespace University.UI.Utilities
             var creditCard = new creditCardType
             {
                 cardNumber = PaymentGatewayVM.CardNumber,
-                expirationDate = PaymentGatewayVM.MonthAndYear
+                expirationDate = PaymentGatewayVM.MonthAndYear,
+                cardCode = PaymentGatewayVM.CVV.ToString()
             };
 
             var bankAccount = new bankAccountType
@@ -203,6 +207,231 @@ namespace University.UI.Utilities
             }
 
             return response;
+        }
+
+        //Get saved customer profile from server
+        public static getCustomerProfileResponse GetCustomerProfile(String ApiLoginID, String ApiTransactionKey, string customerProfileId)
+        {
+            Console.WriteLine("Get Customer Profile sample");
+
+            ApiOperationBase<ANetApiRequest, ANetApiResponse>.RunEnvironment = AuthorizeNet.Environment.SANDBOX;
+            // define the merchant information (authentication / transaction id)
+            ApiOperationBase<ANetApiRequest, ANetApiResponse>.MerchantAuthentication = new merchantAuthenticationType()
+            {
+                name = ApiLoginID,
+                ItemElementName = ItemChoiceType.transactionKey,
+                Item = ApiTransactionKey,
+            };
+
+            var request = new getCustomerProfileRequest();
+            request.customerProfileId = customerProfileId;
+
+            // instantiate the controller that will call the service
+            var controller = new getCustomerProfileController(request);
+            controller.Execute();
+
+            // get the response from the service (errors contained if any)
+            var response = controller.GetApiResponse();
+
+            if (response != null && response.messages.resultCode == messageTypeEnum.Ok)
+            {
+                Console.WriteLine(response.messages.message[0].text);
+                Console.WriteLine("Customer Profile Id: " + response.profile.customerProfileId);
+
+                if (response.subscriptionIds != null && response.subscriptionIds.Length > 0)
+                {
+                    Console.WriteLine("List of subscriptions : ");
+                    for (int i = 0; i < response.subscriptionIds.Length; i++)
+                        Console.WriteLine(response.subscriptionIds[i]);
+                }
+
+            }
+            else if (response != null)
+            {
+                Console.WriteLine("Error: " + response.messages.message[0].code + "  " +
+                                  response.messages.message[0].text);
+            }
+
+            return response;
+        }
+
+        //Charge a saved customer profile directly on server by sending the profile Id
+        public static createTransactionResponse ChargeACustomerProfile(String ApiLoginID, String ApiTransactionKey, string customerProfileId,
+            string customerPaymentProfileId, decimal Amount)
+        {
+            Console.WriteLine("Charge Customer Profile");
+
+            ApiOperationBase<ANetApiRequest, ANetApiResponse>.RunEnvironment = AuthorizeNet.Environment.SANDBOX;
+
+            // define the merchant information (authentication / transaction id)
+            ApiOperationBase<ANetApiRequest, ANetApiResponse>.MerchantAuthentication = new merchantAuthenticationType()
+            {
+                name = ApiLoginID,
+                ItemElementName = ItemChoiceType.transactionKey,
+                Item = ApiTransactionKey
+            };
+
+            //create a customer payment profile
+            customerProfilePaymentType profileToCharge = new customerProfilePaymentType();
+            profileToCharge.customerProfileId = customerProfileId;
+            profileToCharge.paymentProfile = new paymentProfile { paymentProfileId = customerPaymentProfileId };
+
+            var transactionRequest = new transactionRequestType
+            {
+                transactionType = transactionTypeEnum.authCaptureTransaction.ToString(),    // refund type
+                amount = Amount,
+                profile = profileToCharge
+            };
+
+            var request = new createTransactionRequest { transactionRequest = transactionRequest };
+
+            // instantiate the collector that will call the service
+            var controller = new createTransactionController(request);
+            controller.Execute();
+
+            // get the response from the service (errors contained if any)
+            var response = controller.GetApiResponse();
+
+            // validate response
+            if (response != null)
+            {
+                if (response.messages.resultCode == messageTypeEnum.Ok)
+                {
+                    if (response.transactionResponse.messages != null)
+                    {
+                        Console.WriteLine("Successfully created transaction with Transaction ID: " + response.transactionResponse.transId);
+                        Console.WriteLine("Response Code: " + response.transactionResponse.responseCode);
+                        Console.WriteLine("Message Code: " + response.transactionResponse.messages[0].code);
+                        Console.WriteLine("Description: " + response.transactionResponse.messages[0].description);
+                        Console.WriteLine("Success, Auth Code : " + response.transactionResponse.authCode);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Failed Transaction.");
+                        if (response.transactionResponse.errors != null)
+                        {
+                            Console.WriteLine("Error Code: " + response.transactionResponse.errors[0].errorCode);
+                            Console.WriteLine("Error message: " + response.transactionResponse.errors[0].errorText);
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Failed Transaction.");
+                    if (response.transactionResponse != null && response.transactionResponse.errors != null)
+                    {
+                        Console.WriteLine("Error Code: " + response.transactionResponse.errors[0].errorCode);
+                        Console.WriteLine("Error message: " + response.transactionResponse.errors[0].errorText);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Error Code: " + response.messages.message[0].code);
+                        Console.WriteLine("Error message: " + response.messages.message[0].text);
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("Null Response.");
+            }
+
+            return response;
+        }
+
+
+        //Create a new customer payment profile on server
+        public static ANetApiResponse CreateNewPaymentProfile(string ApiLoginID, string ApiTransactionKey, string customerProfileId, PaymentGatewayVM PaymentGatewayVM)
+        {
+            Console.WriteLine("Create Customer Payment Profile Sample");
+
+            // set whether to use the sandbox environment, or production enviornment
+            ApiOperationBase<ANetApiRequest, ANetApiResponse>.RunEnvironment = AuthorizeNet.Environment.SANDBOX;
+
+            // define the merchant information (authentication / transaction id)
+            ApiOperationBase<ANetApiRequest, ANetApiResponse>.MerchantAuthentication = new merchantAuthenticationType()
+            {
+                name = ApiLoginID,
+                ItemElementName = ItemChoiceType.transactionKey,
+                Item = ApiTransactionKey,
+            };
+
+            //var bankAccount = new bankAccountType
+            //{
+            //    accountNumber = "01245524321",
+            //    routingNumber = "000000204",
+            //    accountType = bankAccountTypeEnum.checking,
+            //    echeckType = echeckTypeEnum.WEB,
+            //    nameOnAccount = "test",
+            //    bankName = "Bank Of America"
+            //};
+            var creditCard = new creditCardType
+            {
+                cardNumber = PaymentGatewayVM.CardNumber,
+                expirationDate = PaymentGatewayVM.MonthAndYear,
+                cardCode = PaymentGatewayVM.CVV.ToString()
+            };
+            paymentType echeck = new paymentType { Item = creditCard };
+
+            var billTo = new customerAddressType
+            {
+                firstName = "John",
+                lastName = "Snow"
+            };
+            customerPaymentProfileType echeckPaymentProfile = new customerPaymentProfileType();
+            echeckPaymentProfile.payment = echeck;
+            echeckPaymentProfile.billTo = billTo;
+
+            var request = new createCustomerPaymentProfileRequest
+            {
+                customerProfileId = customerProfileId,
+                paymentProfile = echeckPaymentProfile,
+                validationMode = validationModeEnum.none
+            };
+
+            // instantiate the controller that will call the service
+            var controller = new createCustomerPaymentProfileController(request);
+            controller.Execute();
+
+            // get the response from the service (errors contained if any)
+            createCustomerPaymentProfileResponse response = controller.GetApiResponse();
+
+            // validate response 
+            if (response != null)
+            {
+                if (response.messages.resultCode == messageTypeEnum.Ok)
+                {
+                    if (response.messages.message != null)
+                    {
+                        Console.WriteLine("Success! Customer Payment Profile ID: " + response.customerPaymentProfileId);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Customer Payment Profile Creation Failed.");
+                    Console.WriteLine("Error Code: " + response.messages.message[0].code);
+                    Console.WriteLine("Error message: " + response.messages.message[0].text);
+                    if (response.messages.message[0].code == "E00039")
+                    {
+                        Console.WriteLine("Duplicate Payment Profile ID: " + response.customerPaymentProfileId);
+                    }
+                }
+            }
+            else
+            {
+                if (controller.GetErrorResponse().messages.message.Length > 0)
+                {
+                    Console.WriteLine("Customer Payment Profile Creation Failed.");
+                    Console.WriteLine("Error Code: " + response.messages.message[0].code);
+                    Console.WriteLine("Error message: " + response.messages.message[0].text);
+                }
+                else
+                {
+                    Console.WriteLine("Null Response.");
+                }
+            }
+
+            return response;
+
         }
     }
 }

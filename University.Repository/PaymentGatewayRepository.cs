@@ -43,5 +43,20 @@ namespace University.Repository
                 return false;
             }
         }
+
+        public List<CardDetails> GetCardDetails(int UserId)
+        {
+            try
+            {
+                using (var context = new UniversityEntities())
+                {
+                    return context.CardDetails.Where(x => x.CreatedBy == UserId).ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                return new List<CardDetails>();
+            }
+        }
     }
 }

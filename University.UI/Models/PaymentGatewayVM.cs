@@ -34,5 +34,13 @@ namespace University.UI.Models
                 return Month > 9 ? Month.ToString() + Year.ToString() : "0" + Month.ToString() + Year.ToString();
             }
         }
+
+        public string DBCardNumber
+        {
+            get
+            {
+                return "XXXXXXXXXXXX" + CardNumber.Substring(CardNumber.Length - 4);
+            }
+        }
     }
 }

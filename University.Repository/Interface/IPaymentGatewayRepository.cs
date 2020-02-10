@@ -11,5 +11,6 @@ namespace University.Repository.Interface
     {
         bool SaveTransactionDetails(CardTransactionDetails CardTransactionDetail);
         bool SaveCardDetails(CardDetails CardDetails);
+        List<CardDetails> GetCardDetails(int UserId);
     }
 }

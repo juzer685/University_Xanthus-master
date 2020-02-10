@@ -1,0 +1,76 @@
+﻿@model List<University.UI.Models.CardListVM>
+
+@{
+    ViewBag.Title = "CardList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section styles{
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+}
+
+
+<div class="container">
+    <h2>Saved Card List</h2>
+    <div class="panel-group" id="accordion">
+        @foreach (var Card in Model)
+        {
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        @Html.Hidden("CustomerProfileId", Card.CustomerProfileId, new { @class = "CustomerProfileId" })
+                        @Html.Hidden("CustomerPaymentProfileId", Card.CustomerPaymentProfileId, new { @class = "CustomerPaymentProfileId" })
+                        <input type="radio" name="radioCardNumber"><a data-toggle="collapse" data-parent="#accordion" href="#collapse1">@Card.CardNumber</a>
+                    </h4>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label for="CVV">CVV</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-credit-card"></i></span>
+                                    @Html.TextBox("CVV", "", new { @class = "form-control", placeholder = "CVV" })
+                                </div>
+                            </div> <!-- input-group.// -->
+                        </div> <!-- form-group.// -->
+                        <button class="subscribe btn btn-primary btn-block btnPaymentGateway">PAY(@Card.Amount)</button>
+                    </div>
+                </div>
+            </div>
+
+        }
+        @*<div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Collapsible Group 2</a>
+                    </h4>
+                </div>
+                <div id="collapse2" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Collapsible Group 3</a>
+                    </h4>
+                </div>
+                <div id="collapse3" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                    </div>
+                </div>
+            </div>*@
+
+    </div>
+</div>
+
+
+@section scripts{
+    <script src="~/Scripts/jsCardList.js"></script>
+}

@@ -26,5 +26,10 @@ namespace University.Service
         {
             return _PaymentGatewayRepository.SaveCardDetails(CardDetails);
         }
+
+        public List<CardDetails> GetCardDetails(int UserId)
+        {
+            return _PaymentGatewayRepository.GetCardDetails(UserId);
+        }
     }
 }

@@ -84,7 +84,10 @@ namespace University.UI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SaveCardDetails(PaymentGatewayVM PaymentGatewayVM)
         {
-            createCustomerProfileResponse response = PaymentGatewayUtility.CreateCustomerProfile(ConfigurationManager.AppSettings["ApiLoginID"], ConfigurationManager.AppSettings["ApiTransactionKey"], Session["AdminEmail"].ToString(), PaymentGatewayVM);
+            //getCustomerProfileResponse CustomerProfile = PaymentGatewayUtility.GetCustomerProfile(ConfigurationManager.AppSettings["ApiLoginID"], ConfigurationManager.AppSettings["ApiTransactionKey"], "1510518453");
+            
+            var response = PaymentGatewayUtility.CreateCustomerProfile(ConfigurationManager.AppSettings["ApiLoginID"], ConfigurationManager.AppSettings["ApiTransactionKey"], Session["AdminEmail"].ToString(), PaymentGatewayVM);
+           
             if (response.messages.resultCode == messageTypeEnum.Ok)
             {
                 if (response.messages.message != null)
@@ -92,12 +95,13 @@ namespace University.UI.Controllers
                     bool TransResult = _PaymentGatewayService.SaveCardDetails(new CardDetails
                     {
                         CardHolderName = PaymentGatewayVM.CardHolderName,
-                        CardNumber = PaymentGatewayVM.CardNumber,
+                        CardNumber = PaymentGatewayVM.DBCardNumber,
                         ExpiryMonth = PaymentGatewayVM.Month,
                         ExpiryYear = PaymentGatewayVM.Year,
                         CustomerProfileId = response.customerProfileId,
                         PaymentProfileId = response.customerPaymentProfileIdList[0],
                         ShippingProfileId = response.customerShippingAddressIdList[0],
+                        //CardType = response.,
                         //change for user to userloginid
                         CreatedBy = Convert.ToInt32(Session["AdminLoginID"]),
                         CreatedDate = DateTime.Now,
@@ -107,6 +111,52 @@ namespace University.UI.Controllers
                     if (TransResult)
                     {
                         return Json(new { result = true, Message = "Transaction succeded" });
+                    }
+                    else
+                    {
+                        return Json(new { result = false, Message = "Transaction Failed" });
+                    }
+                }
+                else
+                {
+                    return Json(new { result = false, Message = "Transaction Failed" });
+                }
+            }
+            else
+            {
+                return Json(new { result = false, Message = "Transaction Failed" });
+            }
+        }
+
+        //change to user login id for user
+        [HttpGet]
+        public ActionResult GetCardList()
+        {
+            List<CardListVM> ListVM = new List<CardListVM>();
+            var lst = _PaymentGatewayService.GetCardDetails(Convert.ToInt32(Session["AdminLoginID"]));
+            foreach (var card in lst)
+            {
+                ListVM.Add(new CardListVM {
+                    CardNumber = card.CardNumber,
+                    CustomerProfileId = card.CustomerProfileId,
+                    CustomerPaymentProfileId = card.PaymentProfileId,
+                    Amount = 50
+                });
+            }
+            return View("CardList", ListVM);
+        }
+
+        [HttpPost]
+        public ActionResult MakePaymentUsingProfile(CardListVM CardListVM)
+        {
+            createTransactionResponse response = PaymentGatewayUtility.ChargeACustomerProfile(ConfigurationManager.AppSettings["ApiLoginID"], ConfigurationManager.AppSettings["ApiTransactionKey"], CardListVM.CustomerProfileId, CardListVM.CustomerPaymentProfileId, 50);
+            if (response != null)
+            {
+                if (response.messages.resultCode == messageTypeEnum.Ok)
+                {
+                    if (response.transactionResponse.messages != null)
+                    {
+                        return Json(new { result = true, Message = "Transaction Successful" });
                     }
                     else
                     {
