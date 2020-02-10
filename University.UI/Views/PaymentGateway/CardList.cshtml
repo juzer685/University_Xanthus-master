@@ -6,7 +6,7 @@
 }
 
 @section styles{
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">*@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 }
@@ -22,13 +22,13 @@
                     <h4 class="panel-title">
                         @Html.Hidden("CustomerProfileId", Card.CustomerProfileId, new { @class = "CustomerProfileId" })
                         @Html.Hidden("CustomerPaymentProfileId", Card.CustomerPaymentProfileId, new { @class = "CustomerPaymentProfileId" })
-                        <input type="radio" name="radioCardNumber"><a data-toggle="collapse" data-parent="#accordion" href="#collapse1">@Card.CardNumber</a>
+                        <input type="radio" name="radioCardNumber"><a data-toggle="collapse" data-parent="#accordion" href="#collapse1"> @Card.CardNumber</a>
                     </h4>
                 </div>
                 <div id="collapse1" class="panel-collapse collapse in">
                     <div class="panel-body">
                         <div class="form-group">
-                            <label for="CVV">CVV</label>
+                            <label for="CVV">CVV:</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fa fa-credit-card"></i></span>
@@ -36,7 +36,7 @@
                                 </div>
                             </div> <!-- input-group.// -->
                         </div> <!-- form-group.// -->
-                        <button class="subscribe btn btn-primary btn-block btnPaymentGateway">PAY(@Card.Amount)</button>
+                        <button class="btn btn-primary btnPaymentGateway">PAY(@Card.Amount)</button>
                     </div>
                 </div>
             </div>
