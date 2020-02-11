@@ -30,15 +30,16 @@
             <div class="col-md-12">
                 <div class="card card-primary card-tabs">
                     <div class="card-header p-0 pt-1">
-                        <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
-                            <li class="nav-item" id="basicdeatils"><a class="nav-link active" data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadProductBasicDetails">Basic Details</a></li>
-                            <li class="nav-item" ><a id="userguide" class="nav-link" data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadProductUserGuide">User Guide</a></li>
-                            <li class="nav-item" ><a id="video" class="nav-link" data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductVideos"> Videos</a></li>
-                            <li class="nav-item" ><a id="FAQ" class="nav-link" data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductFAQ"> FAQ</a></li>
-                            <li class="nav-item" ><a id="spec" class="nav-link" data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadProductSpecifiction"> Spec</a></li>
-                            <li class="nav-item" ><a id="howto" class="nav-link" data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductDocuments"> How To</a></li>
+                        <ul class="nav nav-tabs tab" id="custom-tabs-one-tab" role="tablist">
+                            <li class="nav-item " id="basicdeatils"><a class="nav-link active" data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadProductBasicDetails">Basic Details</a></li>
+                            <li class="nav-item "><a id="userguide" class="nav-link" data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadProductUserGuide">User Guide</a></li>
+                            <li class="nav-item disabled"><a id="video" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductVideos"> Videos</a></li>
+                            <li class="nav-item disabled"><a id="FAQ" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductFAQ"> FAQ</a></li>
+                            <li class="nav-item disabled"><a id="spec" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadProductSpecifiction"> Spec</a></li>
+                            <li class="nav-item disabled"><a id="howto" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductDocuments"> How To</a></li>
                         </ul>
-                    </div>
+
+                        </div>
                     <!-- /.card-header -->
                     <div class="card-body">
                         <input type="hidden" id="HdProductId" value="@Model.Id" />
@@ -65,11 +66,17 @@
 <script>
         var baseURL = "/Admin/Product/";
         var blankId = '@Guid.Empty';
-        $(document).ready(function () {
+    $(document).ready(function () {
+            $('#userguide').attr("class", "nav-link disabled");
+             //$("#userguide").addClass("disabled");
+             $("#video").addClass("disabled");
+             $("#FAQ").addClass("disabled");
+             $("#spec").addClass("disabled");
+             $("#howto").addClass("disabled");
             //$('#myTab').tab();
             $(document).on('submit', '[name=ProductForm]', function (e) {
                 // code
-                $('#BasicDeatilsAssocitedID').val($("#ddlusrlst").val());
+                //$('#BasicDeatilsAssocitedID').val($("#ddlusrlst").val());
             // alert($("#ddlusrlst").val());
                 var form = $(this);
                 var url = form.attr('action');
@@ -89,6 +96,11 @@
                         $("#Id").val(data);
                         _showSuccessMessage("Data Saved Successfully");
                         setTimeout(function () { $('#userguide').trigger('click'); }, 1500);
+                        $('#userguide').removeClass("disabled");
+                        $("#video").removeClass("disabled");
+                        $("#FAQ").removeClass("disabled");
+                        $("#spec").removeClass("disabled");
+                        $("#howto").removeClass("disabled");
                         //Cancel();
                         //$("#frmDiv").html(data);
                     }
@@ -96,14 +108,18 @@
 
                 e.preventDefault();
             });
-            $("")
+            
 
             $('[data-toggle="tab"]').click(function (e) {
                 e.preventDefault();
                 var loadurl = $(this).attr('href');
                 var targ = $(this).attr('data-target');
                 var HdProductId = $("#HdProductId").val();
-                if (HdProductId == "0") { _showErrorMessage("Please Save Product Basic Details First!"); return false; }
+                //if (HdProductId == "0")
+                //{
+                //    _showErrorMessage("Please Save Product Basic Details First!");
+                //    return false;
+                //}
                 $.get(loadurl + "?productId=" + HdProductId, function (data) {
                     $(targ).html(data);
                 });
@@ -150,7 +166,7 @@
                 contentType: false,
                 processData: false,
                 success: function (data) {
-                    
+
                     //alert("Data Saved Successfully");
                     _showSuccessMessage("Data Saved Successfully");
                     setTimeout(function () { $('#howto').trigger('click'); }, 1500);
@@ -161,7 +177,7 @@
         }
     function SaveProductUserGuide(e) {
         $('#ProductUserGuideAssocitedID').val($("#ddlusrlst").val());
-        
+
             var form = $(e.target);
             var url = form.attr('action');
             var formData = new FormData($(e.target)[0]);

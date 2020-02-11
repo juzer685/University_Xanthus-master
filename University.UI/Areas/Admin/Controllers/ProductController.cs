@@ -59,6 +59,7 @@ namespace University.UI.Areas.Admin.Controllers
         }
         public ActionResult AddEditProduct(string ProductId)
         {
+            Session["ProductID"] = ProductId;
             ProductViewModel viewModel;
             if (!string.IsNullOrEmpty(ProductId))
             {
@@ -112,6 +113,7 @@ namespace University.UI.Areas.Admin.Controllers
         //}
         public ActionResult SaveProduct(ProductViewModel model, HttpPostedFileBase file)
         {
+            //Session["ProductID"] = model.Id;
             if (model.Id == 0)
             {
                 var res = AutoMapper.Mapper.Map<ProductViewModel, ProductEntity>(model);
@@ -121,6 +123,7 @@ namespace University.UI.Areas.Admin.Controllers
                 }
                 res.AssocitedCustID = Convert.ToInt32(Session["AdminLoginID"]);
                 var productId = _productService.AddUpdateProductBasic(res);
+                Session["ProductID"] = productId;
                 return Json(productId, JsonRequestBehavior.AllowGet);
             }
             else
@@ -132,6 +135,7 @@ namespace University.UI.Areas.Admin.Controllers
                 }
                 res.AssocitedCustID = Convert.ToInt32(Session["AdminLoginID"]);
                 var productId = _productService.AddUpdateProductBasic(res);
+                Session["ProductID"] = productId;
                 return Json(productId, JsonRequestBehavior.AllowGet);
 
             }

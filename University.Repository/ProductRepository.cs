@@ -79,7 +79,7 @@ namespace University.Repository
                                p.Id,
                                p.Title,
                                subcatid = c.Id,
-                               c.Name,
+                               s.Name,
                                VideoRateSum = p.ProductVideos.Sum(x => x.VideoRate)
                            }
                            ).ToList();
@@ -390,6 +390,7 @@ namespace University.Repository
                     Productobj.SubCategoryId = model.SubCategoryId;
                     Productobj.ImageALT = model.ImageALT;
                     Productobj.AssocitedCustID = model.AssocitedCustID;
+                    Productobj.IsDeleted = false;
                     context.Product.Add(Productobj);
                     context.SaveChanges();
                     return Productobj.Id;

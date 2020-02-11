@@ -14,6 +14,7 @@
     <link href="~/plugins/fontawesome-free/css/fontawesome.min.css" rel="stylesheet" />
     <link href="~/dist/css/adminlte.min.css" rel="stylesheet" />
     <link href="~/plugins/fontawesome-free/css/all.min.css" rel="stylesheet" />
+    
 </head>
 <style>
 
@@ -134,53 +135,51 @@
         overflow: hidden;
         transition: max-height 0.2s ease-out;
     }
-   
-    .has-img{
-       height:200px;
-    background-size: cover;
-    object-fit:scale-down;
-    }
-   
-    .imguser
-    {
 
-        
-    background-size: cover;
-    object-fit:cover;
-    vertical-align:top;
+    .has-img {
+        height: 200px;
+        background-size: cover;
+        object-fit: scale-down;
     }
-    .mailbox-attachment-icon.has-img>img {
-    height:-webkit-fill-available;
-    max-width: 100%;
-}
+
+    .imguser {
+        background-size: cover;
+        object-fit: cover;
+        vertical-align: top;
+    }
+
+    .mailbox-attachment-icon.has-img > img {
+        height: -webkit-fill-available;
+        max-width: 100%;
+    }
 
     /*Videoratedollersymbol*/
-.dollar{
-	display:inline-block;
-	position: relative;
-	}
-.dollar a{
-	padding-left:15px;
-	}
-.dollar:before {
-	position: absolute;
-    content:"$";
-    left:5px;
-	top:8px;
- 	}
+    .dollar {
+        display: inline-block;
+        position: relative;
+    }
 
-    
+        .dollar a {
+            padding-left: 15px;
+        }
+
+        .dollar:before {
+            position: absolute;
+            content: "$";
+            left: 5px;
+            top: 8px;
+        }
 </style>
 @*<div>
-    <div class="timeline-item">
-        <div class="timeline-item timeline-body logoBanner">
-            <span class="img-container ">
-                <img class="logoBannerr" src="~/Images/university-logo.png" alt="slide" width="140" onerror="this.onerror = null; this.src ='~/images~/Images/NoImageAvailable.jpg'">
-            </span>
+        <div class="timeline-item">
+            <div class="timeline-item timeline-body logoBanner">
+                <span class="img-container ">
+                    <img class="logoBannerr" src="~/Images/university-logo.png" alt="slide" width="140" onerror="this.onerror = null; this.src ='~/images~/Images/NoImageAvailable.jpg'">
+                </span>
 
+            </div>
         </div>
-    </div>
-</div>*@
+    </div>*@
 
 
 @*@if (Model.HomeBanners.Count() > 0)
@@ -191,16 +190,16 @@
         <div class="card-body">
             <div id="carouselExampleIndicators" class="carousel slide imgbox clearfix" data-ride="carousel">
                 @*<ol class="carousel-indicators">
-                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                   
-                </ol>*@
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+
+                    </ol>*@
                 <div class="carousel-inner" style="height:250px">
                     @{ int i = 0;}
                     @foreach (var item in Model.HomeBanners)
-                        {
-                            i++;
-                            var active = i == 1 ? "active" : "";
+                    {
+                        i++;
+                        var active = i == 1 ? "active" : "";
                         <div class="carousel-item @active">
                             @*<img class="img-responsive img-rounded" src="~/images/training1.png" alt="slide" width="100%" style="cursor:pointer" onerror="this.onerror = null; this.src = '/images/noimageavailable.jpg';">*@
                             @*<img class="img-responsive img-rounded" src="@item.ImageURL" alt="slide" width="100%" onclick="window.location.href='/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(item.ProductId.ToString(), System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])'" style="cursor:pointer" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';">*@
@@ -227,22 +226,22 @@
     <div class="container">
         <div class="pageBlock">
             @*<div class="titleBlock" style="background-color:white;">
-            <div class="">
-                <p class="titleTxt">
-                    Welcome back
-                    @if (Session["CustomerName"] != null)
-                    {
-                        @Session["CustomerName"].ToString()
-                    }!
-                </p>
-                <p class="lastView">Last viewed: <span>@Model.LastViewedProduct</span></p>
-            </div>
-        </div>*@
-            @if (Model.BannerImage.ImageURL != null )
+                    <div class="">
+                        <p class="titleTxt">
+                            Welcome back
+                            @if (Session["CustomerName"] != null)
+                            {
+                                @Session["CustomerName"].ToString()
+                            }!
+                        </p>
+                        <p class="lastView">Last viewed: <span>@Model.LastViewedProduct</span></p>
+                    </div>
+                </div>*@
+            @if (Model.BannerImage.ImageURL != null)
             {
-               <div class="bannerContainer" style="text-align:center">
-                <img class="meter-icon" src="@Model.BannerImage.ImageURL" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" alt="slide" style="cursor:pointer;width:200px;">
-                @*<img class="meter-icon" src="~/Images/Training2.png" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" onclick="" alt="slide" style="cursor:pointer;width:200px;">*@
+                <div class="bannerContainer" style="text-align:center">
+                    <img class="meter-icon" src="@Model.BannerImage.ImageURL" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" alt="slide" style="cursor:pointer;width:200px;">
+                    @*<img class="meter-icon" src="~/Images/Training2.png" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" onclick="" alt="slide" style="cursor:pointer;width:200px;">*@
                 </div>
             }
 
@@ -261,13 +260,13 @@
             </div>
             <br />
             <!-- /.card-body -->
-           
 
-    <div class="card-footer bg-white ">
-        <ul class="mailbox-attachments d-flex align-items-stretch clearfix imgbox ">
-                @foreach (var product in Model.Products)
+
+            <div class="card-footer bg-white" >
+                <ul class="mailbox-attachments d-flex align-items-stretch clearfix imgbox ">
+                    @foreach (var product in Model.Products)
                     {
-                        <li class="openpop" >
+                        <li class="openpop temp" data-toggle="popover">
                             <span class="mailbox-attachment-icon has-img">
                                 <img class="imguser" src="~/Uploads/Product/@product.ImageURL" alt="Attachment">
                             </span>
@@ -280,115 +279,153 @@
                             </div>
                         </li>
                     }
-            
-            </ul>
-        </div>
+                </ul>
+            </div>
 
-    @*<div class="productListingContent">
-            <div class="row">
+            @*<div class="productListingContent">
+                    <div class="row">
 
-                @foreach (var product in Model.Products)
-                {
-                    <div class="col-md-4">
-                        <div class="productContent">
-                            <div class="productImage background-product">
-                                    <a class="innerContent" href="/Products/ProductsById?ProductId=@product.Id">@product.Title </a>
-                                    <img class="arrow-icon" src="~/Uploads/Product/@product.ImageURL" alt="slide" width="100%">
+                        @foreach (var product in Model.Products)
+                        {
+                            <div class="col-md-4">
+                                <div class="productContent">
+                                    <div class="productImage background-product">
+                                            <a class="innerContent" href="/Products/ProductsById?ProductId=@product.Id">@product.Title </a>
+                                            <img class="arrow-icon" src="~/Uploads/Product/@product.ImageURL" alt="slide" width="100%">
+
+                                        </div>
+                                    <div class="productImage background-product">
+                                        <a class="listitemProductName" href="/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(product.Id.ToString(),System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])">
+                                            <img class="" src="~/Uploads/Product/@product.ImageURL" alt="slide" width="100%" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';">
+                                        </a>
+                                    </div>
+                                    <div class="productDetails" style="text-align:center">
+                                        <div class="productName">
+                                            <a class="listitemProductName" href="/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(product.Id.ToString(),System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])">
+                                                <h2> @product.Title</h2>
+                                            </a>
+                                        </div>
+                                    </div>
 
                                 </div>
-                            <div class="productImage background-product">
-                                <a class="listitemProductName" href="/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(product.Id.ToString(),System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])">
-                                    <img class="" src="~/Uploads/Product/@product.ImageURL" alt="slide" width="100%" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';">
-                                </a>
                             </div>
-                            <div class="productDetails" style="text-align:center">
-                                <div class="productName">
-                                    <a class="listitemProductName" href="/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(product.Id.ToString(),System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])">
-                                        <h2> @product.Title</h2>
-                                    </a>
-                                </div>
+                        }
+                    </div>
+                </div>*@
+            @*<div class="aboutBlock">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 col-md-5">
+                                <div class="aboutTitle">About IPS University</div>
+                                <p>IPS University is an online learning resource center that provides 24/7 access to self-service training including maintenance how-to videos, technical manuals, and more. Become a pro with all the information you need to keep your IPS Smart Meters running at optimum performance. </p>
+                                <a href="/Home/about">Continue reading <img class="arrow-icon" src="/images/arrow-icon.png" alt="slide" width="18" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';"></a>
                             </div>
-
                         </div>
                     </div>
-                }
-            </div>
-        </div>*@
-    @*<div class="aboutBlock">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 col-md-5">
-                        <div class="aboutTitle">About IPS University</div>
-                        <p>IPS University is an online learning resource center that provides 24/7 access to self-service training including maintenance how-to videos, technical manuals, and more. Become a pro with all the information you need to keep your IPS Smart Meters running at optimum performance. </p>
-                        <a href="/Home/about">Continue reading <img class="arrow-icon" src="/images/arrow-icon.png" alt="slide" width="18" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';"></a>
+                </div>*@
+            @*<div class="titleBlock feedback" style="margin-top:20px; background-color: white;">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 col-md-12">
+                                <p class="titleTxt">Feedback</p><br />
+                                <p class="lastView">Feedback! Ideas for improvements? Or just want to chat about possiblties? Use the form  stylbelow to connect.</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>*@
-    @*<div class="titleBlock feedback" style="margin-top:20px; background-color: white;">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 col-md-12">
-                        <p class="titleTxt">Feedback</p><br />
-                        <p class="lastView">Feedback! Ideas for improvements? Or just want to chat about possiblties? Use the form  stylbelow to connect.</p>
+                </div>*@
+            @*<div class="row">
+                    <div class="col-md-12">
+                         textarea
+                        <div class="form-group " style="margin-top: 10px;">
+
+                            <textarea value="Feedback" id="txtFeedback" class="form-control textAreaBox" rows="8" placeholder="I would love if you guys could show me an example of how..."></textarea>
+                        </div>
+                        <div style="text-align:center">
+                            <button id="btnSubmit" class="btn-primary" type="button">Submit</button>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>*@
-    @*<div class="row">
-            <div class="col-md-12">
-                 textarea
-                <div class="form-group " style="margin-top: 10px;">
-
-                    <textarea value="Feedback" id="txtFeedback" class="form-control textAreaBox" rows="8" placeholder="I would love if you guys could show me an example of how..."></textarea>
-                </div>
-                <div style="text-align:center">
-                    <button id="btnSubmit" class="btn-primary" type="button">Submit</button>
-                </div>
-            </div>
-        </div>*@
-    @*<div class="accordionBlock faq" style="background-color:white;margin-top:10px;">
-            <div class="titleBlock">
-                <div class="container">
-                    <p class="titleTxt black">FAQ</p>
-                </div>
-            </div>
-
-            <div class="productInfo container">
-                @foreach (var item in Model.ProductFAQs)
-                {
-                    <button class="accordion">@item.Question</button>
-                    <div class="panel">
-                        <p>@item.Answer</p>
-
+                </div>*@
+            @*<div class="accordionBlock faq" style="background-color:white;margin-top:10px;">
+                    <div class="titleBlock">
+                        <div class="container">
+                            <p class="titleTxt black">FAQ</p>
+                        </div>
                     </div>
-                }
-            </div>
-        </div>*@
 
-    @*<div class="accordionBlock faq" style="background-color:white;margin-top:10px;">
-            <div class="titleBlock">
-                <div class="container">
-                    <p class="titleTxt black">FAQ</p>
-                </div>
-            </div>
+                    <div class="productInfo container">
+                        @foreach (var item in Model.ProductFAQs)
+                        {
+                            <button class="accordion">@item.Question</button>
+                            <div class="panel">
+                                <p>@item.Answer</p>
 
-            <div class="productInfo container">
-                @foreach (var item in Model.ProductFAQs)
-                {
-                    <button class="accordion">@item.Question</button>
-                    <div class="panel">
-                        <p>@item.Answer</p>
-
+                            </div>
+                        }
                     </div>
-                }
-            </div>
-        </div>*@
+                </div>*@
 
-    </div>
+            @*<div class="accordionBlock faq" style="background-color:white;margin-top:10px;">
+                    <div class="titleBlock">
+                        <div class="container">
+                            <p class="titleTxt black">FAQ</p>
+                        </div>
+                    </div>
+
+                    <div class="productInfo container">
+                        @foreach (var item in Model.ProductFAQs)
+                        {
+                            <button class="accordion">@item.Question</button>
+                            <div class="panel">
+                                <p>@item.Answer</p>
+
+                            </div>
+                        }
+                    </div>
+                </div>*@
+
+           
+
+
+
+        </div>
     </div>
 </div>
 <script>
+    $(document).ready(function () {
+        $('[data-toggle="popover"]').popover({
+            placement: 'right',
+            trigger: 'hover',
+            width: '500px',
+            html: true
+        })
+        setdata();
+    });
+
+    function setdata() {
+
+        var obj = "<div class='quick-view-box--box--3cUtO popover--popover--1sy7H model' data-purpose='popper' id='popper0' style='position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(806px, 1000px, 0px);' data-placement='right'>" +
+            "<div class='popover--popper-content--2CJqQ'>" +
+            "<div class='popover--body--2JJmm'>" +
+            "<div class=''>" +
+            "<div id='quick-view-box'>" +
+            "<div class='regular text-midnight-lighter quick-view-box--top--26Tmi'>" +
+            "<span class='dib a11 mt10 mb10 quick-view-box--published-above--1JvM3'><b>Description:</b>@foreach(var product in Model.Products){<span>@product.Title</span>}</span>" +
+            "<button type='button' class='add-to-cart btn btn-lg btn-primary' style='width: 100%;'><span class='add-to-cart'><span class='add-to-cart'>Add to cart</span></span></button></div>" +
+            "<button id='wishlist-button--25' title='Add to Wishlist' type='button' class='ml15 p10 wishlist-button--style-primary--3DnBS wishlist-button--wishlist-btn--3Xy6s btn btn-link'><span class='sr-only'>Wishlist</span><span class='wishlist-button--wish-icon--XnBJz udi udi-heart'></span></button>" +  
+            "</div>" +
+            "</div>" +
+            "</div>" +
+            "</div>" +
+            " </div>" +
+            "</div><div data-purpose='arrow' class='popover--arrow--f35jS' data-placement='right' style='top: 281px;'></div>" +
+            "</div>";
+
+
+
+        // $("#temp").append("<li>Appended item</li>");
+        $(".temp").attr('data-content', obj);
+        $('.temp').popover();
+    }
     var acc = document.getElementsByClassName("accordion");
     var i;
 
@@ -404,22 +441,5 @@
         });
     }
 
-
-    //$(".openpop").mouseover(function()
-      //  {
-        //alert();
-        //this.openPopup();
-        //$(".test11").modal('show');
-           // $(".popup, .popup-content").addClass("active");
-        //});
-   // $(".openpop").mouseout(function ()
-   // {
-      // $(".test11").modal('hide');
-             // this.closePopup();
-           // alert();
-           // $(".popup, .popup-content").addClass("active");
-      //  });
-   
- 
 </script>
 

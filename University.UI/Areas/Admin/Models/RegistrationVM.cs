@@ -32,7 +32,7 @@ namespace University.UI.Areas.Admin.Models
 
         [Required(ErrorMessage = "Please enter Confirm Password")]
         [Compare("Password", ErrorMessage = "Confirm Password' and 'Password' do not match")]
-        [StringLength(30, ErrorMessage = "Password must be of minimum 6 characters length and Maximum 30 Character length", MinimumLength = 6)]
+       // [StringLength(30, ErrorMessage = "Password must be of minimum 6 characters length and Maximum 30 Character length", MinimumLength = 6)]
         public string ConfirmPassword { get; set; }
 
         public int RoleID { get; set; }
