@@ -54,7 +54,7 @@ namespace University.UI.Utilities
 			var transactionRequest = new transactionRequestType
 			{
 				transactionType = transactionTypeEnum.authCaptureTransaction.ToString(),   // charge the card
-				amount = 133.45m,
+				amount = PaymentGatewayVM.Amount,
 				payment = paymentType,
 				billTo = billingAddress,
 				lineItems = lineItems
@@ -95,36 +95,47 @@ namespace University.UI.Utilities
 		}
 
         //To create customer profile on server
-        public static createCustomerProfileResponse CreateCustomerProfile(string ApiLoginID, string ApiTransactionKey, string emailId, PaymentGatewayVM PaymentGatewayVM)
+        public static createCustomerProfileResponse CreateCustomerProfile(string ApiLoginID, string ApiTransactionKey ,PaymentGatewayVM PaymentGatewayVM)
         {
             Console.WriteLine("Create Customer Profile Sample");
-
             // set whether to use the sandbox environment, or production enviornment
             ApiOperationBase<ANetApiRequest, ANetApiResponse>.RunEnvironment = AuthorizeNet.Environment.SANDBOX;
-
             // define the merchant information (authentication / transaction id)
             ApiOperationBase<ANetApiRequest, ANetApiResponse>.MerchantAuthentication = new merchantAuthenticationType()
             {
                 name = ApiLoginID,
                 ItemElementName = ItemChoiceType.transactionKey,
-                Item = ApiTransactionKey,
+                Item = ApiTransactionKey
+                
+               // mobileDeviceId="34567"
             };
+            
 
             var creditCard = new creditCardType
             {
                 cardNumber = PaymentGatewayVM.CardNumber,
                 expirationDate = PaymentGatewayVM.MonthAndYear,
-                cardCode = PaymentGatewayVM.CVV.ToString()
+                cardCode = PaymentGatewayVM.CVV.ToString(),
+                //cryptogram = Guid.NewGuid().ToString()
+                // Set the token specific info
+                //          isPaymentToken = true,
+                // Set this to the value of the cryptogram received from the token provide
+                //cryptogram = "EjRWeJASNFZ4kBI0VniQEjRWeJA=",
+                //tokenRequestorName = "CHASE_PAY",
+                //tokenRequestorId = "12345678901",
+                //tokenRequestorEci = "07"
+
             };
 
             var bankAccount = new bankAccountType
             {
-                accountNumber = "231323342",
-                routingNumber = "000000224",
+                accountNumber = "231323",
+                routingNumber = "000000225",
                 accountType = bankAccountTypeEnum.checking,
                 echeckType = echeckTypeEnum.WEB,
-                nameOnAccount = "test",
-                bankName = "Bank Of America"
+                nameOnAccount = "tested",
+                bankName = "Bank Of India"
+                
             };
 
             // standard api call to retrieve response
@@ -146,25 +157,28 @@ namespace University.UI.Utilities
             homeAddress.address = "10900 NE 8th St";
             homeAddress.city = "Seattle";
             homeAddress.zip = "98006";
-
+            
 
             customerAddressType officeAddress = new customerAddressType();
             officeAddress.address = "1200 148th AVE NE";
             officeAddress.city = "NorthBend";
             officeAddress.zip = "92101";
-
+            
             addressInfoList.Add(homeAddress);
             addressInfoList.Add(officeAddress);
-
+           
 
             customerProfileType customerProfile = new customerProfileType();
-            customerProfile.merchantCustomerId = "Test CustomerID";
-            customerProfile.email = emailId;
+           
+            customerProfile.merchantCustomerId = "2CLINC555557556";
+            //customerProfile.description = "emailIdssshtitest";
             customerProfile.paymentProfiles = paymentProfileList.ToArray();
             customerProfile.shipToList = addressInfoList.ToArray();
+            
+            //customerProfile.su
 
             var request = new createCustomerProfileRequest { profile = customerProfile, validationMode = validationModeEnum.none };
-
+            //request.refId= 1361101257555
             // instantiate the controller that will call the service
             var controller = new createCustomerProfileController(request);
             controller.Execute();
@@ -210,7 +224,7 @@ namespace University.UI.Utilities
         }
 
         //Get saved customer profile from server
-        public static getCustomerProfileResponse GetCustomerProfile(String ApiLoginID, String ApiTransactionKey, string customerProfileId)
+        public static getCustomerProfileResponse GetCustomerProfile(String ApiLoginID, String ApiTransactionKey, string customerProfileId,PaymentGatewayVM PaymentGatewayVM)
         {
             Console.WriteLine("Get Customer Profile sample");
 
@@ -256,12 +270,13 @@ namespace University.UI.Utilities
         }
 
         //Charge a saved customer profile directly on server by sending the profile Id
-        public static createTransactionResponse ChargeACustomerProfile(String ApiLoginID, String ApiTransactionKey, string customerProfileId,
-            string customerPaymentProfileId, decimal Amount)
+        public static createTransactionResponse ChargeACustomerProfile(string ApiLoginID, string ApiTransactionKey,CardListVM cardListVM)
         {
             Console.WriteLine("Charge Customer Profile");
+           
+            
 
-            ApiOperationBase<ANetApiRequest, ANetApiResponse>.RunEnvironment = AuthorizeNet.Environment.SANDBOX;
+                ApiOperationBase<ANetApiRequest, ANetApiResponse>.RunEnvironment = AuthorizeNet.Environment.SANDBOX;
 
             // define the merchant information (authentication / transaction id)
             ApiOperationBase<ANetApiRequest, ANetApiResponse>.MerchantAuthentication = new merchantAuthenticationType()
@@ -273,13 +288,13 @@ namespace University.UI.Utilities
 
             //create a customer payment profile
             customerProfilePaymentType profileToCharge = new customerProfilePaymentType();
-            profileToCharge.customerProfileId = customerProfileId;
-            profileToCharge.paymentProfile = new paymentProfile { paymentProfileId = customerPaymentProfileId };
+            profileToCharge.customerProfileId = cardListVM.CustomerProfileId;
+            profileToCharge.paymentProfile = new paymentProfile { paymentProfileId = cardListVM.CustomerPaymentProfileId };
 
             var transactionRequest = new transactionRequestType
             {
                 transactionType = transactionTypeEnum.authCaptureTransaction.ToString(),    // refund type
-                amount = Amount,
+                amount = cardListVM.Amount,
                 profile = profileToCharge
             };
 
@@ -337,7 +352,6 @@ namespace University.UI.Utilities
 
             return response;
         }
-
 
         //Create a new customer payment profile on server
         public static ANetApiResponse CreateNewPaymentProfile(string ApiLoginID, string ApiTransactionKey, string customerProfileId, PaymentGatewayVM PaymentGatewayVM)

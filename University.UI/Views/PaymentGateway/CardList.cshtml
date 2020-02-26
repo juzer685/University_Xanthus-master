@@ -1,5 +1,4 @@
 ﻿@model List<University.UI.Models.CardListVM>
-
 @{
     ViewBag.Title = "CardList";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -11,66 +10,74 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 }
 
-
-<div class="container">
-    <h2>Saved Card List</h2>
-    <div class="panel-group" id="accordion">
-        @foreach (var Card in Model)
-        {
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        @Html.Hidden("CustomerProfileId", Card.CustomerProfileId, new { @class = "CustomerProfileId" })
-                        @Html.Hidden("CustomerPaymentProfileId", Card.CustomerPaymentProfileId, new { @class = "CustomerPaymentProfileId" })
-                        <input type="radio" name="radioCardNumber"><a data-toggle="collapse" data-parent="#accordion" href="#collapse1"> @Card.CardNumber</a>
-                    </h4>
-                </div>
-                <div id="collapse1" class="panel-collapse collapse in">
-                    <div class="panel-body">
-                        <div class="form-group">
-                            <label for="CVV">CVV:</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-credit-card"></i></span>
-                                    @Html.TextBox("CVV", "", new { @class = "form-control", placeholder = "CVV" })
+<div class="container-fluid">
+    <div class="row justify-center">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="container">
+                        <h2>Select Option to Pay</h2>
+                        <div class="panel-group accordion" id="">
+                            @foreach (var Card in Model)
+                            {
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            @Html.Hidden("CardHolderName", Card.CardHolderName, new { @class = "CardHolderName" })
+                                            @Html.Hidden("Month", Card.Month, new { @class = "Month" })
+                                            @Html.Hidden("Year", Card.Year, new { @class = "Year" })
+                                            @Html.Hidden("ProductName", Card.ProductName, new { @class = "ProductName" })
+                                            @Html.Hidden("CustomerFName", Card.CustomerFName, new { @class = "CustomerFName" })
+                                            @*@Html.Hidden("createby", Card.Year, new { @class = "createby" })*@
+                                            @Html.Hidden("CustomerProfileId", Card.CustomerProfileId, new { @class = "CustomerProfileId" })
+                                            @Html.Hidden("CustomerPaymentProfileId", Card.CustomerPaymentProfileId, new { @class = "CustomerPaymentProfileId" })
+                                            <input type="radio" name="radioCardNumber"><a data-toggle="collapse" data-parent=".accordion" href=".test1" class="dataCardNumber">@Card.CardNumber</a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapse1" class="panel-collapse collapse in test1">
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                <label for="CVV">CVV:</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><i class="fa fa-credit-card"></i></span>
+                                                        @Html.TextBox("CVV", "", new { @class = "form-control datacvv", placeholder = "CVV" })
+                                                    </div>
+                                                </div> <!-- input-group.// -->
+                                            </div> <!-- form-group.// -->
+                                            <button class="btn btn-primary btnPaymentGateway amount PAY" >@Card.Amount</button>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div> <!-- input-group.// -->
-                        </div> <!-- form-group.// -->
-                        <button class="btn btn-primary btnPaymentGateway">PAY(@Card.Amount)</button>
+
+                            }
+
+                            @*<input type="radio" class="your-radio-class"><a data-toggle="collapse" data-parent="#accordion" href="#test-swipe-1" class="your-radio-class"> Credit Card</a>*@
+                            @*<span><input type="radio" onclick="selecttype('jobseeker');" name="account" id="jobseeker" value="0"> Credit Card </span>*@
+
+                            @*<div id="test-swipe-1" class="col s12 pd0 pdtop-home">
+                                @Html.Action("Index")
+                            </div>*@
+                        </div>
                     </div>
                 </div>
             </div>
-
-        }
-        @*<div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Collapsible Group 2</a>
-                    </h4>
-                </div>
-                <div id="collapse2" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Collapsible Group 3</a>
-                    </h4>
-                </div>
-                <div id="collapse3" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    </div>
-                </div>
-            </div>*@
-
+        </div>
     </div>
 </div>
 
 
 @section scripts{
+
+    @*<script src="~/Scripts/PaymentGateway.js"></script>*@
     <script src="~/Scripts/jsCardList.js"></script>
 }
+<script>
+    $(document).ready(function () {
+        $("#test-swipe-1").hide();
+        $(".your-radio-class").click(function () {
+            $("#test-swipe-1").show();
+        });
+
+    });
+</script>

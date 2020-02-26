@@ -196,7 +196,7 @@ namespace University.Repository
         {
             using (var context = new UniversityEntities())
             {
-                return context.SubCategoryMaster.Include("CategoryMaster").FirstOrDefault(y => y.Id == id && y.IsDeleted != true);
+                return context.SubCategoryMaster.Include("CategoryMaster").FirstOrDefault(y => y.Id == id && y.IsDeleted == false);
             }
         }
 

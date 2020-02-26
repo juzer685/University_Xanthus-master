@@ -64,7 +64,9 @@
                                         </td>
                                     </tr>
                                 }
+
                             </tbody>
+
                         </table>
                     </div>
                     <!-- /.card-body -->
@@ -89,42 +91,42 @@
                 <div class="modal-body" id="popupBody">
                     @Html.Partial("AddEditCategoryMapp", Model)
                     @*<div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label>Choose Category</label>
-                    <select name="CategoryID" class="form-control" style="width: 100%;">
-                        <option value="0" selected>Select Category</option>
-                        @foreach (var item in Model.SubCategoryMasterlst)
-                        {
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Choose Category</label>
+                                    <select name="CategoryID" class="form-control" style="width: 100%;">
+                                        <option value="0" selected>Select Category</option>
+                                        @foreach (var item in Model.SubCategoryMasterlst)
+                                        {
 
-                            if (item.AssocitedCustID == Convert.ToInt32(Session["AdminLoginID"]))
-                            {
-                                <option value="@item.Id" name="CategoryID" id="CategoryID">@item.Name</option>
-                            }
+                                            if (item.AssocitedCustID == Convert.ToInt32(Session["AdminLoginID"]))
+                                            {
+                                                <option value="@item.Id" name="CategoryID" id="CategoryID">@item.Name</option>
+                                            }
 
-                        }
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label>Choose User</label>
-                    <select name="UserID" class="form-control select2" style="width: 100%;">
-                        <option value="0" selected>Select User</option>
-                        @foreach (var item in Model.Logintbllst)
-                        {
-                            if (item.RoleID.ToString() == "5")
-                            {
-                                <option value="@item.ID" id="useridd">@item.FirstName @item.LastName</option>
-                            }
-                        }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Choose User</label>
+                                    <select name="UserID" class="form-control select2" style="width: 100%;">
+                                        <option value="0" selected>Select User</option>
+                                        @foreach (var item in Model.Logintbllst)
+                                        {
+                                            if (item.RoleID.ToString() == "5")
+                                            {
+                                                <option value="@item.ID" id="useridd">@item.FirstName @item.LastName</option>
+                                            }
+                                        }
 
-                    </select>
-                </div>
-            </div>
-        </div>*@
+                                    </select>
+                                </div>
+                            </div>
+                        </div>*@
 
                 </div>
 
@@ -139,75 +141,76 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
+<script src="~/Scripts/jquery.validate.min.js" type="text/javascript"></script>
 
 <script>
-     //$(document).ready(function () {
-     //       $(".reset").click(function () {
-     //           $('#ddlvalue').val(0);
-     //       });
-     //   });
+    //$(document).ready(function () {
+    //       $(".reset").click(function () {
+    //           $('#ddlvalue').val(0);
+    //       });
+    //   });
     $(document).ready(function () {
 
         $('#SubCategoryTable').DataTable();
 
         $("#CategoryMapping").on('submit', function (e) {
-            var form = $(this);
-            var url = form.attr('action');
-            var formData = new FormData($(this)[0]);
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: formData, // serializes the form's elements.
-                enctype: 'multipart/form-data',
-                cache: false,
-                contentType: false,
-                processData: false,
-                success: function (data) {
-                    _showSuccessMessage("Data Saved Successfully");
-                    setTimeout(function () { location.reload(); }, 1000);
-                }
-            });
-            e.preventDefault();
-
-        });
-    });
-
-    function AddCategoryMapp(Id) {
-
-                $("#CategoryID").val('');
-                $("#useridd").val('');
-                $.ajax({
-                    type: "POST",
-                    url: "/Admin/SubCategory/GetCategoryUserMapping",
-                    data: { Id: Id }, // serializes the form's elements.
-                    success: function (data) {
-                    if (Id == null || Id == 0)
-                    {
-                        $("#categoryMappheader").html("Add Category User Mapping");
-                    }
-                    else
-                    {
-                        $("#categoryMappheader").html("Edit Category User Mapping");
-                    }
-                        $("#popupBody").html(data);
-                        $("#AddCategoryMapping").modal('show');
-                    }
-                });
-            }
-
-            function DeleteCategoryMapp(Id) {
-                $("#DeleteConfirmationModal").modal('show');
-                $(document).on('click', 'button#confirmation-yes', function () {
+            
+                    var form = $(this);
+                    var url = form.attr('action');
+                    var formData = new FormData($(this)[0]);
                     $.ajax({
                         type: "POST",
-                        url: "/Admin/SubCategory/DeleteCategoryUseerMapping",
-                        data: { Id: Id }, // serializes the form's elements.
+                        url: url,
+                        data: formData, // serializes the form's elements.
+                        enctype: 'multipart/form-data',
+                        cache: false,
+                        contentType: false,
+                        processData: false,
                         success: function (data) {
-                            //alert("Data Deleted Successfully"); // show response from the php script.
-                            _showSuccessMessage("Data Deleted Successfully");
+                            _showSuccessMessage("Data Saved Successfully");
                             setTimeout(function () { location.reload(); }, 1000);
                         }
                     });
+                    e.preventDefault();
+                
+
+            });
+        });
+
+        function AddCategoryMapp(Id) {
+
+            $("#CategoryID").val('');
+            $("#useridd").val('');
+            $.ajax({
+                type: "POST",
+                url: "/Admin/SubCategory/GetCategoryUserMapping",
+                data: { Id: Id }, // serializes the form's elements.
+                success: function (data) {
+                    if (Id == null || Id == 0) {
+                        $("#categoryMappheader").html("Add Category User Mapping");
+                    }
+                    else {
+                        $("#categoryMappheader").html("Edit Category User Mapping");
+                    }
+                    $("#popupBody").html(data);
+                    $("#AddCategoryMapping").modal('show');
+                }
+            });
+        }
+
+        function DeleteCategoryMapp(Id) {
+            $("#DeleteConfirmationModal").modal('show');
+            $(document).on('click', 'button#confirmation-yes', function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/Admin/SubCategory/DeleteCategoryUseerMapping",
+                    data: { Id: Id }, // serializes the form's elements.
+                    success: function (data) {
+                        //alert("Data Deleted Successfully"); // show response from the php script.
+                        _showSuccessMessage("Data Deleted Successfully");
+                        setTimeout(function () { location.reload(); }, 1000);
+                    }
                 });
-            }
+            });
+        }
 </script>

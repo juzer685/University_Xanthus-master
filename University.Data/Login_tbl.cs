@@ -21,8 +21,8 @@ namespace University.Data
             this.CategoryUserMapping1 = new HashSet<CategoryUserMapping>();
             this.Login_tbl1 = new HashSet<Login_tbl>();
             this.EmailInfoes = new HashSet<EmailInfo>();
-            this.CardDetails = new HashSet<CardDetails>();
             this.CardTransactionDetails = new HashSet<CardTransactionDetails>();
+            this.CardDetails = new HashSet<CardDetails>();
         }
     
         public int ID { get; set; }
@@ -52,8 +52,8 @@ namespace University.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmailInfo> EmailInfoes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CardDetails> CardDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CardTransactionDetails> CardTransactionDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CardDetails> CardDetails { get; set; }
     }
 }

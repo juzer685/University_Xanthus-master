@@ -47,7 +47,10 @@ namespace University.UI.Controllers
                     ResponseCode = Convert.ToInt32(response.transactionResponse.responseCode),
                     CreatedDate = DateTime.Now,
                     //change for user to userloginid
-                    CreatedBy = Convert.ToInt32(Session["AdminLoginID"])
+                    CreatedBy = Convert.ToInt32(Session["UserLoginID"]),
+                    Amount=PaymentGatewayVM.Amount,
+                    ProductName=PaymentGatewayVM.ProductName,
+                    CustomerFullName=PaymentGatewayVM.CustomerFName
                 });
                 if (TransResult)
                 {
@@ -73,7 +76,7 @@ namespace University.UI.Controllers
             return View("PaymentStatus");
         }
 
-        [HttpGet]
+        //[HttpGet]
         public ActionResult SaveCardDetails()
         {
             return View("CardDetails", new PaymentGatewayVM());
@@ -84,10 +87,10 @@ namespace University.UI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SaveCardDetails(PaymentGatewayVM PaymentGatewayVM)
         {
-            //getCustomerProfileResponse CustomerProfile = PaymentGatewayUtility.GetCustomerProfile(ConfigurationManager.AppSettings["ApiLoginID"], ConfigurationManager.AppSettings["ApiTransactionKey"], "1510518453");
-            
-            var response = PaymentGatewayUtility.CreateCustomerProfile(ConfigurationManager.AppSettings["ApiLoginID"], ConfigurationManager.AppSettings["ApiTransactionKey"], Session["AdminEmail"].ToString(), PaymentGatewayVM);
-           
+            //getCustomerProfileResponse response = PaymentGatewayUtility.GetCustomerProfile(ConfigurationManager.AppSettings["ApiLoginID"], ConfigurationManager.AppSettings["ApiTransactionKey"], /*Session["UserEmail"].ToString(),*/ PaymentGatewayVM);
+
+            var response = PaymentGatewayUtility.CreateCustomerProfile(ConfigurationManager.AppSettings["ApiLoginID"], ConfigurationManager.AppSettings["ApiTransactionKey"], /*Session["UserEmail"].ToString(),*/ PaymentGatewayVM);
+
             if (response.messages.resultCode == messageTypeEnum.Ok)
             {
                 if (response.messages.message != null)
@@ -96,6 +99,7 @@ namespace University.UI.Controllers
                     {
                         CardHolderName = PaymentGatewayVM.CardHolderName,
                         CardNumber = PaymentGatewayVM.DBCardNumber,
+                        //CardNumber = PaymentGatewayVM.CardNumber,
                         ExpiryMonth = PaymentGatewayVM.Month,
                         ExpiryYear = PaymentGatewayVM.Year,
                         CustomerProfileId = response.customerProfileId,
@@ -103,9 +107,11 @@ namespace University.UI.Controllers
                         ShippingProfileId = response.customerShippingAddressIdList[0],
                         //CardType = response.,
                         //change for user to userloginid
-                        CreatedBy = Convert.ToInt32(Session["AdminLoginID"]),
+                        CreatedBy = Convert.ToInt32(Session["UserLoginID"]),
                         CreatedDate = DateTime.Now,
-                        IsDeleted = false
+                        IsDeleted = false,
+                        CVV= PaymentGatewayVM.CVV
+
                     });
 
                     if (TransResult)
@@ -129,49 +135,103 @@ namespace University.UI.Controllers
         }
 
         //change to user login id for user
-        [HttpGet]
-        public ActionResult GetCardList()
+        
+        public ActionResult GetCardList(decimal id,string ids)
         {
             List<CardListVM> ListVM = new List<CardListVM>();
-            var lst = _PaymentGatewayService.GetCardDetails(Convert.ToInt32(Session["AdminLoginID"]));
+            var lst = _PaymentGatewayService.GetCardDetails(Convert.ToInt32(Session["UserLoginID"]));
             foreach (var card in lst)
             {
-                ListVM.Add(new CardListVM {
+                ListVM.Add(new CardListVM
+                {
+                    ProductName = ids,
+                    CustomerFName = Convert.ToString(Session["UserNamee"]),
+                    createby = Convert.ToInt32(Session["UserLoginID"]),
                     CardNumber = card.CardNumber,
                     CustomerProfileId = card.CustomerProfileId,
                     CustomerPaymentProfileId = card.PaymentProfileId,
-                    Amount = 50
-                });
+                    Amount = id,
+                    CardHolderName = card.CardHolderName,
+                    CreatedDate = DateTime.Now,
+                    CardType = card.CardType,
+                    Month = card.ExpiryMonth,
+                    Year = card.ExpiryYear
+                    //MonthAndYear = card.,
+                }); ;
             }
             return View("CardList", ListVM);
         }
-
         [HttpPost]
         public ActionResult MakePaymentUsingProfile(CardListVM CardListVM)
         {
-            createTransactionResponse response = PaymentGatewayUtility.ChargeACustomerProfile(ConfigurationManager.AppSettings["ApiLoginID"], ConfigurationManager.AppSettings["ApiTransactionKey"], CardListVM.CustomerProfileId, CardListVM.CustomerPaymentProfileId, 50);
+            //CardListVM.CVV = 456;
+            createTransactionResponse response = PaymentGatewayUtility.ChargeACustomerProfile(ConfigurationManager.AppSettings["ApiLoginID"], ConfigurationManager.AppSettings["ApiTransactionKey"], CardListVM);
+           
             if (response != null)
-            {
+            { 
                 if (response.messages.resultCode == messageTypeEnum.Ok)
                 {
-                    if (response.transactionResponse.messages != null)
+                    bool TransResult = _PaymentGatewayService.SaveTransactionDetails(new CardTransactionDetails
                     {
-                        return Json(new { result = true, Message = "Transaction Successful" });
+                        ProductName = CardListVM.ProductName,
+                        CardHolderName = CardListVM.CardHolderName,
+                        CardNumber = CardListVM.CardNumber,
+                        Expiration = CardListVM.MonthAndYear,
+                        CVV = CardListVM.CVV,
+                        ResultCode = response.messages.resultCode.ToString(),
+                        Message = response.messages.message[0].text,
+                        AccountType = response.transactionResponse.accountType,
+                        TransId = response.transactionResponse.transId,
+                        ResponseCode = Convert.ToInt32(response.transactionResponse.responseCode),
+                        CreatedDate = DateTime.Now,
+                        //change for user to userloginid
+                        CreatedBy = Convert.ToInt32(Session["UserLoginID"]),
+                        Amount=CardListVM.Amount,
+                        CustomerFullName=CardListVM.CustomerFName
+                    });
+                    if (TransResult)
+                    {
+                        TempData["PaymentStatus"] = true;
+                        return Json(new { result = true, Message = response.messages.message[0].text });
                     }
                     else
                     {
-                        return Json(new { result = false, Message = "Transaction Failed" });
+                        TempData["PaymentStatus"] = true;
+                        return Json(new { result = true, Message = response.messages.message[0].text });
                     }
                 }
                 else
                 {
-                    return Json(new { result = false, Message = "Transaction Failed" });
+                    TempData["PaymentStatus"] = false;
+                    return Json(new { result = false, Message = response.messages.message[0].text });
                 }
-            }
-            else
-            {
-                return Json(new { result = false, Message = "Transaction Failed" });
-            }
+        }
+        else
+        {
+            return Json(new { result = false, Message = "Transaction Failed" });
+        }
+            //if (response != null)
+            //{
+            //    if (response.messages.resultCode == messageTypeEnum.Ok)
+            //    {
+            //        if (response.transactionResponse.messages != null)
+            //        {
+            //            return Json(new { result = true, Message = "Transaction Successful" });
+            //        }
+            //        else
+            //        {
+            //            return Json(new { result = false, Message = "Transaction Failed" });
+            //        }
+            //    }
+            //    else
+            //    {
+            //        return Json(new { result = false, Message = "Transaction Failed" });
+            //    }
+            //}
+            //else
+            //{
+            //    return Json(new { result = false, Message = "Transaction Failed" });
+            //}
         }
     }
 }

@@ -28,7 +28,10 @@ function RegisterHandler() {
                         else {
                             _showErrorMessage(data.Message);
                             document.getElementById('loaderring').style.display = "none";
-                            setTimeout(function () { window.location.href = data.url; }, 2000);
+                            $("#Email").val("");
+                            $("#Password").val("");
+                            $("#ConfirmPassword").val("");
+                            //setTimeout(function () { window.location.href = data.url; }, 2000);
                         }
                     }
                 });

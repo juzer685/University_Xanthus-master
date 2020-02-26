@@ -26,6 +26,7 @@ namespace University.Data
         public System.DateTime CreatedDate { get; set; }
         public bool IsDeleted { get; set; }
         public string CardType { get; set; }
+        public Nullable<int> CVV { get; set; }
     
         public virtual Login_tbl Login_tbl { get; set; }
     }

@@ -13,5 +13,6 @@ namespace University.Service.Interface
         bool SaveCardDetails(CardDetails CardDetails);
 
         List<CardDetails> GetCardDetails(int UserId);
+        
     }
 }

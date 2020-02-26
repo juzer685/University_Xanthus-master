@@ -61,7 +61,16 @@
                 <div class="input-group">
                     <div class="custom-file">
                         <input type="file" name="file" class="custom-file-input" id="file" required accept="image/jpeg" onchange="readURL(this);">
-                        <label class="custom-file-label" for="exampleInputFile">Select Image</label>
+                        @if (Model.ImageURL != "")
+                        {
+                            <label class="custom-file-label" for="exampleInputFile">@Model.ImageURL</label>
+                        }
+                        else
+                        {
+                            <label class="custom-file-label" for="exampleInputFile">Select Image</label>
+                        }
+
+                        @*<label class="custom-file-label" for="exampleInputFile">Select Image</label>*@
                     </div>
                 </div>
                 @Html.ValidationMessageFor(m => m.ImageURL)

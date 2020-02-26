@@ -40,7 +40,12 @@ namespace University.UI.Models
             get
             {
                 return "XXXXXXXXXXXX" + CardNumber.Substring(CardNumber.Length - 4);
+                //return CardNumber.Substring(CardNumber.Length - 16);
             }
         }
+        public decimal Amount { get; set; }
+        public string CustomerFName { get; set; }
+        public string ProductName { get; set; }
+
     }
 }

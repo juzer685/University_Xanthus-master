@@ -54,12 +54,12 @@ namespace University.UI.Areas.Admin.Controllers
         }
         private string UploadFileOnServer(string location, HttpPostedFileBase file)
         {
-            string extension = Path.GetExtension(file.FileName);
-            string fileId = Guid.NewGuid().ToString().Replace("-", "");
-            string filename = fileId + extension;
-            var path = Path.Combine(Server.MapPath(location), filename);
+            string extension = Path.GetFileName(file.FileName);
+            //string fileId = Guid.NewGuid().ToString().Replace("-", "");
+            //string filename = fileId + extension;
+            var path = Path.Combine(Server.MapPath(location), extension);
             file.SaveAs(path);
-            return filename;
+            return extension;
         }
         public ActionResult AddEditSubCategory(SubCategoryViewModel model, HttpPostedFileBase file)
         {
@@ -68,6 +68,8 @@ namespace University.UI.Areas.Admin.Controllers
             {
                 res.ImageURL = UploadFileOnServer(SubCategoryImagePath, file);
             }
+            
+            // var myguid = Guid.TryParseExact(res.ImageURL);
             var isSuccess = _subCategoryService.AddOrUpdateSubCategory(res);
             return Json(isSuccess, JsonRequestBehavior.AllowGet);
         }

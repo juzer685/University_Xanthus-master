@@ -50,7 +50,7 @@ namespace University.Repository
             {
                 using (var context = new UniversityEntities())
                 {
-                    return context.CardDetails.Where(x => x.CreatedBy == UserId).ToList();
+                    return context.CardDetails.Where(x => x.CreatedBy == UserId && x.IsDeleted==false).ToList();
                 }
             }
             catch (Exception e)
@@ -58,5 +58,6 @@ namespace University.Repository
                 return new List<CardDetails>();
             }
         }
+        
     }
 }

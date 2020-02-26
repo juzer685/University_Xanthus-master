@@ -321,13 +321,11 @@
                     </div>
                     <div class="info" style="padding: 2px 5px;">
                         <a class="user-name">
-                            @*@if (string.IsNullOrEmpty(Convert.ToString(Session["RoleID"])))
-                                {
-                                    @Url.Action("Login", "Login");
-                                }
-                                else*@
-
-
+                            @*@if (Convert.ToString(Session["RoleID"])==  "")
+        {
+            @Url.Action("Login", "Login");
+        }*@
+                            
                             @if (Session["RoleID"].ToString() == "4")
                             {
                                 @Session["AdminName"].ToString();
@@ -337,9 +335,9 @@
                                 @Session["UserNamee"].ToString();
                             }
                             @*<span class="customer-id">
-                                    CustomerId : @if (Session["Customer"] != null)
-                                    {@Session["Customer"].ToString()}
-                                </span>*@
+            CustomerId : @if (Session["Customer"] != null)
+            {@Session["Customer"].ToString()}
+        </span>*@
                         </a>
                     </div>
                 </div>
@@ -408,16 +406,16 @@
                                     <p>
                                         User List
                                     </p>
-                                </a>    
+                                </a>
                             </li>
-                            <li class="nav-item pointer">
+                            @*<li class="nav-item pointer">
                                 <a class="nav-link" href="~/PaymentGateway/SaveCardDetails">
                                     <i class="nav-icon fas fa-user-circle"></i>
                                     <p>
                                         Add Card
                                     </p>
                                 </a>
-                            </li>
+                            </li>*@
                             @*<li class="nav-item pointer">
                 <a class="nav-link" href="/Admin/User/Register">
                     <i class="nav-icon fas fa-user-circle"></i>
@@ -429,7 +427,14 @@
                         }
                         @if (Session["RoleID"].ToString() == "5")
                         {
-
+                            <li class="nav-item pointer">
+                                <a class="nav-link" href="~/PaymentGateway/SaveCardDetails">
+                                    <i class="nav-icon fas fa-user-circle"></i>
+                                    <p>
+                                        Add Card
+                                    </p>
+                                </a>
+                            </li>
 
                             <li class="nav-item">
                                 <a href="~/Home/Category" class="nav-link">
@@ -676,6 +681,7 @@
                 //e.stopPropagation();
             });
         </script>*@
+
     <script type="text/javascript">
         function preventBack() {
             window.history.forward();

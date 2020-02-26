@@ -125,17 +125,17 @@ $(document).ready(function () {
 
 
     $(document).ready(function () {
-
+   
         var _URL = window.URL || window.webkitURL;
 
         $(document).on("change", "input[type='file'].validateHeightWidth", function (e) {
-            var imageName = $("#lblImageName").text();
-            $("#lblImageName").text('');
+            var imageName = $("#CategoryFileLabel").text();
+            //$("#CategoryFileLabel").text('');
             var file = $(this)[0].files[0];
             var _this = $(this);
             var fileExt = file.name.substr(file.name.lastIndexOf(".") + 1);
-            if (fileExt.toUpperCase() != "gif".toUpperCase() && fileExt.toUpperCase() != "png".toUpperCase() && fileExt.toUpperCase() != "jpeg".toUpperCase() && fileExt.toUpperCase() != "jpg".toUpperCase()) {
-               // $('.overlaySizeAlert').css({ "visibility": "visible", "opacity": "1" });
+            if (fileExt.toUpperCase() != "jpeg".toUpperCase() && fileExt.toUpperCase() != "jpg".toUpperCase()) {
+             
                 $('.overlaySizeAlert').css({ "visibility": "visible", "opacity": "1" });
                 $(_this).val('');
                 $(_this).parent().find('img.imgStd').attr('src', fileOriginalIndex);
@@ -167,14 +167,16 @@ $(document).ready(function () {
                     //$(_this).parent().find('img.imgStd').attr('src', null);
                     //$(_this).parent().find('img.imgStd').attr('src', '/images/NoImageAvailable250.jpg');
                     if (typeof fileOriginalIndex === "undefined") {
-                        $(_this).parent().find('img.imgStd').attr('src', '/images/NoImageAvailable250.jpg');
+                       // $(_this).parent().find('.imgStd').attr('src', '/images/NoImageAvailable.jpg');
+                        $(_this).parent().find('img.imgStd').attr('src', '/images/NoImageAvailable.jpg');
                         return false;
                     }
                     else
                     {
+                        $('#image-preview').attr('src', ' ')
                         $(_this).parent().find('img.imgStd').attr('src', fileOriginalIndex);
-                        $("#lblImageName").text(imageName);
-                        $("#lblImageName").css("font-weight", "Bold");
+                        $("#CategoryFileLabel").text(imageName);
+                        $("#CategoryFileLabel").css("font-weight", "Bold");
                     }
                     $("#DeleteImage").hide();
                 }
@@ -264,3 +266,4 @@ function _showErrorMessage(message) {
     //});
     toastr.error(message);
 }
+

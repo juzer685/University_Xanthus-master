@@ -5,10 +5,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     var lst = (List<Login_tbl>)Session["UserList"];
 }
-
-
-
-
 <!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="container-fluid">
@@ -108,7 +104,10 @@
 
 
     <script>
+      var fileOriginalIndex = "";
+       
         $(document).ready(function () {
+            
             $(".reset").click(function () {
                 $("#Id").val('');
                 //$("#categoryheader").html("Add Category");
@@ -123,7 +122,8 @@
 
         // alert($("#ddlusrlst").val());
         $(document).ready(function () {
-            var fileOriginalIndex = "";
+          
+
             //$('#SubCategoryTable').DataTable({
             //    "paging": true,
             //    "lengthChange": false,
@@ -202,7 +202,8 @@
                         $("#categoryheader").html("Edit Category");
                     }
                     $("#popupBody").html(data);
-                    fileOriginalIndex = $("#image-preview").attr('src');
+                     fileOriginalIndex = $("#image-preview").attr('src');
+                   // fileOriginalIndex = $("#image-preview").attr('src');
                     $("#AddSubCategoryModal").modal('show');
                 }
             });

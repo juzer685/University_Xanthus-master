@@ -53,11 +53,11 @@ namespace University.UI.Areas.Admin.Controllers
         private string UploadFileOnServer(string location, HttpPostedFileBase file)
         {
             string extension = Path.GetExtension(file.FileName);
-            string fileId = Guid.NewGuid().ToString().Replace("-", "");
-            string filename = fileId + extension;
-            var path = Path.Combine(Server.MapPath(location), filename);
+            //string fileId = Guid.NewGuid().ToString().Replace("-", "");
+            //string filename = fileId + extension;
+            var path = Path.Combine(Server.MapPath(location), extension);
             file.SaveAs(path);
-            return filename;
+            return extension;
         }
 
        

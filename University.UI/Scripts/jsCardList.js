@@ -5,23 +5,22 @@
 
 function RegisterHandler() {
 
-    $('.btnPaymentGateway').click(function () {
-        //var formValid = $('#UserRegistrationForm').validate().form();
-        //if (!formValid)
-        //    return false;
-        //else {
-        //if ($('#agreeTerms').is(':checked')) {
-        //var k = $("input[name='radioCardNumber']").click(function () {
-        //    if ($('input:radio[name=type]:checked').val() == "walk_in") {
-        //        alert($('input:radio[name=type]:checked').val());
-        //        //$('#select-table > .roomNumber').attr('enabled',false);
-        //    }
-        //});
+    $('.btnPaymentGateway').click(function ()
+    {
         var Obj = {
-            //CustomerProfileId: $('.CustomerProfileId').val(),
-            //CustomerPaymentProfileId: $('.CustomerPaymentProfileId').val()
+            //DBCardNumber: $('.CardNumber').html(),
+            Amount: parseFloat($('.amount').html()),
+            CVV: $(this).prev().find(".datacvv").val(),
+            CardNumber: $(this).parent().parent().parent().find('.dataCardNumber').html(),
+            createby: $("input[name='radioCardNumber']:checked").siblings('.createby').val(),
+            ProductName: $("input[name='radioCardNumber']:checked").siblings('.ProductName').val(),
+            CustomerFName: $("input[name='radioCardNumber']:checked").siblings('.CustomerFName').val(),
+            CardHolderName: $("input[name='radioCardNumber']:checked").siblings('.CardHolderName').val(),
+            Month: $("input[name='radioCardNumber']:checked").siblings('.Month').val(),
+            Year: $("input[name='radioCardNumber']:checked").siblings('.Year').val(),
             CustomerProfileId: $("input[name='radioCardNumber']:checked").siblings('.CustomerProfileId').val(),
-            CustomerPaymentProfileId: $("input[name='radioCardNumber']:checked").siblings('.CustomerPaymentProfileId').val()
+            CustomerPaymentProfileId: $("input[name='radioCardNumber']:checked").siblings('.CustomerPaymentProfileId').val(),
+
         };
         //document.getElementById('loaderring').style.display = "block";
         $.ajax({

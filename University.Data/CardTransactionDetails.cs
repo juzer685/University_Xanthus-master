@@ -26,6 +26,9 @@ namespace University.Data
         public int ResponseCode { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public int CreatedBy { get; set; }
+        public string ProductName { get; set; }
+        public Nullable<decimal> Amount { get; set; }
+        public string CustomerFullName { get; set; }
     
         public virtual Login_tbl Login_tbl { get; set; }
     }

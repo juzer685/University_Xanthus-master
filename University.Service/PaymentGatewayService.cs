@@ -31,5 +31,6 @@ namespace University.Service
         {
             return _PaymentGatewayRepository.GetCardDetails(UserId);
         }
+       
     }
 }
