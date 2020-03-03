@@ -57,6 +57,7 @@ namespace University.UI.Controllers
             List<ProductEntity> ListProduct = new List<ProductEntity>();
             ListProduct = _sliderService.ListproductbyUserId().ToList();
             RecentVisitedProduct recentVisitedProduct = new RecentVisitedProduct();
+
             // recentVisitedProduct =null
             //if(Convert.ToInt32(Session["UserLoginID"])!= 0)
             //{

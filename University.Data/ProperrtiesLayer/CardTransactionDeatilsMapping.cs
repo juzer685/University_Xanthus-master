@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace University.Data
 {
-    public partial class ProductVideos
+    public partial class CardTransactionDeatilsMapping
     {
-        public Decimal catid { get; set; }
-        public decimal? VideoRateSum { get; set; }
-        public string subcategoryname { get; set; }
         public bool IsPaid { get; set; }
     }
 }

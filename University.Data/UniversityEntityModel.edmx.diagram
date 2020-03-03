@@ -45,10 +45,11 @@
         <AssociationConnector Association="UniversityModel.FK_RecentVisitedProduct_Product" />
         <EntityTypeShape EntityType="UniversityModel.ProductVideos" Width="1.5" PointX="7.5" PointY="49.75" />
         <AssociationConnector Association="UniversityModel.FK_ProductVideos_Product" />
-        <EntityTypeShape EntityType="UniversityModel.CardTransactionDetails" Width="1.5" PointX="5.25" PointY="14" />
-        <AssociationConnector Association="UniversityModel.FK_CardTransactionDetails_Login_tbl" />
         <EntityTypeShape EntityType="UniversityModel.CardDetails" Width="1.5" PointX="5.25" PointY="24.25" />
         <AssociationConnector Association="UniversityModel.FK_CardDetails_Login_tbl" />
+        <EntityTypeShape EntityType="UniversityModel.CardTransactionDeatilsMapping" Width="1.5" PointX="9.375" PointY="4.75" />
+        <EntityTypeShape EntityType="UniversityModel.CardTransactionDetails" Width="1.5" PointX="5.25" PointY="28.75" />
+        <AssociationConnector Association="UniversityModel.FK_CardTransactionDetails_Login_tbl" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

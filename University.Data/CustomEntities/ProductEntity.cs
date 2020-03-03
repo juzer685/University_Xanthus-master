@@ -8,6 +8,8 @@ namespace University.Data.CustomEntities
 {
     public class ProductEntity
     {
+        //public decimal subcatid { get; set; }
+        public Decimal VideoIds { get; set; }
         public decimal? VideoRateSum { get; set; }
         public Decimal Id { get; set; }
         public int? AssocitedCustID { get; set; }
@@ -32,5 +34,6 @@ namespace University.Data.CustomEntities
         public virtual ICollection<ProductFAQs> ProductFAQs { get; set; }
         public virtual ICollection<ProductDocuments> ProductDocuments { get; set; }
         public virtual ICollection<CategoryUserMapping> Categorymapp { get; set; }
+        public virtual ICollection<CardTransactionDetails> CardTransactionDetails { get; set; }
     }
 }

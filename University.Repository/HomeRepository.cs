@@ -361,20 +361,24 @@ namespace University.Repository
             using (var context = new UniversityEntities())
             {
                 int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
-                var res1 = (from l in context.Login_tbl.Where(y => y.IsDeleted != true && y.ID == UserID)
-                            join cm in context.CategoryUserMapping.Where(y => y.IsDeleted != true && y.UserID == UserID)
+                var res1 = (from l in context.Login_tbl.Where(y => y.IsDeleted == false && y.ID == UserID)
+                            join cm in context.CategoryUserMapping.Where(y => y.IsDeleted == false && y.UserID == UserID)
                             on l.ID equals cm.UserID
-                            join c in context.SubCategoryMaster.Where(y => y.IsDeleted != true)
+                            join c in context.SubCategoryMaster.Where(y => y.IsDeleted == false)
                             on cm.CategoryID equals c.Id
-                            join p in context.Product.Where(y => y.IsDeleted != true)
+                            join p in context.Product.Where(y => y.IsDeleted == false)
                             on c.Id equals p.SubCategoryId
+                            //join ctdm in context.CardTransactionDeatilsMapping
+                            //on p.Id equals ctdm.ProductID
                             join pv in context.ProductVideos
                             on p.Id equals pv.ProductId
                             orderby p.CreatedDate
+                            //group pv by pv.ProductId into g
                             group pv by pv.ProductId into g
                             select new 
-                            { 
-                                g.Key, videosSum = g.ToList().Sum(x => x.VideoRate) 
+                            {
+                                g.Key, 
+                                videosSum = g.ToList().Sum(x => x.VideoRate) 
                             });
                 //select new { ProductId = pvs.Key, videos = pvs.ToList() });
                             //var Productlst = new List<ProductEntity>();
@@ -387,13 +391,17 @@ namespace University.Repository
                             //    });
                             //}
                 //int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
-                var res = (from l in context.Login_tbl.Where(y => y.IsDeleted != true && y.ID == UserID)
-                           join cm in context.CategoryUserMapping.Where(y => y.IsDeleted != true && y.UserID == UserID)
+                var res = (from l in context.Login_tbl.Where(y => y.IsDeleted == false && y.ID == UserID)
+                           join cm in context.CategoryUserMapping.Where(y => y.IsDeleted == false && y.UserID == UserID)
                            on l.ID equals cm.UserID
-                           join c in context.SubCategoryMaster.Where(y => y.IsDeleted != true)
+                           join c in context.SubCategoryMaster.Where(y => y.IsDeleted == false)
                            on cm.CategoryID equals c.Id
-                           join p in context.Product.Where(y => y.IsDeleted != true)
+                           join p in context.Product.Where(y => y.IsDeleted == false)
                            on c.Id equals p.SubCategoryId
+                           //join pv in context.ProductVideos
+                           //on p.Id equals pv.ProductId
+                           //join pp in context.Product.Where(y => y.IsDeleted == false)
+                           //on pv.ProductId equals pp.Id
                            orderby p.CreatedDate
                            select new ProductEntity()
                            {
@@ -409,10 +417,8 @@ namespace University.Repository
                                Title = p.Title,
                                UpdatedBy = p.UpdatedBy,
                                UpdatedDate = p.UpdatedDate,
-                               //VideoRateSum=p.sumvideorate,
-                               //CategoryMaster = c,
-                               // SubCategoryMaster = s,
-                               // ProductUserGuide = guide,
+                              // VideoIds= context.ProductVideos.Where(x=>x.IsDeleted!=true && x.ProductId==p.Id).Select(x=>x.Id).FirstOrDefault(),
+                               CardTransactionDetails=context.CardTransactionDetails.Where(x=>x.CreatedBy== UserID).ToList(),
                                Categorymapp = context.CategoryUserMapping.Where(x => x.IsDeleted != true && x.UserID == UserID).ToList(),
                                ProductVideos = context.ProductVideos.Where(x => x.IsDeleted != true).ToList(),
                                ProductDocuments = context.ProductDocuments.Where(x => x.IsDeleted != true).ToList()
@@ -420,6 +426,7 @@ namespace University.Repository
 
                 foreach (var item in res)
                 {
+                  
                     item.VideoRateSum = res1.Where(x => x.Key == item.Id).Select(x => x.videosSum).FirstOrDefault(); 
                 }
 

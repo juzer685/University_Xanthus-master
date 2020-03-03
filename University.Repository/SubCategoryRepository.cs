@@ -115,11 +115,11 @@ namespace University.Repository
                 int AdminId = Convert.ToInt32(HttpContext.Current.Session["AdminLoginID"]);
                 if (AdminId != 0)
                 {
-                    return context.SubCategoryMaster.Include("CategoryMaster").Where(y => y.IsDeleted != true && y.AssocitedCustID == AdminId).OrderByDescending(t => t.CreatedDate).ToList();
+                    return context.SubCategoryMaster.Include("CategoryMaster").Where(y => y.IsDeleted == false && y.AssocitedCustID == AdminId).OrderByDescending(t => t.CreatedDate).ToList();
                 }
                 else
                 {
-                    return context.SubCategoryMaster.Include("CategoryMaster").Where(y => y.IsDeleted != true).OrderByDescending(t => t.CreatedDate).ToList();
+                    return context.SubCategoryMaster.Include("CategoryMaster").Where(y => y.IsDeleted == false).OrderByDescending(t => t.CreatedDate).ToList();
                 }
 
 
@@ -204,7 +204,7 @@ namespace University.Repository
         {
             using (var context = new UniversityEntities())
             {
-                var subcategory = context.SubCategoryMaster.FirstOrDefault(y => y.Id == id && y.IsDeleted != true);
+                var subcategory = context.SubCategoryMaster.FirstOrDefault(y => y.Id == id && y.IsDeleted == false);
                 if (subcategory != null)
                 {
                     subcategory.IsDeleted = true;
@@ -219,7 +219,7 @@ namespace University.Repository
         {
             using (var context = new UniversityEntities())
             {
-                var subcategory = context.SubCategoryMaster.FirstOrDefault(y => y.Id == model.Id && y.IsDeleted != true);
+                var subcategory = context.SubCategoryMaster.FirstOrDefault(y => y.Id == model.Id && y.IsDeleted == false);
                 var categoryId = context.CategoryMaster.FirstOrDefault().Id;
                 if (subcategory != null)
                 {
@@ -250,7 +250,7 @@ namespace University.Repository
         {
             using (var context = new UniversityEntities())
             {
-                var categoryMapping = context.CategoryUserMapping.FirstOrDefault(y => y.ID == model.ID && y.IsDeleted != true);
+                var categoryMapping = context.CategoryUserMapping.FirstOrDefault(y => y.ID == model.ID && y.IsDeleted == false);
                 // var categoryId = context.CategoryMaster.FirstOrDefault().Id;
                 if (categoryMapping != null)
                 {

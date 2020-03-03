@@ -43,6 +43,7 @@ namespace University.UI.Areas.Admin.Models
         public string subcat { get; set; }
         public string ImageALT { get; set; }
         public string Description { get; set; }
+        public string VideosIDs { get; set; }
         public Nullable<Decimal> SubCategoryId { get; set; }
         //public Nullable<Decimal> CategoryId { get; set; }
         public Nullable<bool> IsDeleted { get; set; }

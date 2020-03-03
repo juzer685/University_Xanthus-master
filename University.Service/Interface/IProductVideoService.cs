@@ -11,6 +11,6 @@ namespace University.Service.Interface
     {
        // (List<ProductVideos>, List<CategoryUserMapping>) GetProductVideoList();
          List<ProductVideos> GetProductVideoList();
-        IEnumerable<ProductVideos> GetUserVideosList();
+        IEnumerable<ProductVideoModel> GetUserVideosList();
     }
 }

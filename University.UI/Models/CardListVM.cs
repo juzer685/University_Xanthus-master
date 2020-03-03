@@ -7,6 +7,9 @@ namespace University.UI.Models
 {
     public class CardListVM
     {
+        public decimal ProductId { get; set; }
+        public int VideoId { get; set; }
+        public int SubCatID { get; set; }
         public string ProductName { get; set; }
         public string CustomerFName { get; set; }
         public string CardHolderName { get; set; }

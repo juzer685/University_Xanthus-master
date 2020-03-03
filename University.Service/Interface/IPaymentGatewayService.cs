@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using University.Data;
+using University.Data.CustomEntities;
 
 namespace University.Service.Interface
 {
@@ -13,6 +14,8 @@ namespace University.Service.Interface
         bool SaveCardDetails(CardDetails CardDetails);
 
         List<CardDetails> GetCardDetails(int UserId);
-        
+
+        IEnumerable<ProductVideos> GetUserVideosList();
+
     }
 }

@@ -29,6 +29,9 @@ namespace University.Data
         public string ProductName { get; set; }
         public Nullable<decimal> Amount { get; set; }
         public string CustomerFullName { get; set; }
+        public Nullable<int> CategoryID { get; set; }
+        public Nullable<decimal> ProductID { get; set; }
+        public Nullable<decimal> VideoID { get; set; }
     
         public virtual Login_tbl Login_tbl { get; set; }
     }

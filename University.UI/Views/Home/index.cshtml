@@ -2,6 +2,7 @@
 @model University.UI.Models.HomePageViewModel
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
+        
 }
 <head>
     <meta charset="utf-8">
@@ -261,10 +262,10 @@
 
 
             <div class="card-footer bg-white">
-
                 <ul class="mailbox-attachments d-flex align-items-stretch clearfix imgbox ">
                     <div class="col-md-12">
                         <div class="row">
+                        
                             @foreach (var product in Model.Products)
                             {
                                 <li class="openpop temp" data-toggle="popover">
@@ -272,13 +273,15 @@
                                         <img class="imguser" src="~/Uploads/Product/@product.ImageURL" alt="Attachment">
                                     </span>
                                     <div class="mailbox-attachment-info">
+                                        <a class="subcatid">@product.SubCategoryId</a>
+                                        <a class="ProductID">@product.Id</a>
                                         <a @*href="/Products/ProductsById?ProductId=@product.Id"*@ class="mailbox-attachment-name productname">@product.Title</a>
                                     </div>
                                     <div class="mailbox-attachment-info dollar " id="">
                                         <a class="giveamount">@product.VideoRateSum</a>
-
                                     </div>
-                                    <button type="button" class="bfCaptchaEntry">Bay Now!</button>
+
+                                    <button type="button" class="baynowclick">Bay Now!</button>
 
                                 </li>
                             }
@@ -410,27 +413,12 @@
             html: true,
             animation: true
         })
-        setdata();
+        //setdata();
     });
 
     function setdata() {
         var obj = '<div class="popover" onmouseover="clearTimeout(timeoutObj);$(this).mouseleave(function() {$(this).hide();});"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>';
-       // var obj="<div class='col-lg-12' style='text-align:center'><div class='row' style='margin-top:10px'><div class='col-lg-4' > <input type='image' src='submit.gif' alt='Submit' width='48' height='48'></div></div>";
- //       var obj ="<div class='quick-view-box--box--3cUtO popover--popover--1sy7H model' data-purpose='popper' id='popper0' style='position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(806px, 1000px, 0px);' data-placement='right'> " +
- //   "<div class='popover--popper-content--2CJqQ'>" +
- //       "<div class='popover--body--2JJmm'>" +
- //           "<div class=''>" +
- //               "<div id='quick-view-box'>"+
- //                   "<div class='regular text-midnight-lighter quick-view-box--top--26Tmi'> " +
- //                       "<span class='dib a11 mt10 mb10 quick-view-box--published-above--1JvM3'>Tested</span>" +
- //                       "<button type='button' class='add-to-cart btn btn-lg btn-primary' style='width: 100%;'><span class='add-to-cart'><span class='add-to-cart'>Add to cart</span></span></button></div>" +
- //                   "</div>" +
- //               "</div>" +
- //           "</div>" +
- //       "</div>" +
- //   "</div>" +
- //"<div data-purpose='arrow' class='popover--arrow--f35jS' data-placement='right' style='top: 281px;'></div>";
-        // $("#temp").append("<li>Appended item</li>");
+       
         $(".temp").attr('data-content', obj);
         $('.temp').popover();
     }
@@ -448,13 +436,13 @@
             }
         });
     }
-    $(".bfCaptchaEntry").on("click", function () {
-        //var test = $("#giveamount").val();
-         var ProductName = $(this).parent().find('.productname').html();
+    $(".baynowclick").on("click", function () {
+         //var VideoID = $(this).parent().find('.VideoID').html();
+        var ProductID = $(this).parent().find('.ProductID').html();
+        var SubCatID = $(this).parent().find('.subcatid').html();
+        var ProductName = $(this).parent().find('.productname').html();
         var Rate = $(this).parent().find('.giveamount').html();
-        //alert(test);
-        //var h = "/PaymentGateway/index";
-         var h = "/PaymentGateway/GetCardList?id="+Rate+ "&ids=" +ProductName;
+        var h = "/PaymentGateway/GetCardList?Videorate="+Rate+ "&Productname=" +ProductName+ "&ProductID=" +ProductID+ "&SubcatID=" +SubCatID;
         window.location.href = h;
     });
 

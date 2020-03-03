@@ -150,8 +150,8 @@ namespace University.UI.Areas.Admin.Controllers
                 CategoryID = model.CategoryId,
                 UserID = model.UserID
             });
-            return Json(isSuccess, JsonRequestBehavior.AllowGet);
-            //return RedirectToAction("CategoryUserMapping");
+            //return Json(isSuccess, JsonRequestBehavior.AllowGet);
+            return RedirectToAction("CategoryUserMappingList", isSuccess);
         }
 
         public ActionResult DeleteCategoryUseerMapping(string Id)

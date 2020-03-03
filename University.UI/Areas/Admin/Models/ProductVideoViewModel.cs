@@ -55,7 +55,8 @@ namespace University.UI.Areas.Admin.Models
         public HttpPostedFileBase ProductVideo { get; set; }
         public Decimal AssocitedCustID { get; set; }
         public decimal VideoRate { get; set; }
-
+        public bool IsPaid { get; set; }
+        public Decimal SubCatID { get; set; }
 
 
     }

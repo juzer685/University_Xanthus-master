@@ -44,7 +44,11 @@ namespace IPSU.Web.Areas.Admin.Controllers
                     Id = pvideo.Id,
                     Title = pvideo.Title,
                     Decription = pvideo.Decription,
-                    VideoURL = pvideo.VideoURL
+                    VideoURL = pvideo.VideoURL,
+                    ProductId=pvideo.ProductId,
+                    IsPaid=pvideo.IsPaid,
+                    VideoRate=pvideo.VideoRate,
+                    SubCatID=pvideo.SubcatId
                 });
                 
             }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using University.Data;
+using University.Data.CustomEntities;
 using University.Repository.Interface;
 using University.Service.Interface;
 
@@ -31,6 +32,11 @@ namespace University.Service
         {
             return _PaymentGatewayRepository.GetCardDetails(UserId);
         }
-       
+
+        public IEnumerable<ProductVideos> GetUserVideosList()
+        {
+            return _PaymentGatewayRepository.GetUserVideosList();
+        }
+
     }
 }

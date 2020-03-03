@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using University.Data;
+using University.Data.CustomEntities;
 
 namespace University.Repository.Interface
 {
@@ -12,6 +13,7 @@ namespace University.Repository.Interface
         bool SaveTransactionDetails(CardTransactionDetails CardTransactionDetail);
         bool SaveCardDetails(CardDetails CardDetails);
         List<CardDetails> GetCardDetails(int UserId);
-       
+        IEnumerable<ProductVideos> GetUserVideosList();
+
     }
 }
