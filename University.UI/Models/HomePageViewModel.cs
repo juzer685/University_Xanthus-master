@@ -15,6 +15,7 @@ namespace University.UI.Models
         public HomeBanner BannerImage { get; set; }
         public IEnumerable<FAQViewModel> ProductFAQs { get; set; }
         public IEnumerable<ProductEntity> Products { get; set; }
+        public IEnumerable<ProductVideoModel> ProductsVideos { get; set; }
         public List<CategoryMaster> Categories { get; set; }
         public IEnumerable<SubCategoryMaster> HomeBannersted { get; set; }
         public List<SubCategoryMaster> SubCategories { get; set; }

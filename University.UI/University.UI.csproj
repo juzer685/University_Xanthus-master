@@ -178,6 +178,7 @@
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductFeedbackController.cs" />
     <Compile Include="Areas\Admin\Controllers\SubCategoryController.cs" />
+    <Compile Include="Areas\Admin\Models\CardTransactionDetailsMappings.cs" />
     <Compile Include="Areas\Admin\Models\CategoryMappingModel.cs" />
     <Compile Include="Areas\Admin\Models\RegistrationVM.cs" />
     <Compile Include="Areas\Admin\Models\UserListViewModel.cs" />
@@ -2112,6 +2113,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\jsCardList.js" />
     <Content Include="Scripts\PaymentGateway.js" />
+    <Content Include="Scripts\ProjectValidation.js" />
     <Content Include="Scripts\Register.js" />
     <Content Include="Uploads\Product\20646dcafe2e40df8dd3cf40daa0404f.pdf" />
     <Content Include="Uploads\Product\2152030334fa4e58a98caa25337e16cc.doc" />

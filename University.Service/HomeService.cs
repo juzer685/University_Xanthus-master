@@ -87,6 +87,15 @@ namespace University.Service
         {
             return _sliderRepository.GetRecentVisitedProduct(Id);
         }
+        //get video list on Homepage
+        public IEnumerable<ProductVideoModel> GetUserVideosList()
+        {
+            return _sliderRepository.GetUserVideosList();
+        }
+        //public IEnumerable<CardTransactionDeatilsMapping> GetBuyProductList()
+        //{
+        //    return _sliderRepository.GetBuyProductList();
+        //}
     }
 }
 

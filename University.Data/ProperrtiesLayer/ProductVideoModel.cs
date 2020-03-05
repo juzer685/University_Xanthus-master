@@ -15,7 +15,7 @@ namespace University.Data
         public bool IsPaid { get; set; }
         public decimal VideoRate { get; set; }
         public Decimal SubcatId { get; set; }
-        public int TransactionId { get; set; }
+        public string TransactionId { get; set; }
 
 
     }

@@ -630,12 +630,13 @@ namespace University.Repository
                     spec.Title = productSpec.Title;
                     spec.AssocitedCustID = productSpec.AssocitedCustID;
                     spec.UpdatedDate = DateTime.UtcNow;
+                    spec.IsDeleted = false;
                     context.SaveChanges();
                 }
                 else
                 {
+                    productSpec.IsDeleted = false;
                     productSpec.CreatedDate = DateTime.UtcNow;
-
                     context.ProductSpec.Add(productSpec);
                     context.SaveChanges();
                 }
@@ -667,12 +668,13 @@ namespace University.Repository
                     if (productUserGuide.ImageURL != null)
                         guide.ImageURL = productUserGuide.ImageURL;
                     guide.UpdatedDate = DateTime.UtcNow;
+                    guide.IsDeleted = false;
                     guide.ImageALT = productUserGuide.ImageALT;
                     context.SaveChanges();
                 }
                 else
                 {
-                
+                    productUserGuide.IsDeleted = false;
                     productUserGuide.CreatedDate = DateTime.UtcNow;
                     context.ProductUserGuide.Add(productUserGuide);
                     context.SaveChanges();
@@ -727,6 +729,7 @@ namespace University.Repository
                     productVideoExising.Title = productVideo.Title;
                     productVideoExising.Decription = productVideo.Decription;
                     productVideoExising.VideoRate = productVideo.VideoRate;
+                    productVideoExising.IsDeleted = false;
                     
 
                     if (!string.IsNullOrWhiteSpace(productVideo.VideoURL))
@@ -742,6 +745,7 @@ namespace University.Repository
                 }
                 else
                 {
+                    productVideo.IsDeleted = false;
                     productVideo.CreatedDate = DateTime.UtcNow;
                     context.ProductVideos.Add(productVideo);
                     context.SaveChanges();
