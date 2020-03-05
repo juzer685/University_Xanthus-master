@@ -26,7 +26,8 @@ namespace University.Data
             this.RecentVisitedProduct = new HashSet<RecentVisitedProduct>();
             this.ProductVideos = new HashSet<ProductVideos>();
         }
-    
+
+        public string TransactionID { get; set; }
         public decimal Id { get; set; }
         public string Title { get; set; }
         public string ImageURL { get; set; }

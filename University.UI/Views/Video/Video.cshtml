@@ -110,6 +110,9 @@
                                         <div class="col-12 col-md-10">
                                             <div class="searchItemTitle">
                                                 <a class="searchItemTitle productname" href="~/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(item.ProductId.ToString(), System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])">@item.Title</a>
+                                                @*@Html.Hidden("ProductId", item.ProductId, new { @class = "ProductID" })
+                                                @Html.Hidden("SubCatID", item.SubCatID, new { @class = "SubCatID" })
+                                                @Html.Hidden("Id", item.Id, new { @class = "Id" })*@
                                                 <a class="ProductID">@item.ProductId</a>
                                                 <a class="SubCatID">@item.SubCatID</a>
                                                 <a class="VideoID">@item.Id</a>
@@ -120,7 +123,7 @@
                                                 @*<a class="ProductID">@item.ProductId</a>*@
                                                 @*<a class="giveamount">@item</a>*@
                                                 <div class="wrapper1">
-                                                    <button type="button" class="button baynowclick">BayNow!</button>
+                                                    <button type="button" class="button baynowclick" style="margin-left: 150px;margin-top: -15px;">BuyNow!</button>
                                                 </div>
                                             </div>
                                         </div>

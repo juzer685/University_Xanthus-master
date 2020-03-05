@@ -370,7 +370,7 @@ namespace University.Repository
                             on c.Id equals p.SubCategoryId
                             //join ctdm in context.CardTransactionDeatilsMapping
                             //on p.Id equals ctdm.ProductID
-                            join pv in context.ProductVideos
+                            join pv in context.ProductVideos//.Where(y => y.IsDeleted == false )
                             on p.Id equals pv.ProductId
                             orderby p.CreatedDate
                             //group pv by pv.ProductId into g
@@ -378,7 +378,10 @@ namespace University.Repository
                             select new 
                             {
                                 g.Key, 
-                                videosSum = g.ToList().Sum(x => x.VideoRate) 
+                                videosSum = g.ToList().Sum(x => x.VideoRate),
+                                productvideolist=g.ToList().Select(x=>x.ProductId)
+                                //productvideoslist=g.ToList().Where(x=>x.ProductId==)
+                               
                             });
                 //select new { ProductId = pvs.Key, videos = pvs.ToList() });
                             //var Productlst = new List<ProductEntity>();
@@ -423,6 +426,10 @@ namespace University.Repository
                                ProductVideos = context.ProductVideos.Where(x => x.IsDeleted != true).ToList(),
                                ProductDocuments = context.ProductDocuments.Where(x => x.IsDeleted != true).ToList()
                            }).ToList();
+                foreach(var item1 in res)
+                {
+                    item1.ProductVideos = context.ProductVideos.Where(y => y.IsDeleted != true).ToList();
+                }
 
                 foreach (var item in res)
                 {
@@ -480,6 +487,116 @@ namespace University.Repository
         //    }
         //}
         #endregion
+
+            //get video List on Home page
+        public IEnumerable<ProductVideoModel> GetUserVideosList()
+        {
+            using (var context = new UniversityEntities())
+            {
+                int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
+                //int AssocitedCustID = Convert.ToInt32(HttpContext.Current.Session["AdminLoginID"]);
+                var res = (from l in context.Login_tbl.Where(y => y.IsDeleted != true && y.ID == UserID)
+                           join cm in context.CategoryUserMapping.Where(y => y.IsDeleted != true && y.UserID == UserID)
+                           on l.ID equals cm.UserID
+                           join c in context.SubCategoryMaster.Where(y => y.IsDeleted != true)
+                           on cm.CategoryID equals c.Id
+                           join p in context.Product.Where(y => y.IsDeleted != true)
+                           on c.Id equals p.SubCategoryId
+                           join pv in context.ProductVideos.Where(y => y.IsDeleted != true)
+                           on p.Id equals pv.ProductId
+                           //join ctd in context.CardTransactionDetails.Where(y => y.CreatedBy == UserID && y.Message == "Successful.")
+                           //on pv.ProductId equals ctd.ProductID
+                           orderby pv.CreatedDate
+                           select new ProductVideoModel
+                           {
+                               Id = pv.Id,
+                               Title = pv.Title,
+                               Decription = pv.Decription,
+                               VideoURL = pv.VideoURL,
+                               ProductId = pv.ProductId,
+                               IsPaid = false,
+                               VideoRate = pv.VideoRate ?? 0,
+                               SubcatId = c.Id
+                           }).ToList();
+
+                //get paid video list if click on product buy button
+                //get paid video list if click on video buy button
+                //remaing video list which is not paid
+
+                //TODO:if click on each video buy button then show product value - that each video value
+                //if user click on product buy button and if some video already added in database then first remove and then add product 
+
+                //get videos list from res which not paid video
+                List<ProductVideoModel> productvideo = new List<ProductVideoModel>();
+                // productvideo = res.Except(PaidVideodata).ToList();
+                foreach (var prodvideo in res)
+                {
+                    //get videos list which product exist in card transaction details table with ispaid falg true
+                    //if (context.CardTransactionDeatilsMapping.Where(c => c.VideoID == prodvideo.Id && c.UserID == UserID).Count() != 0)
+                    //{
+                    //    productvideo.Add(new ProductVideoModel
+                    //    {
+                    //        Id = prodvideo.Id,
+                    //        Title = prodvideo.Title,
+                    //        Decription = prodvideo.Decription,
+                    //        VideoURL = prodvideo.VideoURL,
+                    //        IsPaid = true,
+                    //        ProductId = prodvideo.ProductId,
+                    //        VideoRate = prodvideo.VideoRate,
+                    //        SubcatId = prodvideo.SubcatId
+                    //    });
+                    //}
+                    //else
+                    //{
+                        productvideo.Add(new ProductVideoModel
+                        {
+                            Id = prodvideo.Id,
+                            Title = prodvideo.Title,
+                            Decription = prodvideo.Decription,
+                            VideoURL = prodvideo.VideoURL,
+                            IsPaid = false,
+                            ProductId = prodvideo.ProductId,
+                            VideoRate = prodvideo.VideoRate,
+                            SubcatId = prodvideo.SubcatId
+                        });
+                    //}
+                }
+                return productvideo;
+            }
+        }
+
+        //public IEnumerable<CardTransactionDeatilsMapping> GetBuyProductList()
+        //{
+        //    using(var context = new UniversityEntities())
+        //    {
+        //        int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
+        //        var res = (from l in context.Login_tbl.Where(y => y.IsDeleted != true && y.ID == UserID)
+        //                   join cm in context.CategoryUserMapping.Where(y => y.IsDeleted != true && y.UserID == UserID)
+        //                   on l.ID equals cm.UserID
+        //                   join c in context.SubCategoryMaster.Where(y => y.IsDeleted != true)
+        //                   on cm.CategoryID equals c.Id
+        //                   join p in context.Product.Where(y => y.IsDeleted != true)
+        //                   on c.Id equals p.SubCategoryId
+        //                   join pv in context.ProductVideos.Where(y => y.IsDeleted != true)
+        //                   on p.Id equals pv.ProductId
+        //                   //join ctd in context.CardTransactionDetails.Where(y => y.CreatedBy == UserID && y.Message == "Successful.")
+        //                   //on pv.ProductId equals ctd.ProductID
+        //                   orderby pv.CreatedDate
+        //                   select new CardTransactionDeatilsMapping
+        //                   {
+        //                       Id = pv.Id,
+        //                       Title = pv.Title,
+        //                       Decription = pv.Decription,
+        //                       VideoURL = pv.VideoURL,
+        //                       ProductId = pv.ProductId,
+        //                       IsPaid = false,
+        //                       VideoRate = pv.VideoRate ?? 0,
+        //                       SubcatId = c.Id
+        //                   }).ToList();
+        //    }
+        //}
     }
+
+
 
 }

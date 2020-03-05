@@ -20,6 +20,7 @@ namespace University.Repository
                 {
                     context.CardTransactionDetails.Add(CardTransactionDetail);
                     context.SaveChanges();
+                    
                     List<CardTransactionDeatilsMapping> cardTransactionDeatilsMapping = new List<CardTransactionDeatilsMapping>();
                     //cardTransactionDeatilsMapping.TransactionID = CardTransactionDetail.TransId;
                     context.CardTransactionDeatilsMapping.Add(new CardTransactionDeatilsMapping
@@ -28,24 +29,19 @@ namespace University.Repository
                         UserID = CardTransactionDetail.CreatedBy,
                         CategoryID = CardTransactionDetail.CategoryID,
                         ProductID = CardTransactionDetail.ProductID,
-                       VideoID= CardTransactionDetail.VideoID,
-                        //CONVERT(INT, REPLACE([varName], ',', ''))
-                        // string.Join(",", CardTransactionDetail.VideoID)
-                        //VideoID = string.Join(", ", CardTransactionDetail.VideoID),
-                        IsDeleted = false,
-                        //IsPaid=true
-
-
-
+                        VideoID= CardTransactionDetail.VideoID,
+                        IsDeleted = false
                     }); 
                     context.SaveChanges();
-                    //context.CardTransactionDeatilsMapping.Add(cardTransactionDeatilsMapping);
-                       
-                        
+                    ProductEntity productEntity = new ProductEntity();
+                    //context.Product.Add(new  Product{ 
+                    //    TransactionID=CardTransactionDetail.TransId,
+                    //    Id=CardTransactionDetail.ProductID??0
+                    //});
+                    productEntity.TransactionId = CardTransactionDetail.TransId;
+                    productEntity.Id = CardTransactionDetail.ProductID ??0;
                  }
                     //productvideo.SaveChanges();
-
-
                     return true;
                 
             }

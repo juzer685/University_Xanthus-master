@@ -10,7 +10,7 @@ namespace University.Repository.Interface
 {
     public interface IHomeRepository
     {
-       
+        //IEnumerable<CardTransactionDeatilsMapping> GetBuyProductList();
         IEnumerable<HomeSlider> GetHomeSliderList();
         HomeSlider GetHomeSlider(int id);
         bool AddOrUpdateHomeSlider(HomeSlider model);
@@ -27,5 +27,7 @@ namespace University.Repository.Interface
         void AddProductToRecentViewed(RecentVisitedProduct model);
         RecentVisitedProduct GetRecentVisitedProduct(int Id);
         IEnumerable<ProductEntity> ListproductbyUserId();
+        //get video list on homepage
+        IEnumerable<ProductVideoModel> GetUserVideosList();
     }
 }

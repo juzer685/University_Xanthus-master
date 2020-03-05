@@ -259,40 +259,58 @@
             </div>
             <br />
             <!-- /.card-body -->
-
-
             <div class="card-footer bg-white">
                 <ul class="mailbox-attachments d-flex align-items-stretch clearfix imgbox ">
                     <div class="col-md-12">
                         <div class="row">
-                        
-                            @foreach (var product in Model.Products)
-                            {
-                                <li class="openpop temp" data-toggle="popover">
-                                    <span class="mailbox-attachment-icon has-img">
-                                        <img class="imguser" src="~/Uploads/Product/@product.ImageURL" alt="Attachment">
-                                    </span>
-                                    <div class="mailbox-attachment-info">
-                                        <a class="subcatid">@product.SubCategoryId</a>
-                                        <a class="ProductID">@product.Id</a>
-                                        <a @*href="/Products/ProductsById?ProductId=@product.Id"*@ class="mailbox-attachment-name productname">@product.Title</a>
-                                    </div>
-                                    <div class="mailbox-attachment-info dollar " id="">
-                                        <a class="giveamount">@product.VideoRateSum</a>
-                                    </div>
+                            @*@foreach (var productvideos in Model.ProductsVideos)
+                            {*@
+                                @foreach (var product in Model.Products)
+                                {
+                                    //if (Model.ProductsVideos.Count() == product.ProductVideos.Count() )
+                                    //{
+                                        <li class="openpop temp" data-toggle="popover">
+                                            <span class="mailbox-attachment-icon has-img">
+                                                <img class="imguser" src="~/Uploads/Product/@product.ImageURL" alt="Attachment">
+                                            </span>
+                                            <div class="mailbox-attachment-info">
+                                                @*<input type="hidden" class="SubCategoryId" value="@product.SubCategoryId" name="@product.SubCategoryId"/>*@
+                                                @*@Html.Hidden("SubCategoryId", product.SubCategoryId, new { @class = "SubCategoryId" })
+                            @Html.Hidden("Id", product.Id, new { @class = "ProductID" })*@
+                                                <a class="SubCategoryId">@product.SubCategoryId</a>
+                                                <a class="ProductID">@product.Id</a>
+                                                <a @*href="/Products/ProductsById?ProductId=@product.Id"*@ class="mailbox-attachment-name productname">@product.Title</a>
+                                            </div>
+                                            <div class="mailbox-attachment-info dollar " id="">
+                                                 <a class="giveamount">@product.VideoRateSum</a>
+                                             </div>
 
-                                    <button type="button" class="baynowclick">Bay Now!</button>
+                                            <button type="button" class="baynowclick">Buy Now!</button>
 
-                                </li>
-                            }
-                        </div>
+                                        </li>
+                                    @*}
+                                    else
+                                    {
+                                        <li class="openpop temp" data-toggle="popover">
+                                            <span class="mailbox-attachment-icon has-img">
+                                                <img class="imguser" src="~/Uploads/Product/@product.ImageURL" alt="Attachment">
+                                            </span>
+                                            <div class="mailbox-attachment-info">
+                                                <a class="SubCategoryId">@product.SubCategoryId</a>
+                                                <a class="ProductID">@product.Id</a>
+                                                <a href="/Products/ProductsById?ProductId=@product.Id" class="mailbox-attachment-name productname">@product.Title</a>
+                                            </div>
+                                            <div class="mailbox-attachment-info dollar " id="">
+                                                <a class="giveamount">@product.VideoRateSum</a>
+                                            </div>
+                                            <button type="button" class="baynowclick">Buy Now!</button>
+                                        </li>
+                                    }*@
+                                }
+                            @*}*@
+                            </div>
                     </div>
-
                 </ul>
-
-
-
-
             </div>
 
             @*<div class="productListingContent">
@@ -439,7 +457,7 @@
     $(".baynowclick").on("click", function () {
          //var VideoID = $(this).parent().find('.VideoID').html();
         var ProductID = $(this).parent().find('.ProductID').html();
-        var SubCatID = $(this).parent().find('.subcatid').html();
+        var SubCatID = $(this).parent().find('.SubCategoryId').html();
         var ProductName = $(this).parent().find('.productname').html();
         var Rate = $(this).parent().find('.giveamount').html();
         var h = "/PaymentGateway/GetCardList?Videorate="+Rate+ "&Productname=" +ProductName+ "&ProductID=" +ProductID+ "&SubcatID=" +SubCatID;

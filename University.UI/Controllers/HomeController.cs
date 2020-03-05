@@ -56,6 +56,9 @@ namespace University.UI.Controllers
             ListProductFAQ.Add(PF);
             List<ProductEntity> ListProduct = new List<ProductEntity>();
             ListProduct = _sliderService.ListproductbyUserId().ToList();
+            //get the videolist 
+            var ListProductVideo = _sliderService.GetUserVideosList().ToList();
+            //var ListBuyProductVideoList= _sliderService.GetBuyProductList().ToList();
             RecentVisitedProduct recentVisitedProduct = new RecentVisitedProduct();
 
             // recentVisitedProduct =null
@@ -82,6 +85,7 @@ namespace University.UI.Controllers
             homePageViewModel.HomeBanners = viewModel.ToList();
             homePageViewModel.ProductFAQs = FAQviewModel;
             homePageViewModel.Products = ListProduct;
+            homePageViewModel.ProductsVideos = ListProductVideo;
             HomeBanner homeBanner = new HomeBanner();
             if (BannerviewModel != null)
             {
@@ -167,10 +171,10 @@ namespace University.UI.Controllers
             ViewBag.SearchString = SearchString;
             return View(listproductEntity);
         }
-        public ActionResult Profile()
-        {
-            return View();
-        }
+        //public ActionResult Profile()
+        //{
+        //    return View();
+        //}
 
         public ActionResult SmartSearch(string freeText)
         {

@@ -232,7 +232,7 @@ namespace University.UI.Controllers
                                 VideoID = pvideo.Id,
                             });
                         }
-                        TransResult = false;
+                       // TransResult = false;
                     }
                     if (TransResult)
                     {
