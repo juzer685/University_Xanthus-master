@@ -92,10 +92,10 @@ namespace University.Service
         {
             return _sliderRepository.GetUserVideosList();
         }
-        //public IEnumerable<CardTransactionDeatilsMapping> GetBuyProductList()
-        //{
-        //    return _sliderRepository.GetBuyProductList();
-        //}
+        public IEnumerable<CardTransactionDetailsMappings> GetBuyProductList()
+        {
+            return _sliderRepository.GetBuyProductList();
+        }
     }
 }
 

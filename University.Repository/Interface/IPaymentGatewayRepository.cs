@@ -14,6 +14,7 @@ namespace University.Repository.Interface
         bool SaveCardDetails(CardDetails CardDetails);
         List<CardDetails> GetCardDetails(int UserId);
         IEnumerable<ProductVideos> GetUserVideosList();
+        IEnumerable<CardTransactionDetailsMappings> GetCardTransDeatilsMapp();
 
     }
 }

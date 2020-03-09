@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace University.UI.Areas.Admin.Models
+namespace University.Data.CustomEntities
 {
     public class CardTransactionDetailsMappings
     {
+        public bool IsPaid { get; set; }
+        public decimal VideoRate { get; set; }
         public int CTMID { get; set; }
         public Nullable<decimal> UserID { get; set; }
         public Nullable<decimal> CategoryID { get; set; }
@@ -17,5 +20,6 @@ namespace University.UI.Areas.Admin.Models
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<decimal> CreatedBy { get; set; }
         public Nullable<decimal> DeletedBy { get; set; }
+
     }
 }

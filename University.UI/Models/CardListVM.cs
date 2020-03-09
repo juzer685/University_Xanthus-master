@@ -8,6 +8,8 @@ namespace University.UI.Models
     public class CardListVM
     {
         public decimal ProductId { get; set; }
+        public bool isbuy { get; set; }
+        public bool isProductbuy { get; set; }
         public int VideoId { get; set; }
         public int SubCatID { get; set; }
         public string ProductName { get; set; }

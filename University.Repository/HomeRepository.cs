@@ -379,7 +379,7 @@ namespace University.Repository
                             {
                                 g.Key, 
                                 videosSum = g.ToList().Sum(x => x.VideoRate),
-                                productvideolist=g.ToList().Select(x=>x.ProductId)
+                                //productvideolist=g.ToList().Select(x=>x.ProductId)
                                 //productvideoslist=g.ToList().Where(x=>x.ProductId==)
                                
                             });
@@ -441,51 +441,7 @@ namespace University.Repository
                 return res;
             }
         }
-        //public IEnumerable<ProductEntity> ListproductbyUserId()
-        //{
-        //    using (var context = new UniversityEntities())
-        //    {
-        //        int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
-        //        var res = (from p in context.Product.Where(y => y.IsDeleted != true)
-        //                   join s in context.SubCategoryMaster.Where(y => y.IsDeleted != true)
-        //                   on p.SubCategoryId equals s.Id
-        //                   //join cm in context.CategoryUserMapping.Where(y=>y.IsDeleted !=true )
-        //                   //on s.Id equals cm.CategoryID
-        //                   //join l in context.Login_tbl.Where(y=>y.IsDeleted!=true)
-        //                   //on cm.UserID equals l.ID 
-        //                   join c in context.CategoryMaster.Where(y => y.IsDeleted != true)
-        //                   on s.CategoryId equals c.Id
-        //                   join g in context.ProductUserGuide.Where(y => y.IsDeleted != true)
-        //                   on p.Id equals g.ProductId into temp
-        //                   from guide in temp.DefaultIfEmpty()
-        //                       //join v in context.ProductVideos.Where(y => y.IsDeleted != true)
-        //                       //on p.Id equals v.ProductId into tempV
-        //                       //from videos in tempV.DefaultIfEmpty()
-
-        //                   select new ProductEntity()
-        //                   {
-        //                       Id = p.Id,
-        //                       CreatedBy = p.CreatedBy,
-        //                       CreatedDate = p.CreatedDate,
-        //                       DeletedBy = p.DeletedBy,
-        //                       DeletedDate = p.DeletedDate,
-        //                       Description = p.Description,
-        //                       ImageURL = p.ImageURL,
-        //                       IsDeleted = p.IsDeleted,
-        //                       SubCategoryId = p.SubCategoryId,
-        //                       Title = p.Title,
-        //                       UpdatedBy = p.UpdatedBy,
-        //                       UpdatedDate = p.UpdatedDate,
-        //                       CategoryMaster = c,
-        //                       SubCategoryMaster = s,
-        //                       ProductUserGuide = guide,
-        //                       Categorymapp = context.CategoryUserMapping.Where(x=> x.IsDeleted != true && x.UserID == UserID).ToList(),
-        //                       ProductVideos = context.ProductVideos.Where(x => x.IsDeleted != true).ToList(),
-        //                       ProductDocuments = context.ProductDocuments.Where( x=> x.IsDeleted != true).ToList()
-        //                   }).ToList();
-        //        return res.OrderByDescending(x => x.CreatedDate).Take(6);
-        //    }
-        //}
+        
         #endregion
 
             //get video List on Home page
@@ -565,36 +521,31 @@ namespace University.Repository
             }
         }
 
-        //public IEnumerable<CardTransactionDeatilsMapping> GetBuyProductList()
-        //{
-        //    using(var context = new UniversityEntities())
-        //    {
-        //        int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
-        //        var res = (from l in context.Login_tbl.Where(y => y.IsDeleted != true && y.ID == UserID)
-        //                   join cm in context.CategoryUserMapping.Where(y => y.IsDeleted != true && y.UserID == UserID)
-        //                   on l.ID equals cm.UserID
-        //                   join c in context.SubCategoryMaster.Where(y => y.IsDeleted != true)
-        //                   on cm.CategoryID equals c.Id
-        //                   join p in context.Product.Where(y => y.IsDeleted != true)
-        //                   on c.Id equals p.SubCategoryId
-        //                   join pv in context.ProductVideos.Where(y => y.IsDeleted != true)
-        //                   on p.Id equals pv.ProductId
-        //                   //join ctd in context.CardTransactionDetails.Where(y => y.CreatedBy == UserID && y.Message == "Successful.")
-        //                   //on pv.ProductId equals ctd.ProductID
-        //                   orderby pv.CreatedDate
-        //                   select new CardTransactionDeatilsMapping
-        //                   {
-        //                       Id = pv.Id,
-        //                       Title = pv.Title,
-        //                       Decription = pv.Decription,
-        //                       VideoURL = pv.VideoURL,
-        //                       ProductId = pv.ProductId,
-        //                       IsPaid = false,
-        //                       VideoRate = pv.VideoRate ?? 0,
-        //                       SubcatId = c.Id
-        //                   }).ToList();
-        //    }
-        //}
+        public IEnumerable<CardTransactionDetailsMappings> GetBuyProductList()
+        {
+            using (var context = new UniversityEntities())
+            {
+                int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
+                
+                var res =         (from ctd in context.CardTransactionDeatilsMapping.Where(c => c.UserID == UserID && c.IsDeleted==false)
+                                   join v in context.ProductVideos
+                                   on ctd.VideoID equals v.Id
+                                   select new CardTransactionDetailsMappings
+                                   {
+                                      CTMID = ctd.CTMID,
+                                      VideoID = ctd.VideoID,
+                                      UserID = ctd.UserID,
+                                      //IsPaid = ctd.IsPaid,
+                                      CategoryID = ctd.CategoryID,
+                                      TransactionID = ctd.TransactionID,
+                                      ProductID = ctd.ProductID,
+                                      VideoRate = v.VideoRate ??0
+                                  }).ToList();
+
+                return res;
+            }
+           
+        }
     }
 
 

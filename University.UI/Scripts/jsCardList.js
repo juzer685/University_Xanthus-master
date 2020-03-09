@@ -12,6 +12,8 @@ function RegisterHandler() {
             Amount: parseFloat($('.amount').html()),
             CVV: $(this).prev().find(".datacvv").val(),
             CardNumber: $(this).parent().parent().parent().find('.dataCardNumber').html(),
+            isProductbuy: $("input[name='radioCardNumber']:checked").siblings('.isProductbuy').val(),
+            isbuy: $("input[name='radioCardNumber']:checked").siblings('.isbuy').val(),
             VideoId: $("input[name='radioCardNumber']:checked").siblings('.VideoId').val(),
             ProductId: $("input[name='radioCardNumber']:checked").siblings('.ProductId').val(),
             SubCatID: $("input[name='radioCardNumber']:checked").siblings('.SubCatID').val(),

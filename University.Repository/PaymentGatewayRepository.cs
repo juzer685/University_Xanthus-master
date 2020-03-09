@@ -33,13 +33,13 @@ namespace University.Repository
                         IsDeleted = false
                     }); 
                     context.SaveChanges();
-                    ProductEntity productEntity = new ProductEntity();
+                    //ProductEntity productEntity = new ProductEntity();
                     //context.Product.Add(new  Product{ 
                     //    TransactionID=CardTransactionDetail.TransId,
                     //    Id=CardTransactionDetail.ProductID??0
                     //});
-                    productEntity.TransactionId = CardTransactionDetail.TransId;
-                    productEntity.Id = CardTransactionDetail.ProductID ??0;
+                   // productEntity.TransactionId = CardTransactionDetail.TransId;
+                   // productEntity.Id = CardTransactionDetail.ProductID ??0;
                  }
                     //productvideo.SaveChanges();
                     return true;
@@ -106,7 +106,9 @@ namespace University.Repository
                                pv.Title,
                                pv.Decription,
                                pv.ProductId,
-                               pv.VideoURL
+                               pv.VideoURL,
+                              
+
                            }
 
                            ).ToList();
@@ -119,7 +121,8 @@ namespace University.Repository
                         Title = prodvideo.Title,
                         Decription = prodvideo.Decription,
                         VideoURL = prodvideo.VideoURL,
-                        ProductId= prodvideo.ProductId
+                        ProductId= prodvideo.ProductId,
+                       
 
                     });
                     //var title = prodvideo.Title;
@@ -131,6 +134,31 @@ namespace University.Repository
             }
         }
 
+        public IEnumerable<CardTransactionDetailsMappings> GetCardTransDeatilsMapp()
+        {
+            using (var context = new UniversityEntities())
+            {
+                int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
 
+                var res = (from ctd in context.CardTransactionDeatilsMapping.Where(c => c.UserID == UserID && c.IsDeleted == false)
+                           join v in context.ProductVideos
+                           on ctd.VideoID equals v.Id
+                           join l in context.Login_tbl.Where(y => y.IsDeleted != true)
+                           on ctd.UserID equals l.ID
+                           select new CardTransactionDetailsMappings
+                           {
+                               CTMID = ctd.CTMID,
+                               VideoID = ctd.VideoID,
+                               UserID = ctd.UserID,
+                               //IsPaid = ctd.IsPaid,
+                               CategoryID = ctd.CategoryID,
+                               TransactionID = ctd.TransactionID,
+                               ProductID = ctd.ProductID,
+                               VideoRate = v.VideoRate ?? 0
+                           }).ToList();
+               
+                return res;
+            }
+        }
     }
 }

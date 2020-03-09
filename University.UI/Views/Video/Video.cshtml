@@ -106,7 +106,7 @@
                                     else
                                     {
                                         <iframe class="video v1" width="100%" height="200" src="@item.VideoURL" frameborder="0" allowfullscreen autoplay></iframe>
-                                        <div class="overlay" style=""></div>
+                                        <div class="overlay" style=" height: 200px;"></div>
                                         <div class="col-12 col-md-10">
                                             <div class="searchItemTitle">
                                                 <a class="searchItemTitle productname" href="~/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(item.ProductId.ToString(), System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])">@item.Title</a>
@@ -150,13 +150,14 @@
         if (event.key == "Enter")
             onSearchProductVideo();
     }
-     $(".baynowclick").on("click", function () {
+    $(".baynowclick").on("click", function () {
+        var isbuy = true;
          var VideoID = $(this).parent().parent().parent().find('.VideoID').html();
          var ProductID = $(this).parent().parent().parent().find('.ProductID').html();
          var SubCatID = $(this).parent().parent().parent().find('.SubCatID').html();
          var ProductName = $(this).parent().parent().parent().find('.productname').html();
          var Rate = $(this).parent().parent().parent().find('.giveamount').html();
-        var h = "/PaymentGateway/GetCardMapping?Videorate="+Rate+ "&Productname=" +ProductName+ "&ProductID=" +ProductID+ "&SubCatID=" +SubCatID+ "&VideoID=" +VideoID;
+        var h = "/PaymentGateway/GetCardMapping?Videorate="+Rate+ "&Productname=" +ProductName+ "&ProductID=" +ProductID+ "&SubCatID=" +SubCatID+ "&VideoID=" +VideoID+ "&isbuy=" +isbuy;
         window.location.href = h;
     });
 </script>

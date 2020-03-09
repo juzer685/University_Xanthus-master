@@ -37,6 +37,10 @@ namespace University.Service
         {
             return _PaymentGatewayRepository.GetUserVideosList();
         }
+         public IEnumerable<CardTransactionDetailsMappings> GetCardTransDeatilsMapp()
+        {
+            return _PaymentGatewayRepository.GetCardTransDeatilsMapp();
+        }
 
     }
 }

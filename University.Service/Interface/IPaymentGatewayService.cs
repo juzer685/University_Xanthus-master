@@ -16,6 +16,7 @@ namespace University.Service.Interface
         List<CardDetails> GetCardDetails(int UserId);
 
         IEnumerable<ProductVideos> GetUserVideosList();
+        IEnumerable<CardTransactionDetailsMappings> GetCardTransDeatilsMapp();
 
     }
 }

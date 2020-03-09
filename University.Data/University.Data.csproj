@@ -69,6 +69,7 @@
       <DependentUpon>UniversityEntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Class1.cs" />
+    <Compile Include="CustomEntities\CardTransactionDetailsMappings.cs" />
     <Compile Include="CustomEntities\ProductEntity.cs" />
     <Compile Include="CustomEntities\ProductLayoutMenu.cs" />
     <Compile Include="CustomEntities\ProductVideosEntity.cs" />
@@ -127,6 +128,7 @@
     </Compile>
     <Compile Include="ProperrtiesLayer\CardTransactionDeatilsMapping.cs" />
     <Compile Include="ProperrtiesLayer\CategoryUserMapping.cs" />
+    <Compile Include="ProperrtiesLayer\CardTransactionDetails.cs" />
     <Compile Include="ProperrtiesLayer\ProductVideoModel.cs" />
     <Compile Include="ProperrtiesLayer\ProductVideos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

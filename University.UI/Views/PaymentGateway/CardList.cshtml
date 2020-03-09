@@ -23,6 +23,8 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
+                                            @Html.Hidden("isProductbuy", Card.isProductbuy, new { @class = "isProductbuy" })
+                                            @Html.Hidden("isbuy", Card.isbuy, new { @class = "isbuy" })
                                             @Html.Hidden("VideoId", Card.VideoId, new { @class = "VideoId" })
                                             @Html.Hidden("SubCatID", Card.SubCatID, new { @class = "SubCatID" })
                                             @Html.Hidden("ProductId", Card.ProductId, new { @class = "ProductId" })

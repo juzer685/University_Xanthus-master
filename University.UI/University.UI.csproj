@@ -178,7 +178,6 @@
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductFeedbackController.cs" />
     <Compile Include="Areas\Admin\Controllers\SubCategoryController.cs" />
-    <Compile Include="Areas\Admin\Models\CardTransactionDetailsMappings.cs" />
     <Compile Include="Areas\Admin\Models\CategoryMappingModel.cs" />
     <Compile Include="Areas\Admin\Models\RegistrationVM.cs" />
     <Compile Include="Areas\Admin\Models\UserListViewModel.cs" />

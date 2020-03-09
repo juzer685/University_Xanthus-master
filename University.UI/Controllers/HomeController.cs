@@ -58,7 +58,7 @@ namespace University.UI.Controllers
             ListProduct = _sliderService.ListproductbyUserId().ToList();
             //get the videolist 
             var ListProductVideo = _sliderService.GetUserVideosList().ToList();
-            //var ListBuyProductVideoList= _sliderService.GetBuyProductList().ToList();
+            var ListBuyProductVideoList = _sliderService.GetBuyProductList().ToList();
             RecentVisitedProduct recentVisitedProduct = new RecentVisitedProduct();
 
             // recentVisitedProduct =null
@@ -86,16 +86,13 @@ namespace University.UI.Controllers
             homePageViewModel.ProductFAQs = FAQviewModel;
             homePageViewModel.Products = ListProduct;
             homePageViewModel.ProductsVideos = ListProductVideo;
+            homePageViewModel.cardTransactionDetailsMappings = ListBuyProductVideoList;
             HomeBanner homeBanner = new HomeBanner();
             if (BannerviewModel != null)
             {
                 homeBanner.ImageURL = BannerviewModel.ImageFullPath;
                 homeBanner.LinkTo = BannerviewModel.LinkTo;
-
-                
             }
-
-
             homePageViewModel.BannerImage = homeBanner;
             return View(homePageViewModel);
         }
