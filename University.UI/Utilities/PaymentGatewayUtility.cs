@@ -170,7 +170,7 @@ namespace University.UI.Utilities
 
             customerProfileType customerProfile = new customerProfileType();
            
-            customerProfile.merchantCustomerId = "2CLINC555557556";
+            customerProfile.merchantCustomerId = "2CLINC555557556tech";
             //customerProfile.description = "emailIdssshtitest";
             customerProfile.paymentProfiles = paymentProfileList.ToArray();
             customerProfile.shipToList = addressInfoList.ToArray();

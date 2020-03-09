@@ -36,5 +36,7 @@ namespace University.Data.CustomEntities
         public virtual ICollection<ProductDocuments> ProductDocuments { get; set; }
         public virtual ICollection<CategoryUserMapping> Categorymapp { get; set; }
         public virtual ICollection<CardTransactionDetails> CardTransactionDetails { get; set; }
+        public virtual ICollection<CardTransactionDetailsMappings> CardTransactionDetailsMappings  { get; set; }
+        
     }
 }

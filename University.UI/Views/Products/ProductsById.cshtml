@@ -186,8 +186,8 @@
                 <div class="card">
                     <div class="card-body">
                         @*<div class="ips-logo">
-                            <img src="~/Images/university-logo.png" alt="slide" width="140" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';">
-                        </div>*@
+                                <img src="~/Images/university-logo.png" alt="slide" width="140" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';">
+                            </div>*@
                         <div class="product-info">
                             <div class="product-title">
                                 <p>@Model.Title</p>
@@ -234,45 +234,45 @@
                                         <!-- Tab panes -->
                                         <div class="tab-content">
                                             <div class="tab-pane active" id="user-guide">
-                                               
-                                                    @*@if (Convert.ToInt32(Session["UserLoginID"]) == Model.ProductUserGuide.ass)
+
+                                                @*@if (Convert.ToInt32(Session["UserLoginID"]) == Model.ProductUserGuide.ass)
                                                     {*@
-                                                        <div class="product-guide">
-                                                            <div class="product-title"> @Model.ProductUserGuide.Title</div>
-                                                            <p class="product-desc">@Model.ProductUserGuide.Description</p>
+                                                <div class="product-guide">
+                                                    <div class="product-title"> @Model.ProductUserGuide.Title</div>
+                                                    <p class="product-desc">@Model.ProductUserGuide.Description</p>
 
-                                                            <div class="product-document">
-                                                                @if (!String.IsNullOrEmpty(@Model.ProductUserGuide.DocumentURL))
-                                                                {
+                                                    <div class="product-document">
+                                                        @if (!String.IsNullOrEmpty(@Model.ProductUserGuide.DocumentURL))
+                                                        {
 
-                                                                    if (@Model.ProductUserGuide.DocumentURL.Contains(".pdf"))
-                                                                    {
-                                                                        <object data="@Model.ProductUserGuide.DocumentURL" type="application/pdf" width="100%" height="800px">
-                                                                            <p>
-                                                                                It appears you don't have a PDF plugin for this browser.
-                                                                                No biggie... you can
-                                                                                <a href="@Model.ProductUserGuide.DocumentURL">
-                                                                                    click here to download the PDF file.
-                                                                                </a>
-                                                                            </p>
-                                                                        </object>
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        <a style="color:blue;" href="@Model.ProductUserGuide.DocumentURL" target="_blank">User Guide</a>
-                                                                    }
-                                                                }
-                                                            </div>
-                                                            @if (!string.IsNullOrWhiteSpace(Model.ProductUserGuide.ImageURL))
-                                                                {
-                                                                <div class="product-img">
-                                                                    <img class="" src="~/Uploads/Product/@Model.ProductUserGuide.ImageURL" alt="@Model.ProductUserGuide.ImageALT" width="100%" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';">
-                                                                </div>
-                                                                }
+                                                            if (@Model.ProductUserGuide.DocumentURL.Contains(".pdf"))
+                                                            {
+                                                                <object data="@Model.ProductUserGuide.DocumentURL" type="application/pdf" width="100%" height="800px">
+                                                                    <p>
+                                                                        It appears you don't have a PDF plugin for this browser.
+                                                                        No biggie... you can
+                                                                        <a href="@Model.ProductUserGuide.DocumentURL">
+                                                                            click here to download the PDF file.
+                                                                        </a>
+                                                                    </p>
+                                                                </object>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a style="color:blue;" href="@Model.ProductUserGuide.DocumentURL" target="_blank">User Guide</a>
+                                                            }
+                                                        }
+                                                    </div>
+                                                    @if (!string.IsNullOrWhiteSpace(Model.ProductUserGuide.ImageURL))
+                                                    {
+                                                        <div class="product-img">
+                                                            <img class="" src="~/Uploads/Product/@Model.ProductUserGuide.ImageURL" alt="@Model.ProductUserGuide.ImageALT" width="100%" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';">
                                                         </div>
-                                                   
-                                                
+                                                    }
                                                 </div>
+
+
+                                            </div>
                                             <div class="tab-pane" id="videos">
                                                 @if (@Model.ProductVideos.Count > 0)
                                                 {
@@ -283,13 +283,12 @@
                                                             <div class="video-title " style="">@Model.ProductVideos[0].Title</div>
                                                             <p class="video-desc">@Model.ProductVideos[0].Decription</p>
                                                         </div>
-                                                        
-                                                        
+
+
                                                         <div class="col-lg-4" style="">
                                                             @foreach (var item in Model.ProductVideos)
                                                             {
-                                                                if (item.IsPaid == true)
-                                                                {
+                                                               
                                                                     <div>
                                                                         <a onclick="return false;">
                                                                             <div class="col-lg-12 ppp">
@@ -300,15 +299,15 @@
                                                                         <div class="searchItemTitle">@item.Title</div>
                                                                         <p class="block-ellipsis">@item.Decription</p>
                                                                     </div>
-                                                                    }
-                                                                }
-                                                            </div>
-                                                        
+                                                               
+                                                            }
+                                                        </div>
+
 
                                                     </div>
                                                 }
 
-                                                </div>
+                                            </div>
                                             <div class="tab-pane" id="faq">
                                                 <div class="productInfo">
                                                     @foreach (var item in Model.ProductFAQs)
@@ -426,5 +425,5 @@
             }
         });
 
-        
+
 </script>

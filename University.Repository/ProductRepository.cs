@@ -191,12 +191,15 @@ namespace University.Repository
                            join g in context.ProductUserGuide.Where(y => y.IsDeleted != true)
                            on p.Id equals g.ProductId into temp
                            from guide in temp.DefaultIfEmpty()
+                           //join cardtrans in context.CardTransactionDeatilsMapping.Where(y=> y.IsDeleted == false)
+                           //on p.Id equals cardtrans.ProductID
                                //join v in context.ProductVideos.Where(y => y.IsDeleted != true)
                                //on p.Id equals v.ProductId into tempV
                                //from videos in tempV.DefaultIfEmpty()
                            join spec in context.ProductSpec.Where(y => y.IsDeleted != true)
                            on p.Id equals spec.ProductId into tempS
                            from speci in tempS.DefaultIfEmpty()
+                           
                            where p.Id == Id
                            select new ProductEntity()
                            {
@@ -221,7 +224,10 @@ namespace University.Repository
                                ProductVideos = p.ProductVideos.Where(y => y.IsDeleted != true).ToList(),
                                ProductSpec = speci,
                                ProductFAQs = p.ProductFAQs.Where(y => y.IsDeleted != true).ToList(),
-                               ProductDocuments = p.ProductDocuments.Where(y => y.IsDeleted != true).ToList()
+                               ProductDocuments = p.ProductDocuments.Where(y => y.IsDeleted != true).ToList(),
+                              
+                               //TransactionId=cardtrans.TransactionID
+
                            }).ToList();
                 return res.FirstOrDefault();
             }
