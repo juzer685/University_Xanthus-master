@@ -320,17 +320,17 @@
                         </div>
                     </div>
                     <div class="info" style="padding: 2px 5px;">
-                        <a class="user-name">
-                            @*@if (Convert.ToString(Session["RoleID"])==  "")
-        {
-            @Url.Action("Login", "Login");
-        }*@
+                        <a href="#" class="user-name">
+                            @if (Convert.ToString(Session["RoleID"])==  null)
+                            {
+                                @Url.Action("Login", "Login");
+                            }
                             
-                            @if (Session["RoleID"].ToString() == "4")
+                            else if (Convert.ToString(Session["RoleID"]) == "4")
                             {
                                 @Session["AdminName"].ToString();
                             }
-                            else
+                            else if(Convert.ToString(Session["RoleID"]) == "5")
                             {
                                 @Session["UserNamee"].ToString();
                             }
@@ -392,14 +392,9 @@
                 </p>
             </a>
         </li>*@
-                        @if (Session["RoleID"].ToString() == "4")
+
+                        @if (Convert.ToString(Session["RoleID"]) == "4")
                         {
-                            @*<li class="nav-item pointer">
-                <a href="~/Admin/User" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>UserList</p>
-                </a>
-            </li>*@
                             <li class="nav-item pointer">
                                 <a class="nav-link" href="~/Admin/User">
                                     <i class="nav-icon fas fa-user-circle"></i>
@@ -408,24 +403,9 @@
                                     </p>
                                 </a>
                             </li>
-                            @*<li class="nav-item pointer">
-                                <a class="nav-link" href="~/PaymentGateway/SaveCardDetails">
-                                    <i class="nav-icon fas fa-user-circle"></i>
-                                    <p>
-                                        Add Card
-                                    </p>
-                                </a>
-                            </li>*@
-                            @*<li class="nav-item pointer">
-                <a class="nav-link" href="/Admin/User/Register">
-                    <i class="nav-icon fas fa-user-circle"></i>
-                    <p>
-                        Add User
-                    </p>
-                </a>
-            </li>*@
+
                         }
-                        @if (Session["RoleID"].ToString() == "5")
+                        @if (Convert.ToString(Session["RoleID"]) == "5")
                         {
                             <li class="nav-item pointer">
                                 <a class="nav-link" href="~/PaymentGateway/SaveCardDetails">
@@ -505,10 +485,6 @@
 
                                     }
                             </li>
-                        }
-
-                        @if (Session["RoleID"].ToString() == "5")
-                        {
 
                             <li class="nav-item">
                                 <a href="~/UserGuide/UserGuide" class="nav-link">
@@ -552,7 +528,53 @@
                                 </ul>
                             </li>
                         }
-                        @if (Session["RoleID"].ToString() == "4")
+
+                        @*@if (Convert.ToString(Session["RoleID"]) == "5")
+        {
+
+            <li class="nav-item">
+                <a href="~/UserGuide/UserGuide" class="nav-link">
+                    <i class="nav-icon fas fa-book-open"></i>
+                    <p>
+                        User Guides
+                    </p>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a href="~/Video/video" class="nav-link">
+                    <i class="nav-icon fas fa-video"></i>
+                    <p>
+                        Video
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-book-reader"></i>
+                    <p>
+                        Training
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="far fa-map nav-icon"></i>
+                            <p>Google Maps</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="far fa-map nav-icon"></i>
+                            <p>Open Street Map</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        }*@
+                        @if (Convert.ToString(Session["RoleID"]) == "4")
                         {
                             <li class="nav-item has-treeview menu-open">
 
@@ -619,10 +641,12 @@
                                 </ul>
                             </li>
                         }
-                        @if (Session["RoleID"].ToString() == "5")
+                        @if (Convert.ToString(Session["RoleID"]) == "5")
                         {
+
                             <li class="nav-item">
-                                <a class="nav-link">
+                                <a href="#" class="nav-link">
+                                    @*<a class="nav-link">*@
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>
                                         Events
@@ -631,7 +655,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link">
+                                <a href="#" class="nav-link">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>
                                         Feedback

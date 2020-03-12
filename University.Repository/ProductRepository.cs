@@ -182,54 +182,111 @@ namespace University.Repository
             using (var context = new UniversityEntities())
             {
                 int AssocitedCustID = Convert.ToInt32(HttpContext.Current.Session["AdminLoginID"]);
-                // int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
-                var res = (from p in context.Product.Where(y => y.IsDeleted != true )
-                           join s in context.SubCategoryMaster.Where(y => y.IsDeleted != true)
-                           on p.SubCategoryId equals s.Id
-                           join c in context.CategoryMaster.Where(y => y.IsDeleted != true)
-                           on s.CategoryId equals c.Id
-                           join g in context.ProductUserGuide.Where(y => y.IsDeleted != true)
-                           on p.Id equals g.ProductId into temp
-                           from guide in temp.DefaultIfEmpty()
-                           //join cardtrans in context.CardTransactionDeatilsMapping.Where(y=> y.IsDeleted == false)
-                           //on p.Id equals cardtrans.ProductID
+                
+                 int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
+                if (AssocitedCustID == 0)
+                {
+                    var res = (from p in context.Product.Where(y => y.IsDeleted != true)
+                               join s in context.SubCategoryMaster.Where(y => y.IsDeleted != true)
+                               on p.SubCategoryId equals s.Id
+                               join c in context.CategoryMaster.Where(y => y.IsDeleted != true)
+                               on s.CategoryId equals c.Id
+                               join g in context.ProductUserGuide.Where(y => y.IsDeleted != true)
+                               on p.Id equals g.ProductId into temp
+                               from guide in temp.DefaultIfEmpty()
+                               //join cardtrans in context.CardTransactionDeatilsMapping.Where(y=> y.IsDeleted == false && y.UserID== UserID)
+                               //on p.Id equals cardtrans.ProductID
                                //join v in context.ProductVideos.Where(y => y.IsDeleted != true)
-                               //on p.Id equals v.ProductId into tempV
-                               //from videos in tempV.DefaultIfEmpty()
-                           join spec in context.ProductSpec.Where(y => y.IsDeleted != true)
-                           on p.Id equals spec.ProductId into tempS
-                           from speci in tempS.DefaultIfEmpty()
-                           
-                           where p.Id == Id
-                           select new ProductEntity()
-                           {
-                               Id = p.Id,
-                               AssocitedCustID=AssocitedCustID,
-                               //CategoryId = c.Id,
-                               CreatedBy = p.CreatedBy,
-                               CreatedDate = p.CreatedDate,
-                               DeletedBy = p.DeletedBy,
-                               DeletedDate = p.DeletedDate,
-                               Description = p.Description,
-                               ImageURL = p.ImageURL,
-                               ImageALT = p.ImageALT,
-                               IsDeleted = p.IsDeleted,
-                               SubCategoryId = p.SubCategoryId,
-                               Title = p.Title,
-                               UpdatedBy = p.UpdatedBy,
-                               UpdatedDate = p.UpdatedDate,
-                               CategoryMaster = c,
-                               SubCategoryMaster = s,
-                               ProductUserGuide = guide,
-                               ProductVideos = p.ProductVideos.Where(y => y.IsDeleted != true).ToList(),
-                               ProductSpec = speci,
-                               ProductFAQs = p.ProductFAQs.Where(y => y.IsDeleted != true).ToList(),
-                               ProductDocuments = p.ProductDocuments.Where(y => y.IsDeleted != true).ToList(),
-                              
-                               //TransactionId=cardtrans.TransactionID
+                                //on p.Id equals v.ProductId 
+                                   //from videos in tempV.DefaultIfEmpty()
+                               join spec in context.ProductSpec.Where(y => y.IsDeleted != true)
+                               on p.Id equals spec.ProductId into tempS
+                               from speci in tempS.DefaultIfEmpty()
+                               where p.Id == Id
+                               select new ProductEntity()
+                               {
+                                   Id = p.Id,
+                                   AssocitedCustID = AssocitedCustID,
+                                   //CategoryId = c.Id,
+                                   CreatedBy = p.CreatedBy,
+                                   CreatedDate = p.CreatedDate,
+                                   DeletedBy = p.DeletedBy,
+                                   DeletedDate = p.DeletedDate,
+                                   Description = p.Description,
+                                   ImageURL = p.ImageURL,
+                                   ImageALT = p.ImageALT,
+                                   IsDeleted = p.IsDeleted,
+                                   SubCategoryId = p.SubCategoryId,
+                                   Title = p.Title,
+                                   UpdatedBy = p.UpdatedBy,
+                                   UpdatedDate = p.UpdatedDate,
+                                   CategoryMaster = c,
+                                   SubCategoryMaster = s,
+                                   ProductUserGuide = guide,
+                                   ProductVideosTranIDs = p.GetCardTransactionDeatilsMappings.Where(y => y.IsDeleted != true).ToList(),
+                                   ProductVideos = p.ProductVideos.Where(y => y.IsDeleted != true ).ToList(),
+                                   ProductSpec = speci,
+                                   ProductFAQs = p.ProductFAQs.Where(y => y.IsDeleted != true).ToList(),
+                                   ProductDocuments = p.ProductDocuments.Where(y => y.IsDeleted != true).ToList(),
+                                  //TransactionId=v.TransactionID
 
-                           }).ToList();
-                return res.FirstOrDefault();
+                               }).ToList();
+                    return res.FirstOrDefault();
+
+                }
+                else
+                {
+                    var res = (from p in context.Product.Where(y => y.IsDeleted != true)
+                               join s in context.SubCategoryMaster.Where(y => y.IsDeleted != true)
+                               on p.SubCategoryId equals s.Id
+                               join c in context.CategoryMaster.Where(y => y.IsDeleted != true)
+                               on s.CategoryId equals c.Id
+                               join g in context.ProductUserGuide.Where(y => y.IsDeleted != true)
+                               on p.Id equals g.ProductId into temp
+                               from guide in temp.DefaultIfEmpty()
+                                   //join cardtrans in context.CardTransactionDeatilsMapping.Where(y=> y.IsDeleted == false)
+                                   //on p.Id equals cardtrans.ProductID
+                                   //join v in context.ProductVideos.Where(y => y.IsDeleted != true)
+                                   //on p.Id equals v.ProductId into tempV
+                                   //from videos in tempV.DefaultIfEmpty()
+                               join spec in context.ProductSpec.Where(y => y.IsDeleted != true)
+                               on p.Id equals spec.ProductId into tempS
+                               from speci in tempS.DefaultIfEmpty()
+                               where p.Id == Id
+                               select new ProductEntity()
+                               {
+                                   Id = p.Id,
+                                   AssocitedCustID = AssocitedCustID,
+                                   //CategoryId = c.Id,
+                                   CreatedBy = p.CreatedBy,
+                                   CreatedDate = p.CreatedDate,
+                                   DeletedBy = p.DeletedBy,
+                                   DeletedDate = p.DeletedDate,
+                                   Description = p.Description,
+                                   ImageURL = p.ImageURL,
+                                   ImageALT = p.ImageALT,
+                                   IsDeleted = p.IsDeleted,
+                                   SubCategoryId = p.SubCategoryId,
+                                   Title = p.Title,
+                                   UpdatedBy = p.UpdatedBy,
+                                   UpdatedDate = p.UpdatedDate,
+                                   CategoryMaster = c,
+                                   SubCategoryMaster = s,
+                                   ProductUserGuide = guide,
+                                  // ProductVideosTranIDs = p.GetCardTransactionDeatilsMappings.Where(y => y.IsDeleted != true).ToList(),
+                                   ProductVideos = p.ProductVideos.Where(y => y.IsDeleted != true).ToList(),
+                                   ProductSpec = speci,
+                                   ProductFAQs = p.ProductFAQs.Where(y => y.IsDeleted != true).ToList(),
+                                   ProductDocuments = p.ProductDocuments.Where(y => y.IsDeleted != true).ToList(),
+
+                                   //TransactionId=cardtrans.TransactionID
+
+                               }).ToList();
+                    return res.FirstOrDefault();
+                    //return res;
+
+                }
+               
             }
         }
 

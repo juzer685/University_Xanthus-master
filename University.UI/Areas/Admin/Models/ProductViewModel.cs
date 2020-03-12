@@ -5,12 +5,14 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Web;
 using System.Web.Configuration;
+using University.Data.CustomEntities;
 
 namespace University.UI.Areas.Admin.Models
 {
     public class ProductViewModel
     {
         string ProductImagePath = WebConfigurationManager.AppSettings["ProductImagePath"];
+        //public string TransactionId { get; set; }
         public ProductViewModel()
         {
             this.ProductFAQs = new List<ProductFaqViewModel>();
@@ -68,11 +70,12 @@ namespace University.UI.Areas.Admin.Models
 
         public virtual List<ProductVideoViewModel> ProductVideos { get; set; }
 
+        public virtual List<CardTransactionDetailsMappings> ProductVideosTranIDs { get; set; }
         public virtual CategoryMaster CategoryMaster { get; set; }
         public virtual List<ProductDocumentViewModel> ProductDocuments { get; set; }
 
         public int AssocitedCustID { get; set; }
-
+       
         public string CheckImage { 
             get {
                 if (string.IsNullOrEmpty(ImageURL))
@@ -86,6 +89,7 @@ namespace University.UI.Areas.Admin.Models
             }
         }
     }
+
 
     public enum ProductForm
     {
