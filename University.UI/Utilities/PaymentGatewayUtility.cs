@@ -166,8 +166,6 @@ namespace University.UI.Utilities
             
             addressInfoList.Add(homeAddress);
             addressInfoList.Add(officeAddress);
-           
-
             customerProfileType customerProfile = new customerProfileType();
            
             customerProfile.merchantCustomerId = "2CLINC555557556tech";

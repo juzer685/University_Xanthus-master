@@ -12,5 +12,6 @@ namespace University.Data
         public decimal? VideoRateSum { get; set; }
         public string subcategoryname { get; set; }
         public bool IsPaid { get; set; }
+        public string TransactionID { get; set; }
     }
 }

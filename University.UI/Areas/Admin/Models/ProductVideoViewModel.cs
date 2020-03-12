@@ -9,6 +9,7 @@ namespace University.UI.Areas.Admin.Models
     public class ProductVideoViewModel
     {
         string ProductImagePath = WebConfigurationManager.AppSettings["ProductImagePath"];
+        public string TransactionId { get; set; }
         public string VideoFullPath
         {
             get

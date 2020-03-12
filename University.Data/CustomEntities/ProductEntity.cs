@@ -31,12 +31,13 @@ namespace University.Data.CustomEntities
         public virtual SubCategoryMaster SubCategoryMaster { get; set; }
         public virtual ProductUserGuide ProductUserGuide { get; set; }
         public virtual List<ProductVideos> ProductVideos { get; set; }
+        public virtual List<CardTransactionDeatilsMapping> ProductVideosTranIDs { get; set; }
         public virtual ProductSpec ProductSpec { get; set; }
         public virtual ICollection<ProductFAQs> ProductFAQs { get; set; }
         public virtual ICollection<ProductDocuments> ProductDocuments { get; set; }
         public virtual ICollection<CategoryUserMapping> Categorymapp { get; set; }
         public virtual ICollection<CardTransactionDetails> CardTransactionDetails { get; set; }
-        public virtual ICollection<CardTransactionDetailsMappings> CardTransactionDetailsMappings  { get; set; }
+        //public virtual ICollection<CardTransactionDetailsMappings> CardTransactionDetailsMappings  { get; set; }
         
     }
 }

@@ -13,7 +13,7 @@
         <input name="AssocitedID" id="ProductspecAssocitedID" type="hidden" />
         <div class="col-md-6">
             <div class="form-group">
-                @Html.TextBoxFor(m => m.Title, new { @class = "form-control", @required = "required", @pattern = "^[^<>%$*@!#]*$", @title = "Special characters are not allowed." })
+                @Html.TextBoxFor(m => m.Title, new { @class = "form-control txtOnly", @required = "required", @pattern = "^[^<>%$*@!#]*$", @title = "Special characters are not allowed." })
                 @Html.ValidationMessageFor(m => m.Title)
             </div>
         </div>
@@ -40,6 +40,8 @@
         </div>
     </div>
 </form>
+
+<script src="~/Scripts/ProjectValidation.js"></script>
 @*<script>
         $(document).ready(function () {
 

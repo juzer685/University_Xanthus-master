@@ -283,17 +283,18 @@
                                                             <div class="video-title " style="">@Model.ProductVideos[0].Title</div>
                                                             <p class="video-desc">@Model.ProductVideos[0].Decription</p>
                                                         </div>
-
-
                                                         <div class="col-lg-4" style="">
                                                             @foreach (var item in Model.ProductVideos)
                                                             {
-                                                               
                                                                     <div>
                                                                         <a onclick="return false;">
                                                                             <div class="col-lg-12 ppp">
                                                                                 <iframe class="video v1 ChildVideo" width="180" height="100" src="@item.VideoURL" frameborder="0" enablejsapi="1" allowfullscreen></iframe>
+
+                                                                               
                                                                                 <div class="overlay" style=""></div>
+                                                                               
+
                                                                             </div>
                                                                         </a>
                                                                         <div class="searchItemTitle">@item.Title</div>
