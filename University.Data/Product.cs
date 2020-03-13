@@ -60,6 +60,7 @@ namespace University.Data
         public virtual ICollection<RecentVisitedProduct> RecentVisitedProduct { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductVideos> ProductVideos { get; set; }
+        //public virtual ICollection<productv> ProductVideos { get; set; }
         public virtual ICollection<CardTransactionDeatilsMapping> GetCardTransactionDeatilsMappings { get; set; }
     }
 }

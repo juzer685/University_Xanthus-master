@@ -74,11 +74,13 @@
                                                     <div class="crop">
                                                         @if (string.IsNullOrEmpty(item.ImageFullPath))
                                                         {
-                                                            <a href="/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(item.ProductId.ToString(),System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])"><img class="searchImage" src="/images/NoImageAvailable.jpg" alt="searchImage" width="100%" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';"></a>
+                                                            @*<a href="/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(item.ProductId.ToString(),System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])"><img class="searchImage" src="/images/NoImageAvailable.jpg" alt="searchImage" width="100%" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';"></a>*@
+                                                            <a href="#"><img class="searchImage" src="/images/NoImageAvailable.jpg" alt="searchImage" width="100%" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';"></a>
                                                         }
                                                         else
                                                         {
-                                                            <a href="/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(item.ProductId.ToString(),System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])"><img class="searchImage" src="@item.ImageFullPath" alt="searchImage" width="100%" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';"></a>
+                                                            @*<a href="/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(item.ProductId.ToString(),System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])"><img class="searchImage" src="@item.ImageFullPath" alt="searchImage" width="100%" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';"></a>*@
+                                                            <a href="#"><img class="searchImage" src="@item.ImageFullPath" alt="searchImage" width="100%" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';"></a>
                                                         }
                                                     </div>
                                                     <div class="text-center">

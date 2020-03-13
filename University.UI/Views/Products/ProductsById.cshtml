@@ -290,10 +290,18 @@
                                                                         <a onclick="return false;">
                                                                             <div class="col-lg-12 ppp">
                                                                                 <iframe class="video v1 ChildVideo" width="180" height="100" src="@item.VideoURL" frameborder="0" enablejsapi="1" allowfullscreen></iframe>
+                                                                                @if (item.TransactionId == null)
+                                                                                {
+                                                                                    <div class="overlay" style=""></div>
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <div class="overlay" style=""></div>
+                                                                                }
 
-                                                                               
-                                                                                <div class="overlay" style=""></div>
-                                                                               
+
+
+
 
                                                                             </div>
                                                                         </a>

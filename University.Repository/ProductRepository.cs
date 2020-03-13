@@ -176,117 +176,94 @@ namespace University.Repository
                 
             }
         }
-
         public ProductEntity GetProduct(Decimal Id)
         {
             using (var context = new UniversityEntities())
             {
                 int AssocitedCustID = Convert.ToInt32(HttpContext.Current.Session["AdminLoginID"]);
-                
-                 int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
-                if (AssocitedCustID == 0)
+                //int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
+                var res = (from p in context.Product.Where(y => y.IsDeleted != true)
+                           join s in context.SubCategoryMaster.Where(y => y.IsDeleted != true)
+                           on p.SubCategoryId equals s.Id
+                           join c in context.CategoryMaster.Where(y => y.IsDeleted != true)
+                           on s.CategoryId equals c.Id
+                           join g in context.ProductUserGuide.Where(y => y.IsDeleted != true)
+                           on p.Id equals g.ProductId into temp
+                           from guide in temp.DefaultIfEmpty()
+                           join spec in context.ProductSpec.Where(y => y.IsDeleted != true)
+                           on p.Id equals spec.ProductId into tempS
+                           from speci in tempS.DefaultIfEmpty()
+                           where p.Id == Id
+                           select new ProductEntity()
+                           {
+                               Id = p.Id,
+                               AssocitedCustID = AssocitedCustID,
+                               //CategoryId = c.Id,
+                               CreatedBy = p.CreatedBy,
+                               CreatedDate = p.CreatedDate,
+                               DeletedBy = p.DeletedBy,
+                               DeletedDate = p.DeletedDate,
+                               Description = p.Description,
+                               ImageURL = p.ImageURL,
+                               ImageALT = p.ImageALT,
+                               IsDeleted = p.IsDeleted,
+                               SubCategoryId = p.SubCategoryId,
+                               Title = p.Title,
+                               UpdatedBy = p.UpdatedBy,
+                               UpdatedDate = p.UpdatedDate,
+                               CategoryMaster = c,
+                               SubCategoryMaster = s,
+                               ProductUserGuide = guide,
+                               ProductVideos = p.ProductVideos.Where(y => y.IsDeleted != true).ToList(),
+                               //ProductVideosTranIDs = p.GetCardTransactionDeatilsMappings.Where(y => y.IsDeleted != true).ToList(),
+                               ProductSpec = speci,
+                               ProductFAQs = p.ProductFAQs.Where(y => y.IsDeleted != true).ToList(),
+                               ProductDocuments = p.ProductDocuments.Where(y => y.IsDeleted != true).ToList(),
+                               //TransactionId=v.TransactionID
+                           }).ToList();
+                var productVideos = (from p in context.Product.Where(y => y.IsDeleted != true)
+                                     join s in context.SubCategoryMaster.Where(y => y.IsDeleted != true)
+                                     on p.SubCategoryId equals s.Id
+                                     join ctd in context.CardTransactionDeatilsMapping.Where(c => c.IsDeleted == false)
+                                     on p.Id equals ctd.ProductID
+                                     join v in context.ProductVideos.Where(c => c.IsDeleted == false)
+                                    on new
+                                    {
+                                        ProductID = (decimal)ctd.ProductID,
+                                        //VideoID = (decimal)ctd.VideoID
+                                    }
+                                    equals new
+                                    {
+                                        ProductID = v.ProductId,
+                                       // VideoID = v.Id
+                                    }
+                                     select new
+                                     {
+                                         ID = v.Id,
+                                         ProductID = p.Id,
+                                         Videourl = v.VideoURL,
+                                         Tiltle = v.Title,
+                                         Description = v.Decription,
+                                         TransactionId = ctd.TransactionID,
+                                         VideoRate = v.VideoRate ?? 0
+
+                                     }).ToList()
+                                    .Select(x => new ProductVideos()
+                                    {
+                                        Id = x.ID,
+                                        ProductId = x.ProductID,
+                                        VideoURL = x.Videourl,
+                                        Title = x.Tiltle,
+                                        Decription = x.Description,
+                                        TransactionID = x.TransactionId,
+                                        VideoRate = x.VideoRate
+                                    }).ToList();
+                foreach (var r in res)
                 {
-                    var res = (from p in context.Product.Where(y => y.IsDeleted != true)
-                               join s in context.SubCategoryMaster.Where(y => y.IsDeleted != true)
-                               on p.SubCategoryId equals s.Id
-                               join c in context.CategoryMaster.Where(y => y.IsDeleted != true)
-                               on s.CategoryId equals c.Id
-                               join g in context.ProductUserGuide.Where(y => y.IsDeleted != true)
-                               on p.Id equals g.ProductId into temp
-                               from guide in temp.DefaultIfEmpty()
-                               //join cardtrans in context.CardTransactionDeatilsMapping.Where(y=> y.IsDeleted == false && y.UserID== UserID)
-                               //on p.Id equals cardtrans.ProductID
-                               //join v in context.ProductVideos.Where(y => y.IsDeleted != true)
-                                //on p.Id equals v.ProductId 
-                                   //from videos in tempV.DefaultIfEmpty()
-                               join spec in context.ProductSpec.Where(y => y.IsDeleted != true)
-                               on p.Id equals spec.ProductId into tempS
-                               from speci in tempS.DefaultIfEmpty()
-                               where p.Id == Id
-                               select new ProductEntity()
-                               {
-                                   Id = p.Id,
-                                   AssocitedCustID = AssocitedCustID,
-                                   //CategoryId = c.Id,
-                                   CreatedBy = p.CreatedBy,
-                                   CreatedDate = p.CreatedDate,
-                                   DeletedBy = p.DeletedBy,
-                                   DeletedDate = p.DeletedDate,
-                                   Description = p.Description,
-                                   ImageURL = p.ImageURL,
-                                   ImageALT = p.ImageALT,
-                                   IsDeleted = p.IsDeleted,
-                                   SubCategoryId = p.SubCategoryId,
-                                   Title = p.Title,
-                                   UpdatedBy = p.UpdatedBy,
-                                   UpdatedDate = p.UpdatedDate,
-                                   CategoryMaster = c,
-                                   SubCategoryMaster = s,
-                                   ProductUserGuide = guide,
-                                   ProductVideosTranIDs = p.GetCardTransactionDeatilsMappings.Where(y => y.IsDeleted != true).ToList(),
-                                   ProductVideos = p.ProductVideos.Where(y => y.IsDeleted != true ).ToList(),
-                                   ProductSpec = speci,
-                                   ProductFAQs = p.ProductFAQs.Where(y => y.IsDeleted != true).ToList(),
-                                   ProductDocuments = p.ProductDocuments.Where(y => y.IsDeleted != true).ToList(),
-                                  //TransactionId=v.TransactionID
-
-                               }).ToList();
-                    return res.FirstOrDefault();
-
+                    r.ProductVideos = productVideos.Where(x => x.ProductId == r.Id).ToList();
                 }
-                else
-                {
-                    var res = (from p in context.Product.Where(y => y.IsDeleted != true)
-                               join s in context.SubCategoryMaster.Where(y => y.IsDeleted != true)
-                               on p.SubCategoryId equals s.Id
-                               join c in context.CategoryMaster.Where(y => y.IsDeleted != true)
-                               on s.CategoryId equals c.Id
-                               join g in context.ProductUserGuide.Where(y => y.IsDeleted != true)
-                               on p.Id equals g.ProductId into temp
-                               from guide in temp.DefaultIfEmpty()
-                                   //join cardtrans in context.CardTransactionDeatilsMapping.Where(y=> y.IsDeleted == false)
-                                   //on p.Id equals cardtrans.ProductID
-                                   //join v in context.ProductVideos.Where(y => y.IsDeleted != true)
-                                   //on p.Id equals v.ProductId into tempV
-                                   //from videos in tempV.DefaultIfEmpty()
-                               join spec in context.ProductSpec.Where(y => y.IsDeleted != true)
-                               on p.Id equals spec.ProductId into tempS
-                               from speci in tempS.DefaultIfEmpty()
-                               where p.Id == Id
-                               select new ProductEntity()
-                               {
-                                   Id = p.Id,
-                                   AssocitedCustID = AssocitedCustID,
-                                   //CategoryId = c.Id,
-                                   CreatedBy = p.CreatedBy,
-                                   CreatedDate = p.CreatedDate,
-                                   DeletedBy = p.DeletedBy,
-                                   DeletedDate = p.DeletedDate,
-                                   Description = p.Description,
-                                   ImageURL = p.ImageURL,
-                                   ImageALT = p.ImageALT,
-                                   IsDeleted = p.IsDeleted,
-                                   SubCategoryId = p.SubCategoryId,
-                                   Title = p.Title,
-                                   UpdatedBy = p.UpdatedBy,
-                                   UpdatedDate = p.UpdatedDate,
-                                   CategoryMaster = c,
-                                   SubCategoryMaster = s,
-                                   ProductUserGuide = guide,
-                                  // ProductVideosTranIDs = p.GetCardTransactionDeatilsMappings.Where(y => y.IsDeleted != true).ToList(),
-                                   ProductVideos = p.ProductVideos.Where(y => y.IsDeleted != true).ToList(),
-                                   ProductSpec = speci,
-                                   ProductFAQs = p.ProductFAQs.Where(y => y.IsDeleted != true).ToList(),
-                                   ProductDocuments = p.ProductDocuments.Where(y => y.IsDeleted != true).ToList(),
 
-                                   //TransactionId=cardtrans.TransactionID
-
-                               }).ToList();
-                    return res.FirstOrDefault();
-                    //return res;
-
-                }
-               
+                return res.FirstOrDefault();
             }
         }
 

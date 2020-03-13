@@ -240,9 +240,9 @@ namespace University.UI.Controllers
                         }
                         else if (pvideo.ProductId == CardListVM.ProductId && CardListVM.isProductbuy == true)
                         {
-                            var data = res1.Where(c => c.VideoID != pvideo.Id).FirstOrDefault();
+                            var data = res1.Where(c => c.VideoID == pvideo.Id).FirstOrDefault();
                             //check if null
-                            if(data != null)
+                            if(data == null)
                             {
                                 TransResult = _PaymentGatewayService.SaveTransactionDetails(new CardTransactionDetails
                                 {
@@ -267,6 +267,10 @@ namespace University.UI.Controllers
                                     isProductbuy = CardListVM.isProductbuy,
                                 });
                             }
+                            //else
+                            //{
+                            //    break;
+                            //}
                         }
                         // TransResult = false;
                     }

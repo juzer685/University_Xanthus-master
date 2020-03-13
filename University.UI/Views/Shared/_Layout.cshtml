@@ -321,16 +321,18 @@
                     </div>
                     <div class="info" style="padding: 2px 5px;">
                         <a href="#" class="user-name">
-                            @if (Convert.ToString(Session["RoleID"])==  null)
+                            @if (Convert.ToString(Session["RoleID"]) == "")
                             {
-                                @Url.Action("Login", "Login");
+                               
+                               @Url.Action("Login","Login")
+                               
                             }
-                            
+
                             else if (Convert.ToString(Session["RoleID"]) == "4")
                             {
                                 @Session["AdminName"].ToString();
                             }
-                            else if(Convert.ToString(Session["RoleID"]) == "5")
+                            else if (Convert.ToString(Session["RoleID"]) == "5")
                             {
                                 @Session["UserNamee"].ToString();
                             }
@@ -392,7 +394,7 @@
                 </p>
             </a>
         </li>*@
-
+                       
                         @if (Convert.ToString(Session["RoleID"]) == "4")
                         {
                             <li class="nav-item pointer">
@@ -405,7 +407,7 @@
                             </li>
 
                         }
-                        @if (Convert.ToString(Session["RoleID"]) == "5")
+                       @if (Convert.ToString(Session["RoleID"]) == "5")
                         {
                             <li class="nav-item pointer">
                                 <a class="nav-link" href="~/PaymentGateway/SaveCardDetails">
@@ -486,6 +488,12 @@
                                     }
                             </li>
 
+
+                        }
+
+                        @if (Convert.ToString(Session["RoleID"]) == "5")
+                        {
+
                             <li class="nav-item">
                                 <a href="~/UserGuide/UserGuide" class="nav-link">
                                     <i class="nav-icon fas fa-book-open"></i>
@@ -528,52 +536,6 @@
                                 </ul>
                             </li>
                         }
-
-                        @*@if (Convert.ToString(Session["RoleID"]) == "5")
-        {
-
-            <li class="nav-item">
-                <a href="~/UserGuide/UserGuide" class="nav-link">
-                    <i class="nav-icon fas fa-book-open"></i>
-                    <p>
-                        User Guides
-                    </p>
-                </a>
-            </li>
-
-
-            <li class="nav-item">
-                <a href="~/Video/video" class="nav-link">
-                    <i class="nav-icon fas fa-video"></i>
-                    <p>
-                        Video
-                    </p>
-                </a>
-            </li>
-            <li class="nav-item has-treeview">
-                <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-book-reader"></i>
-                    <p>
-                        Training
-                        <i class="right fas fa-angle-left"></i>
-                    </p>
-                </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="far fa-map nav-icon"></i>
-                            <p>Google Maps</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="far fa-map nav-icon"></i>
-                            <p>Open Street Map</p>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-        }*@
                         @if (Convert.ToString(Session["RoleID"]) == "4")
                         {
                             <li class="nav-item has-treeview menu-open">
