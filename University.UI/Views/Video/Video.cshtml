@@ -110,9 +110,7 @@
                                         <div class="col-12 col-md-10">
                                             <div class="searchItemTitle">
                                                 <a class="searchItemTitle productname" href="~/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(item.ProductId.ToString(), System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])">@item.Title</a>
-                                                @*@Html.Hidden("ProductId", item.ProductId, new { @class = "ProductID" })
-                                                @Html.Hidden("SubCatID", item.SubCatID, new { @class = "SubCatID" })
-                                                @Html.Hidden("Id", item.Id, new { @class = "Id" })*@
+                                                
                                                 <a class="ProductID">@item.ProductId</a>
                                                 <a class="SubCatID">@item.SubCatID</a>
                                                 <a class="VideoID">@item.Id</a>

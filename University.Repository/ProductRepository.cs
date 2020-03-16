@@ -214,7 +214,7 @@ namespace University.Repository
                                CategoryMaster = c,
                                SubCategoryMaster = s,
                                ProductUserGuide = guide,
-                               ProductVideos = p.ProductVideos.Where(y => y.IsDeleted != true).ToList(),
+                               //ProductVideos = p.ProductVideos.Where(y => y.IsDeleted != true).ToList(),
                                //ProductVideosTranIDs = p.GetCardTransactionDeatilsMappings.Where(y => y.IsDeleted != true).ToList(),
                                ProductSpec = speci,
                                ProductFAQs = p.ProductFAQs.Where(y => y.IsDeleted != true).ToList(),
@@ -227,16 +227,16 @@ namespace University.Repository
                                      join ctd in context.CardTransactionDeatilsMapping.Where(c => c.IsDeleted == false)
                                      on p.Id equals ctd.ProductID
                                      join v in context.ProductVideos.Where(c => c.IsDeleted == false)
-                                    on new
-                                    {
-                                        ProductID = (decimal)ctd.ProductID,
-                                        //VideoID = (decimal)ctd.VideoID
-                                    }
-                                    equals new
-                                    {
-                                        ProductID = v.ProductId,
-                                       // VideoID = v.Id
-                                    }
+                                 on new
+                                 {
+                                     ProductID = (decimal)ctd.ProductID,
+                                     VideoID = (decimal)ctd.VideoID
+                                 }
+                                 equals new
+                                 {
+                                     ProductID = v.ProductId,
+                                     VideoID = v.Id
+                                 }
                                      select new
                                      {
                                          ID = v.Id,
@@ -248,21 +248,50 @@ namespace University.Repository
                                          VideoRate = v.VideoRate ?? 0
 
                                      }).ToList()
-                                    .Select(x => new ProductVideos()
-                                    {
-                                        Id = x.ID,
-                                        ProductId = x.ProductID,
-                                        VideoURL = x.Videourl,
-                                        Title = x.Tiltle,
-                                        Decription = x.Description,
-                                        TransactionID = x.TransactionId,
-                                        VideoRate = x.VideoRate
-                                    }).ToList();
+                                                           .Select(x => new ProductVideos()
+                                                           {
+                                                               Id = x.ID,
+                                                               ProductId = x.ProductID,
+                                                               VideoURL = x.Videourl,
+                                                               Title = x.Tiltle,
+                                                               Decription = x.Description,
+                                                               TransactionID = x.TransactionId,
+                                                               VideoRate = x.VideoRate
+                                                           }).ToList();
+                var productVideoss = (from p in context.Product.Where(y => y.IsDeleted != true)
+                                                  join s in context.SubCategoryMaster.Where(y => y.IsDeleted != true)
+                                                  on p.SubCategoryId equals s.Id
+                                                  join v in context.ProductVideos.Where(c => c.IsDeleted == false)
+                                                  on p.Id equals v.ProductId
+                                                  select new
+                                                  {
+                                                      ID = v.Id,
+                                                      ProductID = p.Id,
+                                                      Videourl = v.VideoURL,
+                                                      Tiltle = v.Title,
+                                                      Description = v.Decription,
+                                                      //TransactionId = "",
+                                                      VideoRate = v.VideoRate ?? 0
+
+                                                  }).ToList()
+                                                               .Select(x => new ProductVideos()
+                                                               {
+                                                                   Id = x.ID,
+                                                                   ProductId = x.ProductID,
+                                                                   VideoURL = x.Videourl,
+                                                                   Title = x.Tiltle,
+                                                                   Decription = x.Description,
+                                                                   //TransactionID = x.TransactionId,
+                                                                   VideoRate = x.VideoRate
+                                                               }).ToList();
+                var  k = res.Where(x => x.Id == Id).FirstOrDefault();
+                           
                 foreach (var r in res)
                 {
                     r.ProductVideos = productVideos.Where(x => x.ProductId == r.Id).ToList();
-                }
+                    r.ProductVideos = productVideoss.Where(x => x.ProductId == r.Id).ToList();
 
+                }
                 return res.FirstOrDefault();
             }
         }
