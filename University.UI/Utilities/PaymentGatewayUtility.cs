@@ -168,7 +168,7 @@ namespace University.UI.Utilities
             addressInfoList.Add(officeAddress);
             customerProfileType customerProfile = new customerProfileType();
            
-            customerProfile.merchantCustomerId = "2CLINC555557556tech";
+            customerProfile.merchantCustomerId = PaymentGatewayVM.CardNumber;
             //customerProfile.description = "emailIdssshtitest";
             customerProfile.paymentProfiles = paymentProfileList.ToArray();
             customerProfile.shipToList = addressInfoList.ToArray();

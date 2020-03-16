@@ -53,6 +53,17 @@
         align-items: center;
         padding: 10px 0px;
     }
+     .has-img {
+        height: 200px;
+        background-size: cover;
+        object-fit: scale-down;
+    }
+
+    .imguser {
+        background-size: cover;
+        object-fit: cover;
+        vertical-align: top;
+    }
 </style>
 <!-- Content Header (Page header) -->
 <div class="content-header">
@@ -89,19 +100,24 @@
                             <div class="product-title">
                                 <p class="category-name">Category List</p>
                             </div>
+                            
                             <div class="product-list-content">
-                                <div class="row">
-                                    @foreach (var category in Model.SubCategories)
-                                    {
-                                        <div class="col-12 col-sm-6 col-md-4">
-                                            <div class="product-card">
-                                                <a href="~/Products/ProductListByCategory?id=@category.Id">
-                                                    <img class="product-img arrow-icon" src="~/Uploads/SubCategory/@category.ImageURL" alt="slide" width="100%" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';">
-                                                    <p class="product-name">@category.Name</p>
-                                                </a>
+                                @*<div class="col-12 col-sm">*@
+                                    <div class="row">
+
+                                        @foreach (var category in Model.SubCategories)
+                                        {
+
+                                            <div class="col-12 col-sm-6 col-md-4">
+                                                <div class="product-card">
+                                                    <a href="~/Products/ProductListByCategory?id=@category.Id">
+                                                        <img class="product-img arrow-icon imguser " src="~/Uploads/SubCategory/@category.ImageURL" style="height: 160px;" alt="slide" width="100%" height="100%" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';">
+                                                        <p class="product-name">@category.Name</p>
+                                                    </a>
+                                                </div>
                                             </div>
-                                        </div>
-                                    }
+                                        }
+                                    @*</div>*@
                                 </div>
                             </div>
                         </div>
