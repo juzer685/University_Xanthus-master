@@ -14,8 +14,8 @@
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fa fa-user"></i></span>
-                                </div>
-                                @Html.TextBoxFor(x => x.CardHolderName, new { @class = "form-control", placeholder = "Full name" })
+                                </div> 
+                                @Html.TextBoxFor(x => x.CardHolderName, new { @class = "form-control", @id="card-number-field cardNumber", placeholder = "Full name" })
                                 @*<input type="text" class="form-control" name="CardHolderName" placeholder="" required="">*@
                             </div> <!-- input-group.// -->
                             @Html.ValidationMessageFor(x => x.CardHolderName, null, new { @class = "", style = "color:red;" })
@@ -172,18 +172,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
-
-
-
-
-
-
-
-
-
-
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label data-toggle="tooltip" title="" data-original-title="3 digits code on back side of the card">CVV <i class="fa fa-question-circle"></i></label>
@@ -200,3 +188,4 @@
         </div>
     </div>
 </div>
+<script src="~/Scripts/jquery.payform.min.js"></script>

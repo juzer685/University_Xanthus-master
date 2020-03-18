@@ -2113,6 +2113,7 @@
     <None Include="Properties\PublishProfiles\FolderProfile8.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile9.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.payform.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -2121,6 +2122,7 @@
     <Content Include="Scripts\PaymentGateway.js" />
     <Content Include="Scripts\ProjectValidation.js" />
     <Content Include="Scripts\Register.js" />
+    <Content Include="Scripts\script.js" />
     <Content Include="Uploads\Product\20646dcafe2e40df8dd3cf40daa0404f.pdf" />
     <Content Include="Uploads\Product\2152030334fa4e58a98caa25337e16cc.doc" />
     <Content Include="Uploads\Product\21f8fae1cdc24f339d623d7a41f5048b.pdf" />

@@ -323,9 +323,10 @@
                         <a href="#" class="user-name">
                             @if (Convert.ToString(Session["RoleID"]) == "")
                             {
-                               
-                               @Url.Action("Login","Login")
-                               
+                                base.Response.Redirect("~/Login/Login");
+                              //  @Url.Action("Login","Login")
+
+
                             }
 
                             else if (Convert.ToString(Session["RoleID"]) == "4")
