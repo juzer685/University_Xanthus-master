@@ -263,10 +263,31 @@
                 <ul class="mailbox-attachments d-flex align-items-stretch clearfix imgbox ">
                     <div class="col-md-12">
                         <div class="row">
-                           
-                                @foreach (var product in Model.Products)
+
+                            @foreach (var product in Model.Products)
+                            {
+                                if (Model.cardTransactionDetailsMappings.Where(c => c.ProductID == product.Id).Count() == product.ProductVideos.Where(c => c.ProductId == product.Id).Count())
                                 {
-                                    if (Model.cardTransactionDetailsMappings.Where(c => c.ProductID == product.Id).Count() == product.ProductVideos.Where(c => c.ProductId == product.Id).Count())
+                                    if (product.ProductVideos.Where(c => c.ProductId == product.Id).Count() == 0)
+                                    {
+                                        <li class="openpop temp" data-toggle="popover">
+                                            <span class="mailbox-attachment-icon has-img">
+                                                <img class="imguser" src="~/Uploads/Product/@product.ImageURL" alt="Attachment">
+                                            </span>
+                                            <div class="mailbox-attachment-info">
+                                                <a class="SubCategoryId ids">@product.SubCategoryId</a>
+                                                <a class="ProductID ids">@product.Id</a>
+                                                <a @*href="/Products/ProductsById?ProductId=@product.Id"*@ class="mailbox-attachment-name productname">@product.Title</a>
+                                            </div>
+                                            <div class="mailbox-attachment-info dollar " id="">
+                                                 <a class="giveamount" style=" margin-left: -12px;">0</a>
+                                             </div>
+                                            @*<button type="button" class="baynowclick">Buy Now!</button>*@
+
+                                        </li>
+
+                                    }
+                                    else
                                     {
                                         <li class="openpop temp" data-toggle="popover">
                                             <span class="mailbox-attachment-icon has-img">
@@ -278,37 +299,39 @@
                                                 <a @*href="/Products/ProductsById?ProductId=@product.Id"*@ class="mailbox-attachment-name productname">@product.Title</a>
                                             </div>
                                             @*<div class="mailbox-attachment-info dollar " id="">
-                                                 <a class="giveamount">@product.VideoRateSum</a>
-                                             </div>
-                                            <button type="button" class="baynowclick">Buy Now!</button>*@
+                             <a class="giveamount">@product.VideoRateSum</a>
+                         </div>
+                        <button type="button" class="baynowclick">Buy Now!</button>*@
 
                                         </li>
                                     }
-                                    else
-                                    {
-                                        if (Model.cardTransactionDetailsMappings.Where(c => c.ProductID == product.Id).Count() != 0)
-                                        {
-                                            var videorate = Model.cardTransactionDetailsMappings.Where(c => c.ProductID == product.Id).Sum(c => c.VideoRate);
-                                            product.VideoRateSum = product.VideoRateSum - videorate;
-                                        }
-                                                <li class="openpop temp" data-toggle="popover">
-                                                    <span class="mailbox-attachment-icon has-img">
-                                                        <img class="imguser" src="~/Uploads/Product/@product.ImageURL" alt="Attachment">
-                                                    </span>
-                                                    <div class="mailbox-attachment-info">
-                                                        <a  class="SubCategoryId ids">@product.SubCategoryId</a>
-                                                        <a class="ProductID ids">@product.Id</a>
-                                                        <a @*href="/Products/ProductsById?ProductId=@product.Id"*@ class="mailbox-attachment-name productname">@product.Title</a>
-                                                    </div>
-                                                    <div class="mailbox-attachment-info dollar " id="">
-                                                        <a class="giveamount" style=" margin-left: -12px;">@product.VideoRateSum</a>
-                                                    </div>
-                                                    @*<button type="submit" class="">Submit</button>*@
-                                                    <button type="button" class="btn btn-primary baynowclick" style="margin-left: 40px;margin-bottom: 5px;">Buy Now</button>
-                                                </li>
-                                    }
+
                                 }
-                            </div>
+                                else
+                                {
+                                    if (Model.cardTransactionDetailsMappings.Where(c => c.ProductID == product.Id).Count() != 0)
+                                    {
+                                        var videorate = Model.cardTransactionDetailsMappings.Where(c => c.ProductID == product.Id).Sum(c => c.VideoRate);
+                                        product.VideoRateSum = product.VideoRateSum - videorate;
+                                    }
+                                    <li class="openpop temp" data-toggle="popover">
+                                        <span class="mailbox-attachment-icon has-img">
+                                            <img class="imguser" src="~/Uploads/Product/@product.ImageURL" alt="Attachment">
+                                        </span>
+                                        <div class="mailbox-attachment-info">
+                                            <a class="SubCategoryId ids">@product.SubCategoryId</a>
+                                            <a class="ProductID ids">@product.Id</a>
+                                            <a @*href="/Products/ProductsById?ProductId=@product.Id"*@ class="mailbox-attachment-name productname">@product.Title</a>
+                                        </div>
+                                        <div class="mailbox-attachment-info dollar " id="">
+                                            <a class="giveamount" style=" margin-left: -12px;">@product.VideoRateSum</a>
+                                        </div>
+                                        @*<button type="submit" class="">Submit</button>*@
+                                        <button type="button" class="btn btn-primary baynowclick" style="margin-left: 40px;margin-bottom: 5px;">Buy Now</button>
+                                    </li>
+                                }
+                            }
+                        </div>
                     </div>
                 </ul>
             </div>

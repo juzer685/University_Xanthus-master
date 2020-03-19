@@ -435,15 +435,15 @@ namespace University.Repository
                 //        hh = kk;
                 //    }
                 //}
-                foreach(var item1 in res)
-                {
-                    item1.ProductVideos = context.ProductVideos.Where(y => y.IsDeleted != true).ToList();
-                }
+                //foreach(var item1 in res)
+                //{
+                //    item1.ProductVideos = context.ProductVideos.Where(y => y.IsDeleted != true).ToList();
+                //}
 
                 foreach (var item in res)
                 {
                   
-                    item.VideoRateSum = res1.Where(x => x.Key == item.Id).Select(x => x.videosSum ?? 0).FirstOrDefault(); 
+                    item.VideoRateSum = res1.Where(x => x.Key == item.Id).Select(x => x.videosSum).FirstOrDefault(); 
                 }
 
 

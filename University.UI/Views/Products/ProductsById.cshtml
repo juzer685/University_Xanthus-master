@@ -137,7 +137,18 @@
             margin-top: -24px;
         
     }
-
+    #testeds {
+        width: 100%;
+        height: 100%;
+        /*background-color: white;*/
+        z-index: 10;
+        /* display: block; */
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
     /*.ytp-play-button ytp-button{
         background: transparent;
         border: none !important;
@@ -308,44 +319,48 @@
                                             <div class="tab-pane" id="videos">
                                                 @if (@Model.ProductVideos.Count > 0)
                                                 {
-                                                    <div class="col-lg-12 row">
-
-                                                        <div class="col-lg-8">
-                                                            <iframe class="video v1 MainVideo" width="100%" height="200" src="@Model.ProductVideos[0].VideoURL" frameborder="0" allowfullscreen autoplay></iframe>
-                                                            <div class="video-title " style="">@Model.ProductVideos[0].Title</div>
-                                                            <p class="video-desc">@Model.ProductVideos[0].Decription</p>
+                                                <div class="col-lg-12 row">
+                                                    
+                                                    <div class="col-lg-8 ">
+                                                        <div id="testeds">
                                                         </div>
-                                                        <div class="col-lg-4" style="">
-                                                            @foreach (var item in Model.ProductVideos)
-                                                            {
-                                                                    <div>
-                                                                        <a onclick="return false;">
-                                                                            <div class="col-lg-12 container">
-                                                                                <iframe class="video v1 ChildVideo image" width="180" height="100" src="@item.VideoURL" frameborder="0" enablejsapi="1" allowfullscreen></iframe>
-                                                                                @if (item.TransactionId == "")
-                                                                                {
-                                                                                    <div class="" style="">
-                                                                                        <div class="text test">Bay <br />video</div>
-                                                                              
-                                                                                    </div>
-                                                                                }
-                                                                                else
-                                                                                {
-                                                                            <div class="overlay" style="">
-                                                                               
-                                                                            </div>
-                                                                                }
-                                                                            </div>
-                                                                        </a>
-                                                                        <div class="searchItemTitle">@item.Title</div>
-                                                                        <p class="block-ellipsis">@item.Decription</p>
-                                                                    </div>
-                                                               
-                                                            }
-                                                        </div>
+                                                        <iframe id="" class="video v1 MainVideo" width="100%" height="200" src="@Model.ProductVideos[0].VideoURL" frameborder="0" allowfullscreen autoplay></iframe>
 
-
+                                                        <div class="video-title " style="">@Model.ProductVideos[0].Title</div>
+                                                        <p class="video-desc">@Model.ProductVideos[0].Decription</p>
                                                     </div>
+                                                 
+                                                    <div class="col-lg-4" style="">
+                                                        @foreach (var item in Model.ProductVideos)
+                                                        {
+                                                            <div>
+                                                                <a onclick="return false;">
+                                                                    <div class="col-lg-12 container">
+                                                                        <iframe class="video v1 ChildVideo image" width="180" height="100" src="@item.VideoURL" frameborder="0" enablejsapi="1" allowfullscreen></iframe>
+                                                                        @if (item.TransactionId == "")
+                                                                        {
+                                                                            <div class="" style="">
+                                                                                <div class="text test">Bay <br />video</div>
+
+                                                                            </div>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <div class="overlay overlaymainvideoremove" style="">
+
+                                                                            </div>
+                                                                        }
+                                                                    </div>
+                                                                </a>
+                                                                <div class="searchItemTitle">@item.Title</div>
+                                                                <p class="block-ellipsis">@item.Decription</p>
+                                                            </div>
+
+                                                        }
+                                                    </div>
+
+
+                                                </div>
                                                 }
 
                                             </div>
@@ -433,7 +448,13 @@
                     panel.style.maxHeight = panel.scrollHeight + "px";
                 }
             });
-        }
+    }
+    $('.overlaymainvideoremove').click(function () {
+     
+  document.getElementById("testeds").style.display = "none";
+
+    });
+
 
     $("#btn-submit-feedback").click(function (e) {
             var txtvalue = $("#txtFeedback").val();

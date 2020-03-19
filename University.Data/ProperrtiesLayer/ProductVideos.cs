@@ -9,7 +9,7 @@ namespace University.Data
     public partial class ProductVideos
     {
         public Decimal catid { get; set; }
-        public decimal? VideoRateSum { get; set; }
+        public decimal VideoRateSum { get; set; }
         public string subcategoryname { get; set; }
         public bool IsPaid { get; set; }
         public bool ispaidvideo { get; set; }
