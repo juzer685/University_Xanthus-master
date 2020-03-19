@@ -11,7 +11,7 @@ namespace University.Data.CustomEntities
         //public decimal subcatid { get; set; }
         public Decimal VideoIds { get; set; }
         public string TransactionId { get; set; }
-        public decimal? VideoRateSum { get; set; }
+        public decimal VideoRateSum { get; set; }
         public Decimal Id { get; set; }
         public int? AssocitedCustID { get; set; }
         public string Title { get; set; }

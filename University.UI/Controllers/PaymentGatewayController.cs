@@ -84,11 +84,22 @@ namespace University.UI.Controllers
             return View("CardDetails", new PaymentGatewayVM());
         }
 
+        private static Random RNG = new Random();
+
         //change admin email and ID to user when migrating to user
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult SaveCardDetails(PaymentGatewayVM PaymentGatewayVM)
         {
+            var fileId = new System.Text.StringBuilder();
+            while (fileId.Length < 16)
+            {
+                fileId.Append(RNG.Next(10).ToString());
+            }
+            //var fileId  =Guid.NewGuid();
+            //Guid obj = Guid.NewGuid();
+            //var fileId = Guid.NewGuid().ToString().Replace("-", "");
+            PaymentGatewayVM.GuidString = fileId.ToString();
             //getCustomerProfileResponse response = PaymentGatewayUtility.GetCustomerProfile(ConfigurationManager.AppSettings["ApiLoginID"], ConfigurationManager.AppSettings["ApiTransactionKey"], /*Session["UserEmail"].ToString(),*/ PaymentGatewayVM);
 
             var response = PaymentGatewayUtility.CreateCustomerProfile(ConfigurationManager.AppSettings["ApiLoginID"], ConfigurationManager.AppSettings["ApiTransactionKey"], /*Session["UserEmail"].ToString(),*/ PaymentGatewayVM);
@@ -118,21 +129,21 @@ namespace University.UI.Controllers
 
                     if (TransResult)
                     {
-                        return Json(new { result = true, Message = "Transaction succeded" });
+                        return Json(new { result = true, Message = "Card Added succeded" });
                     }
                     else
                     {
-                        return Json(new { result = false, Message = "Transaction Failed" });
+                        return Json(new { result = false, Message = "Card Added Failed" });
                     }
                 }
                 else
                 {
-                    return Json(new { result = false, Message = "Transaction Failed" });
+                    return Json(new { result = false, Message = "Card Added Failed" });
                 }
             }
             else
             {
-                return Json(new { result = false, Message = "Transaction Failed" });
+                return Json(new { result = false, Message = "Card Added Failed" });
             }
         }
 

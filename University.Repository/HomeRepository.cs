@@ -358,6 +358,7 @@ namespace University.Repository
 
         public IEnumerable<ProductEntity> ListproductbyUserId()
         {
+            //decimal videosSum;
             using (var context = new UniversityEntities())
             {
                 int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
@@ -399,7 +400,7 @@ namespace University.Repository
                            on l.ID equals cm.UserID
                            join c in context.SubCategoryMaster.Where(y => y.IsDeleted == false)
                            on cm.CategoryID equals c.Id
-                           join p in context.Product.Where(y => y.IsDeleted == false)
+                           join p in context.Product.Where(y => y.IsDeleted == false )
                            on c.Id equals p.SubCategoryId
                            //join pv in context.ProductVideos
                            //on p.Id equals pv.ProductId
@@ -426,6 +427,14 @@ namespace University.Repository
                                ProductVideos = context.ProductVideos.Where(x => x.IsDeleted != true).ToList(),
                                ProductDocuments = context.ProductDocuments.Where(x => x.IsDeleted != true).ToList()
                            }).ToList();
+                //foreach(var kk in res)
+                //{
+                //    if(kk.Categorymapp.Select(x=>x.UserID).FirstOrDefault() == UserID)
+                //    {
+                //        List<Product> hh = new List<Product>();
+                //        hh = kk;
+                //    }
+                //}
                 foreach(var item1 in res)
                 {
                     item1.ProductVideos = context.ProductVideos.Where(y => y.IsDeleted != true).ToList();
@@ -434,7 +443,7 @@ namespace University.Repository
                 foreach (var item in res)
                 {
                   
-                    item.VideoRateSum = res1.Where(x => x.Key == item.Id).Select(x => x.videosSum).FirstOrDefault(); 
+                    item.VideoRateSum = res1.Where(x => x.Key == item.Id).Select(x => x.videosSum ?? 0).FirstOrDefault(); 
                 }
 
 
