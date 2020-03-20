@@ -5,6 +5,11 @@
     ViewBag.Title = "Category User Mapping";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+     .pointer {
+            cursor: pointer;
+        }
+</style>
 
 @*<h2>CategoryUserMappingList</h2>*@
 
@@ -53,16 +58,19 @@
                             <tbody>
                                 @foreach (var item in Model.CategoryUserMapping)
                                 {
+                                    if (item.CategoryDeleteorNot == false)
+                                    {
                                     <tr>
                                         <td class="text-center">@item.UserID</td>
                                         <td class="text-center">@item.AdminFirstName @item.AdminLastName</td>
                                         <td class="text-center">@item.UserFirstName @item.UserLastName</td>
                                         <td class="text-center">@item.CategoryName</td>
                                         <td class="text-center">
-                                            <i title="Edit" class="fas fa-edit" onclick="AddCategoryMapp('@item.ID')"></i>
-                                            <i title="Delete" class="fas fa-trash" onclick="DeleteCategoryMapp('@item.ID')"></i>
+                                            <i title="Edit" class="fas fa-edit pointer" onclick="AddCategoryMapp('@item.ID')"></i>
+                                            <i title="Delete" class="fas fa-trash pointer" onclick="DeleteCategoryMapp('@item.ID')"></i>
                                         </td>
                                     </tr>
+                                    }
                                 }
 
                             </tbody>

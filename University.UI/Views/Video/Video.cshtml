@@ -89,45 +89,53 @@
                         <div class="row">
                             @foreach (var item in Model)
                             {
-                                <div class="col-lg-4">
-                                    @if(item.IsPaid == true)
-                                    {
-                                        <iframe class="video v1" width="100%" height="200" src="@item.VideoURL" frameborder="0" allowfullscreen autoplay></iframe>
-                                        @*<div class="overlay" style=""></div>*@
-                                        <div class="col-12 col-md-10">
-                                            <div class="searchItemTitle">
-                                                <a class="searchItemTitle" href="~/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(item.ProductId.ToString(), System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])">
-                                                    @item.Title
-                                                </a>
-                                            </div>
-                                            <p class="block-ellipsis" title="@item.Decription">@item.Decription</p>
+                            <div class="col-lg-4">
+                                @if (item.IsPaid == true)
+                                {
+                                    <iframe class="video v1" width="100%" height="200" src="@item.VideoURL" frameborder="0" allowfullscreen autoplay></iframe>
+                                    @*<div class="overlay" style=""></div>*@
+                                    <div class="col-12 col-md-10">
+                                        <div class="searchItemTitle">
+                                            <a class="searchItemTitle" href="~/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(item.ProductId.ToString(), System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])">
+                                                @item.Title
+                                            </a>
                                         </div>
-                                    }
-                                    else
-                                    {
-                                        <iframe class="video v1" width="100%" height="200" src="@item.VideoURL" frameborder="0" allowfullscreen autoplay></iframe>
-                                        <div class="overlay" style=" height: 200px;"></div>
-                                        <div class="col-12 col-md-10">
-                                            <div class="searchItemTitle">
-                                                <a class="searchItemTitle productname" href="~/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(item.ProductId.ToString(), System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])">@item.Title</a>
-                                                
-                                                <a  class="ProductID ids">@item.ProductId</a>
-                                                <a  class="SubCatID ids">@item.SubCatID</a>
-                                                <a  class="VideoID ids">@item.Id</a>
-                                            </div>
-                                            <p class="block-ellipsis" title="@item.Decription">@item.Decription</p>
-                                            <div class="mailbox-attachment-info dollar " id="">
-                                                <a class="giveamount" style="margin-left: -12px;">@item.VideoRate</a>
-                                                @*<a class="ProductID">@item.ProductId</a>*@
-                                                @*<a class="giveamount">@item</a>*@
-                                                <div class="wrapper1">
+                                        <p class="block-ellipsis" title="@item.Decription">@item.Decription</p>
+                                    </div>
+                                    <div class="mailbox-attachment-info" style="margin-top: -10px;">
+                                        @*<a class="giveamount" style="margin-left: -12px;">@item.VideoRate</a>
+                                       
+                                        <div class="wrapper1">
 
-                                                    <button type="button" class="btn btn-primary button baynowclick" style="margin-left: 150px;margin-top: -15px;width: 80px;">Buy Now</button>
-                                                </div>
+                                            <button type="button" class="btn btn-primary button baynowclick" style="margin-left: 150px;margin-top: -15px;width: 80px;">Buy Now</button>
+                                        </div>*@
+                                    </div>
+                                }
+                                else
+                                {
+                                    <iframe class="video v1" width="100%" height="200" src="@item.VideoURL" frameborder="0" allowfullscreen autoplay></iframe>
+                                    <div class="overlay" style=" height: 200px;"></div>
+                                    <div class="col-12 col-md-10">
+                                        <div class="searchItemTitle">
+                                            <a class="searchItemTitle productname" href="~/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(item.ProductId.ToString(), System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])">@item.Title</a>
+
+                                            <a class="ProductID ids">@item.ProductId</a>
+                                            <a class="SubCatID ids">@item.SubCatID</a>
+                                            <a class="VideoID ids">@item.Id</a>
+                                        </div>
+                                        <p class="block-ellipsis" title="@item.Decription">@item.Decription</p>
+                                        <div class="mailbox-attachment-info dollar " style="margin-top: -10px;">
+                                            <a class="giveamount" style="margin-left: -12px;">@item.VideoRate</a>
+                                            @*<a class="ProductID">@item.ProductId</a>*@
+                                            @*<a class="giveamount">@item</a>*@
+                                            <div class="wrapper1">
+
+                                                <button type="button" class="btn btn-primary button baynowclick" style="margin-left: 150px;margin-top: -25px;width: 80px;">Buy Now</button>
                                             </div>
                                         </div>
-                                    }
-                                </div>
+                                    </div>
+                                }
+                            </div>
                             }
 
                         </div>

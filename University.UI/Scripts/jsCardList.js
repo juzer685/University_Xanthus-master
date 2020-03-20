@@ -9,8 +9,7 @@ function RegisterHandler() {
 
     $('.btnPaymentGateway').click(function () {
 
-        $("tested").hide();
-       // parseFloat CurrencyField = 0.0;
+       
             var Obj = {
                
                 //Amount: parseFloat($('.amount').html()),

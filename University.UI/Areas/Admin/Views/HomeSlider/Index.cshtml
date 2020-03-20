@@ -4,7 +4,11 @@
     ViewBag.Title = "Home Slider";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<style>
+     .pointer {
+            cursor: pointer;
+        }
+</style>
 
 <!-- Content Header (Page header) -->
 <div class="content-header">
@@ -54,8 +58,8 @@
                                             <td>@item.Product.Title</td>
                                             <td>@item.TextDescription</td>
                                             <td class="text-center">
-                                                <i class="fas fa-edit" onclick="AddHomeSlider('@item.Id')"></i>
-                                                <i class="fas fa-trash" onclick="DeleteHomeSlider('@item.Id')"></i>
+                                                <i class="fas fa-edit pointer" onclick="AddHomeSlider('@item.Id')"></i>
+                                                <i class="fas fa-trash pointer" onclick="DeleteHomeSlider('@item.Id')"></i>
                                                 @*<input type="button" class="btn-primary-ips" value="Edit" onclick="AddHomeSlider('@item.Id')" />
                                                     <input type="button" class="btn-primary-ips" value="Delete" onclick="DeleteHomeSlider('@item.Id')" />*@
                                             </td>

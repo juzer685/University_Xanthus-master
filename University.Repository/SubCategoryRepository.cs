@@ -38,8 +38,8 @@ namespace University.Repository
             {
                 int AdminId = Convert.ToInt32(HttpContext.Current.Session["AdminLoginID"]);
 
-                List<Login_tbl> obj1 = context.Login_tbl.Where(y => y.IsDeleted != true && y.AdminId == AdminId).ToList();
-                List<SubCategoryMaster> obj2 = context.SubCategoryMaster.Include("CategoryMaster").Where(y => y.IsDeleted != true && y.AssocitedCustID == AdminId).OrderByDescending(t => t.CreatedDate).ToList();
+                List<Login_tbl> obj1 = context.Login_tbl.Where(y => y.IsDeleted == false && y.AdminId == AdminId).ToList();
+                List<SubCategoryMaster> obj2 = context.SubCategoryMaster.Include("CategoryMaster").Where(y => y.IsDeleted == false && y.AssocitedCustID == AdminId).OrderByDescending(t => t.CreatedDate).ToList();
                 return (obj1, obj2);
 
 
@@ -54,8 +54,8 @@ namespace University.Repository
                 if (AdminId != 0)
                 {
                     var Obj = context.CategoryUserMapping
-                        .Where(x => x.AdminID == AdminId && x.IsDeleted != true)
-                        .Select(x => new {  id=x.ID,x.Login_tbl.ID, x.Login_tbl.FirstName, x.Login_tbl.LastName, x.Login_tbl.AdminId, x.SubCategoryMaster.Id, x.SubCategoryMaster.Name })
+                        .Where(x => x.AdminID == AdminId && x.IsDeleted == false)
+                        .Select(x => new {  id=x.ID,x.Login_tbl.ID, x.Login_tbl.FirstName, x.Login_tbl.LastName, x.Login_tbl.AdminId, x.SubCategoryMaster.Id, x.SubCategoryMaster.Name, x.SubCategoryMaster.IsDeleted })
                         .ToList()
                         .Select(x => new CategoryUserMapping
                         {
@@ -66,9 +66,10 @@ namespace University.Repository
                             AdminID = x.AdminId,
                             CategoryID = x.Id,
                             CategoryName = x.Name,
-                            
+                            CategoryDeleteorNot = x.IsDeleted,
+
                         }).ToList();
-                    var AdminDetails = context.Login_tbl.FirstOrDefault(x => x.ID == AdminId);
+                    var AdminDetails = context.Login_tbl.FirstOrDefault(x => x.ID == AdminId && x.IsDeleted==false);
                     foreach (var item in Obj)
                     {
                         item.AdminFirstName = AdminDetails.FirstName;
@@ -81,7 +82,7 @@ namespace University.Repository
                     int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
                     var Obj = context.CategoryUserMapping
                        .Where(x => x.UserID == UserID && x.IsDeleted != true)
-                       .Select(x => new { x.Login_tbl.ID, x.Login_tbl.FirstName, x.Login_tbl.LastName, x.Login_tbl.AdminId, x.SubCategoryMaster.Id, x.SubCategoryMaster.Name })
+                       .Select(x => new { x.Login_tbl.ID, x.Login_tbl.FirstName, x.Login_tbl.LastName, x.Login_tbl.AdminId, x.SubCategoryMaster.Id, x.SubCategoryMaster.Name,x.SubCategoryMaster.IsDeleted })
                        .ToList()
                        .Select(x => new CategoryUserMapping
                        {
@@ -91,7 +92,8 @@ namespace University.Repository
                            UserLastName = x.LastName,
                            AdminID = x.AdminId,
                            CategoryID = x.Id,
-                           CategoryName = x.Name
+                           CategoryName = x.Name,
+                           CategoryDeleteorNot=x.IsDeleted 
 
 
 

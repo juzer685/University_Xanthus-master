@@ -16,6 +16,8 @@ namespace University.UI.Areas.Admin.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
+       // public string FirstLastName
+       
         //CategoryId
         //[Required(ErrorMessage = "Error: Must Choose a Country")]
         public decimal CategoryId { get; set; }

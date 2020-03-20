@@ -8,6 +8,7 @@ namespace University.Data
 {
     public partial class CategoryUserMapping
     {
+        public bool? CategoryDeleteorNot { get; set; }
         public string AdminFirstName { get; set; }
         public string AdminLastName { get; set; }
         public string UserFirstName { get; set; }

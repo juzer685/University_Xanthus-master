@@ -36,10 +36,12 @@
                                             @*@Html.Hidden("createby", Card.Year, new { @class = "createby" })*@
                                             @Html.Hidden("CustomerProfileId", Card.CustomerProfileId, new { @class = "CustomerProfileId" })
                                             @Html.Hidden("CustomerPaymentProfileId", Card.CustomerPaymentProfileId, new { @class = "CustomerPaymentProfileId" })
-                                            <input type="radio" name="radioCardNumber"><a data-toggle="collapse" data-parent=".accordion" href=".test1" class="dataCardNumber">@Card.CardNumber</a>
+                                            @*<input type="radio" name="radioCardNumber" required><a data-toggle="collapse" data-parent=".accordion" href=".test1" class="dataCardNumber">@Card.CardNumber</a>*@
+                                            <input name="radioCardNumber" type="radio" class="selectradio" required><a data-toggle="collapse" data-parent=".accordion" class="dataCardNumber">@Card.CardNumber</a>
                                         </h4>
                                     </div>
-                                    <div id="collapse1" class="panel-collapse collapse in test1">
+                                    <div id="collapse1" class="panel-collapse collapse in test1 form1">
+                                    @*<div id="" class="panel-collapse collapse in test1 form1">*@
                                         <div class="panel-body">
                                             <div class="form-group">
                                                 <label for="CVV">CVV:</label>
@@ -79,11 +81,17 @@
     <script src="~/Scripts/jsCardList.js"></script>
 }
 <script>
+
+
     $(document).ready(function () {
         $("#test-swipe-1").hide();
         $(".your-radio-class").click(function () {
             $("#test-swipe-1").show();
         });
 
+    });
+    $('.selectradio').click(function () {
+     
+        $(".form1").toggle();
     });
 </script>

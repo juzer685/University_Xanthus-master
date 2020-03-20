@@ -53,6 +53,8 @@
                             <tbody>
                                 @foreach (var item in Model)
                                 {
+                                    if (item.RoleID != 4)
+                                    {
                                     <tr>
                                         @if (4 == Convert.ToInt32(Session["AdminLoginID"]))
                                         {
@@ -68,6 +70,7 @@
                                             </td>
                                         }
                                     </tr>
+                                    }
                                 }
                             </tbody>
                         </table>

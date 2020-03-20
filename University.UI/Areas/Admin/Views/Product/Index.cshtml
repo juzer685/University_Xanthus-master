@@ -9,14 +9,17 @@
     {
   content: "$";
 }
-
+     .pointer {
+            cursor: pointer;
+        }
 
 </style>
 
 <!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="container-fluid">
-        <div class="row mb-2" style="margin-top: 10px">
+        <div class="row mb-2" style="        margin-top: 10px
+">
             <div class="col-sm-12">
                 <h1 class="m-0 text-dark">Product</h1>
             </div><!-- /.col -->
@@ -65,8 +68,8 @@
                                     <td class="dollar">@item.sumvideorate</td>
                                     <td>
                                         @*<input name="AssocitedID" id="BasicDeatilsAssocitedID" type="hidden" />*@
-                                        <i class="fas fa-edit" onclick="AddProduct('@item.Id')"></i>
-                                        <i class="fas fa-trash" onclick="DeleteProduct('@item.Id')"></i>
+                                        <i class="fas fa-edit pointer" onclick="AddProduct('@item.Id')"></i>
+                                        <i class="fas fa-trash pointer" onclick="DeleteProduct('@item.Id')"></i>
                                         @*<input type="button" class="btn-primary-ips" value="Edit" onclick="AddProduct('@item.Id')" />
                                          <input type="button" class="btn-primary-ips" value="Delete" onclick="DeleteProduct('@item.Id')" />*@
                                     </td>

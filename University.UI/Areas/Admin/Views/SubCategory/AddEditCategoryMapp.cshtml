@@ -28,7 +28,7 @@
     <div class="col-md-6">
         <div class="form-group">
             <label>Choose User</label>
-            @Html.DropDownListFor(x => x.UserID, new SelectList(Model.Logintbllst, "ID", "FirstName"), "Select User", new { @class = "form-control" })
+            @Html.DropDownListFor(x => x.UserID, new SelectList(Model.Logintbllst, "ID", "FirstLastName"), "Select User", new { @class = "form-control" })
             <div class="errorTxtt"></div>
             @*<select name="UserID" class="form-control select2" style="width: 100%;">
             <option value="0" selected>Select User</option>
