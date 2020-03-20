@@ -1,4 +1,6 @@
-﻿$(document).ready(function () {
+﻿
+
+$(document).ready(function () {
     //document.getElementById('loaderring').style.display = "none";
     RegisterHandler();
 });
@@ -6,11 +8,13 @@
 function RegisterHandler() {
 
     $('.btnPaymentGateway').click(function () {
-       
 
+        $("tested").hide();
+       // parseFloat CurrencyField = 0.0;
             var Obj = {
-                //DBCardNumber: $('.CardNumber').html(),
-                Amount: parseFloat($('.amount').html()),
+               
+                //Amount: parseFloat($('.amount').html()),
+                Amount: $(this).parent().find(".amount").val().replace("$",""),
                 CVV: $(this).prev().find(".datacvv").val(),
                 CardNumber: $(this).parent().parent().parent().find('.dataCardNumber').html(),
                 isProductbuy: $("input[name='radioCardNumber']:checked").siblings('.isProductbuy').val(),

@@ -46,11 +46,12 @@
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text"><i class="fa fa-credit-card"></i></span>
-                                                        @Html.TextBox("CVV", "", new { @class = "form-control datacvv", placeholder = "CVV" ,@required = "required"})
+                                                        @Html.TextBox("CVV", "", new { @class = "form-control datacvv", placeholder = "CVV", @required = "required" })
                                                     </div>
                                                 </div> <!-- input-group.// -->
                                             </div> <!-- form-group.// -->
-                                            <i>$</i><button class="btn btn-primary btnPaymentGateway amount PAY" style="margin-left: 5px;"> @Card.Amount</button>
+                                            <input  style="margin-left: 5px;" id="btn" class="btn btn-primary btnPaymentGateway amount PAY fa fa-usd" type="button" value="$@Card.Amount"  />
+                                            @*<button class="btn btn-primary btnPaymentGateway amount PAY " style="margin-left: 5px;"><i class="tested">$</i>@Card.Amount</button>*@
                                         </div>
                                     </div>
                                 </div>
