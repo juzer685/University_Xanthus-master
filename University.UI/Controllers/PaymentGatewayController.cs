@@ -81,7 +81,35 @@ namespace University.UI.Controllers
         //[HttpGet]
         public ActionResult SaveCardDetails()
         {
-            return View("CardDetails", new PaymentGatewayVM());
+            List<CardListVM> ListVM = new List<CardListVM>();
+            var lst = _PaymentGatewayService.GetCardDetails(Convert.ToInt32(Session["UserLoginID"]));
+            foreach (var card in lst)
+            {
+                ListVM.Add(new CardListVM
+                {
+                   // ProductId = ProductID,
+                   // ProductName = Productname,
+                    CustomerFName = Convert.ToString(Session["UserNamee"]),
+                    createby = Convert.ToInt32(Session["UserLoginID"]),
+                    CardNumber = card.CardNumber,
+                    CustomerProfileId = card.CustomerProfileId,
+                    CustomerPaymentProfileId = card.PaymentProfileId,
+                    //Amount = Videorate,
+                    CardHolderName = card.CardHolderName,
+                    CreatedDate = DateTime.Now,
+                    CardType = card.CardType,
+                    Month = card.ExpiryMonth,
+                    Year = card.ExpiryYear,
+                    //SubCatID = SubCatID,
+                    //isProductbuy = isProductbuy,
+                });
+            }
+            //return View("CardList", ListVM);
+            //return View("CardDetails", ListVM);
+            PaymentGatewayVM paymentGatewayVM = new PaymentGatewayVM();
+            paymentGatewayVM.cardListVMs = ListVM;
+            //return View("CardDetails", new PaymentGatewayVM());
+            return View("CardDetails", paymentGatewayVM);
         }
 
         private static Random RNG = new Random();

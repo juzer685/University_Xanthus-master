@@ -20,7 +20,7 @@
                         <div class="panel-group accordion" id="">
                             @foreach (var Card in Model)
                             {
-                                <div class="panel panel-default">
+                                <div class="panel panel-default ">
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
                                             @Html.Hidden("isProductbuy", Card.isProductbuy, new { @class = "isProductbuy" })
@@ -37,17 +37,19 @@
                                             @Html.Hidden("CustomerProfileId", Card.CustomerProfileId, new { @class = "CustomerProfileId" })
                                             @Html.Hidden("CustomerPaymentProfileId", Card.CustomerPaymentProfileId, new { @class = "CustomerPaymentProfileId" })
                                             @*<input type="radio" name="radioCardNumber" required><a data-toggle="collapse" data-parent=".accordion" href=".test1" class="dataCardNumber">@Card.CardNumber</a>*@
-                                            <input name="radioCardNumber" type="radio" class="selectradio" required><a data-toggle="collapse" data-parent=".accordion" class="dataCardNumber">@Card.CardNumber</a>
+                                            <input name="radioCardNumber" id="test" type="radio" class="selectradiobutton" required><a data-toggle="collapse" data-parent=".accordion" class="dataCardNumber">@Card.CardNumber</a>
+
                                         </h4>
                                     </div>
                                     <div id="collapse1" class="panel-collapse collapse in test1 form1">
                                     @*<div id="" class="panel-collapse collapse in test1 form1">*@
                                         <div class="panel-body">
-                                            <div class="form-group">
+                                            <div class="form-group  ">
                                                 <label for="CVV">CVV:</label>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
-                                                        <span class="input-group-text"><i class="fa fa-credit-card"></i></span>
+                                                        <span class="input-group-text">
+                                                        <i class="fa fa-credit-card"></i></span>
                                                         @Html.TextBox("CVV", "", new { @class = "form-control datacvv", placeholder = "CVV", @required = "required" })
                                                     </div>
                                                 </div> <!-- input-group.// -->
@@ -90,7 +92,7 @@
         });
 
     });
-    $('.selectradio').click(function () {
+    $('.selectradiobutton').click(function () {
      
         $(".form1").toggle();
     });

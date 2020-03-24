@@ -22,18 +22,21 @@
                 <input name="AssocitedID" id="BasicDeatilsAssocitedID" type="hidden" />
                 <label for="email">Category Name</label>
                 @Html.DropDownListFor(m => m.SubCategoryId, new SelectList(ViewBag.SubCategoryList, "Id", "Name"), "--select category--", new { @class = "form-control pointer txtOnly", @required = "required" })
-                @Html.ValidationMessageFor(m => m.SubCategoryId)
+                @Html.ValidationMessageFor(x => x.SubCategoryId, null, new { @class = "", style = "color:red;" })
+                @*@Html.ValidationMessageFor(m => m.SubCategoryId)*@
             </div>
 
             <div class="form-group">
                 <label for="Title">Product Title</label>
-                @Html.TextBoxFor(m => m.Title, new { @class = "form-control txtOnly", @required = "required", @pattern = "^[^<>%$*@!#]*$", @title = "Special characters are not allowed." ,@maxlength = "50"})
-                @Html.ValidationMessageFor(m => m.Title)
+                @Html.TextBoxFor(m => m.Title, new { @class = "form-control txtOnly", @required = "required", @pattern = "^[^<>%$*@!#]*$", @title = "Special characters are not allowed.", @maxlength = "50" })
+                @Html.ValidationMessageFor(x => x.Title, null, new { @class = "", style = "color:red;" })
+                @*@Html.ValidationMessageFor(m => m.Title)*@
             </div>
             <div class="form-group">
                 <label for="Description">Product Description</label>
-                @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @required = "required", @maxlength = "100"})
-                @Html.ValidationMessageFor(m => m.Description)
+                @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @required = "required", @maxlength = "100" })
+                @Html.ValidationMessageFor(x => x.Description, null, new { @class = "", style = "color:red;" })
+                @*@Html.ValidationMessageFor(m => m.Description)*@
             </div>
         </div>
         <div class="col-md-6">
@@ -46,6 +49,7 @@
                         <input type="file" name="file" class="custom-file-input pointer" id="file" required accept="image/jpeg" onchange="readURL(this);">
                         @if (Model.ImageURL != "")
                         {
+
                             <label class="custom-file-label" for="exampleInputFile">@Model.ImageURL</label> 
                         }
                         else

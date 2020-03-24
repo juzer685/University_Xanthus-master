@@ -62,7 +62,7 @@ namespace University.UI.Areas.Admin.Controllers
             return extension;
         }
         public ActionResult AddEditSubCategory(SubCategoryViewModel model, HttpPostedFileBase file)
-        {
+       {
             var res = AutoMapper.Mapper.Map<SubCategoryViewModel, SubCategoryMaster>(model);
             if (file != null)
             {
@@ -144,14 +144,29 @@ namespace University.UI.Areas.Admin.Controllers
         public ActionResult AddCategoryUserMapping(CategoryMappingModel model)
         {
             // var res = AutoMapper.Mapper.Map<CategoryMappingModel, CategoryUserMapping>(model);
-
-            var isSuccess = _subCategoryService.AddCategoryUserMapping(new CategoryUserMapping { 
-                ID = model.ID,
-                CategoryID = model.CategoryId,
-                UserID = model.UserID
-            });
-            //return Json(isSuccess, JsonRequestBehavior.AllowGet);
-            return RedirectToAction("CategoryUserMappingList", isSuccess);
+            //  if(model.UserID )
+            if (ModelState.IsValid)
+            {
+                if (model.CategoryId != 0 && model.UserID != 0)
+                {
+                    var isSuccess = _subCategoryService.AddCategoryUserMapping(new CategoryUserMapping
+                    {
+                        ID = model.ID,
+                        CategoryID = model.CategoryId,
+                        UserID = model.UserID
+                    });
+                    //return Json(isSuccess, JsonRequestBehavior.AllowGet);
+                    return RedirectToAction("CategoryUserMappingList", isSuccess);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public ActionResult DeleteCategoryUseerMapping(string Id)

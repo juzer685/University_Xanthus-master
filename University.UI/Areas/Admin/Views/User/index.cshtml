@@ -6,6 +6,11 @@
     ViewBag.Title = "User";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+    <style>
+        .pointer {
+            cursor: pointer;
+        }
+    </style>
 
 <!-- Content Header (Page header) -->
 <div class="content-header">
@@ -63,8 +68,8 @@
                                             <td class="text-center">@item.FirstName</td>
                                             <td class="text-center">@item.LastName</td>
                                             <td class="text-center">
-                                                <i class="fas fa-edit redonlyeamil" onclick="window.location.href = '/Admin/User/EditUser/@item.ID'"></i>
-                                                <i class="fas fa-trash" onclick="DeleteUser('@item.ID')"></i>
+                                                <i class="fas fa-edit redonlyeamil pointer" onclick="window.location.href = '/Admin/User/EditUser/@item.ID'"></i>
+                                                <i class="fas fa-trash pointer" onclick="DeleteUser('@item.ID')"></i>
                                                 @*<input type="button" class="btn btn-primary btn-sm" value="Edit" onclick="AddSubCategory('@item.ID')" />
                                                     <input type="button" class="btn btn-primary btn-sm" value="Delete" onclick="DeleteUser('@item.ID')" />*@
                                             </td>

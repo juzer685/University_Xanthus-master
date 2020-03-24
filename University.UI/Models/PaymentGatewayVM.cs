@@ -48,5 +48,7 @@ namespace University.UI.Models
         public string ProductName { get; set; }
         public string GuidString { get; set; }
 
+        public List<CardListVM> cardListVMs { get; set; }
+
     }
 }

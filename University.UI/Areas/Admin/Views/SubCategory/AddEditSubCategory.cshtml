@@ -57,10 +57,12 @@
         <div class="custom-file">
             @*<input type="file" id="file" name="file" class="form-control validateHeightWidth" accept="image/gif, image/png, image/jpeg, image/jpg" onchange="readURL(this);" />*@
 
-            <input type="file" id="categoryfile" name="file" class="custom-file-input validateHeightWidthcheck" required accept="image/gif, image/png, image/jpeg, image/jpg" onchange="readURL(this);">
+            @*<input type="file" id="categoryfile" name="file" class="custom-file-input validateHeightWidthcheck" required accept="image/gif, image/png, image/jpeg, image/jpg" onchange="readURL(this);">*@
+            <input type="file" id="categoryfile" name="file" class="custom-file-input validateHeightWidthcheck" onchange="readURL(this);">
             @if (Model.ImageURL != "")
             {
 
+                @*<input type="file" class="custom-file-input validateHeightWidthcheck" onchange="readURL(this)" ; value="@Model.ImageURL" />*@
                 <label class="custom-file-label" id="CategoryFileLabel" for="exampleInputFile">@Model.ImageURL</label>
                 @*<label id="image-preview">@Model.ImageURL</label>*@
             }
@@ -73,7 +75,7 @@
     </div>
     @Html.ValidationMessageFor(m => m.ImageURL)
     @*<img id="image-preview" src="@Model.ImageFullPath" alt="" class="imgStd" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" />*@
-    <img id="image-preview" src="@Model.ImageFullPath" alt="" class="imgStd" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" />
+    <img id="image-preview"  src="@Model.ImageFullPath" alt="" class="imgStd" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" />
 
 </div>
 @*<div class="form-group">
