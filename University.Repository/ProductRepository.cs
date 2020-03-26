@@ -447,10 +447,10 @@ namespace University.Repository
                 var product = context.Product.FirstOrDefault(y => y.Id == model.Id && y.IsDeleted != true);
                 if (product != null)
                 {
-                    if (!string.IsNullOrWhiteSpace(model.ImageURL))
-                    {
+                    //if (!string.IsNullOrWhiteSpace(model.ImageURL))
+                    //{
                         product.ImageURL = model.ImageURL;
-                    }
+                    //}
                     product.Title = model.Title;
                     product.SubCategoryId = model.SubCategoryId;
                     product.Description = model.Description;
@@ -746,7 +746,7 @@ namespace University.Repository
                     guide.Title = productUserGuide.Title;
                     guide.DocumentURL = productUserGuide.DocumentURL;
                     if (productUserGuide.ImageURL != null)
-                        guide.ImageURL = productUserGuide.ImageURL;
+                    guide.ImageURL = productUserGuide.ImageURL;
                     guide.UpdatedDate = DateTime.UtcNow;
                     guide.IsDeleted = false;
                     guide.ImageALT = productUserGuide.ImageALT;

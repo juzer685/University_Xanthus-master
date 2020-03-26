@@ -13,7 +13,7 @@ function RegisterHandler() {
             var Obj = {
                
                 //Amount: parseFloat($('.amount').html()),
-                Amount: $(this).parent().find(".amount").val().replace("$",""),
+                Amount: $(this).parent().find(".amount").val().replace("Pay-$",""),
                 CVV: $(this).prev().find(".datacvv").val(),
                 CardNumber: $(this).parent().parent().parent().find('.dataCardNumber').html(),
                 isProductbuy: $("input[name='radioCardNumber']:checked").siblings('.isProductbuy').val(),

@@ -97,54 +97,7 @@
                 </div>
 
                 <div class="modal-body" id="popupBody">
-                    @*//   @Html.Partial("AddEditCategoryMapp", Model)*@
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Choose Category</label>
-                                @Html.HiddenFor(y => y.ID)
-
-                                @Html.DropDownListFor(x => x.CategoryId, new SelectList(Model.SubCategoryMasterlst, "Id", "Name"), new { @required = "required", @class = "form-control" })
-                                @*@Html.ValidationMessageFor(x => x.CategoryId,null, new { @class = "", style = "color:red;" })*@
-                                @*<div class="errorTxtt"></div>*@
-                                @*<select name="CategoryID" class="form-control" style="width: 100%;">
-                        <option value="0" selected>Select Category</option>
-                        @foreach (var item in Model.SubCategoryMasterlst)
-                        {
-
-                            if (item.AssocitedCustID == Convert.ToInt32(Session["AdminLoginID"]))
-                            {
-                                <option value="@item.Id" name="CategoryID" id="CategoryID">@item.Name</option>
-                            }
-
-                        }
-                    </select>*@
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Choose User</label>
-                                @Html.DropDownListFor(x => x.UserID, new SelectList(Model.Logintbllst, "ID", "FirstLastName"), new { @required = "required", @class = "form-control" })
-                                @*@Html.ValidationMessageFor(x => x.UserID, null, new { @class = "", style = "color:red;" })*@
-                                @*<div class="errorTxtt"></div>*@
-                                @*<select name="UserID" class="form-control select2" style="width: 100%;">
-                        <option value="0" selected>Select User</option>
-                        @foreach (var item in Model.Logintbllst)
-                        {
-                            if (item.RoleID.ToString() == "5")
-                            {
-                                <option value="@item.ID" id="useridd">@item.FirstName @item.LastName</option>
-                            }
-                        }
-
-                    </select>*@
-                            </div>
-                        </div>
-                    </div>
-
+                       @Html.Partial("AddEditCategoryMapp", Model)
                 </div>
 
                 <div class="modal-footer">
@@ -171,7 +124,7 @@
         $('#SubCategoryTable').DataTable();
 
         //$("#CategoryMapping").on('submit', function (e) {
-        //    alert("j")
+       
         //            var form = $(this);
         //            var url = form.attr('action');
         //            var formData = new FormData($(this)[0]);
@@ -192,7 +145,7 @@
                 
 
         //    });
-        //});
+        });
 
         function AddCategoryMapp(Id) {
 
