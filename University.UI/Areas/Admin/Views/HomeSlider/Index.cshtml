@@ -106,17 +106,11 @@
 <!-- /Add Home Slider modal-dialog -->
 
 <script>
-    //$('.homeslideradd').click(function () {
-    //    if ($('#ddlusrlst').val() == 0) {
-    //        _showErrorMessage("First Select User");
+    $('.homeslideradd').click(function () {
+         $(".checktest").attr("required", true);
 
-    //    }
-    //    else
-    //    {
-    //        AddHomeSlider();
-    //    }
-
-    //})
+    })
+    
     $(document).ready(function () {
         $('#HomeSliderTable').DataTable();
 

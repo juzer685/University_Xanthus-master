@@ -20,8 +20,8 @@
     @Html.HiddenFor(m => m.Id)
 
     <div class="form-group">
-        <label for="email">Product Name</label>
-        @Html.DropDownListFor(m => m.ProductId, new SelectList(Model.Products, "Id", "Title"), "--select Product--", new { @class = "form-control", @required = "required" })
+        <label for="email">Course Name</label>
+        @Html.DropDownListFor(m => m.ProductId, new SelectList(Model.Products, "Id", "Title"), "--select Course--", new { @class = "form-control", @required = "required" })
         @Html.ValidationMessageFor(m => m.ProductId)
     </div>
     <div class="form-group">

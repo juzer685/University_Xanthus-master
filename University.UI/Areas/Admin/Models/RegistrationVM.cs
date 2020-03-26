@@ -27,7 +27,8 @@ namespace University.UI.Areas.Admin.Models
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Please enter Password")]
-        [StringLength(30, ErrorMessage = "Password must be of minimum 6 characters length and Maximum 30 Character length", MinimumLength = 6)]
+        //[StringLength(30, ErrorMessage = "Password must be of minimum 6 characters length and Maximum 30 Character length", MinimumLength = 6)]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$", ErrorMessage = "Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character:")]
         public string Password { get; set; }
 
         [Required(ErrorMessage = "Please enter Confirm Password")]

@@ -12,19 +12,19 @@
             @if (Model.Id == 0)
             {
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark" id="Productheader">Add Product</h1>
+                    <h1 class="m-0 text-dark" id="Productheader">Add Course</h1>
                 </div><!-- /.col -->
             }
             else
             {
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark" id="Productheader">Edit Product</h1>
+                    <h1 class="m-0 text-dark" id="Productheader">Edit Course</h1>
                 </div><!-- /.col -->
             }
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Administration</a></li>
-                    <li class="breadcrumb-item"><a href="/Admin/Product">Product</a></li>
+                    <li class="breadcrumb-item"><a href="/Admin/Product">Course</a></li>
                     <li class="breadcrumb-item active">@(Model?.Title)</li>
                 </ol>
             </div><!-- /.col -->
@@ -44,10 +44,10 @@
                             <ul class="nav nav-tabs tab" id="custom-tabs-one-tab" role="tablist">
                                 <li class="nav-item " id="basicdeatils"><a class="nav-link active" data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadProductBasicDetails">Basic Details</a></li>
                                 <li class="nav-item "><a id="userguide" class="nav-link" data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadProductUserGuide">User Guide</a></li>
-                                <li class="nav-item disabled"><a id="video" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductVideos"> Videos</a></li>
+                                <li class="nav-item disabled"><a id="video" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductVideos"> Tutorials</a></li>
                                 <li class="nav-item disabled"><a id="FAQ" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductFAQ"> FAQ</a></li>
-                                <li class="nav-item disabled"><a id="spec" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadProductSpecifiction"> Spec</a></li>
-                                <li class="nav-item disabled"><a id="howto" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductDocuments"> How To</a></li>
+                                @*<li class="nav-item disabled"><a id="spec" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadProductSpecifiction"> Spec</a></li>
+                                <li class="nav-item disabled"><a id="howto" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductDocuments"> How To</a></li>*@
                             </ul>
                         }
                         else
@@ -55,10 +55,10 @@
                             <ul class="nav nav-tabs tab" id="custom-tabs-one-tab" role="tablist">
                                 <li class="nav-item " id=""><a class="nav-link active" data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadProductBasicDetails">Basic Details</a></li>
                                 <li class="nav-item "><a id="" class="nav-link" data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadProductUserGuide">User Guide</a></li>
-                                <li class="nav-item disabled"><a id="" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductVideos"> Videos</a></li>
+                                <li class="nav-item disabled"><a id="" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductVideos"> Tutorials</a></li>
                                 <li class="nav-item disabled"><a id="" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductFAQ"> FAQ</a></li>
-                                <li class="nav-item disabled"><a id="" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadProductSpecifiction"> Spec</a></li>
-                                <li class="nav-item disabled"><a id="" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductDocuments"> How To</a></li>
+                                @*<li class="nav-item disabled"><a id="" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadProductSpecifiction"> Spec</a></li>
+                                <li class="nav-item disabled"><a id="" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductDocuments"> How To</a></li>*@
                             </ul>
                         }
 
@@ -119,11 +119,13 @@
                         $("#Id").val(data);
                         _showSuccessMessage("Data Saved Successfully");
                         setTimeout(function () { $('#userguide').trigger('click'); }, 1500);
+                       
                         $('#userguide').removeClass("disabled");
                         $("#video").removeClass("disabled");
                         $("#FAQ").removeClass("disabled");
                         $("#spec").removeClass("disabled");
                         $("#howto").removeClass("disabled");
+                         
                         //Cancel();
                         //$("#frmDiv").html(data);
                     }

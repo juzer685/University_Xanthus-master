@@ -21,12 +21,12 @@
         <div class="row mb-2" style="        margin-top: 10px
 ">
             <div class="col-sm-12">
-                <h1 class="m-0 text-dark">Product</h1>
+                <h1 class="m-0 text-dark">Course</h1>
             </div><!-- /.col -->
             <div class="col-sm-12">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="~/Home/index">Administration</a></li>
-                    <li class="breadcrumb-item active">Product</li>
+                    <li class="breadcrumb-item active">Course</li>
                 </ol>
             </div><!-- /.col -->
         </div><!-- /.row -->
@@ -42,7 +42,7 @@
                     <div class="card-header">
                         <h3 class="card-title">
                             @*<button type="button" class="btn btn-primary btn-sm b-w-80" onclick="AddProduct()">*@
-                            <button type="button" class="btn btn-primary btn-sm b-w-80" onclick="AddProduct()">
+                            <button type="button" class="btn btn-primary btn-sm b-w-80 tested" onclick="AddProduct()">
                                 Add
                             </button>
                         </h3>
@@ -53,7 +53,7 @@
                             <thead>
                                 <tr>
                                     <th>Category Name</th>
-                                    <th>Product Title</th>
+                                    <th>Course Title</th>
                                     <th>Rate</th>
                                     <th>Action</th>
 
@@ -68,7 +68,7 @@
                                     <td class="dollar">@item.sumvideorate</td>
                                     <td>
                                         @*<input name="AssocitedID" id="BasicDeatilsAssocitedID" type="hidden" />*@
-                                        <i class="fas fa-edit pointer" onclick="AddProduct('@item.Id')"></i>
+                                        <i class="fas fa-edit pointer" onclick="AddProducts('@item.Id')"></i>
                                         <i class="fas fa-trash pointer" onclick="DeleteProduct('@item.Id')"></i>
                                         @*<input type="button" class="btn-primary-ips" value="Edit" onclick="AddProduct('@item.Id')" />
                                          <input type="button" class="btn-primary-ips" value="Delete" onclick="DeleteProduct('@item.Id')" />*@
@@ -112,8 +112,23 @@
         $('#ProductTable').DataTable();
         $('#BasicDeatilsAssocitedID').val($("#ddlusrlst").val());
     });
-
+    
     function AddProduct(Id) {
+        
+        // $(".imagereqbd").attr("required", true);
+        var form = $("#AddEditForm");
+     
+        $("#ProductId").val(Id);
+       
+        form.submit();
+        //alert();
+        //$('#imagereqbd').attr('required', 'required');
+        //$("#imagereqbd").attr("required", false);
+       // $('.imagereqbd').attr("disabled", 'required');
+        // $('.imagereqbd').prop('required',true);
+    }
+
+    function AddProducts(Id) {
         
         var form = $("#AddEditForm");
      
@@ -137,4 +152,7 @@
             });
         });
     }
+
+
+   
 </script>

@@ -54,12 +54,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Product Information</h1>
+                <h1 class="m-0 text-dark">Course Information</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item" aria-current="page"><a href="/Home/index">Home</a></li>
-                    <li class="breadcrumb-item" aria-current="page"><a href="/Home/Category">Products</a></li>
+                    <li class="breadcrumb-item" aria-current="page"><a href="/Home/Category">Courses</a></li>
                     @if (!string.IsNullOrWhiteSpace(ViewBag.CategoryName))
                     {
                         <li class="breadcrumb-item active" aria-current="page">@System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(@ViewBag.CategoryName?.ToLower() ?? "")</li>
@@ -82,7 +82,7 @@
                         </div>*@
                         <div class="product-info">
                             <div class="product-title">
-                                <p class="category"><a href="/Home/Category">Products</a></p>
+                                <p class="category"><a href="/Home/Category">Courses</a></p>
                                 <p class="sub-category"> @ViewBag.CategoryName </p>
                             </div>
                             <div>
@@ -104,9 +104,9 @@
                                                             </a>
                                                         </div>
                                                         <div><a href="#" style="cursor: pointer;" onclick='goToMenu("user-guide","@UrlSecurityManager.Encrypt(product.Id.ToString(),System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])")'>User Guide</a></div>
-                                                        <div><a href="#" style="cursor: pointer;" onclick='goToMenu("videos","@UrlSecurityManager.Encrypt(product.Id.ToString(),System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])")'>Videos</a></div>
+                                                        <div><a href="#" style="cursor: pointer;" onclick='goToMenu("videos","@UrlSecurityManager.Encrypt(product.Id.ToString(),System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])")'>Tutorials</a></div>
                                                         <div><a href="#" style="cursor: pointer;" onclick='goToMenu("faq","@UrlSecurityManager.Encrypt(product.Id.ToString(),System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])")'>FAQ</a></div>
-                                                        <div><a href="#" style="cursor: pointer;" onclick='goToMenu("specs","@UrlSecurityManager.Encrypt(product.Id.ToString(),System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])")'>Specs</a></div>
+                                                        @*<div><a href="#" style="cursor: pointer;" onclick='goToMenu("specs","@UrlSecurityManager.Encrypt(product.Id.ToString(),System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])")'>Specs</a></div>*@
                                                     </div>
                                                 </div>
                                             </div>

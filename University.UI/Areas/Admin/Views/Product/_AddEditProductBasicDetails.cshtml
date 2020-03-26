@@ -27,13 +27,13 @@
             </div>
 
             <div class="form-group">
-                <label for="Title">Product Title</label>
+                <label for="Title">Course Title</label>
                 @Html.TextBoxFor(m => m.Title, new { @class = "form-control txtOnly", @required = "required", @pattern = "^[^<>%$*@!#]*$", @title = "Special characters are not allowed.", @maxlength = "50" })
                 @Html.ValidationMessageFor(x => x.Title, null, new { @class = "", style = "color:red;" })
                 @*@Html.ValidationMessageFor(m => m.Title)*@
             </div>
             <div class="form-group">
-                <label for="Description">Product Description</label>
+                <label for="Description">Course Description</label>
                 @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @required = "required", @maxlength = "100" })
                 @Html.ValidationMessageFor(x => x.Description, null, new { @class = "", style = "color:red;" })
                 @*@Html.ValidationMessageFor(m => m.Description)*@
@@ -46,7 +46,8 @@
                 <label class="info-text" for="ImageUrl" style="color:red;">Image <span class="ShortText">(Please ensure featured image size is Less than 2MB)</span></label>
                 <div class="input-group">
                     <div class="custom-file">
-                        <input type="file" name="file" class="custom-file-input pointer" id="file" required accept="image/jpeg" onchange="readURL(this);">
+
+                        <input type="file" name="file" class="custom-file-input pointer imagereqbd"  id="file"  accept="image/jpeg" onchange="readURL(this);">
                         @if (Model.ImageURL != "")
                         {
 
@@ -118,4 +119,5 @@
             reader.readAsDataURL(input.files[0]);
         }
     }
+    
 </script>

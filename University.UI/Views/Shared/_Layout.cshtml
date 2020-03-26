@@ -423,7 +423,7 @@
                                 <a href="~/Home/Category" class="nav-link">
                                     <i class="nav-icon fas fa-list-ul"></i>
                                     <p>
-                                        Products
+                                        Course
                                     </p>
                                 </a>
                                 @*</li>*@
@@ -462,7 +462,7 @@
                                                         <li class="nav-item">
                                                             <a class="nav-link" href="/Products/ProductListByCategory?id=@category.SubCategoryId">
                                                                 @*<i class="far fa-circle nav-icon"></i>*@
-                                                                <p>Product List</p>
+                                                                <p>Course List</p>
                                                             </a>
                                                         </li>
                                                         @{
@@ -509,11 +509,11 @@
                                 <a href="~/Video/video" class="nav-link">
                                     <i class="nav-icon fas fa-video"></i>
                                     <p>
-                                        Video
+                                        Tutorial
                                     </p>
                                 </a>
                             </li>
-                            <li class="nav-item has-treeview">
+                            @*<li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
                                     <i class="nav-icon fas fa-book-reader"></i>
                                     <p>
@@ -535,7 +535,7 @@
                                         </a>
                                     </li>
                                 </ul>
-                            </li>
+                            </li>*@
                         }
                         @if (Convert.ToString(Session["RoleID"]) == "4")
                         {
@@ -566,7 +566,7 @@
                                     <li class="nav-item">
                                         <a href="~/Admin/Product" class="nav-link">
                                             <i class="fab fa-product-hunt nav-icon"></i>
-                                            <p>Product</p>
+                                            <p>Course</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
@@ -592,7 +592,7 @@
                                     <li class="nav-item">
                                         <a href="~/Admin/ProductFeedback" class="nav-link">
                                             <i class="far fa-comments nav-icon"></i>
-                                            <p>Product Feedback</p>
+                                            <p>Course Feedback</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
@@ -604,12 +604,12 @@
                                 </ul>
                             </li>
                         }
-                        @if (Convert.ToString(Session["RoleID"]) == "5")
+                        @*@if (Convert.ToString(Session["RoleID"]) == "5")
                         {
 
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
-                                    @*<a class="nav-link">*@
+                                    <a class="nav-link">
                                     <i class="nav-icon fas fa-th"></i>
                                     <p>
                                         Events
@@ -625,7 +625,7 @@
                                     </p>
                                 </a>
                             </li>
-                        }
+                        }*@
                         <li class="nav-item">
                             <a class="nav-link" href="/Login/LogOut" onclick="preventBack()">
                                 <i class="nav-icon fas fa-th"></i>
