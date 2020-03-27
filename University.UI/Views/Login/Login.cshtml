@@ -66,7 +66,7 @@
                         <div class="input-group mb-3">
                             <input name="Password" id="Password" type="password" class="form-control"  placeholder="Please enter password" required oninvalid="this.setCustomValidity('Please Enter Password')" oninput="this.setCustomValidity('')">
                             <span>
-                                <img src="~/Images/eye-16.png" alt="eye" onclick="showHide()" id="eye" style="margin-top: 10px;" />
+                                <img src="~/Images/icons8-eye-50.png" alt="eye" onclick="showHide()" id="eye" style="margin-top: 5px;width: 25px;margin-left: -30px;position: absolute;" />
                             </span>
                             <div class="input-group-append">
                                 <div class="input-group-text">
@@ -158,28 +158,30 @@
                 });
 
                function showHide() {
-                if (pwd.type == 'text') {
-                    pwd.type = 'password';
-                }
-                else {
-                    pwd.type = 'text';
-                }
+                   if (Password.type == 'text')
+                   {
+                        Password.type = 'password';
+                   }
+                   else
+                   {
+                        Password.type = 'text';
+                   }
             }
-                function show()
-                {
-                    var a = document.getElementById("Password");
-                    var b = document.getElementById("EYE");
-                    if (a.type == "password")
-                    {
-                        a.type = "text";
-                        b.src = "https://i.stack.imgur.com/waw4z.png";
-                    }
-                    else
-                    {
-                        a.type = "password";
-                        b.src = "https://i.stack.imgur.com/Oyk1g.png";
-                    }
-                }
+                //function show()
+                //{
+                //    var a = document.getElementById("Password");
+                //    var b = document.getElementById("EYE");
+                //    if (a.type == "password")
+                //    {
+                //        a.type = "text";
+                //        b.src = "https://i.stack.imgur.com/waw4z.png";
+                //    }
+                //    else
+                //    {
+                //        a.type = "password";
+                //        b.src = "https://i.stack.imgur.com/Oyk1g.png";
+                //    }
+                //}
 
                 
                 

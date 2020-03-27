@@ -158,9 +158,9 @@
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
                 </li>
-                <li class="nav-item d-none d-sm-inline-block">
+                @*<li class="nav-item d-none d-sm-inline-block">
                     <a href="~/Home/index" class="nav-link">Home</a>
-                </li>
+                </li>*@
 
             </ul>
 
@@ -395,7 +395,16 @@
                 </p>
             </a>
         </li>*@
-                       
+                        <li class="nav-item">
+                            <a href="~/Home/index" class="nav-link">
+                                <i class="nav-icon fas fa-home"></i>
+                                
+                                <p>
+                                    Home
+                                </p>
+                            </a>
+                        </li>
+
                         @if (Convert.ToString(Session["RoleID"]) == "4")
                         {
                             <li class="nav-item pointer">
@@ -408,7 +417,7 @@
                             </li>
 
                         }
-                       @if (Convert.ToString(Session["RoleID"]) == "5")
+                        @if (Convert.ToString(Session["RoleID"]) == "5")
                         {
                             <li class="nav-item pointer">
                                 <a class="nav-link" href="~/PaymentGateway/SaveCardDetails">
@@ -514,28 +523,28 @@
                                 </a>
                             </li>
                             @*<li class="nav-item has-treeview">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-book-reader"></i>
-                                    <p>
-                                        Training
-                                        <i class="right fas fa-angle-left"></i>
-                                    </p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="far fa-map nav-icon"></i>
-                                            <p>Google Maps</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="#" class="nav-link">
-                                            <i class="far fa-map nav-icon"></i>
-                                            <p>Open Street Map</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>*@
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-book-reader"></i>
+                    <p>
+                        Training
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="far fa-map nav-icon"></i>
+                            <p>Google Maps</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="far fa-map nav-icon"></i>
+                            <p>Open Street Map</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>*@
                         }
                         @if (Convert.ToString(Session["RoleID"]) == "4")
                         {
@@ -605,30 +614,32 @@
                             </li>
                         }
                         @*@if (Convert.ToString(Session["RoleID"]) == "5")
-                        {
+        {
 
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <a class="nav-link">
-                                    <i class="nav-icon fas fa-th"></i>
-                                    <p>
-                                        Events
-                                    </p>
-                                </a>
-                            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <a class="nav-link">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>
+                        Events
+                    </p>
+                </a>
+            </li>
 
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-th"></i>
-                                    <p>
-                                        Feedback
-                                    </p>
-                                </a>
-                            </li>
-                        }*@
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>
+                        Feedback
+                    </p>
+                </a>
+            </li>
+        }*@
                         <li class="nav-item">
                             <a class="nav-link" href="/Login/LogOut" onclick="preventBack()">
-                                <i class="nav-icon fas fa-th"></i>
+
+                                <i class="nav-icon fas fa-sign-out-alt"></i>
+                                @*<i class="nav-icon fas fa-th"></i>*@
                                 <p>
                                     LOGOUT
                                 </p>

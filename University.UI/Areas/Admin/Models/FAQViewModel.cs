@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -8,7 +9,9 @@ namespace University.UI.Areas.Admin.Models
     public class FAQViewModel
     {
         public decimal Id { get; set; }
+        [StringLength(100, ErrorMessage = "Do not enter more than 100 characters")]
         public string Question { get; set; }
+        [StringLength(150, ErrorMessage = "Do not enter more than 150 characters")]
         public string Answer { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }

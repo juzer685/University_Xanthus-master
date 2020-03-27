@@ -20,8 +20,36 @@ namespace University.Repository
                 int AdminID = Convert.ToInt32(HttpContext.Current.Session["AdminLoginID"]);
                 if (AdminID != 0)
                 {
+                    var res = (from hs in context.HomeSlider.Where(x=>x.IsDeleted == false)
+                               join p in context.Product.Where(x=>x.IsDeleted==false)
+                               on hs.ProductId equals p.Id
+                               select new 
+                               {
+                                    hs.Id,
+                                    hs.ProductId,
+                                   hs.TextDescription,
+                                   hs.ImageURL,
+                                    hs.ImageALT,
+                                    p.Title,
+                               }).ToList();
+                    List<HomeSlider> homeSliders = new List<HomeSlider>();
+                    foreach (var Homeslider in res)
+                    {
+                        homeSliders.Add(new HomeSlider
+                        {
+                            Id=Homeslider.Id,
+                            ProductId=Homeslider.ProductId,
+                            TextDescription=Homeslider.TextDescription,
+                            ImageURL=Homeslider.ImageURL,
+                            ImageALT=Homeslider.ImageALT,
+                            Title=Homeslider.Title
+                            
+                            
+                        });
+                    }
 
-                    return context.HomeSlider.Include("Product").Where(y => y.IsDeleted != true).OrderByDescending(y => y.CreatedDate).ToList();
+                    return homeSliders;
+                    //return context.HomeSlider.Include("Product").Where(y => y.IsDeleted != true).OrderByDescending(y => y.CreatedDate).ToList();
                 }
                 else
                 {

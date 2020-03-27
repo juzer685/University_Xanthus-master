@@ -33,6 +33,7 @@ namespace IPSU.Web.Areas.Admin.Controllers
             List<ProductVideoViewModel> productVideoViewModel = new List<ProductVideoViewModel>();
 
             var res = _productVideoService.GetUserVideosList().ToList();
+
             if (!String.IsNullOrEmpty(SearchString))
             {
                 res = res.Where(x => x.Title.ToLower().Contains(SearchString.ToLower())).ToList();

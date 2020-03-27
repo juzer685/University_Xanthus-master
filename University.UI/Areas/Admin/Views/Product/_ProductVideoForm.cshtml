@@ -7,15 +7,17 @@
             @Html.HiddenFor(y => y.ProductId)
             @Html.Hidden("ProductVideoId", Model.Id, new { @Value = Model.Id })
             @Html.TextBoxFor(m => m.Title, new { @class = "form-control txtOnly", @required = "required", @pattern = "^[^<>%$*@!#]*$", @title = "Special characters are not allowed." })
-            @Html.ValidationMessageFor(m => m.Title)
+            @Html.ValidationMessageFor(x => x.Title, null, new { @class = "", style = "color:red;" })
+            @*@Html.ValidationMessageFor(m => m.Title)*@
         </div>
         <div class="col input-icon ">
             @Html.TextBoxFor(m => m.VideoRate, new { @class = "form-control", @required = "required"})
             <i>$</i>
         </div>
         <div class="col">
-            @Html.TextAreaFor(m => m.Decription, new { @class = "form-control", rows = "1", @required = "required" ,})
-            @Html.ValidationMessageFor(m => m.Decription)
+            @Html.TextAreaFor(m => m.Decription, new { @class = "form-control", rows = "1", @required = "required", })
+            @Html.ValidationMessageFor(x => x.Decription, null, new { @class = "", style = "color:red;" })
+            @*@Html.ValidationMessageFor(m => m.Decription)*@
         </div>
         @if (string.IsNullOrWhiteSpace(Model.VideoURL))
         {

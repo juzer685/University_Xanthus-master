@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Configuration;
 using University.Data.CustomEntities;
+using System.ComponentModel.DataAnnotations;
 
 namespace University.UI.Areas.Admin.Models
 {
@@ -40,10 +41,12 @@ namespace University.UI.Areas.Admin.Models
         }
         public Decimal Id { get; set; }
         public decimal sumvideorate { get; set; }
+        [StringLength(50, ErrorMessage = "Do not enter more than 50 characters")]
         public string Title { get; set; }
         public string ImageURL { get; set; }
         public string subcat { get; set; }
         public string ImageALT { get; set; }
+        [StringLength(100, ErrorMessage = "Do not enter more than 100 characters")]
         public string Description { get; set; }
         public string VideosIDs { get; set; }
         public Nullable<Decimal> SubCategoryId { get; set; }

@@ -36,10 +36,10 @@ namespace University.UI.Controllers
         }
 
         //[SsoAuth]
-        public ActionResult Index()
+        public ActionResult Index(string SearchString)
          {
-           // SetIdentityDetails();
-
+            // SetIdentityDetails();
+            var res1=new List<ProductEntity>();
             var res = _sliderService.GetHomeSliderList().ToList();
             var viewModel = AutoMapper.Mapper.Map<List<HomeSlider>, List<HomeSliderViewModel>>(res);
 
@@ -54,8 +54,49 @@ namespace University.UI.Controllers
             ListProductFAQ.Add(PF);
             ListProductFAQ.Add(PF);
             ListProductFAQ.Add(PF);
+
+
             List<ProductEntity> ListProduct = new List<ProductEntity>();
-            ListProduct = _sliderService.ListproductbyUserId().ToList();
+            // List<ProductEntity> ListProductfilter = new List<ProductEntity>();
+            
+             
+            if(SearchString != null)
+            {
+               
+                res1 = _sliderService.ListproductbyUserId().ToList();
+            }
+            else
+            {
+                ListProduct = _sliderService.ListproductbyUserId().ToList();
+            }
+            if (!String.IsNullOrEmpty(SearchString))
+            {
+                res1 = res1.Where(x => x.Title.ToLower().Contains(SearchString.ToLower())).ToList();
+            }
+            if (!String.IsNullOrEmpty(SearchString))
+            {
+                ListProduct = res1;
+
+                //foreach (var pvideo in res1)
+                //{
+                //    ListProduct.Add(new ProductEntity
+                //    {
+                //        Id = pvideo.Id,
+                //        Title = pvideo.Title,
+                //        ImageURL = pvideo.ImageURL,
+                //        SubCategoryId = pvideo.SubCategoryId,
+                //        VideoRateSum = pvideo.VideoRateSum,
+
+
+                //    });
+                //}
+
+            }
+            if (!String.IsNullOrEmpty(SearchString))
+            {
+                ListProduct = ListProduct.Where(x => x.Title.ToLower().Contains(SearchString.ToLower())).ToList();
+            }
+           
             //get the videolist 
             var ListProductVideo = _sliderService.GetUserVideosList().ToList();
             var ListBuyProductVideoList = _sliderService.GetBuyProductList().ToList();
@@ -160,27 +201,39 @@ namespace University.UI.Controllers
         //{
         //    return View(homePageViewModel);
         //}
-        public ActionResult Search(string SearchString)
-        {
-            List<ProductEntity> listproductEntity = new List<ProductEntity>();
-            listproductEntity = _productService.GetProducts().Where(x => x.ProductUserGuide != null && x.ProductVideos != null).ToList();
-            listproductEntity = listproductEntity.Where(x => x.ProductUserGuide.Title.ToLower().Contains(SearchString.ToLower()) || x.ProductSpec.Description.ToLower().Contains(SearchString.ToLower()) || x.Description.ToLower().Contains(SearchString.ToLower()) || x.Title.ToLower().Contains(SearchString.ToLower())).ToList();
-            ViewBag.SearchString = SearchString;
-            return View(listproductEntity);
-        }
+        //public ActionResult Search(string SearchString)
+        //{
+        //    List<ProductEntity> listproductEntity = new List<ProductEntity>();
+        //    //listproductEntity = _productService.GetProducts().Where(x => x.ProductUserGuide != null && x.ProductVideos != null).ToList();
+        //    listproductEntity = _productService.GetProducts().ToList();
+        //    if (!String.IsNullOrEmpty(SearchString))
+        //    {
+        //        listproductEntity = listproductEntity.Where(x => x.Title.ToLower().Contains(SearchString.ToLower())).ToList();
+        //    }
+        //    if (!String.IsNullOrEmpty(SearchString))
+        //    {
+        //        listproductEntity = listproductEntity.Where(x => x.Title.ToLower().Contains(SearchString.ToLower())).ToList();
+        //    }
+
+        //    HomePageViewModel homePageViewModel = new HomePageViewModel();
+        //    homePageViewModel.Products = listproductEntity;
+        //    // listproductEntity = listproductEntity.Where(x => x.ProductUserGuide.Title.ToLower().Contains(SearchString.ToLower()) || x.ProductSpec.Description.ToLower().Contains(SearchString.ToLower()) || x.Description.ToLower().Contains(SearchString.ToLower()) || x.Title.ToLower().Contains(SearchString.ToLower())).ToList();
+        //    // ViewBag.SearchString = SearchString;
+        //    return RedirectToAction("Index", homePageViewModel);
+        //}
         //public ActionResult Profile()
         //{
         //    return View();
         //}
 
-        public ActionResult SmartSearch(string freeText)
-        {
-            ViewBag.FreeText = freeText;
-            var res = _categoryMasterService.SmartSearch(freeText);
-            return View(res);
-        }
+        //public ActionResult SmartSearch(string freeText)
+        //{
+        //    ViewBag.FreeText = freeText;
+        //    var res = _categoryMasterService.SmartSearch(freeText);
+        //    return View(res);
+        //}
 
-        [HttpPost]
+        //[HttpPost]
         public JsonResult UserSessionID (int ID)
         {
             Session["UserSessionIDs"] = ID;

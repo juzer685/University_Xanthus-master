@@ -8,7 +8,7 @@
             @Html.HiddenFor(y => y.ID)
 
 
-            @Html.DropDownListFor(x => x.CategoryId, new SelectList(Model.SubCategoryMasterlst, "Id", "Name"), "Select Category", new { @required = "required", @class = "form-control" })
+            @Html.DropDownListFor(x => x.CategoryId, new SelectList(Model.SubCategoryMasterlst, "Id", "Name"), new { @required = "required", @class = "form-control" })
             @Html.ValidationMessageFor(x => x.CategoryId, null, new { @class = "", style = "color:red;" })
            
             @*<div class="errorTxtt"></div>*@
@@ -31,7 +31,7 @@
     <div class="col-md-6">
         <div class="form-group">
             <label>Choose User</label>
-            @Html.DropDownListFor(x => x.UserID, new SelectList(Model.Logintbllst, "ID", "FirstLastName"), "Select User", new {@required="required", @class = "form-control" })
+            @Html.DropDownListFor(x => x.UserID, new SelectList(Model.Logintbllst, "ID", "FirstLastName"),new {@required="required", @class = "form-control" })
             @Html.ValidationMessageFor(x => x.UserID, null, new { @class = "", style = "color:red;" })
              
             @*<div class="errorTxtt"></div>*@

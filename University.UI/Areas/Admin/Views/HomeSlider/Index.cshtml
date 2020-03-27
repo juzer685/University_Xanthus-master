@@ -46,7 +46,7 @@
                         <table id="HomeSliderTable" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th class="text-center">Text</th>
+                                    @*<th class="text-center">Text</th>*@
                                     <th class="text-center">Description</th>
                                     <th class="text-center">Action</th>
                                 </tr>
@@ -55,7 +55,7 @@
                                 @foreach (var item in Model)
                                 {
                                         <tr>
-                                            <td>@item.Product.Title</td>
+                                            @*<td>@item.Product.Title</td>*@
                                             <td>@item.TextDescription</td>
                                             <td class="text-center">
                                                 <i class="fas fa-edit pointer" onclick="AddHomeSlider('@item.Id')"></i>

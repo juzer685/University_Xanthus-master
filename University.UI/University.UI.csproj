@@ -414,6 +414,7 @@
     <Content Include="Images\feedback-icon.png" />
     <Content Include="Images\green-star.png" />
     <Content Include="Images\headseat.png" />
+    <Content Include="Images\icons8-eye-50.png" />
     <Content Include="Images\ips-sample-image.jpg" />
     <Content Include="Images\logo.jpg" />
     <Content Include="Images\logout-icon.png" />
@@ -2086,6 +2087,7 @@
     <Content Include="Scripts\custom.js" />
     <Content Include="Areas\Admin\Views\SubCategory\CategoryUserMappingList.cshtml" />
     <Content Include="Areas\Admin\Views\SubCategory\AddEditCategoryMapp.cshtml" />
+    <Content Include="Images\developer4-21-512.webp" />
     <None Include="Properties\PublishProfiles\FolderProfile10.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile11.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile12.pubxml" />

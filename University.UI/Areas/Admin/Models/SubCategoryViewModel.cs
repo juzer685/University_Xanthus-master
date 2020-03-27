@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Configuration;
+using System.ComponentModel.DataAnnotations;
 
 namespace University.UI.Areas.Admin.Models
 {
@@ -11,7 +12,8 @@ namespace University.UI.Areas.Admin.Models
     {
         string SubCategoryImagePath = WebConfigurationManager.AppSettings["SubCategoryImagePath"];
         public Decimal Id { get; set; }
-       // public Decimal CategoryId { get; set; }
+        // public Decimal CategoryId { get; set; }
+        [StringLength(50, ErrorMessage = "Do not enter more than 30 characters")] 
         public string Name { get; set; }
         public string ImageURL { get; set; }
         public string ImageALT { get; set; }

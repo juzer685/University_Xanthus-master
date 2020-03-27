@@ -12,12 +12,14 @@
     <div class="form-group">
         <label for="email">Question</label>
         @Html.TextBoxFor(m => m.Question, new { @class = "form-control", @required = "required" })
-        @Html.ValidationMessageFor(m => m.Question)
+        @Html.ValidationMessageFor(x => x.Question, null, new { @class = "", style = "color:red;" })
+        @*@Html.ValidationMessageFor(m => m.Question)*@
     </div>
     <div class="form-group">
         <label for="ImageUrl">Answer</label>
         @Html.TextAreaFor(m => m.Answer, new { @class = "form-control", @required = "required" })
-        @Html.ValidationMessageFor(m => m.Answer)
+        @Html.ValidationMessageFor(x => x.Answer, null, new { @class = "", style = "color:red;" })
+        @*@Html.ValidationMessageFor(m => m.Answer)*@
     </div>
     @*<div class="form-group">
             <label for="ImageUrl">Slider Image</label>

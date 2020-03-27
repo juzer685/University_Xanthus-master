@@ -47,12 +47,14 @@
                                         <label for="email">Title</label>
                                         <input name="AssocitedID" id="HomebannerAssocitedID" type="hidden" />
                                         @Html.TextBoxFor(m => m.Title, new { @class = "form-control txtOnly", @required = "required", @pattern = "^[^<>%$*@!#]*$", @title = "Special characters are not allowed." })
-                                        @Html.ValidationMessageFor(m => m.Title)
+                                        @Html.ValidationMessageFor(x => x.Title, null, new { @class = "", style = "color:red;" })
+                                        @*@Html.ValidationMessageFor(m => m.Title)*@
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Description</label>
                                         @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(m => m.Description)
+                                        @Html.ValidationMessageFor(x => x.Description, null, new { @class = "", style = "color:red;" })
+                                        @*@Html.ValidationMessageFor(m => m.Description)*@
                                     </div>
                                     <div class="form-group">
                                         <label for="ImageUrl">Image alt (SEO)</label>
