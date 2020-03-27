@@ -39,7 +39,7 @@
 
             <form action="/Admin/User/Register" method="post" id="UserRegistrationForm">
                 @Html.HiddenFor(x => x.ID)
-                @Html.ValidationMessageFor(x => x.FirstName, null, new { @class = "", style = "color:red;" })
+
                 <div class="input-group mb-3">
                     @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control txtOnly", placeholder = "First Name" })
                     @*<input type="text" class="form-control" name="FirstName" placeholder="First Name">*@
@@ -49,7 +49,8 @@
                         </div>
                     </div>
                 </div>
-                @Html.ValidationMessageFor(x => x.LastName, null, new { @class = "", style = "color:red;" })
+                @Html.ValidationMessageFor(x => x.FirstName, null, new { @class = "", style = "color:red;" })
+
                 <div class="input-group mb-3">
                     @Html.TextBoxFor(x => x.LastName, new { @class = "form-control txtOnly", placeholder = "Last Name" })
                     @*<input type="text" class="form-control" name="LastName" placeholder="LastName">*@
@@ -59,7 +60,8 @@
                         </div>
                     </div>
                 </div>
-                @Html.ValidationMessageFor(x => x.MobileNo, null, new { @class = "", style = "color:red;" })
+                @Html.ValidationMessageFor(x => x.LastName, null, new { @class = "", style = "color:red;" })
+
                 <div class="input-group mb-3">
                     @Html.TextBoxFor(x => x.MobileNo, new { @class = "form-control onlynumbers", placeholder = "Mobile Number" })
                     @*<input type="text" class="form-control" name="MobileNo" placeholder="Mobile Number">*@
@@ -69,7 +71,8 @@
                         </div>
                     </div>
                 </div>
-                @Html.ValidationMessageFor(x => x.Email, null, new { @class = "", style = "color:red;" })
+                @Html.ValidationMessageFor(x => x.MobileNo, null, new { @class = "", style = "color:red;" })
+
                 <div class="input-group mb-3">
                     @if (Model.ID != 0)
                     {
@@ -88,13 +91,14 @@
                         </div>
                     </div>
                 </div>
-                @Html.ValidationMessageFor(x => x.Password, null, new { @class = "", style = "color:red;" })
+                @Html.ValidationMessageFor(x => x.Email, null, new { @class = "", style = "color:red;" })
+
 
                 <div class="input-group mb-3">
                     @if (Model.ID != 0)
                     {
                         @Html.PasswordFor(x => x.Password, new { @class = "form-control Password", placeholder = "Password", value = Model.Password, Model.ReadOnly })
-                        
+
                     }
                     else
                     {
@@ -108,7 +112,8 @@
                         </div>
                     </div>
                 </div>
-                @Html.ValidationMessageFor(x => x.ConfirmPassword, null, new { @class = "", style = "color:red;" })
+                @Html.ValidationMessageFor(x => x.Password, null, new { @class = "", style = "color:red;" })
+
                 <div class="input-group mb-3">
                     @if (Model.ID != 0)
                     {
@@ -124,24 +129,25 @@
                         </div>
                     </div>
                 </div>
+                @Html.ValidationMessageFor(x => x.ConfirmPassword, null, new { @class = "", style = "color:red;" })
                 @*<div class="input-group mb-3">
-                        <input type="password" class="form-control" name="ConfirmPassword" placeholder="Retype password">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
-                            </div>
-                        </div>
-                    </div>*@
+            <input type="password" class="form-control" name="ConfirmPassword" placeholder="Retype password">
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-lock"></span>
+                </div>
+            </div>
+        </div>*@
                 @*@Html.ValidationMessageFor(x => x.CustomerId, null, new { @class = "", style = "color:red;" })
-                    <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="Customer">
-                        @Html.DropDownListFor(x => x.CustomerId, new SelectList(Model.CustomerList, "CustomerID", "CompanyName"), "Select Customer", new { @class = "form-control" })
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-user"></span>
-                            </div>
-                        </div>
-                    </div>*@
+        <div class="input-group mb-3">
+            <input type="email" class="form-control" placeholder="Customer">
+            @Html.DropDownListFor(x => x.CustomerId, new SelectList(Model.CustomerList, "CustomerID", "CompanyName"), "Select Customer", new { @class = "form-control" })
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                </div>
+            </div>
+        </div>*@
                 <div class="row">
                     <div class="col-8">
                         <div class="icheck-primary">

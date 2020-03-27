@@ -49,7 +49,6 @@
                             <thead>
                                 <tr>
                                     <th class="text-center">Email</th>
-                                    <th class="text-center">Role ID</th>
                                     <th class="text-center">First Name</th>
                                     <th class="text-center">Last Name</th>
                                     <th class="text-center">Action</th>
@@ -64,7 +63,6 @@
                                         @if (4 == Convert.ToInt32(Session["AdminLoginID"]))
                                         {
                                             <td class="text-center">@item.UserName</td>
-                                            <td class="text-center">@item.RoleID</td>
                                             <td class="text-center">@item.FirstName</td>
                                             <td class="text-center">@item.LastName</td>
                                             <td class="text-center">

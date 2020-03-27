@@ -45,21 +45,21 @@
             <div class="form-group">
                 <label class="info-text" for="ImageUrl" style="color:red;">Image <span class="ShortText">(Please ensure featured image size is Less than 2MB)</span></label>
                 <div class="input-group">
-                    <div class="custom-file">
+                <div class="custom-file">
+                    <input type="file" id="file" name="file" class="custom-file-input pointer" required accept="image/jpeg" onchange="readURL(this);">
+                    @*<input type="file" name="file" class="custom-file-input pointer " id="file" accept="image/jpeg" onchange="readURL(this);">*@
+                    @if (Model.ImageURL != "")
+                    {
 
-                        <input type="file" name="file" class="custom-file-input pointer imagereqbd"  id="file"  accept="image/jpeg" onchange="readURL(this);">
-                        @if (Model.ImageURL != "")
-                        {
+                        <label class="custom-file-label" for="exampleInputFile">@Model.ImageURL</label>
+                    }
+                    else
+                    {
+                        <label class="custom-file-label" for="exampleInputFile">Select Image</label>
+                    }
 
-                            <label class="custom-file-label" for="exampleInputFile">@Model.ImageURL</label> 
-                        }
-                        else
-                        {
-                            <label class="custom-file-label" for="exampleInputFile">Select Image</label>
-                        }
-                        
-                    </div>
                 </div>
+            </div>
                 @Html.ValidationMessageFor(m => m.ImageURL)
                 <img id="image-preview" src=@Model.CheckImage alt="" class="imgStd" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" />
             </div>
