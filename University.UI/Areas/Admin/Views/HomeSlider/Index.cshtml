@@ -35,7 +35,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">
-                            <button type="button" class="btn btn-primary btn-sm b-w-80 homeslideradd" onclick="AddHomeSlider()">
+                            <button title="Add" type="button" class="btn btn-primary btn-sm b-w-80 homeslideradd" onclick="AddHomeSlider()">
                                 @*<button type="button" class="btn btn-primary btn-sm b-w-80 homeslideradd" >*@
                                     Add
                                 </button>
@@ -58,8 +58,8 @@
                                             @*<td>@item.Product.Title</td>*@
                                             <td>@item.TextDescription</td>
                                             <td class="text-center">
-                                                <i class="fas fa-edit pointer" onclick="AddHomeSlider('@item.Id')"></i>
-                                                <i class="fas fa-trash pointer" onclick="DeleteHomeSlider('@item.Id')"></i>
+                                                <i title="Edit" class="fas fa-edit pointer" onclick="AddHomeSlider('@item.Id')"></i>
+                                                <i title="Delete" class="fas fa-trash pointer" onclick="DeleteHomeSlider('@item.Id')"></i>
                                                 @*<input type="button" class="btn-primary-ips" value="Edit" onclick="AddHomeSlider('@item.Id')" />
                                                     <input type="button" class="btn-primary-ips" value="Delete" onclick="DeleteHomeSlider('@item.Id')" />*@
                                             </td>

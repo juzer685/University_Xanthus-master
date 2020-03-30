@@ -53,7 +53,7 @@ namespace IPSU.Web.Areas.Admin.Controllers
             {
                 //TempData["Success"] = "False";
                 //TempData["Message"] = "You are not a valid user...Please Register..!!";
-                ViewBag.Message = "You are not a valid user...Please Register..!!";
+                ViewBag.Message = "Invalid User name/Password..!!";
                 return View();
             }
             else if (Result.RoleID == 4)
@@ -80,7 +80,7 @@ namespace IPSU.Web.Areas.Admin.Controllers
             }
             else
             {
-                ViewBag.Message = "You are not a valid user...Please Register..!!";
+                ViewBag.Message = "Invalid User Name/Password..!!";
                 return View();
             }
             // return View();

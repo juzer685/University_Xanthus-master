@@ -388,9 +388,10 @@ namespace University.UI.Areas.Admin.Controllers
         }
 
 
-        public ActionResult DeleteProductVideo(string ProductVideoId)
+        public ActionResult DeleteProductVideo(int ProductVideoId)
         {
             var res = _productService.DeleteProductVideo(Convert.ToDecimal(ProductVideoId));
+           
             return Json(res, JsonRequestBehavior.AllowGet);
         }
         #endregion

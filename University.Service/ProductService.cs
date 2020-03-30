@@ -20,14 +20,15 @@ namespace University.Service
             _productRepository = productRepository;
 
         }
-        //public IEnumerable<Product> GetUserVideosList()
-        //{
-        //    return _productRepository.GetUserVideosList();
-        //}
+        public IEnumerable<ProductVideos> GetUserVideosLists()
+        {
+            return _productRepository.GetUserVideosLists();
+        }
         public IEnumerable<ProductVideos> GetUserVideosList()
         {
             return _productRepository.GetUserVideosList();
         }
+       
 
         public IEnumerable<ProductEntity> GetProductList()
         {
@@ -146,6 +147,9 @@ namespace University.Service
             return _productRepository.UpdateProductvideo(model);
         }
 
-        
+        public object GetUserVideosLists(string productVideoId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

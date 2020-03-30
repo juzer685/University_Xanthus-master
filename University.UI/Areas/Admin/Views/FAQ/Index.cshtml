@@ -35,7 +35,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">
-                            <button type="button" class="btn btn-primary btn-sm b-w-80" onclick="AddFAQ()">
+                            <button title="Add" type="button" class="btn btn-primary btn-sm b-w-80" onclick="AddFAQ()">
                             @*<button type="button" class="btn btn-primary btn-sm b-w-80 FAQadd" >*@
                             Add
                             </button>
@@ -59,8 +59,8 @@
                                             <td>@item.Question</td>
                                             <td>@item.Answer</td>
                                             <td class="text-center">
-                                                <i class="fas fa-edit pointer" onclick="AddFAQ('@item.Id')"></i>
-                                                <i class="fas fa-trash pointer" onclick="DeleteFAQ('@item.Id')"></i>
+                                                <i title="Edit" class="fas fa-edit pointer" onclick="AddFAQ('@item.Id')"></i>
+                                                <i title="Delete" class="fas fa-trash pointer" onclick="DeleteFAQ('@item.Id')"></i>
                                             </td>
                                         </tr>
                                      

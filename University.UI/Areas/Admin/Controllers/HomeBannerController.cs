@@ -52,7 +52,7 @@ namespace University.UI.Areas.Admin.Controllers
         }
         private string UploadFileOnServer(string location, HttpPostedFileBase file)
         {
-            string extension = Path.GetExtension(file.FileName);
+            string extension = Path.GetFileName(file.FileName);
             //string fileId = Guid.NewGuid().ToString().Replace("-", "");
             //string filename = fileId + extension;
             var path = Path.Combine(Server.MapPath(location), extension);

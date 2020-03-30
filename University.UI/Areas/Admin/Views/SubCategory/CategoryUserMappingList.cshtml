@@ -38,7 +38,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">
-                            <button type="button" class="btn btn-primary btn-sm b-w-80 subcategoryadd" data-toggle="modal" data-target="#AddCategoryMapping">
+                            <button title="Add" type="button" class="btn btn-primary btn-sm b-w-80 subcategoryadd" data-toggle="modal" data-target="#AddCategoryMapping">
                                 Add
                             </button>
                         </h3>
@@ -88,7 +88,7 @@
 
 
 <div class="modal fade subcatmodel" id="AddCategoryMapping">
-    <div class="modal-dialog">
+    <div class="modal-dialog" onclick="testclick()" id="test">
         <form action="/Admin/SubCategory/AddCategoryUserMapping" id="CategoryMapping" method="post">
             <div class="modal-content">
                 <div class="modal-header">
@@ -183,5 +183,9 @@
                 });
             });
     }
+    function testclick() {
+        document.getElementById("test").disabled = false;
+    }
+    
     
 </script>

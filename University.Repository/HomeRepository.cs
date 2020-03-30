@@ -407,7 +407,7 @@ namespace University.Repository
                             select new 
                             {
                                 g.Key, 
-                                videosSum = g.ToList().Sum(x => x.VideoRate),
+                                videosSum = g.ToList().Where(x=>x.IsDeleted==false).Sum(x => x.VideoRate),
                                 //productvideolist=g.ToList().Select(x=>x.ProductId)
                                 //productvideoslist=g.ToList().Where(x=>x.ProductId==)
                                

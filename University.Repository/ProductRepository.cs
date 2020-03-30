@@ -80,7 +80,7 @@ namespace University.Repository
                                p.Title,
                                subcatid = c.Id,
                                s.Name,
-                               VideoRateSum = p.ProductVideos.Sum(x => x.VideoRate)
+                               VideoRateSum = p.ProductVideos.Where(x=>x.IsDeleted == false).Sum(x => x.VideoRate)
                            }
                            ).ToList();
                 List<ProductVideos> productvideo = new List<ProductVideos>();
@@ -190,6 +190,8 @@ namespace University.Repository
                            join g in context.ProductUserGuide.Where(y => y.IsDeleted != true)
                            on p.Id equals g.ProductId into temp
                            from guide in temp.DefaultIfEmpty()
+                           //join viddeo in context.ProductVideos.Where(y=>y.IsDeleted != true)
+                           //on p.Id equals viddeo.ProductId 
                            join spec in context.ProductSpec.Where(y => y.IsDeleted != true)
                            on p.Id equals spec.ProductId into tempS
                            from speci in tempS.DefaultIfEmpty()
@@ -281,7 +283,8 @@ namespace University.Repository
                                                 Tiltle = v.Title,
                                                 Description = v.Decription,
                                                 TransactionId = "",
-                                                VideoRate = v.VideoRate ?? 0
+                                                VideoRate = v.VideoRate ?? 0,
+                                                //videoRatesumsum=v.VideoRateSum+v.VideoRate,
                                             }).ToList()
                                     .Select(x => new ProductVideos()
                                     {
@@ -291,18 +294,22 @@ namespace University.Repository
                                         Title = x.Tiltle,
                                         Decription = x.Description,
                                         TransactionID = x.TransactionId,
-                                        VideoRate = x.VideoRate
+                                        VideoRate = x.VideoRate,
+                                       // VideoRateSum=x.videoRatesumsum ??0,
                                     }).ToList();
 
 
                 var finalvideo = productVideossunpaid.Where(x => productVideosPaid.Select(d => d.Id).Contains(x.Id)).ToList();
                 var asd = productVideossunpaid.Except(finalvideo);
                 var finalproductvideo = productVideosPaid.Union(asd).ToList();
+                
                 foreach (var k in res)
                 {
+                   
+
                     k.ProductVideos = finalproductvideo.Where(x => x.ProductId == Id).ToList();
                 }
-
+               
                 return res.FirstOrDefault();
             }
         }
@@ -852,6 +859,7 @@ namespace University.Repository
                 var productVideo = context.ProductVideos.FirstOrDefault(y => y.Id == productVideoId);
                 if (productVideo != null)
                 {
+                    productVideo.VideoRateSum = productVideo.VideoRateSum - productVideo.VideoRate ??0;
                     productVideo.IsDeleted = true;
                     productVideo.DeletedDate = DateTime.UtcNow;
                     context.SaveChanges();
@@ -964,5 +972,63 @@ namespace University.Repository
             }
         }
         #endregion
+
+        //video addition 
+        public IEnumerable<ProductVideos> GetUserVideosLists()
+        {
+            using (var context = new UniversityEntities())
+            {
+                // int UserID = Convert.ToInt32(HttpContext.Current.Session["UserLoginID"]);
+                int AssocitedCustID = Convert.ToInt32(HttpContext.Current.Session["AdminLoginID"]);
+                //var res = (from l in context.Login_tbl.Where(y => y.IsDeleted != true && y.ID == AssocitedCustID)
+                //           join cm in context.CategoryUserMapping.Where(y => y.IsDeleted != true && y.AdminID == AssocitedCustID)
+                //           on l.ID equals cm.AdminID
+                //           join c in context.SubCategoryMaster.Where(y => y.IsDeleted != true)
+                //           on cm.CategoryID equals c.Id
+                //           join p in context.Product.Where(y => y.IsDeleted != true)
+                //           on c.Id equals p.SubCategoryId
+                //           join pv in context.ProductVideos.Where(y => y.IsDeleted != true)
+                //           on p.Id equals pv.ProductId
+                //           orderby pv.CreatedDate
+                var res = (from p in context.Product.Where(y => y.IsDeleted != true && y.AssocitedCustID == AssocitedCustID)
+                           join s in context.SubCategoryMaster.Where(y => y.IsDeleted != true)
+                           on p.SubCategoryId equals s.Id
+                           join c in context.CategoryMaster.Where(y => y.IsDeleted != true)
+                           on s.CategoryId equals c.Id
+                           //group p by p.Id into g
+                           select new
+                           {
+                               p.Id,
+                               p.Title,
+                               subcatid = c.Id,
+                               s.Name,
+                               VideoRateSum = p.ProductVideos.Sum(x => x.VideoRate)
+                           }
+                           ).ToList();
+                List<ProductVideos> productvideo = new List<ProductVideos>();
+                foreach (var prodvideo in res)
+                {
+                    productvideo.Add(new ProductVideos
+                    {
+                        Id = prodvideo.Id,
+                        Title = prodvideo.Title,
+                        subcategoryname = prodvideo.Name,
+                        catid = prodvideo.subcatid,
+                        VideoRate = prodvideo.VideoRateSum
+
+                    });
+
+                }
+                return productvideo;
+            }
+        }
+
+
+
+
+
+
+
+
     }
 }

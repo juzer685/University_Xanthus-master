@@ -11,6 +11,9 @@ namespace University.Service.Interface
     public interface IProductService
     {
         //IEnumerable<Product> GetUserVideosList();
+        // IEnumerable<ProductVideos> GetUserVideosLists(int ProductVideoId);
+        IEnumerable<ProductVideos> GetUserVideosLists();
+       // IEnumerable<ProductVideos> GetUserVideosLists(int ProductVideoId);
         IEnumerable<ProductVideos> GetUserVideosList();
         IEnumerable<ProductEntity> GetProductList();
         ProductEntity GetProduct(Decimal Id);
@@ -39,5 +42,6 @@ namespace University.Service.Interface
         List<ProductFeedback> GetProductFeedback();
         List<ProductLayoutMenu> GetProductLayouMenu();
         bool UpdateProductvideo(ProductVideos model);
+        //object GetUserVideosLists(int  productVideoId);
     }
 }

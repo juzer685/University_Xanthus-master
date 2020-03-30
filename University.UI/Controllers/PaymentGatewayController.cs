@@ -157,7 +157,7 @@ namespace University.UI.Controllers
 
                     if (TransResult)
                     {
-                        return Json(new { result = true, Message = "Card Added succeded" });
+                        return Json(new { result = true, Message = "Card added successfully" });
                     }
                     else
                     {

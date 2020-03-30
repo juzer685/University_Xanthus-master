@@ -40,7 +40,7 @@
                             @*<button type="button" class="btn btn-primary btn-sm b-w-80" data-toggle="modal" data-target="#AddSubCategoryModal">
                                     Add
                                 </button>*@
-                            <input type="button" class="btn btn-primary btn-sm b-w-80" value="Add" onclick="window.location.href = '/Admin/User/Register'" />
+                            <input title="Add" type="button" class="btn btn-primary btn-sm b-w-80" value="Add" onclick="window.location.href = '/Admin/User/Register'" />
                         </h3>
                     </div>
                     <!-- /.card-header -->
@@ -66,8 +66,8 @@
                                             <td class="text-center">@item.FirstName</td>
                                             <td class="text-center">@item.LastName</td>
                                             <td class="text-center">
-                                                <i class="fas fa-edit redonlyeamil pointer" onclick="window.location.href = '/Admin/User/EditUser/@item.ID'"></i>
-                                                <i class="fas fa-trash pointer" onclick="DeleteUser('@item.ID')"></i>
+                                                <i title="Edit" class="fas fa-edit redonlyeamil pointer" onclick="window.location.href = '/Admin/User/EditUser/@item.ID'"></i>
+                                                <i title="Delete" class="fas fa-trash pointer" onclick="DeleteUser('@item.ID')"></i>
                                                 @*<input type="button" class="btn btn-primary btn-sm" value="Edit" onclick="AddSubCategory('@item.ID')" />
                                                     <input type="button" class="btn btn-primary btn-sm" value="Delete" onclick="DeleteUser('@item.ID')" />*@
                                             </td>
