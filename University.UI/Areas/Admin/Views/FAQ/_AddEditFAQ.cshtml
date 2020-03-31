@@ -4,21 +4,21 @@
     Layout = null;
 }
 
-
+    <link href="~/dist/css/Custom.css" rel="stylesheet" />
 
 <div>
     @Html.HiddenFor(m => m.Id)
 
     <div class="form-group">
         <label for="email">Question</label>
-        @Html.TextBoxFor(m => m.Question, new { @class = "form-control", @required = "required" })
-        @Html.ValidationMessageFor(x => x.Question, null, new { @class = "", style = "color:red;" })
+        @Html.TextBoxFor(m => m.Question, new { @class = "form-control text-overflow", @required = "required",@maxlength="100" })
+        @*@Html.ValidationMessageFor(x => x.Question, null, new { @class = "", style = "color:red;" })*@
         @*@Html.ValidationMessageFor(m => m.Question)*@
     </div>
     <div class="form-group">
         <label for="ImageUrl">Answer</label>
-        @Html.TextAreaFor(m => m.Answer, new { @class = "form-control", @required = "required" })
-        @Html.ValidationMessageFor(x => x.Answer, null, new { @class = "", style = "color:red;" })
+        @Html.TextAreaFor(m => m.Answer, new { @class = "form-control", @required = "required",@maxlength="500" })
+        @*@Html.ValidationMessageFor(x => x.Answer, null, new { @class = "", style = "color:red;" })*@
         @*@Html.ValidationMessageFor(m => m.Answer)*@
     </div>
     @*<div class="form-group">

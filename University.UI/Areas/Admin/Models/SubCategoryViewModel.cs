@@ -13,8 +13,10 @@ namespace University.UI.Areas.Admin.Models
         string SubCategoryImagePath = WebConfigurationManager.AppSettings["SubCategoryImagePath"];
         public Decimal Id { get; set; }
         // public Decimal CategoryId { get; set; }
-        [StringLength(50, ErrorMessage = "Do not enter more than 30 characters")] 
+        //[StringLength(50, ErrorMessage = "Do not enter more than 50 characters")]
+       // [MaxLength(50)]
         public string Name { get; set; }
+        [Required(ErrorMessage = "Please fill images")]
         public string ImageURL { get; set; }
         public string ImageALT { get; set; }
         public Nullable<bool> IsDeleted { get; set; }

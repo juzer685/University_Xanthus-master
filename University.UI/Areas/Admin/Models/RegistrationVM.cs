@@ -13,13 +13,13 @@ namespace University.UI.Areas.Admin.Models
         public int ID { get; set; }
 
         [Required(ErrorMessage = "Please enter First Name")]
-        [StringLength(30, ErrorMessage = "Do not enter more than 30 characters")]
-        [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Special character should not be entered")]
+       // [StringLength(30, ErrorMessage = "Do not enter more than 30 characters")]
+        //[RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Special character should not be entered")]
         public string FirstName { get; set; }
 
         [Required(ErrorMessage = "Please enter Last Name")]
-        [StringLength(30, ErrorMessage = "Do not enter more than 30 characters")]
-        [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Special character should not be entered")]
+      //  [StringLength(30, ErrorMessage = "Do not enter more than 30 characters")]
+       // [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Special character should not be entered")]
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "Please enter Email")]
@@ -28,12 +28,12 @@ namespace University.UI.Areas.Admin.Models
 
         [Required(ErrorMessage = "Please enter Password")]
         //[StringLength(30, ErrorMessage = "Password must be of minimum 6 characters length and Maximum 30 Character length", MinimumLength = 6)]
-        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$", ErrorMessage = "Include both lower & upper case character,Include at least one number or symbol be at least 8 characters long")]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$", ErrorMessage = "Your password needs to: <br/>Include both lower & upper case character,Include at least one number or symbol be at least 8 characters long")]
         public string Password { get; set; }
 
         [Required(ErrorMessage = "Please enter Confirm Password")]
         [Compare("Password", ErrorMessage = "Confirm Password' and 'Password' do not match")]
-        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$", ErrorMessage = "Include both lower & upper case character,Include at least one number or symbol be at least 8 characters long")]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$", ErrorMessage = "Your password needs to: <br/>Include both lower & upper case character,Include at least one number or symbol be at least 8 characters long")]
         // [StringLength(30, ErrorMessage = "Password must be of minimum 6 characters length and Maximum 30 Character length", MinimumLength = 6)]
         public string ConfirmPassword { get; set; }
 
@@ -43,8 +43,8 @@ namespace University.UI.Areas.Admin.Models
         public decimal? CustomerId { get; set; }
 
         [Required(ErrorMessage = "Please enter Mobile Number")]
-        [RegularExpression("([0-9]+)", ErrorMessage = "Only Numbers are Allowed")]
-        [StringLength(10, ErrorMessage = "Do not enter more than 10 Numbers")]
+       // [RegularExpression("([0-9]+)", ErrorMessage = "Only Numbers are Allowed")]
+       // [StringLength(10, ErrorMessage = "Do not enter more than 10 Numbers")]
         public string MobileNo { get; set; }
         public List<Customer> CustomerList { get; set; }
         public string ReadOnly

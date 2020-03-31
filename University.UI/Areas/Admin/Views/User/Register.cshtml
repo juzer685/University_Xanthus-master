@@ -41,18 +41,22 @@
                 @Html.HiddenFor(x => x.ID)
 
                 <div class="input-group mb-3">
-                    @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control txtOnly", placeholder = "First Name" })
+                    @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control txtOnly", placeholder = "First Name",@maxlength="50" })
                     @*<input type="text" class="form-control" name="FirstName" placeholder="First Name">*@
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-user"></span>
                         </div>
                     </div>
+
                 </div>
                 @Html.ValidationMessageFor(x => x.FirstName, null, new { @class = "", style = "color:red;" })
 
+
+
+
                 <div class="input-group mb-3">
-                    @Html.TextBoxFor(x => x.LastName, new { @class = "form-control txtOnly", placeholder = "Last Name" })
+                    @Html.TextBoxFor(x => x.LastName, new { @class = "form-control txtOnly", placeholder = "Last Name",@maxlength="50" })
                     @*<input type="text" class="form-control" name="LastName" placeholder="LastName">*@
                     <div class="input-group-append">
                         <div class="input-group-text">
@@ -63,7 +67,7 @@
                 @Html.ValidationMessageFor(x => x.LastName, null, new { @class = "", style = "color:red;" })
 
                 <div class="input-group mb-3">
-                    @Html.TextBoxFor(x => x.MobileNo, new { @class = "form-control onlynumbers", placeholder = "Mobile Number" })
+                    @Html.TextBoxFor(x => x.MobileNo, new { @class = "form-control onlynumbers", placeholder = "Mobile Number",@maxlength="10" })
                     @*<input type="text" class="form-control" name="MobileNo" placeholder="Mobile Number">*@
                     <div class="input-group-append">
                         <div class="input-group-text">
@@ -111,6 +115,7 @@
                             <span class="fas fa-lock"></span>
                         </div>
                     </div>
+
                 </div>
                 @Html.ValidationMessageFor(x => x.Password, null, new { @class = "", style = "color:red;" })
 
@@ -128,8 +133,11 @@
                             <span class="fas fa-lock"></span>
                         </div>
                     </div>
+
                 </div>
                 @Html.ValidationMessageFor(x => x.ConfirmPassword, null, new { @class = "", style = "color:red;" })
+
+
                 @*<div class="input-group mb-3">
             <input type="password" class="form-control" name="ConfirmPassword" placeholder="Retype password">
             <div class="input-group-append">
@@ -149,11 +157,11 @@
             </div>
         </div>*@
                 <div class="row">
-                    <div class="col-8">
+                    <div class="col-12">
                         <div class="icheck-primary">
-                            <input type="checkbox" id="agreeTerms" name="terms" value="agree" @Model.Checked>
+                            <input type="checkbox" id="agreeTerms" name="terms" value="agree" @Model.Checked />
                             <label for="agreeTerms">
-                                I agree to the <a href="#">terms</a>
+                                I agree/accept the <a href="#">Terms & Conditions</a>
                             </label>
                         </div>
                     </div>

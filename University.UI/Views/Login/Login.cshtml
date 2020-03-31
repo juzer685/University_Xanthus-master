@@ -53,7 +53,8 @@
                     <div class="form-group">
                         <label class="fontSize" for="email">Email</label>
                         <div class="input-group mb-3">
-                            <input name="UserName" type="text" class="form-control" placeholder="Please enter email" required pattern="^\w+([-+.']\w+)*@Html.Raw("@")\w+([-.]\w+)*\.\w+([-.]\w+)*$" oninvalid="this.setCustomValidity('Please Enter Email Id')" oninput="this.setCustomValidity('')">
+                            <input name="UserName" type="text" class="form-control checkemaiid" placeholder="Please enter email"   pattern="^\w+([-+.']\w+)*@Html.Raw("@")\w+([-.]\w+)*\.\w+([-.]\w+)*$" oninvalid="this.setCustomValidity('Please Enter Email Id')" oninput="this.setCustomValidity('')">
+                         
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-envelope"></span>
@@ -64,13 +65,14 @@
                     <div class="form-group">
                         <label class="fontSize" for="password">Password</label>
                         <div class="input-group mb-3">
-                            <input name="Password" id="Password" type="password" class="form-control"  placeholder="Please enter password" required oninvalid="this.setCustomValidity('Please Enter Password')" oninput="this.setCustomValidity('')">
-                            <span>
-                                <img src="~/Images/icons8-eye-50.png" alt="eye" onclick="showHide()" id="eye" style="margin-top: 5px;width: 25px;margin-left: -30px;position: absolute;" />
-                            </span>
+                            <input name="Password" id="Password" type="password" class="form-control checkpassword"  placeholder="Please enter password"  oninvalid="this.setCustomValidity('Please Enter Password')" oninput="this.setCustomValidity('')">
+                            
                             <div class="input-group-append">
                                 <div class="input-group-text">
-                                    <span class="fas fa-lock"></span>
+                                    <span>
+                                        <img src="~/Images/icons8-eye-50.png" alt="eye" onclick="showHide()" id="eye" style="width: 15px; height:20px;" />
+                                    </span>
+                                    @*<span class="fas fa-lock"></span>*@
                                 </div>
                             </div>
                         </div>
@@ -78,7 +80,7 @@
                     <div class="form-group text-center">
                         <div class="row" style="justify-content:center;">
                             <div class="col-4">
-                                <input id="login" type="submit" class="btn btn-primary btn-block" value="LOGIN" />
+                                <input id="login" type="submit" class="btn btn-primary btn-block" value="LOGIN" onclick="addbutClick()" />
                                 @*<button type="submit" class="btn btn-primary btn-block" value="Login">Login</button>*@
                             </div>
                         </div>
@@ -167,21 +169,12 @@
                         Password.type = 'text';
                    }
             }
-                //function show()
-                //{
-                //    var a = document.getElementById("Password");
-                //    var b = document.getElementById("EYE");
-                //    if (a.type == "password")
-                //    {
-                //        a.type = "text";
-                //        b.src = "https://i.stack.imgur.com/waw4z.png";
-                //    }
-                //    else
-                //    {
-                //        a.type = "password";
-                //        b.src = "https://i.stack.imgur.com/Oyk1g.png";
-                //    }
-                //}
+        function addbutClick()
+        {
+           
+            $(".checkemaiid").attr("required", true);
+            $(".checkpassword").attr("required", true);
+        }
 
                 
                 

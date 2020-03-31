@@ -40,7 +40,7 @@ function RegisterHandler() {
                 });
             }
             else {
-                _showErrorMessage("Please agree to terms");
+                _showErrorMessage("Please agree/accept Terms and conditions");
             }
         }
     });

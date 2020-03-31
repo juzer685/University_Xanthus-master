@@ -205,7 +205,7 @@ namespace University.UI.Areas.Admin.Controllers
                 using (var message = new MailMessage(new MailAddress(ConfigurationManager.AppSettings["AdminId"], "Admin"), new MailAddress(p_Email, "user"))
                 {
                     Subject = "Login Credentials",
-                    Body = "Hello " + FirstName + ",<br/><br/>Welcome to Online Training Portal.Below are the login credentials for the system. <br/><br/>UserName: " + p_Email + " <br/>Password: " + p_Password + "<br/><br/>Please <a href=" + ConfigurationManager.AppSettings["LoginUrl"] + ">Click Here</a> to login. <br/><br/><br/>Regards,<br/>Admin"
+                    Body = "Hello " + FirstName + ",<br/><br/>Welcome to Online Training Portal. Below are the login credentials for the system. <br/><br/>UserName: " + p_Email + " <br/>Password: " + p_Password + "<br/><br/>Please <a href=" + ConfigurationManager.AppSettings["LoginUrl"] + ">Click Here</a> to login. <br/><br/><br/>Regards,<br/>Admin"
                 })
                 {
                     message.IsBodyHtml = true;

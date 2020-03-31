@@ -13,6 +13,9 @@
             cursor: pointer;
         }
 </style>
+<head>
+    <link href="~/dist/css/Custom.css" rel="stylesheet" />
+</head>
 
 <form id="ProductForm" name="ProductForm" enctype="multipart/form-data" method="post" action="/Admin/Product/SaveProduct">
     @Html.HiddenFor(m => m.Id)
@@ -28,14 +31,14 @@
 
             <div class="form-group">
                 <label for="Title">Course Title</label>
-                @Html.TextBoxFor(m => m.Title, new { @class = "form-control txtOnly", @required = "required", @pattern = "^[^<>%$*@!#]*$", @title = "Special characters are not allowed.", @maxlength = "50" })
-                @Html.ValidationMessageFor(x => x.Title, null, new { @class = "", style = "color:red;" })
+                @Html.TextBoxFor(m => m.Title, new { @class = "form-control txtOnly text-overflow", @required = "required", @pattern = "^[^<>%$*@!#]*$", @maxlength = "100" })
+                @*@Html.ValidationMessageFor(x => x.Title, null, new { @class = "", style = "color:red;" })*@
                 @*@Html.ValidationMessageFor(m => m.Title)*@
             </div>
             <div class="form-group">
                 <label for="Description">Course Description</label>
-                @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @required = "required", @maxlength = "100" })
-                @Html.ValidationMessageFor(x => x.Description, null, new { @class = "", style = "color:red;" })
+                @Html.TextAreaFor(m => m.Description, new { @class = "form-control text-overflow", @required = "required", @maxlength = "500" })
+                @*@Html.ValidationMessageFor(x => x.Description, null, new { @class = "", style = "color:red;" })*@
                 @*@Html.ValidationMessageFor(m => m.Description)*@
             </div>
         </div>
@@ -45,23 +48,25 @@
             <div class="form-group">
                 <label class="info-text" for="ImageUrl" style="color:red;">Image <span class="ShortText">(Please ensure featured image size is Less than 2MB)</span></label>
                 <div class="input-group">
-                <div class="custom-file">
-                    <input type="file" id="file" name="file" class="custom-file-input pointer" required accept="image/jpeg" onchange="readURL(this);">
-                    @*<input type="file" name="file" class="custom-file-input pointer " id="file" accept="image/jpeg" onchange="readURL(this);">*@
-                    @if (Model.ImageURL != "")
-                    {
+                    <div class="custom-file">
+                        <input type="file" id="file" name="file" class="custom-file-input pointer validateHeightWidth" required accept="image/jpeg" onchange="readURL(this);">
+                        @*<input type="file" name="file" class="custom-file-input pointer " id="file" accept="image/jpeg" onchange="readURL(this);">*@
+                        @if (Model.ImageURL != "")
+                        {
+                            <label class="custom-file-label CategoryFileLabel" id="" for="exampleInputFile">@Model.ImageURL</label>
+                            @*<label class="custom-file-label" id="CategoryFileLabel" for="exampleInputFile">@Model.ImageURL</label>*@
+                        }
+                        else
+                        {
+                            <label class="custom-file-label CategoryFileLabel" id="" for="exampleInputFile">Category Image</label>
+                            @*<label class="custom-file-label" id="CategoryFileLabel" for="exampleInputFile">Select Image</label>*@
+                        }
 
-                        <label class="custom-file-label" for="exampleInputFile">@Model.ImageURL</label>
-                    }
-                    else
-                    {
-                        <label class="custom-file-label" for="exampleInputFile">Select Image</label>
-                    }
-
+                    </div>
                 </div>
-            </div>
                 @Html.ValidationMessageFor(m => m.ImageURL)
-                <img id="image-preview" src=@Model.CheckImage alt="" class="imgStd" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" />
+                <img id="image-preview" src="@Model.CheckImage" alt="" class="imgStd" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" />
+                @*<img id="image-preview" src=@Model.CheckImage alt="" class="imgStd" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" />*@
             </div>
 
             <div class="form-group">

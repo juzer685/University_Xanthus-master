@@ -6,7 +6,7 @@
             <input name="AssocitedID" id="ProductDOCAssocitedID" type="hidden" />
             @Html.HiddenFor(y => y.ProductId)
             @Html.Hidden("ProductDocumentId", Model.Id,new { @Value = Model.Id })
-            @Html.TextBoxFor(m => m.Title, new { @class = "form-control txtOnly", @required = "required", @pattern = "^[^<>%$*@!#]*$", @title = "Special characters are not allowed." })
+            @Html.TextBoxFor(m => m.Title, new { @class = "form-control txtOnly", @required = "required", @pattern = "^[^<>%$*@!#]*$",,@maxlength="50" })
             @Html.ValidationMessageFor(m => m.Title)
         </div>
         <div class="col">

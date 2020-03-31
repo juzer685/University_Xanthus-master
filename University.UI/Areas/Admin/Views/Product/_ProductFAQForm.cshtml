@@ -1,17 +1,17 @@
 ﻿@model University.UI.Areas.Admin.Models.ProductFaqViewModel
-
+    <link href="~/dist/css/Custom.css" rel="stylesheet" />
 <form onsubmit="SaveProductFormFaq(event)" name="ProductFormFaq" enctype="multipart/form-data" method="post" action="/Admin/Product/SaveProductProductFAQ">
     <div class="row py-2">
 
         <div class="col">
             @Html.HiddenFor(y => y.ProductId)
             @Html.Hidden("FaqId", Model.Id)
-            @Html.TextBoxFor(m => m.Question, new { @class = "form-control", @Required = "Required" })
+            @Html.TextBoxFor(m => m.Question, new { @class = "form-control text-overflow", @Required = "Required",@maxlength="100" })
             @Html.ValidationMessageFor(x => x.Question, null, new { @class = "", style = "color:red;" })
         </div>
         <input name="AssocitedID" id="ProductFAQAssocitedID" type="hidden" />
         <div class="col">
-            @Html.TextBoxFor(m => m.Answer, new { @class = "form-control", @Required = "Required" })
+            @Html.TextBoxFor(m => m.Answer, new { @class = "form-control text-overflow", @Required = "Required" ,@maxlength="1000"})
             @Html.ValidationMessageFor(x => x.Answer, null, new { @class = "", style = "color:red;" })
         </div>
         <div class="col">

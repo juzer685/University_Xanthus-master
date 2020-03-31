@@ -124,49 +124,132 @@ $(document).ready(function () {
     });
 
 
-    $(document).ready(function () {
+    //$(document).ready(function () {
    
+    //    var _URL = window.URL || window.webkitURL;
+
+    //    $(document).on("change", "input[type='file'].validateHeightWidth", function (e) {
+    //        var imageName = $("#CategoryFileLabel").text();
+    //        //$("#CategoryFileLabel").text('');
+    //        var file = $(this)[0].files[0];
+    //        var _this = $(this);
+    //        var fileExt = file.name.substr(file.name.lastIndexOf(".") + 1);
+    //        if (fileExt.toUpperCase() != "gif".toUpperCase() && fileExt.toUpperCase() != "png".toUpperCase())
+    //        {
+    //            $('.overlaySizeAlert').css({ "visibility": "visible", "opacity": "1" });
+    //            $(_this).val('');
+    //            $(_this).parent().find('img.imgStd').attr('src', fileOriginalIndex);
+    //            $("#DeleteImage").hide();
+    //            $("#categoryfile").val('');
+    //            e.preventDefault();
+    //            return false;
+    //        }
+    //        //var _this = $(this);
+    //        img = new Image();
+    //        var imgwidth = 0;
+    //        var imgheight = 0;
+    //        var imgseiz = file.size;
+    //        var maxwidth = 250;
+    //        var maxheight = 250;
+    //        var maxSize = 2000000;
+    //        img.src = _URL.createObjectURL(file);
+    //        img.onload = function ()
+    //        {
+    //            imgwidth = this.width;
+    //            imgheight = this.height;
+    //            if (imgwidth <= maxwidth && imgheight <= maxheight && imgseiz <= maxSize)
+    //            {
+    //                return true;
+    //            }
+    //            else
+    //            {
+    //                $('.overlaySizeAlert').css({ "visibility": "visible", "opacity": "1" });
+    //                //alert("This image does not meet the size and format requirements. Please choose another image and try again");
+    //                $(_this).val('');
+    //                //$(_this).parent().find('img.imgStd').attr('src', null);
+    //                //$(_this).parent().find('img.imgStd').attr('src', '/images/NoImageAvailable250.jpg');
+    //                if (typeof fileOriginalIndex === "undefined")
+    //                {
+    //                   // $(_this).parent().find('.imgStd').attr('src', '/images/NoImageAvailable.jpg');
+    //                    $(_this).parent().find('img.imgStd').attr('src', '/images/NoImageAvailable.jpg');
+    //                    return false;
+    //                }
+    //                else
+    //                {
+    //                    $('#image-preview').attr('src', ' ')
+    //                    $(_this).parent().find('img.imgStd').attr('src', fileOriginalIndex);
+    //                    $("#CategoryFileLabel").text(imageName);
+    //                   // $("#CategoryFileLabel").text('');
+    //                    $("#CategoryFileLabel").css("font-weight", "Bold");
+    //                }
+    //                $("#DeleteImage").hide();
+    //            }
+    //        };
+    //        img.onerror = function ()
+    //        {
+    //            //$("#response").text("not a valid file: " + file.type);
+    //        }
+    //    });
+    //});
+
+
+    $(document).on("change", "input[type='file']", function (e) {
+        //Do something
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+    });
+
+    $(document).ready(function () {
+
         var _URL = window.URL || window.webkitURL;
 
         $(document).on("change", "input[type='file'].validateHeightWidth", function (e) {
-            var imageName = $("#CategoryFileLabel").text();
-            //$("#CategoryFileLabel").text('');
+            console.log("custom-file-input");
             var file = $(this)[0].files[0];
             var _this = $(this);
             var fileExt = file.name.substr(file.name.lastIndexOf(".") + 1);
-            if (fileExt.toUpperCase() != "jpeg".toUpperCase() && fileExt.toUpperCase() != "jpg".toUpperCase()) {
-             
-                $('.overlaySizeAlert').css({ "visibility": "visible", "opacity": "1" });
-                $(_this).val('');
-                $(_this).parent().find('img.imgStd').attr('src', fileOriginalIndex);
-                $("#DeleteImage").hide();
-                $("#categoryfile").val('');
-                e.preventDefault();
-                return false;
-            }
-            //var _this = $(this);
-            img = new Image();
-            var imgwidth = 0;
-            var imgheight = 0;
-            var imgseiz = file.size;
-            var maxwidth = 250;
-            var maxheight = 250;
-            var maxSize = 2000000;
+           
+                img = new Image();
+                var imgwidth = 0;
+                var imgheight = 0;
+                var maxwidth = 250;
+                var maxheight = 250;
+
             img.src = _URL.createObjectURL(file);
-            img.onload = function () {
-                imgwidth = this.width;
-                imgheight = this.height;
-                if (imgwidth <= maxwidth && imgheight <= maxheight && imgseiz <= maxSize) {
-                    return true;
-                }
-                else
+            if (fileExt.toUpperCase() != "gif".toUpperCase() && fileExt.toUpperCase() != "png".toUpperCase())
+            {
+                img.onload = function ()
                 {
-                    $('.overlaySizeAlert').css({ "visibility": "visible", "opacity": "1" });
-                    //alert("This image does not meet the size and format requirements. Please choose another image and try again");
-                    $(_this).val('');
-                    //$(_this).parent().find('img.imgStd').attr('src', null);
-                    //$(_this).parent().find('img.imgStd').attr('src', '/images/NoImageAvailable250.jpg');
-                    if (typeof fileOriginalIndex === "undefined") {
+                    imgwidth = this.width;
+                    imgheight = this.height;
+
+                    if (imgwidth == maxwidth && imgheight == maxheight)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+
+                        $('#image-preview').attr('src', ' ')
+                        $(_this).parent().find('img.imgStd').attr('src', fileOriginalIndex);
+                        //$("#CategoryFileLabel").text(imageName);
+                        $("#CategoryFileLabel").text('');
+                        $("#CategoryFileLabel").css("font-weight", "Bold");
+
+
+                        //$('.overlaySizeAlert').css({ "visibility": "visible", "opacity": "1" });
+                        ////alert("This image does not meet the size and format requirements. Please choose another image and try again");
+                        //$(_this).val('');
+                        //$(_this).parent().find('img.imgStd').attr('src', null);
+                        //$("#DeleteImage").hide();
+                    }
+                }
+            }
+            else
+            {
+                if (typeof fileOriginalIndex === "undefined")
+                    {
                        // $(_this).parent().find('.imgStd').attr('src', '/images/NoImageAvailable.jpg');
                         $(_this).parent().find('img.imgStd').attr('src', '/images/NoImageAvailable.jpg');
                         return false;
@@ -175,63 +258,15 @@ $(document).ready(function () {
                     {
                         $('#image-preview').attr('src', ' ')
                         $(_this).parent().find('img.imgStd').attr('src', fileOriginalIndex);
-                        $("#CategoryFileLabel").text(imageName);
+                         $("#CategoryFileLabel").text('');
+                       // $("#CategoryFileLabel").text('');
                         $("#CategoryFileLabel").css("font-weight", "Bold");
                     }
-                    $("#DeleteImage").hide();
-                }
-            };
-            img.onerror = function () {
-                //$("#response").text("not a valid file: " + file.type);
+
             }
+            
         });
     });
-
-
-    //$(document).on("change", "input[type='file']", function (e) {
-    //    //Do something
-    //    e.preventDefault();
-    //    e.stopPropagation();
-    //    return false;
-    //});
-
-    //$(document).ready(function () {
-
-    //    var _URL = window.URL || window.webkitURL;
-
-    //    $(document).on("change", "input[type='file'].validateHeightWidth", function (e) {
-    //        console.log("custom-file-input");
-    //        var file = $(this)[0].files[0];
-    //        var _this = $(this);
-    //        img = new Image();
-    //        var imgwidth = 0;
-    //        var imgheight = 0;
-    //        var maxwidth = 250;
-    //        var maxheight = 250;
-
-    //        img.src = _URL.createObjectURL(file);
-    //        img.onload = function () {
-    //            imgwidth = this.width;
-    //            imgheight = this.height;
-
-    //            if (imgwidth == maxwidth && imgheight == maxheight) {
-    //                return true;
-    //            } else {
-    //                //_showImageSizeValidationMessage();
-    //               // $("#image-preview").attr('src', null);
-    //                $('.overlaySizeAlert').css({ "visibility": "visible", "opacity": "1" });
-    //                //alert("This image does not meet the size and format requirements. Please choose another image and try again");
-    //                $(_this).val('');
-    //                $(_this).parent().find('img.imgStd').attr('src', null);
-    //                $("#DeleteImage").hide();
-    //            }
-    //        };
-    //        img.onerror = function () {
-
-    //            //$("#response").text("not a valid file: " + file.type);
-    //        };
-    //    });
-    //});
 
     $(document).on('click', '.overlay', function () {
         $('.MainVideo').attr("src", $(this).siblings('iframe').attr("src") + "?autoplay=1");

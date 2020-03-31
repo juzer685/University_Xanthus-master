@@ -110,6 +110,7 @@
                 data: { FaqId: id }, // serializes the form's elements.
                 cache: false,
                 success: function (data) {
+                    _showSuccessMessage("Data Deleted Successfully");
                     //alert('Deleted Successfully');
                     $('.overlayDelete').css({ "visibility": "", "opacity": "" });
                     var tr = $(event).closest("[name=ProductFormFaq]");

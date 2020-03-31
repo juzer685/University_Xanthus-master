@@ -5,10 +5,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     var lst = (List<Login_tbl>)Session["UserList"];
 }
+<link href="~/dist/css/Custom.css" rel="stylesheet" />
 <style>
-     .pointer {
-            cursor: pointer;
-        }
+    .pointer {
+        cursor: pointer;
+    }
 </style>
 <!-- Content Header (Page header) -->
 <div class="content-header">
@@ -36,7 +37,7 @@
                     <div class="card-header">
                         <h3 class="card-title">
                             @*<button type="button" class="btn btn-primary btn-sm b-w-80 subcategoryadd" data-toggle="modal" data-target="#AddSubCategoryModal">*@
-                            <button title="Add" type="button"  class="btn btn-primary btn-sm b-w-80 subcategoryadd" data-toggle="modal" data-target="#AddSubCategoryModal" onclick="addbutClick()" >
+                            <button title="Add" type="button" class="btn btn-primary btn-sm b-w-80 subcategoryadd" data-toggle="modal" data-target="#AddSubCategoryModal" onclick="addbutClick()">
                                 Add
                             </button>
                             @*<input type="button" class="btn btn-primary btn-sm b-w-80" value="Add" onclick="AddSubCategory()" />*@
@@ -55,9 +56,9 @@
                             <tbody>
                                 @foreach (var item in Model)
                                 {
-                                    
+
                                     <tr>
-                                        <td class="text-center">@item.Name</td>
+                                        <td class="text-center text-overflow">@item.Name</td>
                                         @*<td class="text-center">@item.CreatedDate</td>*@
                                         <td class="text-center">
                                             <i title="Edit" class="fas fa-edit pointer" onclick="AddSubCategory('@item.Id')"></i>
@@ -80,165 +81,162 @@
 <!-- /.content -->
 <!-- /Add SubCategory modal-dialog -->
 
-    <div class="modal fade subcatmodel" id="AddSubCategoryModal">
-        <div class="modal-dialog">
-            <form id="subCategoryForm" action="/Admin/SubCategory/AddEditSubCategory">
-                <!-- Modal content-->
-                @*<div>
+<div class="modal fade subcatmodel" id="AddSubCategoryModal">
+    <div class="modal-dialog">
+        <form id="subCategoryForm" action="/Admin/SubCategory/AddEditSubCategory">
+            <!-- Modal content-->
+            @*<div>
                         <input name="AssocitedID" id="SubcategoryAssocitedID" type="hidden" />
                 </div>*@
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="categoryheader">Add Category</h4>
-                        <button type="button" class="close reset" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div class="modal-body" id="popupBody">
-                        @Html.Partial("AddEditSubCategory", new University.UI.Areas.Admin.Models.SubCategoryViewModel())
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                        <button type="button" class="btn btn-default reset" data-dismiss="modal">Close</button>
-                    </div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="categoryheader">Add Category</h4>
+                    <button type="button" class="close reset" data-dismiss="modal">&times;</button>
                 </div>
-                <!-- /.modal-content -->
-            </form>
-        </div>
-        <!-- /.modal-dialog -->
+                <div class="modal-body" id="popupBody">
+                    @Html.Partial("AddEditSubCategory", new University.UI.Areas.Admin.Models.SubCategoryViewModel())
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-default reset" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </form>
     </div>
-    <!-- /Add SubCategory modal-dialog -->
+    <!-- /.modal-dialog -->
+</div>
+<!-- /Add SubCategory modal-dialog -->
 
 
-    <script>
-      //  $("").
+<script>
+    //  $("").
 
-      var fileOriginalIndex = "";
-       
-        $(document).ready(function () {
-            
-            $(".reset").click(function () {
-                $("#Id").val('');
-                //$("#categoryheader").html("Add Category");
-                $("#Name").val('');
-                $('#CategoryFileLabel').text('');
-                //$("#file label").val('Category Image');
-                $('#image-preview').attr('src', ' ');
-                $('#image-preview').attr('onerror', ' ');
-                $("#ImageALT").val('');
-            });
-        });
+    var fileOriginalIndex = "";
 
-        // alert($("#ddlusrlst").val());
-        $(document).ready(function () {
-          
+    $(document).ready(function () {
 
-            //$('#SubCategoryTable').DataTable({
-            //    "paging": true,
-            //    "lengthChange": false,
-            //    "searching": true,
-            //    "ordering": true,
-            //    "info": false,
-            //    "autoWidth": false,
-            //});
-            $('#SubCategoryTable').DataTable(
-                //'aoColumnDefs': [{
-                //    'bSortable': false,
-                //    'aTargets': ['nosort']
-                //}]
-            );
-            //$('.subcategoryadd').click(function () {
-            //    if ($('#ddlusrlst').val() == 0)
-            //    {
-            //        _showErrorMessage("First Select User");
-            //    }
-            //    else
-            //    {
-            //        $('#AddSubCategoryModal').modal('show');
-            //    }
-
-            //})
-
-            $(document).on('submit', '#subCategoryForm', function (e) {
-                //  $('#SubcategoryAssocitedID').val($("#ddlusrlst").val());
-              
-                var form = $(this);
-                var url = form.attr('action');
-                var formData = new FormData($(this)[0]);
-                $.ajax({
-                    type: "POST",
-                    url: url,
-                    data: formData, // serializes the form's elements.
-                    enctype: 'multipart/form-data',
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    success: function (data) {
-                        //$('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
-                        ////alert("Data Saved Successfully"); // show response from the php script.
-                        //setTimeout(function () {
-                        //    location.reload();
-                        //}, 1500);
-                        $("#AddSubCategoryModal").modal("hide");
-                        _showSuccessMessage("Data Saved Successfully");
-                        setTimeout(function () { location.reload(); }, 1000);
-                    }
-                });
-                e.preventDefault();
-
-
-            });
-        });
-
-        function AddSubCategory(Id) {
-           // $(".validateHeightWidthcheck").removeAttr("required");
-           // $('.validateHeightWidthcheck').prop('required',true);
-           // document.getElementsByClassName("validateHeightWidthcheck").removeAttribute("required");
-            $("#Name").val('');
+        $(".reset").click(function () {
             $("#Id").val('');
-            $("#file").val('');
+            //$("#categoryheader").html("Add Category");
+            $("#Name").val('');
+            $('#CategoryFileLabel').text('');
+            //$("#file label").val('Category Image');
+            $('#image-preview').attr('src', ' ');
+            $('#image-preview').attr('onerror', ' ');
+            $("#ImageALT").val('');
+        });
+    });
 
+    // alert($("#ddlusrlst").val());
+    $(document).ready(function () {
+
+
+        //$('#SubCategoryTable').DataTable({
+        //    "paging": true,
+        //    "lengthChange": false,
+        //    "searching": true,
+        //    "ordering": true,
+        //    "info": false,
+        //    "autoWidth": false,
+        //});
+        $('#SubCategoryTable').DataTable(
+            //'aoColumnDefs': [{
+            //    'bSortable': false,
+            //    'aTargets': ['nosort']
+            //}]
+        );
+        //$('.subcategoryadd').click(function () {
+        //    if ($('#ddlusrlst').val() == 0)
+        //    {
+        //        _showErrorMessage("First Select User");
+        //    }
+        //    else
+        //    {
+        //        $('#AddSubCategoryModal').modal('show');
+        //    }
+
+        //})
+
+        $(document).on('submit', '#subCategoryForm', function (e) {
+            //  $('#SubcategoryAssocitedID').val($("#ddlusrlst").val());
+
+            var form = $(this);
+            var url = form.attr('action');
+            var formData = new FormData($(this)[0]);
             $.ajax({
                 type: "POST",
-                url: "/Admin/SubCategory/GetSubCategory",
-                data: { Id: Id }, // serializes the form's elements.
+                url: url,
+                data: formData, // serializes the form's elements.
+                enctype: 'multipart/form-data',
+                cache: false,
+                contentType: false,
+                processData: false,
                 success: function (data) {
-                  
-                    if (Id == null || Id == 0)
-                    {
-                        $("#categoryheader").html("Add Category");
-                    }
-                    else
-                    {
-                        $("#categoryheader").html("Edit Category");
-                    }
-                    $("#popupBody").html(data);
-                     fileOriginalIndex = $("#image-preview").attr('src');
-                   // fileOriginalIndex = $("#image-preview").attr('src');
-                    $("#AddSubCategoryModal").modal('show');
+                    //$('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
+                    ////alert("Data Saved Successfully"); // show response from the php script.
+                    //setTimeout(function () {
+                    //    location.reload();
+                    //}, 1500);
+                    $("#AddSubCategoryModal").modal("hide");
+                    _showSuccessMessage("Data Saved Successfully");
+                    setTimeout(function () { location.reload(); }, 1000);
                 }
             });
-        }
+            e.preventDefault();
 
-        function DeleteSubCategory(Id) {
-            $("#DeleteConfirmationModal").modal('show');
-            $(document).on('click', 'button#confirmation-yes', function () {
-                $.ajax({
-                    type: "POST",
-                    url: "/Admin/SubCategory/DeleteSubCategory",
-                    data: { Id: Id }, // serializes the form's elements.
-                    success: function (data) {
-                        //alert("Data Deleted Successfully"); // show response from the php script.
-                        _showSuccessMessage("Data Deleted Successfully");
-                        setTimeout(function () { location.reload(); }, 1000);
-                    }
-                });
+
+        });
+    });
+
+    function AddSubCategory(Id) {
+        // $(".validateHeightWidthcheck").removeAttr("required");
+        // $('.validateHeightWidthcheck').prop('required',true);
+        // document.getElementsByClassName("validateHeightWidthcheck").removeAttribute("required");
+        $("#Name").val('');
+        $("#Id").val('');
+        $("#file").val('');
+
+        $.ajax({
+            type: "POST",
+            url: "/Admin/SubCategory/GetSubCategory",
+            data: { Id: Id }, // serializes the form's elements.
+            success: function (data) {
+
+                if (Id == null || Id == 0) {
+                    $("#categoryheader").html("Add Category");
+                }
+                else {
+                    $("#categoryheader").html("Edit Category");
+                }
+                $("#popupBody").html(data);
+                fileOriginalIndex = $("#image-preview").attr('src');
+                // fileOriginalIndex = $("#image-preview").attr('src');
+                $("#AddSubCategoryModal").modal('show');
+            }
+        });
+    }
+
+    function DeleteSubCategory(Id) {
+        $("#DeleteConfirmationModal").modal('show');
+        $(document).on('click', 'button#confirmation-yes', function () {
+            $.ajax({
+                type: "POST",
+                url: "/Admin/SubCategory/DeleteSubCategory",
+                data: { Id: Id }, // serializes the form's elements.
+                success: function (data) {
+                    //alert("Data Deleted Successfully"); // show response from the php script.
+                    _showSuccessMessage("Data Deleted Successfully");
+                    setTimeout(function () { location.reload(); }, 1000);
+                }
             });
-        }
+        });
+    }
 
-        function addbutClick()
-        {
-           
-            $(".checktest").attr("required", true);
-        }
-        
-    </script>
+    function addbutClick() {
+
+        $(".checktest").attr("required", true);
+    }
+
+</script>

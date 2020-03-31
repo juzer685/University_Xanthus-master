@@ -1,13 +1,17 @@
 ﻿@model  University.UI.Areas.Admin.Models.ProductVideoViewModel
 
+    <link href="~/dist/css/Custom.css" rel="stylesheet" />
+
+
+
 <form onsubmit="SaveProductProductVideoForms(event)" name="ProductVideoForm" enctype="multipart/form-data" method="post" action="/Admin/Product/SaveProductVideo">
     <div class="row py-2">
         <div class="col">
             <input name="AssocitedID" id="ProductvideosAssocitedID" type="hidden" />
             @Html.HiddenFor(y => y.ProductId)
             @Html.Hidden("ProductVideoId", Model.Id, new { @Value = Model.Id })
-            @Html.TextBoxFor(m => m.Title, new { @class = "form-control txtOnly", @required = "required", @pattern = "^[^<>%$*@!#]*$", @title = "Special characters are not allowed." })
-            @Html.ValidationMessageFor(x => x.Title, null, new { @class = "", style = "color:red;" })
+            @Html.TextBoxFor(m => m.Title, new { @class = "form-control txtOnly text-overflow", @required = "required", @pattern = "^[^<>%$*@!#]*$",@maxlength="50"})
+            @*@Html.ValidationMessageFor(x => x.Title, null, new { @class = "", style = "color:red;" })*@
             @*@Html.ValidationMessageFor(m => m.Title)*@
         </div>
         <div class="col input-icon ">
@@ -15,8 +19,8 @@
             <i>$</i>
         </div>
         <div class="col">
-            @Html.TextAreaFor(m => m.Decription, new { @class = "form-control", rows = "1", @required = "required", })
-            @Html.ValidationMessageFor(x => x.Decription, null, new { @class = "", style = "color:red;" })
+            @Html.TextAreaFor(m => m.Decription, new { @class = "form-control text-overflow", rows = "1", @required = "required", @maxlength="500"})
+            @*@Html.ValidationMessageFor(x => x.Decription, null, new { @class = "", style = "color:red;" })*@
             @*@Html.ValidationMessageFor(m => m.Decription)*@
         </div>
         @if (string.IsNullOrWhiteSpace(Model.VideoURL))
@@ -34,7 +38,7 @@
 
             </div>
         }
-
+       
         <div class="col" hidden>
             @if (!string.IsNullOrWhiteSpace(Model.VideoURL))
             {

@@ -87,6 +87,7 @@
 </section>
 
 <script>
+       var fileOriginalIndex = "";
         var baseURL = "/Admin/Product/";
         var blankId = '@Guid.Empty';
     $(document).ready(function () {
@@ -117,6 +118,7 @@
                         //alert("Data Saved Successfully"); // show response from the php script.
                         $("#HdProductId").val(data);
                         $("#Id").val(data);
+                         fileOriginalIndex = $("#image-preview").attr('src');
                         _showSuccessMessage("Data Saved Successfully");
                         setTimeout(function () { $('#userguide').trigger('click'); }, 1500);
                        
