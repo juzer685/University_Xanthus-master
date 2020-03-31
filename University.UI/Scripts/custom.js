@@ -200,73 +200,73 @@ $(document).ready(function () {
         return false;
     });
 
-    $(document).ready(function () {
+    //$(document).ready(function () {
 
-        var _URL = window.URL || window.webkitURL;
+    //    var _URL = window.URL || window.webkitURL;
 
-        $(document).on("change", "input[type='file'].validateHeightWidth", function (e) {
-            console.log("custom-file-input");
-            var file = $(this)[0].files[0];
-            var _this = $(this);
-            var fileExt = file.name.substr(file.name.lastIndexOf(".") + 1);
+    //    $(document).on("change", "input[type='file'].validateHeightWidth", function (e) {
+    //        console.log("custom-file-input");
+    //        var file = $(this)[0].files[0];
+    //        var _this = $(this);
+    //        var fileExt = file.name.substr(file.name.lastIndexOf(".") + 1);
            
-                img = new Image();
-                var imgwidth = 0;
-                var imgheight = 0;
-                var maxwidth = 250;
-                var maxheight = 250;
+    //            img = new Image();
+    //            var imgwidth = 0;
+    //            var imgheight = 0;
+    //            var maxwidth = 250;
+    //            var maxheight = 250;
 
-            img.src = _URL.createObjectURL(file);
-            if (fileExt.toUpperCase() != "gif".toUpperCase() && fileExt.toUpperCase() != "png".toUpperCase())
-            {
-                img.onload = function ()
-                {
-                    imgwidth = this.width;
-                    imgheight = this.height;
+    //        img.src = _URL.createObjectURL(file);
+    //        if (fileExt.toUpperCase() != "gif".toUpperCase() && fileExt.toUpperCase() != "png".toUpperCase())
+    //        {
+    //            img.onload = function ()
+    //            {
+    //                imgwidth = this.width;
+    //                imgheight = this.height;
 
-                    if (imgwidth == maxwidth && imgheight == maxheight)
-                    {
-                        return true;
-                    }
-                    else
-                    {
+    //                if (imgwidth == maxwidth && imgheight == maxheight)
+    //                {
+    //                    return true;
+    //                }
+    //                else
+    //                {
 
-                        $('#image-preview').attr('src', ' ')
-                        $(_this).parent().find('img.imgStd').attr('src', fileOriginalIndex);
-                        //$("#CategoryFileLabel").text(imageName);
-                        $("#CategoryFileLabel").text('');
-                        $("#CategoryFileLabel").css("font-weight", "Bold");
+    //                    $('#image-preview').attr('src', ' ')
+    //                    $(_this).parent().find('img.imgStd').attr('src', fileOriginalIndex);
+    //                    //$("#CategoryFileLabel").text(imageName);
+    //                    $("#CategoryFileLabel").text('');
+    //                    $("#CategoryFileLabel").css("font-weight", "Bold");
 
 
-                        //$('.overlaySizeAlert').css({ "visibility": "visible", "opacity": "1" });
-                        ////alert("This image does not meet the size and format requirements. Please choose another image and try again");
-                        //$(_this).val('');
-                        //$(_this).parent().find('img.imgStd').attr('src', null);
-                        //$("#DeleteImage").hide();
-                    }
-                }
-            }
-            else
-            {
-                if (typeof fileOriginalIndex === "undefined")
-                    {
-                       // $(_this).parent().find('.imgStd').attr('src', '/images/NoImageAvailable.jpg');
-                        $(_this).parent().find('img.imgStd').attr('src', '/images/NoImageAvailable.jpg');
-                        return false;
-                    }
-                    else
-                    {
-                        $('#image-preview').attr('src', ' ')
-                        $(_this).parent().find('img.imgStd').attr('src', fileOriginalIndex);
-                         $("#CategoryFileLabel").text('');
-                       // $("#CategoryFileLabel").text('');
-                        $("#CategoryFileLabel").css("font-weight", "Bold");
-                    }
+    //                    //$('.overlaySizeAlert').css({ "visibility": "visible", "opacity": "1" });
+    //                    ////alert("This image does not meet the size and format requirements. Please choose another image and try again");
+    //                    //$(_this).val('');
+    //                    //$(_this).parent().find('img.imgStd').attr('src', null);
+    //                    //$("#DeleteImage").hide();
+    //                }
+    //            }
+    //        }
+    //        else
+    //        {
+    //            if (typeof fileOriginalIndex === "undefined")
+    //                {
+    //                   // $(_this).parent().find('.imgStd').attr('src', '/images/NoImageAvailable.jpg');
+    //                    $(_this).parent().find('img.imgStd').attr('src', '/images/NoImageAvailable.jpg');
+    //                    return false;
+    //                }
+    //                else
+    //                {
+    //                    $('#image-preview').attr('src', ' ')
+    //                    $(_this).parent().find('img.imgStd').attr('src', fileOriginalIndex);
+    //                     $("#CategoryFileLabel").text('');
+    //                   // $("#CategoryFileLabel").text('');
+    //                    $("#CategoryFileLabel").css("font-weight", "Bold");
+    //                }
 
-            }
+    //        }
             
-        });
-    });
+    //    });
+    //});
 
     $(document).on('click', '.overlay', function () {
         $('.MainVideo').attr("src", $(this).siblings('iframe').attr("src") + "?autoplay=1");
