@@ -123,7 +123,7 @@ namespace IPSU.Web.Areas.Admin.Controllers
                 using (var message = new MailMessage(new MailAddress(ConfigurationManager.AppSettings["AdminId"], "Admin"), new MailAddress(Email, "user"))
                 {
                     Subject = "Reset Password",
-                    Body = "Hello "+ Login_tbl.FirstName + ",<br/><br/>Welcome to Online Training Portal. We received a request to reset your password.Please <a href=" + ConfigurationManager.AppSettings["ChangePasswordUrl"] + "/" + UrlSecurityManager.Encrypt(EmailInfo.ID.ToString(), ConfigurationManager.AppSettings["SecurityKey"]) + ">Click Here</a> to reset Password<br/><br/>This link is only valid for 30 minutes. <br/><br/><br/>Regards,<br/>Admin"
+                    Body = "Hello "+ Login_tbl.FirstName + ",<br/><br/>Welcome to LearnX. We received a request to reset your password.Please <a href=" + ConfigurationManager.AppSettings["ChangePasswordUrl"] + "/" + UrlSecurityManager.Encrypt(EmailInfo.ID.ToString(), ConfigurationManager.AppSettings["SecurityKey"]) + ">Click Here</a> to reset Password<br/><br/>This link is only valid for 30 minutes. <br/><br/><br/>Regards,<br/>Admin"
                 })
                 {
                     message.IsBodyHtml = true;

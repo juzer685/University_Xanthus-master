@@ -417,6 +417,7 @@
     <Content Include="Images\headseat.png" />
     <Content Include="Images\icons8-eye-50.png" />
     <Content Include="Images\ips-sample-image.jpg" />
+    <Content Include="Images\Learnx.jpg" />
     <Content Include="Images\logo.jpg" />
     <Content Include="Images\logout-icon.png" />
     <Content Include="Images\menu-application.png" />
