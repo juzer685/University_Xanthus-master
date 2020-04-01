@@ -18,6 +18,39 @@ namespace University.Repository
         //        List<SubCategoryMaster> obj2 = context.SubCategoryMaster.Include("CategoryMaster").Where(y => y.IsDeleted != true && y.AssocitedCustID == AdminId).OrderByDescending(t => t.CreatedDate).ToList();
         //    }
         //}
+        public List<Login_tbl> GetCategoryUserList(decimal test)
+        {
+            using (var context = new UniversityEntities())
+            {
+                int AdminId = Convert.ToInt32(HttpContext.Current.Session["AdminLoginID"]);
+
+                 List<Login_tbl> obj1 = context.Login_tbl.Where(y => y.IsDeleted == false && y.AdminId == AdminId).ToList();
+                // List<SubCategoryMaster> obj2 = context.SubCategoryMaster.Include("CategoryMaster").Where(y => y.IsDeleted == false && y.AssocitedCustID == AdminId).OrderByDescending(t => t.CreatedDate).ToList();
+                // return (obj1);
+
+
+                var res = (from cm in context.CategoryUserMapping.Where(y => y.UserID == test && y.IsDeleted == false)    
+                           join l in context.SubCategoryMaster.Where(y => y.IsDeleted == false)
+                           on cm.CategoryID equals l.Id
+
+                           orderby cm.CreatedDate
+                           select new
+                           {
+                               cm.UserID,
+                               l.Name
+                               
+                             //  c.ImageURL
+
+                           }
+
+                          ).ToList();
+
+                return obj1;
+
+            }
+
+        }
+
         public bool DeleteCategoryUseerMapping(Decimal id)
         {
             using (var context = new UniversityEntities())

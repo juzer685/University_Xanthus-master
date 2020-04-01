@@ -20,3 +20,18 @@ $(document).ready(function () {
         }
     });
 });
+
+
+$('.number').keypress(function (event) {
+    if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+        event.preventDefault();
+    }
+});
+
+$('.capitalize').keyup(function (evt) {
+    var txt = $(this).val();
+
+
+    // Regex taken from php.js (http://phpjs.org/functions/ucwords:569)
+    $(this).val(txt.replace(/^(.)|\s(.)/g, function ($1) { return $1.toUpperCase(); }));
+});

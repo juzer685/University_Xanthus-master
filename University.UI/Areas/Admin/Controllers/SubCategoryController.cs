@@ -92,6 +92,12 @@ namespace University.UI.Areas.Admin.Controllers
 
             return View(viewModel);
         }
+  
+        public ActionResult GetUseNameMapping(decimal test)
+        {
+            var res = _subCategoryService.GetCategoryUserList(test);
+            return View();
+        }
         public ActionResult GetCategoryUserMapping(string Id)
         {
             CategoryMappingModel model;

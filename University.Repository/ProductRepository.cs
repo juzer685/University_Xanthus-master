@@ -612,10 +612,11 @@ namespace University.Repository
         {
             using (var context = new UniversityEntities())
             {
-                var productFaqVideo = context.ProductFAQVideos.FirstOrDefault(y => y.Id == productFAQVideo.Id && y.IsDeleted != true);
+                var productFaqVideo = context.ProductFAQVideos.FirstOrDefault(y => y.Id == productFAQVideo.Id && y.IsDeleted == false);
                 if (productFaqVideo != null)
                 {
                     productFaqVideo.UpdatedDate = DateTime.UtcNow;
+                    productFaqVideo.IsDeleted = false;
                     if (!string.IsNullOrWhiteSpace(productFAQVideo.VideoURL))
                     {
                         productFaqVideo.VideoURL = productFAQVideo.VideoURL;
@@ -631,6 +632,7 @@ namespace University.Repository
                 {
                     //productFAQ.Id = Guid.NewGuid();
                     productFAQVideo.CreatedDate = DateTime.UtcNow;
+                    productFAQVideo.IsDeleted = false;
                     context.ProductFAQVideos.Add(productFAQVideo);
                     context.SaveChanges();
                     return productFAQVideo.Id;

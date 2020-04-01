@@ -29,7 +29,7 @@
     else
     {
         <div class="register-logo">
-            <a href="#" style="margin-top:10px"><b>Update User</b></a>
+            <a href="#" style="margin-top:10px"><b>User Profile</b></a>
         </div>
     }
 
@@ -41,7 +41,7 @@
                 @Html.HiddenFor(x => x.ID)
 
                 <div class="input-group mb-3">
-                    @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control txtOnly", placeholder = "First Name",@maxlength="50" })
+                    @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control txtOnly capitalize", placeholder = "First Name", @maxlength = "50" })
                     @*<input type="text" class="form-control" name="FirstName" placeholder="First Name">*@
                     <div class="input-group-append">
                         <div class="input-group-text">
@@ -56,7 +56,7 @@
 
 
                 <div class="input-group mb-3">
-                    @Html.TextBoxFor(x => x.LastName, new { @class = "form-control txtOnly", placeholder = "Last Name",@maxlength="50" })
+                    @Html.TextBoxFor(x => x.LastName, new { @class = "form-control txtOnly capitalize", placeholder = "Last Name", @maxlength = "50" })
                     @*<input type="text" class="form-control" name="LastName" placeholder="LastName">*@
                     <div class="input-group-append">
                         <div class="input-group-text">
@@ -67,7 +67,7 @@
                 @Html.ValidationMessageFor(x => x.LastName, null, new { @class = "", style = "color:red;" })
 
                 <div class="input-group mb-3">
-                    @Html.TextBoxFor(x => x.MobileNo, new { @class = "form-control onlynumbers", placeholder = "Mobile Number",@maxlength="10" })
+                    @Html.TextBoxFor(x => x.MobileNo, new { @class = "form-control onlynumbers", placeholder = "Mobile Number", @maxlength = "10" })
                     @*<input type="text" class="form-control" name="MobileNo" placeholder="Mobile Number">*@
                     <div class="input-group-append">
                         <div class="input-group-text">
@@ -101,20 +101,21 @@
                 <div class="input-group mb-3">
                     @if (Model.ID != 0)
                     {
-                        @Html.PasswordFor(x => x.Password, new { @class = "form-control Password", placeholder = "Password", value = Model.Password, Model.ReadOnly })
+                        @*@Html.PasswordFor(x => x.Password, new { @class = "form-control Password", placeholder = "Password", value = Model.Password, Model.ReadOnly })*@
 
                     }
                     else
                     {
                         @Html.PasswordFor(x => x.Password, new { @class = "form-control", placeholder = "Password", value = Model.Password })
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
                     }
 
                     @*<input type="password" class="form-control" name="Password" placeholder="Password">*@
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-lock"></span>
-                        </div>
-                    </div>
+
 
                 </div>
                 @Html.ValidationMessageFor(x => x.Password, null, new { @class = "", style = "color:red;" })
@@ -122,17 +123,18 @@
                 <div class="input-group mb-3">
                     @if (Model.ID != 0)
                     {
-                        @Html.PasswordFor(x => x.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password", value = Model.Password, Model.ReadOnly })
+                        @*@Html.PasswordFor(x => x.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password", value = Model.Password, Model.ReadOnly })*@
                     }
                     else
                     {
                         @Html.PasswordFor(x => x.ConfirmPassword, new { @class = "form-control", placeholder = "Confirm Password", value = Model.Password })
-                    }
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-lock"></span>
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
                         </div>
-                    </div>
+                    }
+
 
                 </div>
                 @Html.ValidationMessageFor(x => x.ConfirmPassword, null, new { @class = "", style = "color:red;" })
@@ -156,18 +158,25 @@
                 </div>
             </div>
         </div>*@
-                <div class="row">
-                    <div class="col-12">
-                        <div class="icheck-primary">
-                            <input type="checkbox" id="agreeTerms" name="terms" value="agree" @Model.Checked />
-                            <label for="agreeTerms">
-                                I agree/accept the <a href="#">Terms & Conditions</a>
-                            </label>
+                @if (Model.ID != 0)
+                {
+                    
+                }
+                else
+                {
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="icheck-primary">
+                                <input type="checkbox" id="agreeTerms" name="terms" value="agree" @Model.Checked />
+                                <label for="agreeTerms">
+                                    I agree/accept the <a href="#">Terms & Conditions</a>
+                                </label>
+                            </div>
                         </div>
+                        <!-- /.col -->
+                        <!-- /.col -->
                     </div>
-                    <!-- /.col -->
-                    <!-- /.col -->
-                </div>
+                }
                 @if (Model.ID == 0)
                 {
                     <div class="row" style="justify-content:center;">

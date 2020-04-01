@@ -87,7 +87,7 @@
 </section>
 
 <script>
-       var fileOriginalIndex = "";
+       //var fileOriginalIndex = "";
         var baseURL = "/Admin/Product/";
         var blankId = '@Guid.Empty';
     $(document).ready(function () {
@@ -98,42 +98,75 @@
              $("#spec").addClass("disabled");
              $("#howto").addClass("disabled");
             //$('#myTab').tab();
-            $(document).on('submit', '[name=ProductForm]', function (e) {
-                // code
-                //$('#BasicDeatilsAssocitedID').val($("#ddlusrlst").val());
-            // alert($("#ddlusrlst").val());
-                var form = $(this);
-                var url = form.attr('action');
-                var formData = new FormData($(this)[0]);
-                $.ajax({
-                    type: "POST",
-                    url: url,
-                    data: formData, // serializes the form's elements.
-                    enctype: 'multipart/form-data',
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    success: function (data) {
-                        $('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
-                        //alert("Data Saved Successfully"); // show response from the php script.
-                        $("#HdProductId").val(data);
-                        $("#Id").val(data);
-                         fileOriginalIndex = $("#image-preview").attr('src');
-                        _showSuccessMessage("Data Saved Successfully");
-                        setTimeout(function () { $('#userguide').trigger('click'); }, 1500);
-                       
-                        $('#userguide').removeClass("disabled");
-                        $("#video").removeClass("disabled");
-                        $("#FAQ").removeClass("disabled");
-                        $("#spec").removeClass("disabled");
-                        $("#howto").removeClass("disabled");
-                         
-                        //Cancel();
-                        //$("#frmDiv").html(data);
-                    }
-                });
+        $(document).on('submit', '[name=ProductForm]', function (e) {
 
-                e.preventDefault();
+        //    //image validation
+        const fi = document.getElementById('file'); 
+        // Check if any file is selected. 
+            if (fi.files.length > 0)
+            { 
+                for (const i = 0; i <= fi.files.length - 1; i++)
+                { 
+  
+                    const fsize = fi.files.item(i).size; 
+                    const file = Math.round((fsize / 1024)); 
+                    // The size of the file. 
+                    if (file >= 5120)
+                    { 
+                          _showErrorMessage("Please select a Image less than 5mb");
+                            
+                          e.preventDefault();
+                    }
+                    //else if (file < 2048)
+                    //{ 
+                    //    alert( 
+                    //      "File too small, please select a file greater than 2mb"); 
+                    //}
+                    else
+                    { 
+                         var form = $(this);
+                        var url = form.attr('action');
+                        var formData = new FormData($(this)[0]);
+                        $.ajax({
+                            type: "POST",
+                            url: url,
+                            data: formData, // serializes the form's elements.
+                            enctype: 'multipart/form-data',
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            success: function (data) {
+                                $('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
+                                //alert("Data Saved Successfully"); // show response from the php script.
+                                $("#HdProductId").val(data);
+                                $("#Id").val(data);
+                                 fileOriginalIndex = $("#image-preview").attr('src');
+                                _showSuccessMessage("Data Saved Successfully");
+                                setTimeout(function () { $('#userguide').trigger('click'); }, 1500);
+                       
+                                $('#userguide').removeClass("disabled");
+                                $("#video").removeClass("disabled");
+                                $("#FAQ").removeClass("disabled");
+                                $("#spec").removeClass("disabled");
+                                $("#howto").removeClass("disabled");
+                         
+                                //Cancel();
+                                //$("#frmDiv").html(data);
+                            }
+                        });
+                              e.preventDefault(); 
+                        
+                    } 
+                } 
+            } 
+        //    //iamge validation end
+
+
+           
+
+                  
+              
+                
             });
             
 
@@ -205,26 +238,27 @@
     function SaveProductUserGuide(e) {
         $('#ProductUserGuideAssocitedID').val($("#ddlusrlst").val());
 
-            var form = $(e.target);
-            var url = form.attr('action');
-            var formData = new FormData($(e.target)[0]);
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: formData, // serializes the form's elements.
-                enctype: 'multipart/form-data',
-                cache: false,
-                contentType: false,
-                processData: false,
-                success: function (data) {
-                    $('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
-                    //alert("Data Saved Successfully");
-                    _showSuccessMessage("Data Saved Successfully");
-                    setTimeout(function () { $('#video').trigger('click'); }, 1500);
-                    //setTimeout(function () { location.reload(); }, 1500);
-                }
-            });
+                            var form = $(e.target);
+                            var url = form.attr('action');
+                            var formData = new FormData($(e.target)[0]);
+                            $.ajax({
+                                type: "POST",
+                                url: url,
+                                data: formData, // serializes the form's elements.
+                                enctype: 'multipart/form-data',
+                                cache: false,
+                                contentType: false,
+                                processData: false,
+                                success: function (data) {
+                                    $('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
+                                    //alert("Data Saved Successfully");
+                                    _showSuccessMessage("Data Saved Successfully");
+                                    setTimeout(function () { $('#video').trigger('click'); }, 1500);
+                                    //setTimeout(function () { location.reload(); }, 1500);
+                                }
+                            });
 
-            e.preventDefault();
+                            e.preventDefault();
+                   
         }
 </script>

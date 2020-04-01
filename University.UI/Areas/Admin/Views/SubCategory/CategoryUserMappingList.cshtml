@@ -186,6 +186,35 @@
     function testclick() {
         document.getElementById("test").disabled = false;
     }
-    
+
+
+   
+
+
+        $( ".test" ).change(function ()
+        {
+            alert();
+        var countryID = $(this).val();
+        
+            $.ajax({
+                type: 'POST',
+                url: "/Admin/SubCategory/GetUseNameMapping?test="+ countryID ,
+               // url:'ajaxFile.php',
+                data:'country_id='+countryID,
+                success: function (data)
+                {
+                    alert(data);
+                    //$('#state').html(html);
+                    //$('#city').html('<option value="">Select state first</option>'); 
+                }
+            }); 
+        
+        //else
+        //{
+        //    $('#state').html('<option value="">Select country first</option>');
+        //    $('#city').html('<option value="">Select state first</option>'); 
+        //}
+    });
+
     
 </script>

@@ -122,8 +122,8 @@
 
 
     function DeleteFAQVideo(event, id) {
-        //$("#DeleteConfirmationModal").modal('show');
-        //$(document).on('click', 'button#confirmation-yes', function () {
+        $("#DeleteConfirmationModal").modal('show');
+        $(document).on('click', 'button#confirmation-yes', function () {
         $.ajax({
             type: "POST",
             url: "/Admin/Product/DeleteProductFAQVideo",
@@ -131,11 +131,11 @@
             cache: false,
             success: function (data) {
                 //$('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
-                _showSuccessMessage("Deletion Successful");
+                _showSuccessMessage("Data Deleted Successfully");
                 $("#FaqVideoPopup").modal('hide');
             }
         });
-        //});
+        });
     }
 
 
@@ -210,6 +210,7 @@
                 $('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
                 _showSuccessMessage("Data Saved Successfully"); // show response from the php script.
                 //Cancel();
+                 $("#FaqVideoPopup").modal('hide');
                 $(form).replaceWith(data);
             }
         });

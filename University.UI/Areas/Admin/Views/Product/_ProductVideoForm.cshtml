@@ -3,23 +3,23 @@
     <link href="~/dist/css/Custom.css" rel="stylesheet" />
 
 
-
+    
 <form onsubmit="SaveProductProductVideoForms(event)" name="ProductVideoForm" enctype="multipart/form-data" method="post" action="/Admin/Product/SaveProductVideo">
     <div class="row py-2">
         <div class="col">
             <input name="AssocitedID" id="ProductvideosAssocitedID" type="hidden" />
             @Html.HiddenFor(y => y.ProductId)
             @Html.Hidden("ProductVideoId", Model.Id, new { @Value = Model.Id })
-            @Html.TextBoxFor(m => m.Title, new { @class = "form-control txtOnly text-overflow", @required = "required", @pattern = "^[^<>%$*@!#]*$",@maxlength="50"})
+            @Html.TextBoxFor(m => m.Title, new { @class = "form-control txtOnly text-overflow", @required = "required", @pattern = "^[^<>%$*@!#]*$",@maxlength="50",title=Model.Title})
             @*@Html.ValidationMessageFor(x => x.Title, null, new { @class = "", style = "color:red;" })*@
             @*@Html.ValidationMessageFor(m => m.Title)*@
         </div>
         <div class="col input-icon ">
-            @Html.TextBoxFor(m => m.VideoRate, new { @class = "form-control", @required = "required"})
+            @Html.TextBoxFor(m => m.VideoRate, new { @class = "form-control number", @required = "required"})
             <i>$</i>
         </div>
         <div class="col">
-            @Html.TextAreaFor(m => m.Decription, new { @class = "form-control text-overflow", rows = "1", @required = "required", @maxlength="500"})
+            @Html.TextBoxFor(m => m.Decription, new { @class = "form-control text-overflow", rows = "1", @required = "required", @maxlength="500",title=Model.Decription})
             @*@Html.ValidationMessageFor(x => x.Decription, null, new { @class = "", style = "color:red;" })*@
             @*@Html.ValidationMessageFor(m => m.Decription)*@
         </div>
@@ -28,29 +28,17 @@
 
             <div class="col">
                 @*@Html.TextBoxFor(m => m.VideoURL, new { @class = "form-control", @required = "required", @pattern = @"^https?:\/\/[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-/]+$", title = "Ex : https://player.vimeo.com/video/322925106" })*@
-                @Html.TextBoxFor(m => m.VideoURL, new { @class = "form-control", @required = "required", @pattern = @"^https?:\/\/[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-/]+$", title = "Ex : Embed video Path not copy perfect" })
+                @Html.TextBoxFor(m => m.VideoURL, new { @class = "form-control text-overflow", @required = "required", @pattern = @"^https?:\/\/[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-/]+$",title=Model.VideoURL, @*title = "Ex : Embed video Path not copy perfect"*@ })
             </div>
         }
         else
         {
             <div class="col">
-                @Html.TextBoxFor(m => m.VideoURL, new { @class = "form-control", @required = "required", @pattern = @"^https?:\/\/[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-/]+$", title = "Ex : Embed video Path not copy perfect" })
+                @Html.TextBoxFor(m => m.VideoURL, new { @class = "form-control text-overflow", @required = "required", @pattern = @"^https?:\/\/[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-/]+$",title=Model.VideoURL, @*title = "Ex : Embed video Path not copy perfect"*@ })
 
             </div>
         }
-       
-        <div class="col" hidden>
-            @if (!string.IsNullOrWhiteSpace(Model.VideoURL))
-            {
-                <a onclick="ShowProductVideo('@Model.VideoURL'); return false;" href="" target_="blank"><img width="100px" height="70px" class="Thumbnail" src="@Model.ImageFullPath" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" /></a>
-                <input type="file" onchange="readURLThumnale(this);" class="FileInput" name="ProductVideoImg" accept="image/*" />
-            }
-            else
-            {
-                <img width="100px" height="70px" class="Thumbnail" src="@Model.ImageFullPath" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" />
-                <input type="file" onchange="readURLThumnale(this);" class="FileInput" name="ProductVideoImg" accept="image/*" />
-            }
-        </div>
+      
       
         <div class="col">
             <input type="submit" class="btn btn-primary" value="Save" />
@@ -60,6 +48,8 @@
 
     </div>
 </form>
+
+<script src="~/Scripts/ProjectValidation.js"></script>
 
 
 

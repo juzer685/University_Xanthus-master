@@ -98,7 +98,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary" >Submit</button>
                     <button type="button" class="btn btn-default reset" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -161,32 +161,56 @@
 
         $(document).on('submit', '#subCategoryForm', function (e) {
             //  $('#SubcategoryAssocitedID').val($("#ddlusrlst").val());
-
-            var form = $(this);
-            var url = form.attr('action');
-            var formData = new FormData($(this)[0]);
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: formData, // serializes the form's elements.
-                enctype: 'multipart/form-data',
-                cache: false,
-                contentType: false,
-                processData: false,
-                success: function (data) {
-                    //$('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
-                    ////alert("Data Saved Successfully"); // show response from the php script.
-                    //setTimeout(function () {
-                    //    location.reload();
-                    //}, 1500);
-                    $("#AddSubCategoryModal").modal("hide");
-                    _showSuccessMessage("Data Saved Successfully");
-                    setTimeout(function () { location.reload(); }, 1000);
-                }
-            });
-            e.preventDefault();
-
-
+              const fi = document.getElementById('categoryfile'); 
+        // Check if any file is selected. 
+            if (fi.files.length > 0)
+            { 
+                for (const i = 0; i <= fi.files.length - 1; i++)
+                { 
+  
+                    const fsize = fi.files.item(i).size; 
+                    const file = Math.round((fsize / 1024)); 
+                    // The size of the file. 
+                    if (file >= 5120)
+                    { 
+                        
+                             _showErrorMessage("Please select a Image less than 5mb");
+                            
+                          e.preventDefault();
+                    }
+                    //else if (file < 2048)
+                    //{ 
+                    //    alert( 
+                    //      "File too small, please select a file greater than 2mb"); 
+                    //}
+                    else
+                    { 
+                         var form = $(this);
+                        var url = form.attr('action');
+                        var formData = new FormData($(this)[0]);
+                        $.ajax({
+                            type: "POST",
+                            url: url,
+                            data: formData, // serializes the form's elements.
+                            enctype: 'multipart/form-data',
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            success: function (data) {
+                                //$('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
+                                ////alert("Data Saved Successfully"); // show response from the php script.
+                                //setTimeout(function () {
+                                //    location.reload();
+                                //}, 1500);
+                                $("#AddSubCategoryModal").modal("hide");
+                                _showSuccessMessage("Data Saved Successfully");
+                                setTimeout(function () { location.reload(); }, 1000);
+                            }
+                        });
+                        e.preventDefault();
+                    } 
+                } 
+            } 
         });
     });
 
@@ -238,5 +262,8 @@
 
         $(".checktest").attr("required", true);
     }
-
+    function addimages() {
+      
+    }
+   
 </script>

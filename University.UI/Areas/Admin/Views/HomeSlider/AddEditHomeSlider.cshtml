@@ -26,20 +26,21 @@
     </div>
     <div class="form-group">
         <label for="email">Description</label>
-        @Html.TextAreaFor(m => m.TextDescription, new { @class = "form-control", @required = "required", @maxlength = "500" })
+        @Html.TextAreaFor(m => m.TextDescription, new { @class = "form-control", @required = "required", @maxlength = "1000" })
         @*@Html.ValidationMessageFor(x => x.TextDescription, null, new { @class = "", style = "color:red;" })*@
         @*@Html.ValidationMessageFor(m => m.TextDescription)*@
     </div>
-    <div class="form-group">
+    @*<div class="form-group">
         <label for="ImageUrl">Image alt (SEO)</label>
         @Html.TextBoxFor(m => m.ImageALT, new { @class = "form-control" ,@maxlength = "100" })
         @Html.ValidationMessageFor(m => m.ImageALT)
-    </div>
+    </div>*@
     <div class="form-group">
-        <label class="info-text" for="ImageUrl" style="color:red;">Slider Image <span class="ShortText">(Please ensure featured image size is Less than 2MB)</span></label>
+        <label class="info-text" for="ImageUrl" style="color:red;">Slider Image <span class="ShortText">(Please ensure featured image size is Less than 5MB)</span></label>
         <div class="input-group">
             <div class="custom-file">
-                <input type="file" id="file" name="file" class="custom-file-input" required accept="image/jpeg" onchange="readURL(this);">
+
+                <input type="file" id="file" name="file" class="custom-file-input" required accept="image/*" onchange="readURL(this);">
                 @if (Model.ImageURL != "")
                 {
                     <label class="custom-file-label" for="exampleInputFile">@Model.ImageURL</label>

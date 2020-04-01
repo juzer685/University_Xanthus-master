@@ -52,7 +52,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Description</label>
-                                        @Html.TextAreaFor(m => m.Description, new { @class = "form-control" ,@maxlength="500"})
+                                        @Html.TextAreaFor(m => m.Description, new { @class = "form-control" ,@maxlength="1000"})
                                         @*@Html.ValidationMessageFor(x => x.Description, null, new { @class = "", style = "color:red;", })*@
                                         @*@Html.ValidationMessageFor(m => m.Description)*@
                                     </div>
@@ -78,7 +78,7 @@
                                         <label class="info-text" for="ImageUrl" style="color:red;">Image <span class="ShortText">(Please ensure featured image size is Less than 2MB)</span></label>
                                         <div class="input-group">
                                             <div class="custom-file">
-                                                <input type="file" name="file" class="custom-file-input" id="file" required accept="image/jpeg" onchange="readURL(this);">
+                                                <input type="file" name="file" class="custom-file-input" id="file" required accept="image/*" onchange="readURL(this);">
                                                 @if (Model.ImageURL != "")
                                                 {
                                                     <label class="custom-file-label" for="exampleInputFile">@Model.ImageURL</label>
@@ -172,28 +172,53 @@
         // code
        // $('#HomebannerAssocitedID').val($("#ddlusrlst").val());
        // alert($("#ddlusrlst").val());
-        var form = $(this);
-        var url = form.attr('action');
-        var formData = new FormData($(this)[0]);
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: formData, // serializes the form's elements.
-            enctype: 'multipart/form-data',
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: function (data) {
-                $('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
-                //alert("Data Saved Successfully"); // show response from the php script.
-                _showSuccessMessage("Home Banner Saved Succesfully");
-                setTimeout(function () {
-                    location.reload();
-                }, 1500);
-            }
-        });
 
-        e.preventDefault();
+        const fi = document.getElementById('file'); 
+        // Check if any file is selected. 
+        if (fi.files.length > 0) { 
+            for (const i = 0; i <= fi.files.length - 1; i++) { 
+  
+                const fsize = fi.files.item(i).size; 
+                const file = Math.round((fsize / 1024)); 
+                // The size of the file. 
+                if (file >= 5120)
+                { 
+                   _showErrorMessage("Please select a Image less than 5mb");
+                            
+                          e.preventDefault();
+                }
+                //else if (file < 2048) { 
+                //    alert( 
+                //      "File too small, please select a file greater than 2mb"); 
+                //}
+                else
+                { 
+                    
+                        var form = $(this);
+                        var url = form.attr('action');
+                        var formData = new FormData($(this)[0]);
+                        $.ajax({
+                            type: "POST",
+                            url: url,
+                            data: formData, // serializes the form's elements.
+                            enctype: 'multipart/form-data',
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            success: function (data) {
+                                $('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
+                                //alert("Data Saved Successfully"); // show response from the php script.
+                                _showSuccessMessage("Home Banner Saved Succesfully");
+                                setTimeout(function () {
+                                    location.reload();
+                                }, 1500);
+                            }
+                        });
+
+                        e.preventDefault();
+                } 
+            } 
+        } 
     });
     function Cancel() {
         window.location.href = '/Home/index';

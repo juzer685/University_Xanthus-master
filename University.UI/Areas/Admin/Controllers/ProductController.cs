@@ -217,21 +217,44 @@ namespace University.UI.Areas.Admin.Controllers
         public ActionResult SaveProductProductFAQVideo(ProductFAQVideoViewModel model, int FaqVideoId)
         {
             model.AssocitedCustID = Convert.ToInt32(Session["AdminLoginID"]);
-            model.Id = FaqVideoId;
-            var res = AutoMapper.Mapper.Map<ProductFAQVideoViewModel, ProductFAQVideos>(model);
-            if (model.FAQVideo != null)
+            //model.Id = FaqVideoId;
+            if(FaqVideoId ==0)
             {
-                res.VideoURL = UploadFileOnServer(ProductImagePath, model.FAQVideo);
+                model.Id = FaqVideoId;
+                var res = AutoMapper.Mapper.Map<ProductFAQVideoViewModel, ProductFAQVideos>(model);
+                if (model.FAQVideo != null)
+                {
+                    res.VideoURL = UploadFileOnServer(ProductImagePath, model.FAQVideo);
+                }
+                if (model.FAQVideoImg != null)
+                {
+                    res.ImageURL = UploadFileOnServer(ProductImagePath, model.FAQVideoImg);
+                }
+                var productFaqVideoId = _productService.SaveProductFAQVideo(res);
+                var productFaqVideo = _productService.GetProductFAQVideo(productFaqVideoId);
+                var viewModel = AutoMapper.Mapper.Map<ProductFAQVideos, ProductFAQVideoViewModel>(productFaqVideo);
+                if (viewModel == null) { viewModel = new ProductFAQVideoViewModel(); }
+                return View("_FAQVideoForm", viewModel);
             }
-            if (model.FAQVideoImg != null)
+            else
             {
-                res.ImageURL = UploadFileOnServer(ProductImagePath, model.FAQVideoImg);
+                model.Id = FaqVideoId;
+                var res = AutoMapper.Mapper.Map<ProductFAQVideoViewModel, ProductFAQVideos>(model);
+                if (model.FAQVideo != null)
+                {
+                    res.VideoURL = UploadFileOnServer(ProductImagePath, model.FAQVideo);
+                }
+                if (model.FAQVideoImg != null)
+                {
+                    res.ImageURL = UploadFileOnServer(ProductImagePath, model.FAQVideoImg);
+                }
+                var productFaqVideoId = _productService.SaveProductFAQVideo(res);
+                var productFaqVideo = _productService.GetProductFAQVideo(productFaqVideoId);
+                var viewModel = AutoMapper.Mapper.Map<ProductFAQVideos, ProductFAQVideoViewModel>(productFaqVideo);
+                if (viewModel == null) { viewModel = new ProductFAQVideoViewModel(); }
+                return View("_FAQVideoForm", viewModel);
             }
-            var productFaqVideoId = _productService.SaveProductFAQVideo(res);
-            var productFaqVideo = _productService.GetProductFAQVideo(productFaqVideoId);
-            var viewModel = AutoMapper.Mapper.Map<ProductFAQVideos, ProductFAQVideoViewModel>(productFaqVideo);
-            if (viewModel == null) { viewModel = new ProductFAQVideoViewModel(); }
-            return View("_FAQVideoForm", viewModel);
+            
         }
         public ActionResult DeleteProductFAQVideo(int FaqVideoId)
         {

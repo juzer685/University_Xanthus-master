@@ -2,7 +2,7 @@
 <style>
     #image-preview {
         width: 250px;
-        height: 250px;
+        height: 120px;
     }
 
     .info-text {
@@ -37,7 +37,7 @@
             </div>
             <div class="form-group">
                 <label for="Description">Course Description</label>
-                @Html.TextAreaFor(m => m.Description, new { @class = "form-control text-overflow", @required = "required", @maxlength = "500" })
+                @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @required = "required", @maxlength = "1000" ,style="width: 940px;height:300px;"})
                 @*@Html.ValidationMessageFor(x => x.Description, null, new { @class = "", style = "color:red;" })*@
                 @*@Html.ValidationMessageFor(m => m.Description)*@
             </div>
@@ -46,10 +46,10 @@
            
 
             <div class="form-group">
-                <label class="info-text" for="ImageUrl" style="color:red;">Image <span class="ShortText">(Please ensure featured image size is Less than 2MB)</span></label>
+                <label class="info-text" for="ImageUrl" style="color:red;">Image <span class="ShortText">(Please ensure featured image size is Less than 5MB)</span></label>
                 <div class="input-group">
                     <div class="custom-file">
-                        <input type="file" id="file" name="file" class="custom-file-input pointer validateHeightWidth" required accept="image/jpeg" onchange="readURL(this);">
+                        <input type="file" id="file" name="file" class="custom-file-input pointer validateHeightWidth" required  accept="image/*" onchange="readURL(this);">
                         @*<input type="file" name="file" class="custom-file-input pointer " id="file" accept="image/jpeg" onchange="readURL(this);">*@
                         @if (Model.ImageURL != "")
                         {
@@ -69,11 +69,11 @@
                 @*<img id="image-preview" src=@Model.CheckImage alt="" class="imgStd" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" />*@
             </div>
 
-            <div class="form-group">
+            @*<div class="form-group">
                 <label for="ImageUrl">Image alt (SEO)</label>
                 @Html.TextBoxFor(m => m.ImageALT, new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => m.ImageALT)
-            </div>
+            </div>*@
         </div>
         <div class="right">
             <button type="submit" class="btn btn-primary">Save</button>
