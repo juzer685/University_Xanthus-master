@@ -87,7 +87,7 @@
 
 
 
-<div class="modal fade subcatmodel" id="AddCategoryMapping">
+<div class="modal fade subcatmodel" id="AddCategoryMapping" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog" onclick="testclick()" id="test">
         <form action="/Admin/SubCategory/AddCategoryUserMapping" id="CategoryMapping" method="post">
             <div class="modal-content">
@@ -191,39 +191,34 @@
    
 
 
-        $( ".test" ).change(function ()
-        {
-            //alert();
-        var UserID = $(this).val();
+    //    $( ".test" ).change(function ()
+    //    {
+    //        //alert();
+    //    var UserID = $(this).val();
         
-            $.ajax({
-                type: 'GET',
-                url: "/Admin/SubCategory/GetUseNameMapping?test=" + UserID,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-               // url:'ajaxFile.php',
-               // data:'country_id='+countryID,
-                success: function (data)
-                {
+    //        $.ajax({
+    //            type: 'GET',
+    //            url: "/Admin/SubCategory/GetUseNameMapping?test=" + UserID,
+    //            contentType: "application/json; charset=utf-8",
+    //            dataType: "json",
+    //           // url:'ajaxFile.php',
+    //           // data:'country_id='+countryID,
+    //            success: function (data)
+    //            {
                     
-                   // alert(data);
-                    var markup = "<option value='0'>Select City</option>";
-                    //for (var x = 0; x < data.length; x++) {
-                    //    markup += "<option value=" + data[x].countryID + ">" + data[x].countryID + "</option>";
-                    //}
-                     $(".categoryuserdefine").html(markup).show();
+    //               // alert(data);
+    //                var markup = "<option value='0'>Select City</option>";
+    //                for (var x = 0; x < data.length; x++) {
+    //                    markup += "<option value=" + data[x].countryID + ">" + data[x].countryID + "</option>";
+    //                }
+    //                 $(".categoryuserdefine").html(markup).show();
 
-                    //$('.categoryuserdefine').html();
-                    //$('#city').html('<option value="">Select state first</option>'); 
-                }
-            }); 
+                    
+    //            }
+    //        }); 
         
-        //else
-        //{
-        //    $('#state').html('<option value="">Select country first</option>');
-        //    $('#city').html('<option value="">Select state first</option>'); 
-        //}
-    });
+        
+    //});
 
     
 </script>

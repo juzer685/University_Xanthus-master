@@ -101,7 +101,15 @@
         $(document).on('submit', '[name=ProductForm]', function (e) {
 
         //    //image validation
-        const fi = document.getElementById('file'); 
+            const fi = document.getElementById('file'); 
+            //var imageName = $("#CategoryFileLabel").text();
+            //var file = imageName[0].files[0];
+           // var file = $(this)[0].files[0];
+           // var _this = $(this);
+           // var fileExt = file.name.substr(file.name.lastIndexOf(".") + 1);
+
+
+          // var  myfile= $( this ).val();
         // Check if any file is selected. 
             if (fi.files.length > 0)
             { 
@@ -117,6 +125,13 @@
                             
                           e.preventDefault();
                     }
+                    //else if (fileExt.toUpperCase() != "gif".toUpperCase() && fileExt.toUpperCase() != "png".toUpperCase())
+   
+                    //{
+                    //     _showErrorMessage("Please select a Image less than 5mb");
+                            
+                    //      e.preventDefault();
+                    //}
                     //else if (file < 2048)
                     //{ 
                     //    alert( 
@@ -236,9 +251,27 @@
             e.preventDefault();
         }
     function SaveProductUserGuide(e) {
-        $('#ProductUserGuideAssocitedID').val($("#ddlusrlst").val());
+      //  $('#ProductUserGuideAssocitedID').val($("#ddlusrlst").val());
+         const fi = document.getElementById('file'); 
+        // Check if any file is selected. 
+        if (fi.files.length > 0) {
+            for (const i = 0; i <= fi.files.length - 1; i++) {
 
-                            var form = $(e.target);
+                const fsize = fi.files.item(i).size;
+                const file = Math.round((fsize / 1024));
+                // The size of the file. 
+                if (file >= 5120) {
+                    _showErrorMessage("Please select a Image less than 5mb");
+
+                    e.preventDefault();
+                }
+                //else if (file < 2048)
+                //{ 
+                //    alert( 
+                //      "File too small, please select a file greater than 2mb"); 
+                //}
+                else {
+                     var form = $(e.target);
                             var url = form.attr('action');
                             var formData = new FormData($(e.target)[0]);
                             $.ajax({
@@ -260,5 +293,15 @@
 
                             e.preventDefault();
                    
+                }
+            }
+        }
+
+
+
+
+
+
+                           
         }
 </script>

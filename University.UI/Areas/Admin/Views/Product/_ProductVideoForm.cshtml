@@ -15,7 +15,7 @@
             @*@Html.ValidationMessageFor(m => m.Title)*@
         </div>
         <div class="col input-icon ">
-            @Html.TextBoxFor(m => m.VideoRate, new { @class = "form-control number", @required = "required"})
+            @Html.TextBoxFor(m => m.VideoRate, new { @class = "form-control number", @required = "required",@maxlength="6"})
             <i>$</i>
         </div>
         <div class="col">

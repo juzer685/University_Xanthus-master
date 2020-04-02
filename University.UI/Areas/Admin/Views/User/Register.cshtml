@@ -13,6 +13,7 @@
     <link href="~/dist/css/Loader.css" rel="stylesheet" />
 }
 
+
 <div id="loaderring">
     <p class="loaderClass">
         <img src="~/Images/ajax_loader.gif" />
@@ -169,7 +170,7 @@
                             <div class="icheck-primary">
                                 <input type="checkbox" id="agreeTerms" name="terms" value="agree" @Model.Checked />
                                 <label for="agreeTerms">
-                                    I agree/accept the <a href="#">Terms & Conditions</a>
+                                    I agree/accept the <a href="#" onclick="popuptermandcondition()">Terms & Conditions</a>
                                 </label>
                             </div>
                         </div>
@@ -229,6 +230,14 @@
     <script src="~/Scripts/Register.js"></script>
     <script src="~/Scripts/ProjectValidation.js"></script>
 }
+
+
+<script>
+     function popuptermandcondition() {
+        $("#DeleteConfirmationModals").modal('show');
+       
+    }
+</script>
 
 
 

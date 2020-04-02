@@ -39,8 +39,8 @@
 
 
 
-            @*@Html.DropDownListFor(x => x.CategoryId, new SelectList(Model.SubCategoryMasterlst, "Id", "Name"), new { @required = "required", @class = "form-control categoryuserdefine", })
-        @Html.ValidationMessageFor(x => x.CategoryId, null, new { @class = "", style = "color:red;" })*@
+            @Html.DropDownListFor(x => x.CategoryId, new SelectList(Model.SubCategoryMasterlst, "Id", "Name"), new { @required = "required", @class = "form-control categoryuserdefine", })
+        @Html.ValidationMessageFor(x => x.CategoryId, null, new { @class = "", style = "color:red;" })
 
             @*<div class="errorTxtt"></div>*@
             @*<select name="CategoryID" class="form-control" style="width: 100%;">
@@ -56,8 +56,8 @@
             }
         </select>*@
 
-            <select id="ddlcity" class="categoryuserdefine form-control" name="ddlcity" style="width: 200px">
-            </select>
+            @*<select id="ddlcity" class="categoryuserdefine form-control" name="ddlcity" style="width: 200px">
+            </select>*@
         </div>
     </div>
 </div>
