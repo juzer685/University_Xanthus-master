@@ -18,36 +18,51 @@ namespace University.Repository
         //        List<SubCategoryMaster> obj2 = context.SubCategoryMaster.Include("CategoryMaster").Where(y => y.IsDeleted != true && y.AssocitedCustID == AdminId).OrderByDescending(t => t.CreatedDate).ToList();
         //    }
         //}
-        public List<Login_tbl> GetCategoryUserList(decimal test)
+        public IEnumerable<SubCategoryMaster> GetCategoryUserList(decimal test)
         {
             using (var context = new UniversityEntities())
             {
                 int AdminId = Convert.ToInt32(HttpContext.Current.Session["AdminLoginID"]);
-
-                 List<Login_tbl> obj1 = context.Login_tbl.Where(y => y.IsDeleted == false && y.AdminId == AdminId).ToList();
-                // List<SubCategoryMaster> obj2 = context.SubCategoryMaster.Include("CategoryMaster").Where(y => y.IsDeleted == false && y.AssocitedCustID == AdminId).OrderByDescending(t => t.CreatedDate).ToList();
-                // return (obj1);
-
-
-                var res = (from cm in context.CategoryUserMapping.Where(y => y.UserID == test && y.IsDeleted == false)    
-                           join l in context.SubCategoryMaster.Where(y => y.IsDeleted == false)
-                           on cm.CategoryID equals l.Id
-
+                var res = (from cm in context.CategoryUserMapping.Where(y => y.UserID == test && y.IsDeleted == false)
+                           join s in context.SubCategoryMaster.Where(y => y.IsDeleted == false)
+                           on cm.CategoryID equals s.Id
+                           join l in context.Login_tbl.Where(y => y.IsDeleted == false && y.ID == test)
+                           on cm.UserID equals l.ID
                            orderby cm.CreatedDate
                            select new
                            {
+                               //categorylist = context.SubCategoryMaster.Where(y => y.IsDeleted == false).ToList(),
+                               // ProductVideos = context.CategoryUserMapping.Where(y => y.IsDeleted != true).ToList(),
                                cm.UserID,
-                               l.Name
-                               
-                             //  c.ImageURL
+                               s.Name,
+                               cm.CategoryID
+                           }).ToList();
+                var categorylist = context.SubCategoryMaster.Where(y => y.IsDeleted == false).ToList();
 
-                           }
+               
+                var finalcategory = categorylist.Where(x => res.Select(d => d.Name).Contains(x.Name)).ToList();
+                var finalcategorylist = categorylist.Except(finalcategory);
+                //ar finalcategorylist = res.ToList();
+                //CategoryUserMapping categoryUserMappings = new CategoryUserMapping();
 
-                          ).ToList();
+                //List<CategoryUserMapping> categoryUserMappings1 = new List<CategoryUserMapping>();
+                ////var categoryUserMappings1 = new lis
+                //foreach (var subcategory in finalcategorylist)
+                //{
+                //    categoryUserMappings1.Add(new CategoryUserMapping
+                //    {
 
-                return obj1;
+                //        CategoryID = subcategory.CategoryId,
+                //        CategoryName = subcategory.Name
+                //    });
 
+
+
+                //}
+
+                return finalcategorylist;
             }
+
 
         }
 
@@ -65,15 +80,19 @@ namespace University.Repository
                 return true;
             }
         }
-        public (List<Login_tbl>, List<SubCategoryMaster>) GetCategoryUserMappingList()
+        public (List<Login_tbl>,List<SubCategoryMaster>) GetCategoryUserMappingList()
         {
             using (var context = new UniversityEntities())
             {
+                
                 int AdminId = Convert.ToInt32(HttpContext.Current.Session["AdminLoginID"]);
 
                 List<Login_tbl> obj1 = context.Login_tbl.Where(y => y.IsDeleted == false && y.AdminId == AdminId).ToList();
                 List<SubCategoryMaster> obj2 = context.SubCategoryMaster.Include("CategoryMaster").Where(y => y.IsDeleted == false && y.AssocitedCustID == AdminId).OrderByDescending(t => t.CreatedDate).ToList();
-                return (obj1, obj2);
+
+             
+
+                return (obj1,obj2);
 
 
             }

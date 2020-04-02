@@ -36,12 +36,12 @@
     <div class="col-md-6">
         <div class="form-group">
             <label>Choose Category</label>
-           
 
 
-            @Html.DropDownListFor(x => x.CategoryId, new SelectList(Model.SubCategoryMasterlst, "Id", "Name"), new { @required = "required", @class = "form-control ", })
-            @Html.ValidationMessageFor(x => x.CategoryId, null, new { @class = "", style = "color:red;" })
-           
+
+            @*@Html.DropDownListFor(x => x.CategoryId, new SelectList(Model.SubCategoryMasterlst, "Id", "Name"), new { @required = "required", @class = "form-control categoryuserdefine", })
+        @Html.ValidationMessageFor(x => x.CategoryId, null, new { @class = "", style = "color:red;" })*@
+
             @*<div class="errorTxtt"></div>*@
             @*<select name="CategoryID" class="form-control" style="width: 100%;">
             <option value="0" selected>Select Category</option>
@@ -55,6 +55,9 @@
 
             }
         </select>*@
+
+            <select id="ddlcity" class="categoryuserdefine form-control" name="ddlcity" style="width: 200px">
+            </select>
         </div>
     </div>
 </div>

@@ -93,10 +93,12 @@ namespace University.UI.Areas.Admin.Controllers
             return View(viewModel);
         }
   
-        public ActionResult GetUseNameMapping(decimal test)
+        public JsonResult GetUseNameMapping(decimal test)
         {
             var res = _subCategoryService.GetCategoryUserList(test);
-            return View();
+            
+            return Json(res, JsonRequestBehavior.AllowGet);
+            //return View(res);
         }
         public ActionResult GetCategoryUserMapping(string Id)
         {
@@ -149,12 +151,7 @@ namespace University.UI.Areas.Admin.Controllers
 
         public ActionResult AddCategoryUserMapping(CategoryMappingModel model)
         {
-            // var res = AutoMapper.Mapper.Map<CategoryMappingModel, CategoryUserMapping>(model);
-            //  if(model.UserID )
-            //if (ModelState.IsValid)
-            //{
-            //if (model.CategoryId != 0 && model.UserID != 0)
-            //{
+            
                 var isSuccess = _subCategoryService.AddCategoryUserMapping(new CategoryUserMapping
                     {
                         ID = model.ID,
@@ -163,19 +160,7 @@ namespace University.UI.Areas.Admin.Controllers
                     });
                     //return Json(isSuccess, JsonRequestBehavior.AllowGet);
                     return RedirectToAction("CategoryUserMappingList", isSuccess);
-                //}
-            //else
-            //{
-            //    ViewBag.Message = "You are not a valid user...Please Register..!!";
-            //    // return View();
-            //    // return PartialView("AddEditCategoryMapp");
-            //    return View("AddEditCategoryMapp", ViewBag.Message);
-            //}
-            //}
-            //else
-            //{
-            //    return null;
-            //}
+                
         }
 
         public ActionResult DeleteCategoryUseerMapping(string Id)

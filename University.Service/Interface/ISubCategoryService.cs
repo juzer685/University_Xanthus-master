@@ -9,10 +9,10 @@ namespace University.Service.Interface
 {
     public interface ISubCategoryService
     {
-        List<Login_tbl> GetCategoryUserList(decimal test);
+        IEnumerable<SubCategoryMaster> GetCategoryUserList(decimal test);
         bool DeleteCategoryUseerMapping(Decimal id);
         List<CategoryUserMapping> GetCategoryUserMappingGrid();
-        (List<Login_tbl>, List<SubCategoryMaster>) GetCategoryUserMappingList();
+        (List<Login_tbl>,List<SubCategoryMaster>) GetCategoryUserMappingList();
         IEnumerable<SubCategoryMaster> GetSubCategoryList();
         List<SubCategoryMaster> GetSubCategoryListById(Decimal id);
         CategoryUserMapping GetCategoryUserMapping(Decimal id);

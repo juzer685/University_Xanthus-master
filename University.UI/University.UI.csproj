@@ -405,6 +405,7 @@
     <Content Include="Images\event-icon.png" />
     <Content Include="Images\eye-1.png" />
     <Content Include="Images\eye-16.png" />
+    <Content Include="Images\eyelogin.png" />
     <Content Include="Images\feature-product-1.jpg" />
     <Content Include="Images\feature-product-2.jpg" />
     <Content Include="Images\feature-product-3.jpg" />

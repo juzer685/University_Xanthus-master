@@ -30,6 +30,7 @@
         h6 {
             color: red;
         }
+       
     </style>
     <link rel="stylesheet" href="../../plugins/toastr/toastr.min.css">
     <script src="~/plugins/jquery/jquery.min.js"></script>
@@ -68,10 +69,10 @@
                         <div class="input-group mb-3">
                             <input name="Password" id="Password" type="password" class="form-control checkpassword"  placeholder="Please enter password"  oninvalid="this.setCustomValidity('Please Enter Password')" oninput="this.setCustomValidity('')">
                             
-                            <div class="input-group-append">
+                            <div class="input-group-append testedd">
                                 <div class="input-group-text">
                                     <span>
-                                        <img src="~/Images/icons8-eye-50.png" alt="eye" onclick="showHide()" id="eye" style="width: 15px; height:20px;" />
+                                        <img src="~/Images/eyelogin.png" class="" alt="eye" onclick="showHide()" id="eye" style="width: 15px; height:20px;" />
                                     </span>
                                     @*<span class="fas fa-lock"></span>*@
                                 </div>
@@ -163,10 +164,15 @@
                function showHide() {
                    if (Password.type == 'text')
                    {
+                        // $(".testedd").show();
+                     //$('.testedd').removeClass("hide");
+                         $(".testedd").css("background-color","white");
                         Password.type = 'password';
                    }
                    else
                    {
+                      // $(".testedd").hide();
+                       $(".testedd").css("background-color","silver");
                         Password.type = 'text';
                    }
             }

@@ -193,18 +193,27 @@
 
         $( ".test" ).change(function ()
         {
-            alert();
-        var countryID = $(this).val();
+            //alert();
+        var UserID = $(this).val();
         
             $.ajax({
-                type: 'POST',
-                url: "/Admin/SubCategory/GetUseNameMapping?test="+ countryID ,
+                type: 'GET',
+                url: "/Admin/SubCategory/GetUseNameMapping?test=" + UserID,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
                // url:'ajaxFile.php',
-                data:'country_id='+countryID,
+               // data:'country_id='+countryID,
                 success: function (data)
                 {
-                    alert(data);
-                    //$('#state').html(html);
+                    
+                   // alert(data);
+                    var markup = "<option value='0'>Select City</option>";
+                    //for (var x = 0; x < data.length; x++) {
+                    //    markup += "<option value=" + data[x].countryID + ">" + data[x].countryID + "</option>";
+                    //}
+                     $(".categoryuserdefine").html(markup).show();
+
+                    //$('.categoryuserdefine').html();
                     //$('#city').html('<option value="">Select state first</option>'); 
                 }
             }); 

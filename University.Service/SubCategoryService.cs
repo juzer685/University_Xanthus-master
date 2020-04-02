@@ -7,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace University.Service
 {
     public class SubCategoryService : ISubCategoryService
     {
         private readonly ISubCategoryRepository _subCategoryRepository;
-        public List<Login_tbl> GetCategoryUserList(decimal test)
+        public IEnumerable<SubCategoryMaster> GetCategoryUserList(decimal test)
         {
             return _subCategoryRepository.GetCategoryUserList(test);
         }
@@ -54,7 +55,7 @@ namespace University.Service
         //{
         //    return _subCategoryRepository.GetCategoryUservideoMappingList();
         //}
-        public (List<Login_tbl>, List<SubCategoryMaster>) GetCategoryUserMappingList()
+        public (List<Login_tbl>,List<SubCategoryMaster>)GetCategoryUserMappingList()
         {
             return _subCategoryRepository.GetCategoryUserMappingList();
         }
