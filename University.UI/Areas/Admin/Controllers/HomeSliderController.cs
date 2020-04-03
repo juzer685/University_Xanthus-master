@@ -42,7 +42,8 @@ namespace University.UI.Areas.Admin.Controllers
                 res.ImageURL = UploadFileOnServer(HomeSliderImagePath, file);
             }
             var isSuccess = _sliderService.AddOrUpdateHomeSlider(res);
-            return Json(isSuccess, JsonRequestBehavior.AllowGet);
+            // return Json(isSuccess, JsonRequestBehavior.AllowGet);
+            return RedirectToAction("Index", isSuccess);
         }
         private string UploadFileOnServer(string location, HttpPostedFileBase file)
         {

@@ -3,6 +3,7 @@
     #image-preview {
         width: 250px;
         height: 120px;
+       // border: 1px solid #ddd;
     }
 
     .info-text {
@@ -24,14 +25,14 @@
             <div class="form-group">
                 <input name="AssocitedID" id="BasicDeatilsAssocitedID" type="hidden" />
                 <label for="email">Category Name</label>
-                @Html.DropDownListFor(m => m.SubCategoryId, new SelectList(ViewBag.SubCategoryList, "Id", "Name"), "--select category--", new { @class = "form-control pointer txtOnly", @required = "required" })
+                @Html.DropDownListFor(m => m.SubCategoryId, new SelectList(ViewBag.SubCategoryList, "Id", "Name"), "--select category--", new { @class = "form-control pointer ", @required = "required" })
                 @Html.ValidationMessageFor(x => x.SubCategoryId, null, new { @class = "", style = "color:red;" })
                 @*@Html.ValidationMessageFor(m => m.SubCategoryId)*@
             </div>
 
             <div class="form-group">
                 <label for="Title">Course Title</label>
-                @Html.TextBoxFor(m => m.Title, new { @class = "form-control txtOnly text-overflow", @required = "required", @pattern = "^[^<>%$*@!#]*$", @maxlength = "100" })
+                @Html.TextBoxFor(m => m.Title, new { @class = "form-control txtOnly text-overflow", @required = "required", @maxlength = "100" })
                 @*@Html.ValidationMessageFor(x => x.Title, null, new { @class = "", style = "color:red;" })*@
                 @*@Html.ValidationMessageFor(m => m.Title)*@
             </div>
@@ -49,8 +50,13 @@
                 <label class="info-text" for="ImageUrl" style="color:red;">Image <span class="ShortText">(Please ensure featured image size is Less than 5MB)</span></label>
                 <div class="input-group">
                     <div class="custom-file">
-                        <input type="file" id="file" name="file" class="custom-file-input pointer validateHeightWidth" required  accept="image/*" onchange="readURL(this);">
-                        @*<input type="file" name="file" class="custom-file-input pointer " id="file" accept="image/jpeg" onchange="readURL(this);">*@
+
+
+                        @*<label for="img">Select image:</label>
+                <input type="file" id="img" name="img" accept="image/*">*@
+
+                        <input type="file" id="file" name="file" class="custom-file-input pointer validateHeightWidth" required accept="image/*" onchange="readURL(this);">
+
                         @if (Model.ImageURL != "")
                         {
                             <label class="custom-file-label CategoryFileLabel" id="" for="exampleInputFile">@Model.ImageURL</label>
@@ -66,6 +72,7 @@
                 </div>
                 @Html.ValidationMessageFor(m => m.ImageURL)
                 <img id="image-preview" src="@Model.CheckImage" alt="" class="imgStd" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" />
+
                 @*<img id="image-preview" src=@Model.CheckImage alt="" class="imgStd" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" />*@
             </div>
 
@@ -76,9 +83,9 @@
             </div>*@
         </div>
         <div class="right">
-            <button type="submit" class="btn btn-primary">Save</button>
-            <button onclick="Cancel()" type="button" class="btn btn-primary">Cancel</button>
-            <button onclick="Cancel()" type="button" class="btn btn-primary">Exit</button>
+            <button type="submit" class="btn btn-primary" title="Save">Save</button>
+            <button onclick="Cancel()" type="button" class="btn btn-primary" title="Cancel">Cancel</button>
+            <button onclick="Cancel()" type="button" class="btn btn-primary" title="Exit">Exit</button>
         </div>
     </div>
 </form>

@@ -102,12 +102,12 @@
                                 </div>
                             </div>
                             <div class="right">
-                                <button type="submit" class="btn btn-primary homebanner">Save</button>
+                                <button type="submit" class="btn btn-primary homebanner" title="Save">Save</button>
                                 @if (Model != null && Model.ImageFullPath != null)
                                 {
-                                    <input type="button" class="btn btn-primary ConfirmBtn" value="Delete"  onclick="DeleteBanner('@Model.Id')"/>
+                                    <input type="button" class="btn btn-primary ConfirmBtn" value="Delete"  onclick="DeleteBanner('@Model.Id')" title="Delete"/>
                                 }
-                                <button onclick="Cancel()" type="button" class="btn btn-default">Cancel</button>
+                                <button onclick="Cancel()" type="button" class="btn btn-default" title="Cancel">Cancel</button>
                             </div>
                             @*}*@
                         </form>

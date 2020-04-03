@@ -1,6 +1,6 @@
 ﻿
 $(document).on('keypress', '.txtOnly', function (event) {
-    var regex = new RegExp("^[a-zA-Z ]+$");
+    var regex = new RegExp("^[a-zA-Z -!@#$%&*? ]+$");
     var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
     if (!regex.test(key)) {
         event.preventDefault();
@@ -34,4 +34,16 @@ $('.capitalize').keyup(function (evt) {
 
     // Regex taken from php.js (http://phpjs.org/functions/ucwords:569)
     $(this).val(txt.replace(/^(.)|\s(.)/g, function ($1) { return $1.toUpperCase(); }));
+});
+
+('.splandalph').keypress(function (e) {
+   // var regex = new RegExp("^[a-zA-Z-!@#$%&*?]+$");
+    var regex = new RegExp("^[0-9@!#\$\^%&*()+=\-\[\]\\\';,\.\/\{\}\|\":<>\? ]");
+    var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+    if (regex.test(str)) {
+        return true;
+    }
+
+    e.preventDefault();
+    return false;
 });

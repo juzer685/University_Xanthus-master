@@ -115,8 +115,8 @@ a.morelink {
                 <div class="modal-body" id="popupBody">
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" title="Submit">Submit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" title="Close">Close</button>
                 </div>
             </div>
         </div>
@@ -201,27 +201,27 @@ a.morelink {
             });
         });
     }
+//FAQ dot dot start
 
+ //   $(document).ready(function() {
+	//var showChar = 30;
+	//var ellipsestext = "...";
+	//var moretext = "more";
+	//var lesstext = "less";
+	//$('.more').each(function() {
+	//	var content = $(this).html();
 
-    $(document).ready(function() {
-	var showChar = 30;
-	var ellipsestext = "...";
-	var moretext = "more";
-	var lesstext = "less";
-	$('.more').each(function() {
-		var content = $(this).html();
+	//	if(content.length > showChar) {
 
-		if(content.length > showChar) {
+	//		var c = content.substr(0, showChar);
+	//		var h = content.substr(showChar-1, content.length - showChar);
 
-			var c = content.substr(0, showChar);
-			var h = content.substr(showChar-1, content.length - showChar);
+	//		var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span>';
 
-			var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span>';
+	//		$(this).html(html);
+	//	}
 
-			$(this).html(html);
-		}
-
-	});
+	//});
 
 	//$(".morelink").click(function(){
 	//	if($(this).hasClass("less")) {
@@ -235,7 +235,9 @@ a.morelink {
 	//	$(this).prev().toggle();
 	//	return false;
 	//});
-});
+//});
+
+    //faq dot dot end
    
     
 

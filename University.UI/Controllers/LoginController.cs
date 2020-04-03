@@ -178,5 +178,8 @@ namespace IPSU.Web.Areas.Admin.Controllers
                 return Json(new { Message = "New Password and Confirm Password do not match.Please try again", url = "/Login/Login" });
             }
         }
+
+       
+
     }
 }

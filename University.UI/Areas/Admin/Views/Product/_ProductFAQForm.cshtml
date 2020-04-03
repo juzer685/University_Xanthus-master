@@ -15,9 +15,9 @@
             @Html.ValidationMessageFor(x => x.Answer, null, new { @class = "", style = "color:red;" })
         </div>
         <div class="col">
-            <input type="submit" class="btn btn-primary" value="Save" />
-            <input type="button" class="btn btn-primary" value="Delete" onclick="DeleteFAQ(this,'@Model.Id');" />
-            <input type="button" class="btn btn-primary" value="Add/Edit Tutorials" onclick="AddEditFAQVideos('@Model.Id')" />
+            <input type="submit" class="btn btn-primary" value="Save"  title="Save"/>
+            <input type="button" class="btn btn-primary" value="Delete" onclick="DeleteFAQ(this,'@Model.Id');" title="Delete" />
+            <input type="button" class="btn btn-primary" value="Add/Edit Tutorials" onclick="AddEditFAQVideos('@Model.Id')"  title="Add/Edit Tutorials"/>
         </div>
     </div>
 </form>

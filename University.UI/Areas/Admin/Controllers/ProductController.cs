@@ -124,6 +124,7 @@ namespace University.UI.Areas.Admin.Controllers
                 var productId = _productService.AddUpdateProductBasic(res);
                 Session["ProductID"] = productId;
                 return Json(productId, JsonRequestBehavior.AllowGet);
+                
             }
             else
             {
@@ -135,7 +136,10 @@ namespace University.UI.Areas.Admin.Controllers
                 res.AssocitedCustID = Convert.ToInt32(Session["AdminLoginID"]);
                 var productId = _productService.AddUpdateProductBasic(res);
                 Session["ProductID"] = productId;
-                return Json(productId, JsonRequestBehavior.AllowGet);
+                //return Json(productId, JsonRequestBehavior.AllowGet);
+                 //return RedirectToAction("LoadProductUserGuide", Session["ProductID"]);
+                return RedirectToAction("AddEditProduct", "Product", new { ProductId  = productId });
+                // return View("AddEditProduct", productId);
 
             }
         }
@@ -347,7 +351,12 @@ namespace University.UI.Areas.Admin.Controllers
                     viewModel.ImageURL = UploadFileOnServer(ProductImagePath, file);
                 }
                 var res = _productService.SaveProductUserGuide(viewModel);
-                return Json(true, JsonRequestBehavior.AllowGet);
+                 return Json(true, JsonRequestBehavior.AllowGet);
+                // return RedirectToAction("LoadProductUserGuide", "Product",res);
+                //return RedirectToAction("LoadProductUserGuide");
+                //return View("LoadProductUserGuide", res);
+              //  return RedirectToAction("AddEditProduct", res);
+                //return RedirectToAction("SaveProductUserGuide", res);
 
             }
         }

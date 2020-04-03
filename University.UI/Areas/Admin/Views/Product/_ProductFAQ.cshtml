@@ -8,7 +8,7 @@
 </style>
 
 @Html.HiddenFor(m => m.ProductForm)
-<input type="button" class="btn btn-primary" value="Add" onclick="AddFAQ()" style="float:right" />
+<input type="button" class="btn btn-primary" value="Add" onclick="AddFAQ()" style="float:right" title="Add"/>
 <div class="row">
     <div id="faqGrid" class="container-fluid grid-striped">
         <div class="row font-weight-bold py-2">
@@ -32,10 +32,10 @@
         }
 
     </div>
-    <div class="container-fluid"><button onclick="Cancel()" type="button" class="btn btn-primary">Exit</button></div>
+    <div class="container-fluid"><button onclick="Cancel()" type="button" class="btn btn-primary" title="Exit">Exit</button></div>
 </div>
 
-<div id="FaqVideoPopup" class="modal" role="dialog">
+<div id="FaqVideoPopup" class="modal" role="dialog"  data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-lg">
 
         <!-- Modal content-->
@@ -48,7 +48,7 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" title="Close">Close</button>
             </div>
         </div>
 

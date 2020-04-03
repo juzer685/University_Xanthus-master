@@ -41,7 +41,8 @@ namespace University.UI.Areas.Admin.Controllers
                 model.ImageURL = UploadFileOnServer(HomeBannerImagePath, file);
             }
             var res = _homeService.AddOrUpdateHomeBanner(model);
-            return Json(res, JsonRequestBehavior.AllowGet);
+            //return Json(res, JsonRequestBehavior.AllowGet);
+            return RedirectToAction("Index", res);
         }
 
         [HttpPost]

@@ -65,7 +65,7 @@
                 <label class="info-text" for="ImageUrl" style="color:red;">Image <span class="ShortText">(Please ensure featured image size is Less than 5MB)</span></label>
                 <div class="input-group">
                     <div class="custom-file">
-                        <input type="file" name="file" class="custom-file-input imgaddUguide" id="file"  accept="image/jpeg" onchange="readURL(this);">
+                        <input type="file" name="file" class="custom-file-input imgaddUguide" id="file"  accept="image/*" onchange="readURL(this);">
                         @if (Model.ImageURL != "")
                         {
                             <label class="custom-file-label" for="exampleInputFile">@Model.ImageURL</label>
@@ -90,9 +90,9 @@
             </div>*@
         </div>
         <div class="right">
-            <button type="submit" class="btn btn-primary">Save</button>
-            <button type="button" class="btn btn-primary" onclick="Cancel()">Cancel</button>
-            <button type="button" class="btn btn-primary" onclick="Cancel()">Exit</button>
+            <button type="submit" class="btn btn-primary" title="Save">Save</button>
+            <button type="button" class="btn btn-primary" onclick="Cancel()" title="Cancel">Cancel</button>
+            <button type="button" class="btn btn-primary" onclick="Cancel()" title="Exit">Exit</button>
         </div>
     </div>
 </form>

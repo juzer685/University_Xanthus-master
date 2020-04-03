@@ -71,7 +71,8 @@ namespace University.UI.Areas.Admin.Controllers
             
             // var myguid = Guid.TryParseExact(res.ImageURL);
             var isSuccess = _subCategoryService.AddOrUpdateSubCategory(res);
-            return Json(isSuccess, JsonRequestBehavior.AllowGet);
+            return RedirectToAction("Index", isSuccess);
+           // return Json(isSuccess, JsonRequestBehavior.AllowGet);
         }
         public ActionResult DeleteSubCategory(string Id)
         {
