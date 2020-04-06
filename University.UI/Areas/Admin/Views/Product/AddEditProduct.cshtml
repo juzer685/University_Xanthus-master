@@ -1,7 +1,7 @@
 ﻿@model University.UI.Areas.Admin.Models.ProductViewModel
 
 @{
-    ViewBag.Title = "Tutorial/Link";
+    ViewBag.Title = "Tutorial";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -47,7 +47,7 @@
                                 <li class="nav-item disabled"><a id="video" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductVideos"> Tutorials</a></li>
                                 <li class="nav-item disabled"><a id="FAQ" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductFAQ"> FAQ</a></li>
                                 @*<li class="nav-item disabled"><a id="spec" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadProductSpecifiction"> Spec</a></li>
-                                <li class="nav-item disabled"><a id="howto" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductDocuments"> How To</a></li>*@
+                                    <li class="nav-item disabled"><a id="howto" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductDocuments"> How To</a></li>*@
                             </ul>
                         }
                         else
@@ -58,7 +58,7 @@
                                 <li class="nav-item disabled"><a id="" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductVideos"> Tutorials</a></li>
                                 <li class="nav-item disabled"><a id="" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductFAQ"> FAQ</a></li>
                                 @*<li class="nav-item disabled"><a id="" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadProductSpecifiction"> Spec</a></li>
-                                <li class="nav-item disabled"><a id="" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductDocuments"> How To</a></li>*@
+                                    <li class="nav-item disabled"><a id="" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductDocuments"> How To</a></li>*@
                             </ul>
                         }
 
@@ -101,7 +101,7 @@
         $(document).on('submit', '[name=ProductForm]', function (e) {
 
         //    //image validation
-            const fi = document.getElementById('file'); 
+            const fi = document.getElementById('file');
             //var imageName = $("#CategoryFileLabel").text();
             //var file = imageName[0].files[0];
            // var file = $(this)[0].files[0];
@@ -110,35 +110,35 @@
 
 
           // var  myfile= $( this ).val();
-        // Check if any file is selected. 
+        // Check if any file is selected.
             if (fi.files.length > 0)
-            { 
+            {
                 for (const i = 0; i <= fi.files.length - 1; i++)
-                { 
-  
-                    const fsize = fi.files.item(i).size; 
-                    const file = Math.round((fsize / 1024)); 
-                    // The size of the file. 
+                {
+
+                    const fsize = fi.files.item(i).size;
+                    const file = Math.round((fsize / 1024));
+                    // The size of the file.
                     if (file >= 5120)
-                    { 
-                          _showErrorMessage("Please select a Image less than 5mb");
-                            
+                    {
+                          _showErrorMessage("Please select an Image less than 5mb");
+
                           e.preventDefault();
                     }
                     //else if (fileExt.toUpperCase() != "gif".toUpperCase() && fileExt.toUpperCase() != "png".toUpperCase())
-   
+
                     //{
                     //     _showErrorMessage("Please select a Image less than 5mb");
-                            
+
                     //      e.preventDefault();
                     //}
                     //else if (file < 2048)
-                    //{ 
-                    //    alert( 
-                    //      "File too small, please select a file greater than 2mb"); 
+                    //{
+                    //    alert(
+                    //      "File too small, please select a file greater than 2mb");
                     //}
                     else
-                    { 
+                    {
                          var form = $(this);
                         var url = form.attr('action');
                         var formData = new FormData($(this)[0]);
@@ -158,32 +158,32 @@
                                  fileOriginalIndex = $("#image-preview").attr('src');
                                 _showSuccessMessage("Data Saved Successfully");
                                 setTimeout(function () { $('#userguide').trigger('click'); }, 1500);
-                       
+
                                 $('#userguide').removeClass("disabled");
                                 $("#video").removeClass("disabled");
                                 $("#FAQ").removeClass("disabled");
                                 $("#spec").removeClass("disabled");
                                 $("#howto").removeClass("disabled");
-                         
+
                                 //Cancel();
                                 //$("#frmDiv").html(data);
                             }
                         });
-                              e.preventDefault(); 
-                        
-                    } 
-                } 
-            } 
+                              e.preventDefault();
+
+                    }
+                }
+            }
         //    //iamge validation end
 
 
-           
 
-                  
-              
-                
+
+
+
+
             });
-            
+
 
             $('[data-toggle="tab"]').click(function (e) {
                 e.preventDefault();
@@ -249,59 +249,85 @@
             });
 
             e.preventDefault();
+
         }
     function SaveProductUserGuide(e) {
       //  $('#ProductUserGuideAssocitedID').val($("#ddlusrlst").val());
-         const fi = document.getElementById('file'); 
-        // Check if any file is selected. 
-        if (fi.files.length > 0) {
-            for (const i = 0; i <= fi.files.length - 1; i++) {
+         const fi = document.getElementById('file');
+        // Check if any file is selected.
+        if (fi.files.length > 0)
+        {
+            for (const i = 0; i <= fi.files.length - 1; i++)
+            {
 
                 const fsize = fi.files.item(i).size;
                 const file = Math.round((fsize / 1024));
-                // The size of the file. 
+                // The size of the file.
                 if (file >= 5120) {
-                    _showErrorMessage("Please select a Image less than 5mb");
+                    _showErrorMessage("Please select an Image less than 5mb");
 
                     e.preventDefault();
+                    return false
                 }
-                //else if (file < 2048)
-                //{ 
-                //    alert( 
-                //      "File too small, please select a file greater than 2mb"); 
-                //}
-                else {
-                     var form = $(e.target);
-                            var url = form.attr('action');
-                            var formData = new FormData($(e.target)[0]);
-                            $.ajax({
-                                type: "POST",
-                                url: url,
-                                data: formData, // serializes the form's elements.
-                                enctype: 'multipart/form-data',
-                                cache: false,
-                                contentType: false,
-                                processData: false,
-                                success: function (data) {
-                                    $('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
-                                    //alert("Data Saved Successfully");
-                                    _showSuccessMessage("Data Saved Successfully");
-                                    setTimeout(function () { $('#video').trigger('click'); }, 1500);
-                                    //setTimeout(function () { location.reload(); }, 1500);
-                                }
-                            });
+                else
+                {
+                    
+                var form = $(e.target);
+                //var url = '@Url.Action("SaveProductUserGuide", "Product",new {Areas= "Admin"})';
+                var url = form.attr('action');
+                var formData = new FormData($(e.target)[0]);
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: formData, // serializes the form's elements.
+                    enctype: 'multipart/form-data',
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
 
-                            e.preventDefault();
-                   
+                        $('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
+                        //alert("Data Saved Successfully");
+                        _showSuccessMessage("Data Saved Successfully");
+                        setTimeout(function () { $('#video').trigger('click'); }, 1500);
+                        //setTimeout(function () { location.reload(); }, 1500);
+                    }
+                });
+
+                e.preventDefault();
                 }
             }
         }
+        else
+        {
+             var form = $(e.target);
+                    //var url = '@Url.Action("SaveProductUserGuide", "Product",new {Areas= "Admin"})';
+                    var url = form.attr('action');
+                    var formData = new FormData($(e.target)[0]);
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: formData, // serializes the form's elements.
+                        enctype: 'multipart/form-data',
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: function (data) {
+                         
+                            $('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
+                            //alert("Data Saved Successfully");
+                            _showSuccessMessage("Data Saved Successfully");
+                            setTimeout(function () { $('#video').trigger('click'); }, 1500);
+                            //setTimeout(function () { location.reload(); }, 1500);
+                        }
+                    });
 
+                    e.preventDefault();
 
-
-
-
-
-                           
         }
+
+         
+
+    }
+
 </script>

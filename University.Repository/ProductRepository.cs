@@ -769,7 +769,7 @@ namespace University.Repository
                     
                     guide.UpdatedDate = DateTime.UtcNow;
                     guide.IsDeleted = false;
-                    guide.ImageALT = productUserGuide.ImageALT;
+                    //guide.ImageALT = productUserGuide.ImageALT;
                     context.SaveChanges();
                 }
                 else

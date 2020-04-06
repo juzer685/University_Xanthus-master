@@ -41,9 +41,9 @@ namespace University.UI.Areas.Admin.Models
         }
         public int? cateuserid { get; set; }
         public Decimal Id { get; set; }
-        [StringLength(50, ErrorMessage = "Do not enter more than 50 characters")]
+       // [StringLength(50, ErrorMessage = "Do not enter more than 50 characters")]
         public string Title { get; set; }
-        [StringLength(100, ErrorMessage = "Do not enter more than 100 characters")]
+        //[StringLength(100, ErrorMessage = "Do not enter more than 100 characters")]
         public string Decription { get; set; }
         public string VideoURL { get; set; }
         public string ThumbnailURL { get; set; }

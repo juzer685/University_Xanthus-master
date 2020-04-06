@@ -31,6 +31,10 @@
     .pointer {
         cursor: pointer;
     }
+   
+    /*span.field-validation-error {
+    width: 100%;
+}*/
 </style>
 
 <div id="dvLoader" style="display:none; margin: 0px; padding: 0px; position: fixed; right: 0px; top: 0px; width: 100%; height: 100%; background-color: rgb(102, 102, 102); z-index: 30001; opacity: 0.8;">
@@ -53,29 +57,33 @@
 </div>
 
 <div class="form-group">
-    <label class="info-text" for="ImageUrl" id="lblImageName" style="color:red;">Category Image <span class="ShortText">(Please ensure featured image size is Less than 5MB)</span></label>
+    <label class="info-text" for="ImageUrl" id="lblImageName" style="        color: red;
+">Category Image <span class="ShortText">(Please ensure featured image size is Less than 5MB)</span></label>
     <div class="input-group">
         <div class="custom-file">
             @*<input type="file" id="file" name="file" class="form-control validateHeightWidth" accept="image/gif, image/png, image/jpeg, image/jpg" onchange="readURL(this);" />*@
 
             @*<input type="file" id="categoryfile" name="file" class="custom-file-input validateHeightWidthcheck" required accept="image/gif, image/png, image/jpeg, image/jpg" onchange="readURL(this);">*@
             <input type="file" id="categoryfile" name="file" class="custom-file-input  validateHeightWidth checktest" accept="image/*" onchange="readURL(this);">
+            <span class="field-validation-error" data-valmsg-for="file" data-valmsg-replace="true" style="color:red;margin-top: 30px;position: absolute;"><span id="file-error" class=""> @Html.ValidationMessageFor(m => m.file, null, new { @class = "", style = "color:red;" })</span></span>
+                
+         
+                @*<span class="field-validation-valid " data-valmsg-for="ImageURL" data-valmsg-replace="true" style="color:red;margin-top: -16px;">please filed this filed</span>*@
+                @if (Model.ImageURL != "")
+                {
+                    @*<input type="file" class="custom-file-input validateHeightWidthcheck" onchange="readURL(this)" ; value="@Model.ImageURL" />*@
+                    <label class="custom-file-label " id="CategoryFileLabel" for="exampleInputFile">@Model.ImageURL</label>
+                    @*<label id="image-preview">@Model.ImageURL</label>*@
+                }
+                else
+                {
+                    <label class="custom-file-label" id="CategoryFileLabel" for="exampleInputFile">Category Image</label>
+                }
 
-            @if (Model.ImageURL != "")
-            {
-
-                @*<input type="file" class="custom-file-input validateHeightWidthcheck" onchange="readURL(this)" ; value="@Model.ImageURL" />*@
-                <label class="custom-file-label " id="CategoryFileLabel" for="exampleInputFile">@Model.ImageURL</label>
-                @*<label id="image-preview">@Model.ImageURL</label>*@
-            }
-            else
-            {
-                <label class="custom-file-label" id="CategoryFileLabel" for="exampleInputFile">Category Image</label>
-            }
-
-        </div>
+            </div>
     </div>
-    @Html.ValidationMessageFor(m => m.ImageURL, null, new { @class = "", style = "color:red;" })
+
+   
     @*<img id="image-preview" src="@Model.ImageFullPath" alt="" class="imgStd" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" />*@
     <img id="image-preview" src="@Model.ImageFullPath" alt="" class="imgStd tttt" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" style="margin-top: 25px;" />
 

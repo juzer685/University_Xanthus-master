@@ -8,6 +8,7 @@
     #image-preview {
         width: 250px;
         height: 250px;
+        margin-top: 35px;
     }
 
     .info-text {
@@ -26,8 +27,8 @@
     </div>
     <div class="form-group">
         <label for="email">Description</label>
-        @Html.TextAreaFor(m => m.TextDescription, new { @class = "form-control", @required = "required", @maxlength = "1000" })
-        @*@Html.ValidationMessageFor(x => x.TextDescription, null, new { @class = "", style = "color:red;" })*@
+        @Html.TextAreaFor(m => m.TextDescription, new { @class = "form-control", @maxlength = "1000" , @required = "required",})
+        @Html.ValidationMessageFor(m => m.TextDescription, null, new { @class = "", style = "color:red;" })
         @*@Html.ValidationMessageFor(m => m.TextDescription)*@
     </div>
     @*<div class="form-group">
@@ -41,6 +42,7 @@
             <div class="custom-file">
 
                 <input type="file" id="file" name="file" class="custom-file-input" required accept="image/*" onchange="readURL(this);">
+                <span class="field-validation-error" data-valmsg-for="file" data-valmsg-replace="true" style="color:red;margin-top: 30px;position: absolute;"><span id="file-error" class="" style="margin-top: -32px;position: absolute;">@Html.ValidationMessageFor(x => x.file, null, new { @class = "", style = "color:red;" })</span></span>
                 @if (Model.ImageURL != "")
                 {
                     <label class="custom-file-label" for="exampleInputFile">@Model.ImageURL</label>
@@ -52,7 +54,7 @@
                 @*<label class="custom-file-label" for="exampleInputFile">Category Image</label>*@
             </div>
         </div>
-        @Html.ValidationMessageFor(m => m.ImageURL)
+        @*@Html.ValidationMessageFor(m => m.ImageURL)*@
         <img id="image-preview" src="@Model.ImageFullPath" alt="" class="imgStd" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" />
     </div>
 </div>

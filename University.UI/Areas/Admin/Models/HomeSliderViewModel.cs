@@ -14,8 +14,9 @@ namespace University.UI.Areas.Admin.Models
         string HomeSliderImagePath = WebConfigurationManager.AppSettings["HomeSliderImagePath"];
         public int Id { get; set; }
         public string Link { get; set; }
-        [StringLength(100, ErrorMessage = "Do not enter more than 100 characters")]
+       // [StringLength(100, ErrorMessage = "Do not enter more than 100 characters")]
         public string TextDescription { get; set; }
+        public HttpPostedFileBase file { get; set; }
         public string ImageURL { get; set; }
         public string ImageALT { get; set; }
         public Decimal ProductId { get; set; }

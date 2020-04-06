@@ -13,6 +13,12 @@
     <link href="~/dist/css/Loader.css" rel="stylesheet" />
 }
 
+<style>
+    span.field-validation-error {
+    width: 100%;
+}
+</style>
+
 
 <div id="loaderring">
     <p class="loaderClass">
@@ -49,13 +55,8 @@
                             <span class="fas fa-user"></span>
                         </div>
                     </div>
-
+                    <span class="field-validation-error" data-valmsg-for="FirstName" data-valmsg-replace="true" style="color:red;"><span id="FirstName-error" class="">  @Html.ValidationMessageFor(x => x.FirstName, null, new { @class = "", style = "color:red;" })</span></span>
                 </div>
-                @Html.ValidationMessageFor(x => x.FirstName, null, new { @class = "", style = "color:red;" })
-
-
-
-
                 <div class="input-group mb-3">
                     @Html.TextBoxFor(x => x.LastName, new { @class = "form-control txtOnly capitalize", placeholder = "Last Name", @maxlength = "50" })
                     @*<input type="text" class="form-control" name="LastName" placeholder="LastName">*@
@@ -64,8 +65,9 @@
                             <span class="fas fa-user"></span>
                         </div>
                     </div>
+                    <span class="field-validation-error" data-valmsg-for="LastName" data-valmsg-replace="true" style="color:red;"><span id="LastName-error" class=""> @Html.ValidationMessageFor(x => x.LastName, null, new { @class = "", style = "color:red;" })</span></span>
                 </div>
-                @Html.ValidationMessageFor(x => x.LastName, null, new { @class = "", style = "color:red;" })
+               
 
                 <div class="input-group mb-3">
                     @Html.TextBoxFor(x => x.MobileNo, new { @class = "form-control onlynumbers", placeholder = "Mobile Number", @maxlength = "10" })
@@ -75,8 +77,9 @@
                             <span class="fas fa-mobile"></span>
                         </div>
                     </div>
+                    <span class="field-validation-error" data-valmsg-for="MobileNo" data-valmsg-replace="true" style="color:red;"><span id="MobileNo-error" class="">  @Html.ValidationMessageFor(x => x.MobileNo, null, new { @class = "", style = "color:red;" })</span></span>
                 </div>
-                @Html.ValidationMessageFor(x => x.MobileNo, null, new { @class = "", style = "color:red;" })
+               
 
                 <div class="input-group mb-3">
                     @if (Model.ID != 0)
@@ -89,14 +92,16 @@
                         @Html.TextBoxFor(x => x.Email, new { @class = "form-control", placeholder = "Email" })
                     }
                     @*<input type="text" class="form-control" name="Email" placeholder="Email">*@
-                    <p id="GFG" style="font-size:25px;"></p>
+                    <p id="GFG" style="font-size: 25px;"></p>
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-envelope"></span>
                         </div>
                     </div>
+                    <span class="field-validation-error" data-valmsg-for="Email" data-valmsg-replace="true" style="color:red;"><span id="Email-error" class=""> @Html.ValidationMessageFor(x => x.Email, null, new { @class = "", style = "color:red;" })</span></span>
+
                 </div>
-                @Html.ValidationMessageFor(x => x.Email, null, new { @class = "", style = "color:red;" })
+               
 
 
                 <div class="input-group mb-3">
@@ -113,13 +118,15 @@
                                 <span class="fas fa-lock"></span>
                             </div>
                         </div>
+                        <span class="field-validation-error" data-valmsg-for="Password" data-valmsg-replace="true" style="color:red;"><span id="Password-error" class=""> @Html.ValidationMessageFor(x => x.Password, null, new { @class = "", style = "color:red;margin-top:-18px;" })</span></span>
+
                     }
 
                     @*<input type="password" class="form-control" name="Password" placeholder="Password">*@
 
 
                 </div>
-                @Html.ValidationMessageFor(x => x.Password, null, new { @class = "", style = "color:red;" })
+               
 
                 <div class="input-group mb-3">
                     @if (Model.ID != 0)
@@ -134,11 +141,13 @@
                                 <span class="fas fa-lock"></span>
                             </div>
                         </div>
+                        <span class="field-validation-error" data-valmsg-for="ConfirmPassword" data-valmsg-replace="true" style="color:red;"><span id="ConfirmPassword-error" class=""> @Html.ValidationMessageFor(x => x.ConfirmPassword, null, new { @class = "", style = "color:red;" })</span></span>
+
                     }
 
 
                 </div>
-                @Html.ValidationMessageFor(x => x.ConfirmPassword, null, new { @class = "", style = "color:red;" })
+               
 
 
                 @*<div class="input-group mb-3">
@@ -161,7 +170,18 @@
         </div>*@
                 @if (Model.ID != 0)
                 {
-                    
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="icheck-primary">
+                                <input type="checkbox" id="agreeTerms" name="terms" value="agree"  @Model.Checked style="display:none"/>
+                                @*<label for="agreeTerms">
+                                    I accept the <a href="#" onclick="popuptermandcondition()">Terms & Conditions</a>
+                                </label>*@
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                        <!-- /.col -->
+                    </div>
                 }
                 else
                 {
@@ -170,7 +190,7 @@
                             <div class="icheck-primary">
                                 <input type="checkbox" id="agreeTerms" name="terms" value="agree" @Model.Checked />
                                 <label for="agreeTerms">
-                                    I agree/accept the <a href="#" onclick="popuptermandcondition()">Terms & Conditions</a>
+                                    I accept the <a href="#" onclick="popuptermandcondition()">Terms & Conditions</a>
                                 </label>
                             </div>
                         </div>
@@ -192,7 +212,7 @@
                     <div class="row" style="justify-content:center;">
                         <div class="col-4">
                             @*<button type="submit" class="btn btn-primary btn-block">Register</button>*@
-                            <input type="submit" id="UserRegisterationBtn" class="btn btn-primary btn-block" value="Update">
+                            <input type="submit" id="UserRegisterationBtn" class="btn btn-primary btn-block" value="Update" style="margin-top: -50px;">
                         </div>
                     </div>
                 }

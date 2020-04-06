@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "University.Repository", "Un
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "University.Service", "University.Service\University.Service.csproj", "{01A22F34-FB54-4EE9-830C-C36921471A71}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LearnX.UI", "LearnX.UI\LearnX.UI.csproj", "{B35939F3-D8E7-400C-B006-237E7EEB4426}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{01A22F34-FB54-4EE9-830C-C36921471A71}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01A22F34-FB54-4EE9-830C-C36921471A71}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01A22F34-FB54-4EE9-830C-C36921471A71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B35939F3-D8E7-400C-B006-237E7EEB4426}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B35939F3-D8E7-400C-B006-237E7EEB4426}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B35939F3-D8E7-400C-B006-237E7EEB4426}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B35939F3-D8E7-400C-B006-237E7EEB4426}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

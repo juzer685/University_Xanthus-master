@@ -306,11 +306,14 @@ namespace University.UI.Areas.Admin.Controllers
         {
             var res = _productService.GetProductUserGuide(Convert.ToDecimal(ProductId));
             var viewModel = AutoMapper.Mapper.Map<ProductUserGuide, ProductUserGuideViewModel>(res);
-            if (viewModel == null) { viewModel = new ProductUserGuideViewModel(); }
+            if (viewModel == null)
+            { 
+                viewModel = new ProductUserGuideViewModel(); 
+            }
             return View("_ProductUserGuide", viewModel);
         }
 
-        public ActionResult SaveProductUserGuide(ProductUserGuideViewModel model, string UserGuideId, HttpPostedFileBase file)
+        public JsonResult SaveProductUserGuide(ProductUserGuideViewModel model, string UserGuideId, HttpPostedFileBase file)
         {
             if (UserGuideId.ToString() == "0")
             {
@@ -351,11 +354,17 @@ namespace University.UI.Areas.Admin.Controllers
                     viewModel.ImageURL = UploadFileOnServer(ProductImagePath, file);
                 }
                 var res = _productService.SaveProductUserGuide(viewModel);
-                 return Json(true, JsonRequestBehavior.AllowGet);
-                // return RedirectToAction("LoadProductUserGuide", "Product",res);
+               
+                //return RedirectToAction("LoadProductUserGuide",new { productId = Session["ProductID"] });
+                return Json(true, JsonRequestBehavior.AllowGet);
+                //return RedirectToAction("AddEditProduct", res);
+
+
+
+                // return RedirectToAction("_ProductUserGuide");
                 //return RedirectToAction("LoadProductUserGuide");
                 //return View("LoadProductUserGuide", res);
-              //  return RedirectToAction("AddEditProduct", res);
+                //  return RedirectToAction("AddEditProduct", res);
                 //return RedirectToAction("SaveProductUserGuide", res);
 
             }

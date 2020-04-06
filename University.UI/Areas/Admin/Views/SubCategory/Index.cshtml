@@ -174,7 +174,7 @@
                     if (file >= 5120)
                     { 
                         
-                             _showErrorMessage("Please select a Image less than 5mb");
+                             _showErrorMessage("Please select an Image less than 5mb");
                             
                           e.preventDefault();
                     }
@@ -185,7 +185,7 @@
                     //}
                     else
                     { 
-                         var form = $(this);
+                        var form = $(this);
                         var url = form.attr('action');
                         var formData = new FormData($(this)[0]);
                         $.ajax({

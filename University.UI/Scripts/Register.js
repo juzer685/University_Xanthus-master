@@ -16,7 +16,8 @@ function RegisterHandler() {
         if (!formValid)
             return false;
         else {
-            if ($('#agreeTerms').is(':checked')) {
+            if ($('#agreeTerms').is(':checked') )
+            {
                 document.getElementById('loaderring').style.display = "block";
                 $.ajax({
                     type: "POST",
@@ -28,7 +29,8 @@ function RegisterHandler() {
                             document.getElementById('loaderring').style.display = "none";
                             setTimeout(function () { window.location.href = data.url; }, 2000);
                         }
-                        else {
+                        else
+                        {
                             _showErrorMessage(data.Message);
                             document.getElementById('loaderring').style.display = "none";
                             $("#Email").val("");

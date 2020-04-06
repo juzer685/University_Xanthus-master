@@ -1,0 +1,1723 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    .tabbable-panel {
+        border: none;
+        padding: 10px;
+    }
+
+    .tabbable-line > .nav-tab {
+        border: none;
+        margin: 18px;
+        display: flex;
+        border-bottom: 1px solid #dcd8d8;
+    }
+
+        .tabbable-line > .nav-tab > li {
+            margin-right: 2px;
+        }
+
+            .tabbable-line > .nav-tab > li > a {
+                border: 0;
+                margin-right: 0;
+                color: black;
+                background-color: transparent;
+            }
+
+                .tabbable-line > .nav-tab > li > a > i {
+                    color: #a6a6a6;
+                    background-color: transparent;
+                }
+
+            .tabbable-line > .nav-tab > li.open, .tabbable-line > .nav-tab > li:hover {
+                /*// border-bottom: 4px solid rgb(80,144,247);*/
+            }
+
+                .tabbable-line > .nav-tab > li.open > a, .tabbable-line > .nav-tab > li:hover > a {
+                    border: 0;
+                    background: none !important;
+                    /*color: #360067;*/
+                }
+
+                    .tabbable-line > .nav-tab > li.open > a > i, .tabbable-line > .nav-tab > li:hover > a > i {
+                        /*color: #a6a6a6;*/
+                    }
+
+                .tabbable-line > .nav-tab > li.open .dropdown-menu, .tabbable-line > .nav-tab > li:hover .dropdown-menu {
+                    margin-top: 0px;
+                }
+
+            .tabbable-line > .nav-tab > li.active {
+                border-bottom: 4px solid #32465B;
+                position: relative;
+                background-color: transparent;
+            }
+
+                .tabbable-line > .nav-tab > li.active > a {
+                    border: 0;
+                    color: #333333;
+                    background-color: transparent;
+                }
+
+                    .tabbable-line > .nav-tab > li.active > a > i {
+                        color: #404040;
+                    }
+
+    .tabbable-line > .tab-content {
+        margin-top: -3px;
+        background-color: transparent;
+        border: 0;
+        padding: 15px 0;
+    }
+
+    .portlet .tabbable-line > .tab-content {
+        padding-bottom: 0;
+    }
+</style>
+<style>
+    .top-categories--categories-container--3zk1R {
+        margin-bottom: 32px;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .containers {
+        margin-right: auto;
+        margin-left: auto;
+        padding-left: 15px;
+        padding-right: 15px;
+        min-width: 320px;
+    }
+
+    .container:before, .container:after, .container-fluid:before, .container-fluid:after, .row:before, .row:after {
+        content: ' ';
+        display: table;
+    }
+
+    .top-categories--categories__header--2jIOZ {
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 1.33em;
+        margin-bottom: 8px;
+    }
+
+
+    .top-category--category--j2uYS {
+        margin: 8px 0;
+    }
+
+    .top-category--category--j2uYS {
+        display: inline-block;
+        width: 100%;
+    }
+
+    .panel-default {
+        border-color: #ddd;
+    }
+
+    .panel {
+        margin-bottom: 21px;
+        background-color: #fff;
+        border: 1px solid transparent;
+        border-radius: 2px;
+        position: relative;
+        border: none;
+        box-shadow: none;
+    }
+
+        .panel:before {
+            box-shadow: 0 0 1px 1px rgba(20,23,28,.1), 0 3px 1px 0 rgba(20,23,28,.1);
+            opacity: 1;
+        }
+
+        .panel:before, .panel:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            transition: .2s ease;
+            pointer-events: none;
+        }
+
+    .panel-body {
+        padding: 15px;
+    }
+
+    .top-categories--categories-container--3zk1R a {
+        color: #14171c;
+    }
+
+    .panel-body a:hover {
+        color: black;
+        background-color: transparent;
+        font-weight: 400;
+        text-decoration: none;
+        box-shadow: 0 2px 8px 2px rgba(20,23,28,.15);
+    }
+
+    .top-category--category--j2uYS .top-category--panel-content--33f5e {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .top-category--category--j2uYS .top-category--category__icon--3jJCf {
+        padding-right: 16px;
+    }
+
+    .udi {
+        vertical-align: -8%;
+    }
+
+    .udi-medium {
+        font-size: 32px;
+    }
+
+    .udi {
+        font-family: udemyicons !important;
+        speak: none;
+        font-style: normal;
+        font-weight: 400;
+        font-variant: normal;
+        text-transform: none;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+
+    .top-category--category--j2uYS .top-category--category__text--1bphI {
+        height: 32px;
+        line-height: 32px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        flex: 1;
+        min-width: 1px;
+    }
+
+    .panel-body:after {
+        clear: both;
+    }
+
+    .panel-body:before, .panel-body:after {
+        content: ' ';
+        display: table;
+    }
+
+    .panel:after {
+        opacity: 0;
+        box-shadow: 0 2px 8px 2px rgba(20,23,28,.15);
+    }
+
+    .panel:before, .panel:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        transition: .2s ease;
+        pointer-events: none;
+    }
+</style>
+
+
+<link href="~/Content/css/style.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/fonts/fontawesome.min.css" rel="stylesheet" />
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.slick/latest/slick.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/CustomJS/LearnXJS.js"></script>
+
+
+<nav class="navbar navbar-default navbar-fixed-top compress" id="navScroll">
+    <div class="container-fluid">
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mobyapp"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+            <a class="navbar-brand page-scroll" href="#home"><img src="~/Content/Images/8261bf17-e3bd-4fe1-a8b0-9aedd0e20fa2.jpg" alt=""></a>
+        </div>
+        <div class="collapse navbar-collapse" id="mobyapp" style="display: none;">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a class="page-scroll" href="#home">Home</a></li>
+                <li><a class="page-scroll" href="#categoryID">Category</a></li>
+                <li><a class="page-scroll" href="#coursesID">Course</a></li>
+                <li><a class="page-scroll" href="#videosID">Tutorial</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <div class="round_btn"><a style="cursor: pointer;" data-toggle="modal" data-target="#RequestDemo">Log In</a><i class="fa fa-shopping-cart"></i></div>
+                <div class="nav-btn"></div>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+<section id="home" class="common_pad">
+    <div class="text-center">
+        <div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="slidered">
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <div class="item active">
+                                <img src="~/Content/Images/la.jpg" @*height="300"*@ width="100%">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <div class="item">
+                                <img src="~/Content/Images/chicago.jpg" width="100%">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <div class="item">
+                                <img src="~/Content/Images/ny.jpg" width="100%">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="categoryID" class="common_pad">
+    <h2 class="com_head wow fadeInUp animated text-center" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">CATEGORY</h2>
+    <div class="tabbable-panel">
+        <div class="tabbable-line">
+            <ul class="nav nav-tab ">
+                <li class="active">
+                    <a href="#devlopmentID" data-toggle="tab" id="DevTapID" class="tabTrigger">
+                        Development
+                    </a>
+                </li>
+                <li>
+                    <a href="#musicID" data-toggle="tab" id="MusTapID" class="tabTrigger">
+                        Music
+                    </a>
+                </li>
+                <li>
+                    <a href="#softwareID" data-toggle="tab" id="SofTapID" class="tabTrigger">
+                        IT & Software
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="devlopmentID">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="slider">
+                                <div class="col-xs-12 col-sm-6 col-md-3">
+                                    <div class="tcb-product-item" onclick="CourseModal(this)" id="quickViewID0">
+                                        <div class="tcb-product-photo">
+                                            <img src="https://img-a.udemycdn.com/course/240x135/382002_5d4a.jpg" class="img-responsive ImageClass" alt="a" />
+                                            @*<a href="#0" class="cd-trigger" >Quick View</a>*@
+                                        </div>
+                                        <div class="tcb-product-info">
+                                            <div class="tcb-product-title">
+                                                <div class="ProDesID">C# Basics for Beginners</div>
+                                            </div>
+                                            <div class="tcb-hline"></div>
+                                            <div class="ProPriID">
+                                                $150.00
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-6 col-md-3">
+                                    <div class="tcb-product-item" onclick="CourseModal(this)" id="quickViewID1">
+                                        <div class="tcb-product-photo">
+                                            <img src="https://img-a.udemycdn.com/course/240x135/1362070_b9a1_2.jpg" class="img-responsive ImageClass" alt="a" />
+                                            @*<a href="#0" class="cd-trigger">Quick View</a>*@
+                                        </div>
+                                        <div class="tcb-product-info">
+                                            <div class="tcb-product-title">
+                                                <div class="ProDesID">React - The Complete Guide</div>
+                                            </div>
+
+                                            <div class="tcb-hline"></div>
+                                            <div class="ProPriID">
+                                                $49.00
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-6 col-md-3">
+                                    <div class="tcb-product-item" onclick="CourseModal(this)" id="quickViewID2">
+                                        <div class="tcb-product-photo">
+                                            <img src="https://blog.tech-fellow.net/content/images/size/w600/2019/04/asp-net-mvc-1-.jpg" class="img-responsive ImageClass" alt="a" />
+                                            @*<a href="#0" class="cd-trigger">Quick View</a>*@
+                                        </div>
+                                        <div class="tcb-product-info">
+                                            <div class="tcb-product-title">
+                                                <div class="ProDesID">ASP.Net MVC</div>
+                                            </div>
+                                            <div class="tcb-hline"></div>
+                                            <div class="ProPriID">
+                                                $999.00
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-3">
+                                    <div class="tcb-product-item" onclick="CourseModal(this)" id="quickViewID3">
+                                        <div class="tcb-product-photo">
+                                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/1200px-Node.js_logo.svg.png" class="img-responsive ImageClass" alt="a" />
+                                            @*<a href="#0" class="cd-trigger">Quick View</a>*@
+                                        </div>
+                                        <div class="tcb-product-info">
+                                            <div class="tcb-product-title">
+                                                <div class="ProDesID">Node JS</div>
+                                            </div>
+                                            <div class="tcb-hline"></div>
+                                            <div class="ProPriID">
+                                                $199.00
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-6 col-md-3">
+                                    <div class="tcb-product-item" onclick="CourseModal(this)" id="quickViewID4">
+                                        <div class="tcb-product-photo">
+                                            <img src="https://ict.iitk.ac.in/wp-content/uploads/c-programming-2-1.jpg" class="img-responsive ImageClass" alt="a" />
+                                            @*<a href="#0" class="cd-trigger">Quick View</a>*@
+                                        </div>
+                                        <div class="tcb-product-info">
+                                            <div class="tcb-product-title">
+                                                <div class="ProDesID">
+                                                    C++
+                                                </div>
+                                            </div>
+                                            <div class="tcb-hline"></div>
+                                            <div class="ProPriID">
+                                                $49.00
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-3">
+                                    <div class="tcb-product-item" onclick="CourseModal(this)" id="quickViewID5">
+                                        <div class="tcb-product-photo">
+                                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTfP8EvVFsbB0WCGfzUAmqHUGi2gZB6Q3DTtuZtzGdx3jtLMe1M&usqp=CAU" class="img-responsive ImageClass" alt="a" />
+                                            @*<a href="#0" class="cd-trigger">Quick View</a>*@
+
+                                        </div>
+                                        <div class="tcb-product-info">
+                                            <div class="tcb-product-title">
+                                                <div class="ProDesID">
+                                                    Finance
+                                                </div>
+                                            </div>
+                                            <div class="tcb-hline"></div>
+                                            <div class="ProPriID">
+                                                $9.00
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-3">
+                                    <div class="tcb-product-item" onclick="CourseModal(this)" id="quickViewID6">
+                                        <div class="tcb-product-photo">
+                                            <img src="https://lh3.googleusercontent.com/GTmuiIZrppouc6hhdWiocybtRx1Tpbl52eYw4l-nAqHtHd4BpSMEqe-vGv7ZFiaHhG_l4v2m5Fdhapxw9aFLf28ErztHEv5WYIz5fA" class="img-responsive ImageClass" alt="a" />
+                                            @*<a href="#0" class="cd-trigger">Quick View</a>*@
+                                        </div>
+                                        <div class="tcb-product-info">
+                                            <div class="tcb-product-title">
+                                                <div class="ProDesID">
+                                                    Android
+                                                </div>
+                                            </div>
+                                            <div class="tcb-hline"></div>
+                                            <div class="ProPriID">
+                                                $39.00
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-3">
+                                    <div class="tcb-product-item" onclick="CourseModal(this)" id="quickViewID7">
+                                        <div class="tcb-product-photo">
+                                            <img src="https://miro.medium.com/max/620/1*jl_HM5hDwhCfoY59-DodiQ.png" class="img-responsive ImageClass" alt="a" />
+                                            @*<a href="#0" class="cd-trigger">Quick View</a>*@
+                                        </div>
+                                        <div class="tcb-product-info">
+                                            <div class="tcb-product-title">
+                                                <div class="ProDesID">
+                                                    Automation Testing
+                                                </div>
+                                            </div>
+                                            <div class="tcb-hline"></div>
+                                            <div class="ProPriID">
+                                                $11,999.00
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane active" id="musicID">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="slider">
+                                <div class="col-xs-12 col-sm-6 col-md-3">
+                                    <div class="tcb-product-item" onclick="CourseModal(this)" id="quickViewID8">
+                                        <div class="tcb-product-photo">
+                                            <img src="https://img-a.udemycdn.com/course/240x135/450918_4af0_3.jpg" class="img-responsive ImageClass" alt="a" />
+                                        </div>
+                                        <div class="tcb-product-info">
+                                            <div class="tcb-product-title">
+                                                <div class="ProDesID">How To Sing #1: Complete Vocal Warm ups & Voice Physiology</div>
+                                            </div>
+                                            <div class="tcb-hline"></div>
+                                            <div class="ProPriID">
+                                                $150.00
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-3">
+                                    <div class="tcb-product-item" onclick="CourseModal(this)" id="quickViewID9">
+                                        <div class="tcb-product-photo">
+                                            <img src="https://img-a.udemycdn.com/course/240x135/42271_886a_7.jpg" class="img-responsive ImageClass" alt="a" />
+                                        </div>
+                                        <div class="tcb-product-info">
+                                            <div class="tcb-product-title">
+                                                <div class="ProDesID">Complete Guitar System - Beginner to Advanced</div>
+                                            </div>
+
+                                            <div class="tcb-hline"></div>
+                                            <div class="ProPriID">
+                                                $49.00
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-3">
+                                    <div class="tcb-product-item" onclick="CourseModal(this)" id="quickViewID10">
+                                        <div class="tcb-product-photo">
+                                            <img src="https://img-a.udemycdn.com/course/240x135/1147828_0474_2.jpg" class="img-responsive ImageClass" alt="a" />
+                                        </div>
+                                        <div class="tcb-product-info">
+                                            <div class="tcb-product-title">
+                                                <div class="ProDesID">Music Theory for Electronic Music COMPLETE</div>
+                                            </div>
+                                            <div class="tcb-hline"></div>
+                                            <div class="ProPriID">
+                                                $999.00
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-3">
+                                    <div class="tcb-product-item" onclick="CourseModal(this)" id="quickViewID11">
+                                        <div class="tcb-product-photo">
+                                            <img src="https://img-a.udemycdn.com/course/240x135/138902_a9a3_11.jpg" class="img-responsive ImageClass" alt="a" />
+                                        </div>
+                                        <div class="tcb-product-info">
+                                            <div class="tcb-product-title">
+                                                <div class="ProDesID">Music Composition</div>
+                                            </div>
+                                            <div class="tcb-hline"></div>
+                                            <div class="ProPriID">
+                                                $199.00
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-3">
+                                    <div class="tcb-product-item" onclick="CourseModal(this)" id="quickViewID12">
+                                        <div class="tcb-product-photo">
+                                            <img src="https://img-a.udemycdn.com/course/240x135/238934_4d81_5.jpg" class="img-responsive ImageClass" alt="a" />
+                                        </div>
+                                        <div class="tcb-product-info">
+                                            <div class="tcb-product-title">
+                                                <div class="ProDesID">
+                                                    Pianoforall - Incredible New Way To Learn Piano & Keyboard
+                                                </div>
+                                            </div>
+                                            <div class="tcb-hline"></div>
+                                            <div class="ProPriID">
+                                                $49.00
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane active" id="softwareID">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="slider">
+                                <div class="col-xs-12 col-sm-6 col-md-3">
+                                    <div class="tcb-product-item" onclick="CourseModal(this)" id="quickViewID13">
+                                        <div class="tcb-product-photo">
+                                            <img src="https://img-a.udemycdn.com/course/240x135/362328_91f3_10.jpg" class="img-responsive ImageClass" alt="a" />
+                                            <a href="#0" class="cd-trigger">Quick View</a>
+                                        </div>
+                                        <div class="tcb-product-info">
+                                            <div class="tcb-product-title">
+                                                <div class="ProDesID">AWS Certified Solutions Architect - Associate 2020</div>
+                                            </div>
+                                            <div class="tcb-hline"></div>
+                                            <div class="ProPriID">
+                                                $150.00
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-3">
+                                    <div class="tcb-product-item" onclick="CourseModal(this)" id="quickViewID14">
+                                        <div class="tcb-product-photo">
+                                            <img src="https://img-a.udemycdn.com/course/240x135/857010_8239_2.jpg" class="img-responsive ImageClass" alt="a" />
+                                            <a href="#0" class="cd-trigger">Quick View</a>
+                                        </div>
+                                        <div class="tcb-product-info">
+                                            <div class="tcb-product-title">
+                                                <div class="ProDesID">Learn Ethical Hacking From Scratch</div>
+                                            </div>
+
+                                            <div class="tcb-hline"></div>
+                                            <div class="ProPriID">
+                                                $49.00
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-3">
+                                    <div class="tcb-product-item" onclick="CourseModal(this)" id="quickViewID15">
+                                        <div class="tcb-product-photo">
+                                            <img src="https://img-a.udemycdn.com/course/240x135/614772_233b_9.jpg" class="img-responsive ImageClass" alt="a" />
+                                            <a href="#0" class="cd-trigger">Quick View</a>
+                                        </div>
+                                        <div class="tcb-product-info">
+                                            <div class="tcb-product-title">
+                                                <div class="ProDesID">The Complete Cyber Security Course : Hackers Exposed</div>
+                                            </div>
+                                            <div class="tcb-hline"></div>
+                                            <div class="ProPriID">
+                                                $999.00
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-3">
+                                    <div class="tcb-product-item" onclick="CourseModal(this)" id="quickViewID16">
+                                        <div class="tcb-product-photo">
+                                            <img src="https://img-a.udemycdn.com/course/240x135/1320362_1b73_6.jpg" class="img-responsive ImageClass" alt="a" />
+                                            <a href="#0" class="cd-trigger">Quick View</a>
+                                        </div>
+                                        <div class="tcb-product-info">
+                                            <div class="tcb-product-title">
+                                                <div class="ProDesID">Linux Mastery: Master the Linux Command Line in 11.5 Hours</div>
+                                            </div>
+                                            <div class="tcb-hline"></div>
+                                            <div class="ProPriID">
+                                                $199.00
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="top-categories--categories-container--3zk1R containers">
+        <div class="top-categories--categories__header--2jIOZ">Top categories</div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="top-category--category--j2uYS panel panel-default">
+                    <div class="panel-body">
+                        <a href="#devlopmentID">
+                            <div class="top-category--panel-content--33f5e">
+                                <span class="glyphicon glyphicon-folder-close iconClass glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                <div class="top-category--category__text--1bphI">Development</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="top-category--category--j2uYS panel panel-default">
+                    <div class="panel-body">
+                        <a href="/courses/business/">
+                            <div class="top-category--panel-content--33f5e">
+                                <span class="glyphicon glyphicon-stats iconClass" aria-hidden="true"></span>
+                                <div class="top-category--category__text--1bphI">Business</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div><div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="top-category--category--j2uYS panel panel-default">
+                    <div class="panel-body">
+                        <a href="/courses/it-and-software/">
+                            <div class="top-category--panel-content--33f5e">
+                                <span class="glyphicon glyphicon-blackboard iconClass" aria-hidden="true"></span>
+                                <div class="top-category--category__text--1bphI">
+                                    IT and Software
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="top-category--category--j2uYS panel panel-default">
+                    <div class="panel-body">
+                        <a href="/courses/design/">
+                            <div class="top-category--panel-content--33f5e">
+                                <span class="glyphicon glyphicon-pencil iconClass" aria-hidden="true"></span>
+                                <div class="top-category--category__text--1bphI">Design</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="top-category--category--j2uYS panel panel-default">
+                    <div class="panel-body">
+                        <a href="/courses/marketing/">
+                            <div class="top-category--panel-content--33f5e">
+                                <span class="glyphicon glyphicon-bullhorn iconClass" aria-hidden="true"></span><div class="top-category--category__text--1bphI">Marketing</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="top-category--category--j2uYS panel panel-default">
+                    <div class="panel-body">
+                        <a href="/courses/personal-development/">
+                            <div class="top-category--panel-content--33f5e">
+                                <span class="glyphicon glyphicon-book iconClass" aria-hidden="true"></span>
+                                <div class="top-category--category__text--1bphI">Personal Development</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="top-category--category--j2uYS panel panel-default">
+                    <div class="panel-body">
+                        <a href="/courses/photography/">
+                            <div class="top-category--panel-content--33f5e">
+                                <span class="glyphicon glyphicon-camera iconClass" aria-hidden="true"></span>
+                                <div class="top-category--category__text--1bphI">
+                                    Photography
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div><div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="top-category--category--j2uYS panel panel-default">
+                    <div class="panel-body">
+                        <a href="#musicID" data-toggle="tab">
+                            <div class="top-category--panel-content--33f5e">
+                                <span class="glyphicon glyphicon-music iconClass" aria-hidden="true"></span>
+                                <div class="top-category--category__text--1bphI">Music</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="coursesID" class="common_pad">
+    <div class="text-center">
+        <h2 class="com_head wow fadeInUp animated" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">COURSE</h2>
+        <div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="slider">
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <div class="tcb-product-item">
+                                <div class="tcb-product-photo">
+                                    <img src="https://img-a.udemycdn.com/course/240x135/382002_5d4a.jpg" class="img-responsive ImageClass" alt="a" />
+                                    <a href="#0" class="cd-trigger">Quick View</a>
+                                </div>
+                                <div class="tcb-product-info">
+                                    <div class="tcb-product-title">
+                                        <div class="ProDesID">C# Basics for Beginners</div>
+                                    </div>
+                                    <div class="tcb-hline"></div>
+                                    <div class="ProPriID">
+                                        $150.00
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <div class="tcb-product-item">
+                                <div class="tcb-product-photo">
+                                    <img src="https://img-a.udemycdn.com/course/240x135/1362070_b9a1_2.jpg" class="img-responsive ImageClass" alt="a" />
+                                    <a href="#0" class="cd-trigger">Quick View</a>
+                                </div>
+                                <div class="tcb-product-info">
+                                    <div class="tcb-product-title">
+                                        <div class="ProDesID">React - The Complete Guide</div>
+                                    </div>
+
+                                    <div class="tcb-hline"></div>
+                                    <div class="ProPriID">
+                                        $49.00
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <div class="tcb-product-item">
+                                <div class="tcb-product-photo">
+                                    <img src="https://blog.tech-fellow.net/content/images/size/w600/2019/04/asp-net-mvc-1-.jpg" class="img-responsive ImageClass" alt="a" />
+                                    <a href="#0" class="cd-trigger">Quick View</a>
+                                </div>
+                                <div class="tcb-product-info">
+                                    <div class="tcb-product-title">
+                                        <div class="ProDesID">ASP.Net MVC</div>
+                                    </div>
+                                    <div class="tcb-hline"></div>
+                                    <div class="ProPriID">
+                                        $999.00
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <div class="tcb-product-item">
+                                <div class="tcb-product-photo">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/1200px-Node.js_logo.svg.png" class="img-responsive ImageClass" alt="a" />
+                                    <a href="#0" class="cd-trigger">Quick View</a>
+                                </div>
+                                <div class="tcb-product-info">
+                                    <div class="tcb-product-title">
+                                        <div class="ProDesID">Node JS</div>
+                                    </div>
+                                    <div class="tcb-hline"></div>
+                                    <div class="ProPriID">
+                                        $199.00
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <div class="tcb-product-item">
+                                <div class="tcb-product-photo">
+                                    <img src="https://ict.iitk.ac.in/wp-content/uploads/c-programming-2-1.jpg" class="img-responsive ImageClass" alt="a" />
+                                    <a href="#0" class="cd-trigger">Quick View</a>
+                                </div>
+                                <div class="tcb-product-info">
+                                    <div class="tcb-product-title">
+                                        <div class="ProDesID">
+                                            C++
+                                        </div>
+                                    </div>
+                                    <div class="tcb-hline"></div>
+                                    <div class="ProPriID">
+                                        $49.00
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <div class="tcb-product-item">
+                                <div class="tcb-product-photo">
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTfP8EvVFsbB0WCGfzUAmqHUGi2gZB6Q3DTtuZtzGdx3jtLMe1M&usqp=CAU" class="img-responsive ImageClass" alt="a" />
+                                    <a href="#0" class="cd-trigger">Quick View</a>
+
+                                </div>
+                                <div class="tcb-product-info">
+                                    <div class="tcb-product-title">
+                                        <div class="ProDesID">
+                                            Finance
+                                        </div>
+                                    </div>
+                                    <div class="tcb-hline"></div>
+                                    <div class="ProPriID">
+                                        $9.00
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <div class="tcb-product-item">
+                                <div class="tcb-product-photo">
+                                    <img src="https://lh3.googleusercontent.com/GTmuiIZrppouc6hhdWiocybtRx1Tpbl52eYw4l-nAqHtHd4BpSMEqe-vGv7ZFiaHhG_l4v2m5Fdhapxw9aFLf28ErztHEv5WYIz5fA" class="img-responsive ImageClass" alt="a" />
+                                    <a href="#0" class="cd-trigger">Quick View</a>
+                                </div>
+                                <div class="tcb-product-info">
+                                    <div class="tcb-product-title">
+                                        <div class="ProDesID">
+                                            Android
+                                        </div>
+                                    </div>
+                                    <div class="tcb-hline"></div>
+                                    <div class="ProPriID">
+                                        $39.00
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <div class="tcb-product-item">
+                                <div class="tcb-product-photo">
+                                    <img src="https://miro.medium.com/max/620/1*jl_HM5hDwhCfoY59-DodiQ.png" class="img-responsive ImageClass" alt="a" />
+                                    <a href="#0" class="cd-trigger">Quick View</a>
+                                </div>
+                                <div class="tcb-product-info">
+                                    <div class="tcb-product-title">
+                                        <div class="ProDesID">
+                                            Automation Testing
+                                        </div>
+                                    </div>
+                                    <div class="tcb-hline"></div>
+                                    <div class="ProPriID">
+                                        $11,999.00
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<section id="videosID" class="common_pad">
+    <div class="text-center">
+        <h2 class="com_head wow fadeInUp animated" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">TUTORIAL</h2>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="sliderTutorial">
+                    <div class="col-xs-12 col-sm-6 col-md-3">
+                        <div class="mainSlide">
+                            <div class="photo">
+                                <a class="mam hover-shadow cursor" width="100%" height="200" src="https://player.vimeo.com/video/25870398" onclick="currentSlide(1)()">
+                                    <img src="~/Content/Images/Capture.PNG" style="width:105%" class="hover-shadow cursor">
+                                    <span class="videoplay">
+                                        <svg viewBox="0 0 40 40" fill="currentColor" width="40" height="40"><defs><path d="M20,37.8378378 C29.8515658,37.8378378 37.8378378,29.8515658 37.8378378,20 C37.8378378,10.1484342 29.8515658,2.16216216 20,2.16216216 C10.1484342,2.16216216 2.16216216,10.1484342 2.16216216,20 C2.16216216,29.8515658 10.1484342,37.8378378 20,37.8378378 Z M20,40 C8.954305,40 0,31.045695 0,20 C0,8.954305 8.954305,0 20,0 C31.045695,0 40,8.954305 40,20 C40,31.045695 31.045695,40 20,40 Z M26.594595,19.6756755 L15.1351351,12.972973 L15.1351351,26.378378 L26.594595,19.6756755 Z" id="path-play"></path></defs><g id="play-button" stroke="none" fill="none" stroke-width="1" fill-rule="evenodd"><g id="Awesome-Icons---slider-+-grid" transform="translate(-768 -876)"><g id="Icons/play" transform="translate(768 876)"><g id="play"><mask id="mask-play" fill="currentColor"><use xlink:href="#path-play"></use></mask><use id="Mask" fill="currentColor" fill-rule="nonzero" xlink:href="#path-play"></use></g></g></g></g></svg>
+                                        <p> Play Video</p>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="info text-center">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            Video Title
+                                        </div>
+                                        <div class="form-group">
+                                            Description
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-6 col-md-3">
+                        <div class="mainSlide">
+
+                            <div class="photo">
+                                <a class="mam hover-shadow cursor" width="100%" height="200" src="https://player.vimeo.com/video/132081781" frameborder="0" allowfullscreen="" autoplay="1" onclick="currentSlide(2)">
+                                    <img src="https://i.vimeocdn.com/video/525698559.webp?mw=1500&mh=844&q=70" style="width:100%" class="hover-shadow cursor">
+                                    <span class="videoplay">
+                                        <svg viewBox="0 0 40 40" fill="currentColor" width="40" height="40"><defs><path d="M20,37.8378378 C29.8515658,37.8378378 37.8378378,29.8515658 37.8378378,20 C37.8378378,10.1484342 29.8515658,2.16216216 20,2.16216216 C10.1484342,2.16216216 2.16216216,10.1484342 2.16216216,20 C2.16216216,29.8515658 10.1484342,37.8378378 20,37.8378378 Z M20,40 C8.954305,40 0,31.045695 0,20 C0,8.954305 8.954305,0 20,0 C31.045695,0 40,8.954305 40,20 C40,31.045695 31.045695,40 20,40 Z M26.594595,19.6756755 L15.1351351,12.972973 L15.1351351,26.378378 L26.594595,19.6756755 Z" id="path-play"></path></defs><g id="play-button" stroke="none" fill="none" stroke-width="1" fill-rule="evenodd"><g id="Awesome-Icons---slider-+-grid" transform="translate(-768 -876)"><g id="Icons/play" transform="translate(768 876)"><g id="play"><mask id="mask-play" fill="currentColor"><use xlink:href="#path-play"></use></mask><use id="Mask" fill="currentColor" fill-rule="nonzero" xlink:href="#path-play"></use></g></g></g></g></svg>
+                                        <p> Play Video</p>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="info text-center">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            Video Title
+                                        </div>
+                                        <div class="form-group">
+                                            Description
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-6 col-md-3">
+                        <div class="mainSlide">
+
+                            <div class="photo">
+                                <a class="mam hover-shadow cursor" width="100%" height="200" src="https://www.youtube.com/embed/q9V3Ww6fhLs" frameborder="0" allowfullscreen="" autoplay="" onclick="currentSlide(3)">
+                                    <img src="https://i.ytimg.com/vi/q9V3Ww6fhLs/maxresdefault.jpg" style="width:100%" class="hover-shadow cursor">
+                                    <span class="videoplay">
+                                        <svg viewBox="0 0 40 40" fill="currentColor" width="40" height="40"><defs><path d="M20,37.8378378 C29.8515658,37.8378378 37.8378378,29.8515658 37.8378378,20 C37.8378378,10.1484342 29.8515658,2.16216216 20,2.16216216 C10.1484342,2.16216216 2.16216216,10.1484342 2.16216216,20 C2.16216216,29.8515658 10.1484342,37.8378378 20,37.8378378 Z M20,40 C8.954305,40 0,31.045695 0,20 C0,8.954305 8.954305,0 20,0 C31.045695,0 40,8.954305 40,20 C40,31.045695 31.045695,40 20,40 Z M26.594595,19.6756755 L15.1351351,12.972973 L15.1351351,26.378378 L26.594595,19.6756755 Z" id="path-play"></path></defs><g id="play-button" stroke="none" fill="none" stroke-width="1" fill-rule="evenodd"><g id="Awesome-Icons---slider-+-grid" transform="translate(-768 -876)"><g id="Icons/play" transform="translate(768 876)"><g id="play"><mask id="mask-play" fill="currentColor"><use xlink:href="#path-play"></use></mask><use id="Mask" fill="currentColor" fill-rule="nonzero" xlink:href="#path-play"></use></g></g></g></g></svg>
+                                        <p> Play Video</p>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="info text-center">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            Video Title
+                                        </div>
+                                        <div class="form-group">
+                                            Description
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-3">
+                        <div class="mainSlide">
+
+                            <div class="photo">
+                                <a class="mam hover-shadow cursor" width="100%" height="200" src="https://player.vimeo.com/video/132081781" frameborder="0" allowfullscreen="" autoplay="1" onclick="currentSlide(3)">
+                                    <img src="https://i.vimeocdn.com/video/525698559.webp?mw=1500&mh=844&q=70" style="width:100%" class="hover-shadow cursor">
+                                    <span class="videoplay">
+                                        <svg viewBox="0 0 40 40" fill="currentColor" width="40" height="40"><defs><path d="M20,37.8378378 C29.8515658,37.8378378 37.8378378,29.8515658 37.8378378,20 C37.8378378,10.1484342 29.8515658,2.16216216 20,2.16216216 C10.1484342,2.16216216 2.16216216,10.1484342 2.16216216,20 C2.16216216,29.8515658 10.1484342,37.8378378 20,37.8378378 Z M20,40 C8.954305,40 0,31.045695 0,20 C0,8.954305 8.954305,0 20,0 C31.045695,0 40,8.954305 40,20 C40,31.045695 31.045695,40 20,40 Z M26.594595,19.6756755 L15.1351351,12.972973 L15.1351351,26.378378 L26.594595,19.6756755 Z" id="path-play"></path></defs><g id="play-button" stroke="none" fill="none" stroke-width="1" fill-rule="evenodd"><g id="Awesome-Icons---slider-+-grid" transform="translate(-768 -876)"><g id="Icons/play" transform="translate(768 876)"><g id="play"><mask id="mask-play" fill="currentColor"><use xlink:href="#path-play"></use></mask><use id="Mask" fill="currentColor" fill-rule="nonzero" xlink:href="#path-play"></use></g></g></g></g></svg>
+                                        <p> Play Video</p>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="info text-center">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            Video Title
+                                        </div>
+                                        <div class="form-group">
+                                            Description
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-6 col-md-3">
+                        <div class="mainSlide">
+
+                            <div class="photo">
+                                <a class="mam hover-shadow cursor" width="100%" height="200" src="https://www.youtube.com/embed/q9V3Ww6fhLs" frameborder="0" allowfullscreen="" autoplay="" onclick="currentSlide(4)">
+                                    <img src="https://i.ytimg.com/vi/q9V3Ww6fhLs/maxresdefault.jpg" style="width:100%" class="hover-shadow cursor">
+                                    <span class="videoplay">
+                                        <svg viewBox="0 0 40 40" fill="currentColor" width="40" height="40"><defs><path d="M20,37.8378378 C29.8515658,37.8378378 37.8378378,29.8515658 37.8378378,20 C37.8378378,10.1484342 29.8515658,2.16216216 20,2.16216216 C10.1484342,2.16216216 2.16216216,10.1484342 2.16216216,20 C2.16216216,29.8515658 10.1484342,37.8378378 20,37.8378378 Z M20,40 C8.954305,40 0,31.045695 0,20 C0,8.954305 8.954305,0 20,0 C31.045695,0 40,8.954305 40,20 C40,31.045695 31.045695,40 20,40 Z M26.594595,19.6756755 L15.1351351,12.972973 L15.1351351,26.378378 L26.594595,19.6756755 Z" id="path-play"></path></defs><g id="play-button" stroke="none" fill="none" stroke-width="1" fill-rule="evenodd"><g id="Awesome-Icons---slider-+-grid" transform="translate(-768 -876)"><g id="Icons/play" transform="translate(768 876)"><g id="play"><mask id="mask-play" fill="currentColor"><use xlink:href="#path-play"></use></mask><use id="Mask" fill="currentColor" fill-rule="nonzero" xlink:href="#path-play"></use></g></g></g></g></svg>
+                                        <p> Play Video</p>
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="info text-center">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            Video Title
+                                        </div>
+                                        <div class="form-group">
+                                            Description
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="modal" id="myModal" role="dialog">
+    <div class="modal-header" style="border-bottom:none;margin-top: -97px;">
+        <button type="button" class="closeModel" data-dismiss="modal" style="color:white;opacity:1;margin-top: -97px;" onclick="closeModal()">&times;</button>
+    </div>
+    <div class="modal-dialog" style="width:100%;">
+        <!-- Modal content-->
+        <div class="modal-content" style="background-color:black;">
+            <div class="modal-body">
+                <div class="mySlides">
+                    <iframe id="ifrmeID0" class="slideCenter" src="https://player.vimeo.com/video/25870398" frameborder="0" allowfullscreen=""></iframe>
+                </div>
+                <div class="mySlides">
+                    <iframe id="ifrmeID1" class="slideCenter" src="https://player.vimeo.com/video/132081781" frameborder="0" allowfullscreen="">
+                    </iframe>
+                </div>
+                <div class="mySlides">
+                    <iframe id="ifrmeID2" class="slideCenter" src="https://www.youtube.com/embed/q9V3Ww6fhLs" frameborder="0" allowfullscreen="" style="width:50%;left:280px;">
+                    </iframe>
+                </div>
+                <a class="prev" onclick="plusSlides(-1)" id="tutorialPrev">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)" id="tutorialNext">&#10095;</a>
+                <div class="caption-container">
+                    <p id="caption"></p>
+                </div>
+            </div>
+            <div id="carouselexample" class="carousel slide hidden-xs" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="item active ItemSlide1" onclick="currtmodalSlide(1)">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="col-item">
+                                    <div class="popupSlide">
+                                        <a class="mam hover-shadow cursor" width="100%" height="200" src="https://player.vimeo.com/video/25870398" frameborder="0" allowfullscreen="" autoplay="" onclick="currentSlide(1)">
+
+                                            <img src="~/Content/Images/Capture.PNG" style="width:105%" class="hover-shadow cursor" />
+                                            <span class="videoplay hideIcon">
+                                                <svg viewBox="0 0 40 40" fill="currentColor" width="40" height="40"><defs><path d="M20,37.8378378 C29.8515658,37.8378378 37.8378378,29.8515658 37.8378378,20 C37.8378378,10.1484342 29.8515658,2.16216216 20,2.16216216 C10.1484342,2.16216216 2.16216216,10.1484342 2.16216216,20 C2.16216216,29.8515658 10.1484342,37.8378378 20,37.8378378 Z M20,40 C8.954305,40 0,31.045695 0,20 C0,8.954305 8.954305,0 20,0 C31.045695,0 40,8.954305 40,20 C40,31.045695 31.045695,40 20,40 Z M26.594595,19.6756755 L15.1351351,12.972973 L15.1351351,26.378378 L26.594595,19.6756755 Z" id="path-play"></path></defs><g id="play-button" stroke="none" fill="none" stroke-width="1" fill-rule="evenodd"><g id="Awesome-Icons---slider-+-grid" transform="translate(-768 -876)"><g id="Icons/play" transform="translate(768 876)"><g id="play"><mask id="mask-play" fill="currentColor"><use xlink:href="#path-play"></use></mask><use id="Mask" fill="currentColor" fill-rule="nonzero" xlink:href="#path-play"></use></g></g></g></g></svg>
+
+                                            </span>
+                                            <p style="display:none" class="nowplay videoplay"> Now Playing</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="col-item">
+                                    <div class="popupSlide">
+                                        <a class="mam hover-shadow cursor" width="100%" height="200" src="https://player.vimeo.com/video/132081781" frameborder="0" allowfullscreen="" autoplay="" onclick="currentSlide(2)">
+                                            <img src="https://i.vimeocdn.com/video/525698559.webp?mw=1500&mh=844&q=70" style="width:100%" onclick="openModal();currentSlide(2)" class="hover-shadow cursor">
+                                            <span class="videoplay hideIcon">
+                                                <svg viewBox="0 0 40 40" fill="currentColor" width="40" height="40"><defs><path d="M20,37.8378378 C29.8515658,37.8378378 37.8378378,29.8515658 37.8378378,20 C37.8378378,10.1484342 29.8515658,2.16216216 20,2.16216216 C10.1484342,2.16216216 2.16216216,10.1484342 2.16216216,20 C2.16216216,29.8515658 10.1484342,37.8378378 20,37.8378378 Z M20,40 C8.954305,40 0,31.045695 0,20 C0,8.954305 8.954305,0 20,0 C31.045695,0 40,8.954305 40,20 C40,31.045695 31.045695,40 20,40 Z M26.594595,19.6756755 L15.1351351,12.972973 L15.1351351,26.378378 L26.594595,19.6756755 Z" id="path-play"></path></defs><g id="play-button" stroke="none" fill="none" stroke-width="1" fill-rule="evenodd"><g id="Awesome-Icons---slider-+-grid" transform="translate(-768 -876)"><g id="Icons/play" transform="translate(768 876)"><g id="play"><mask id="mask-play" fill="currentColor"><use xlink:href="#path-play"></use></mask><use id="Mask" fill="currentColor" fill-rule="nonzero" xlink:href="#path-play"></use></g></g></g></g></svg>
+                                            </span>
+                                            <p style="display:none" class="nowplay videoplay"> Now Playing</p>
+
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="col-item">
+                                    <div class="popupSlide">
+                                        <a class="mam hover-shadow cursor" width="100%" height="200" src="https://www.youtube.com/embed/q9V3Ww6fhLs" frameborder="0" allowfullscreen="" autoplay="" onclick="currentSlide(3)">
+                                            <img src="https://i.ytimg.com/vi/q9V3Ww6fhLs/maxresdefault.jpg" style="width:100%" onclick="openModal();currentSlide(3)" class="hover-shadow cursor">
+                                            <span class="videoplay hideIcon">
+                                                <svg viewBox="0 0 40 40" fill="currentColor" width="40" height="40"><defs><path d="M20,37.8378378 C29.8515658,37.8378378 37.8378378,29.8515658 37.8378378,20 C37.8378378,10.1484342 29.8515658,2.16216216 20,2.16216216 C10.1484342,2.16216216 2.16216216,10.1484342 2.16216216,20 C2.16216216,29.8515658 10.1484342,37.8378378 20,37.8378378 Z M20,40 C8.954305,40 0,31.045695 0,20 C0,8.954305 8.954305,0 20,0 C31.045695,0 40,8.954305 40,20 C40,31.045695 31.045695,40 20,40 Z M26.594595,19.6756755 L15.1351351,12.972973 L15.1351351,26.378378 L26.594595,19.6756755 Z" id="path-play"></path></defs><g id="play-button" stroke="none" fill="none" stroke-width="1" fill-rule="evenodd"><g id="Awesome-Icons---slider-+-grid" transform="translate(-768 -876)"><g id="Icons/play" transform="translate(768 876)"><g id="play"><mask id="mask-play" fill="currentColor"><use xlink:href="#path-play"></use></mask><use id="Mask" fill="currentColor" fill-rule="nonzero" xlink:href="#path-play"></use></g></g></g></g></svg>
+                                            </span>
+                                            <p style="display:none" class="nowplay videoplay"> Now Playing</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                Left and right controls
+                <a class="lefts carousel-control" href="#carouselexample" role="button" data-slide="prev" onclick="prevnextModalSlides(-1)">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <a class="rights carousel-control" href="#carouselexample" role="button" data-slide="next" onclick="prevnextModalSlides(1)">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+            </div>
+
+            @*<div class="row">
+                    <div class="col-md-12">
+                        <div class="slider">
+                            <div class="col-xs-12 col-sm-6 col-md-3">
+                                <div class="col-item">
+                                    <div class="popupSlide">
+                                        <a class="mam hover-shadow cursor" width="100%" height="200" src="https://player.vimeo.com/video/25870398" frameborder="0" allowfullscreen="" autoplay="" onclick="currentSlide(1)">
+
+                                            <img src="~/Content/Images/Capture.PNG" style="width:105%" class="hover-shadow cursor" />
+                                            <span class="videoplay hideIcon">
+                                                <svg viewBox="0 0 40 40" fill="currentColor" width="40" height="40"><defs><path d="M20,37.8378378 C29.8515658,37.8378378 37.8378378,29.8515658 37.8378378,20 C37.8378378,10.1484342 29.8515658,2.16216216 20,2.16216216 C10.1484342,2.16216216 2.16216216,10.1484342 2.16216216,20 C2.16216216,29.8515658 10.1484342,37.8378378 20,37.8378378 Z M20,40 C8.954305,40 0,31.045695 0,20 C0,8.954305 8.954305,0 20,0 C31.045695,0 40,8.954305 40,20 C40,31.045695 31.045695,40 20,40 Z M26.594595,19.6756755 L15.1351351,12.972973 L15.1351351,26.378378 L26.594595,19.6756755 Z" id="path-play"></path></defs><g id="play-button" stroke="none" fill="none" stroke-width="1" fill-rule="evenodd"><g id="Awesome-Icons---slider-+-grid" transform="translate(-768 -876)"><g id="Icons/play" transform="translate(768 876)"><g id="play"><mask id="mask-play" fill="currentColor"><use xlink:href="#path-play"></use></mask><use id="Mask" fill="currentColor" fill-rule="nonzero" xlink:href="#path-play"></use></g></g></g></g></svg>
+
+                                            </span>
+                                            <p style="display:none" class="nowplay videoplay"> Now Playing</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6 col-md-3">
+                                <div class="col-item">
+                                    <div class="popupSlide">
+                                        <a class="mam hover-shadow cursor" width="100%" height="200" src="https://player.vimeo.com/video/132081781" frameborder="0" allowfullscreen="" autoplay="" onclick="currentSlide(2)">
+                                            <img src="https://i.vimeocdn.com/video/525698559.webp?mw=1500&mh=844&q=70" style="width:100%" class="hover-shadow cursor">
+                                            <span class="videoplay hideIcon">
+                                                <svg viewBox="0 0 40 40" fill="currentColor" width="40" height="40"><defs><path d="M20,37.8378378 C29.8515658,37.8378378 37.8378378,29.8515658 37.8378378,20 C37.8378378,10.1484342 29.8515658,2.16216216 20,2.16216216 C10.1484342,2.16216216 2.16216216,10.1484342 2.16216216,20 C2.16216216,29.8515658 10.1484342,37.8378378 20,37.8378378 Z M20,40 C8.954305,40 0,31.045695 0,20 C0,8.954305 8.954305,0 20,0 C31.045695,0 40,8.954305 40,20 C40,31.045695 31.045695,40 20,40 Z M26.594595,19.6756755 L15.1351351,12.972973 L15.1351351,26.378378 L26.594595,19.6756755 Z" id="path-play"></path></defs><g id="play-button" stroke="none" fill="none" stroke-width="1" fill-rule="evenodd"><g id="Awesome-Icons---slider-+-grid" transform="translate(-768 -876)"><g id="Icons/play" transform="translate(768 876)"><g id="play"><mask id="mask-play" fill="currentColor"><use xlink:href="#path-play"></use></mask><use id="Mask" fill="currentColor" fill-rule="nonzero" xlink:href="#path-play"></use></g></g></g></g></svg>
+                                            </span>
+                                            <p style="display:none" class="nowplay videoplay"> Now Playing</p>
+
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6 col-md-3">
+                                <div class="col-item">
+                                    <div class="popupSlide">
+                                        <a class="mam hover-shadow cursor" width="100%" height="200" src="https://www.youtube.com/embed/q9V3Ww6fhLs" frameborder="0" allowfullscreen="" autoplay="" onclick="currentSlide(3)">
+                                            <img src="https://i.ytimg.com/vi/q9V3Ww6fhLs/maxresdefault.jpg" style="width:100%" class="hover-shadow cursor">
+                                            <span class="videoplay hideIcon">
+                                                <svg viewBox="0 0 40 40" fill="currentColor" width="40" height="40"><defs><path d="M20,37.8378378 C29.8515658,37.8378378 37.8378378,29.8515658 37.8378378,20 C37.8378378,10.1484342 29.8515658,2.16216216 20,2.16216216 C10.1484342,2.16216216 2.16216216,10.1484342 2.16216216,20 C2.16216216,29.8515658 10.1484342,37.8378378 20,37.8378378 Z M20,40 C8.954305,40 0,31.045695 0,20 C0,8.954305 8.954305,0 20,0 C31.045695,0 40,8.954305 40,20 C40,31.045695 31.045695,40 20,40 Z M26.594595,19.6756755 L15.1351351,12.972973 L15.1351351,26.378378 L26.594595,19.6756755 Z" id="path-play"></path></defs><g id="play-button" stroke="none" fill="none" stroke-width="1" fill-rule="evenodd"><g id="Awesome-Icons---slider-+-grid" transform="translate(-768 -876)"><g id="Icons/play" transform="translate(768 876)"><g id="play"><mask id="mask-play" fill="currentColor"><use xlink:href="#path-play"></use></mask><use id="Mask" fill="currentColor" fill-rule="nonzero" xlink:href="#path-play"></use></g></g></g></g></svg>
+                                            </span>
+                                            <p style="display:none" class="nowplay videoplay"> Now Playing</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-3">
+                                <div class="col-item">
+                                    <div class="popupSlide">
+                                        <a class="mam hover-shadow cursor" width="100%" height="200" src="https://player.vimeo.com/video/132081781" frameborder="0" allowfullscreen="" autoplay="" onclick="currentSlide(4)">
+                                            <img src="https://i.vimeocdn.com/video/525698559.webp?mw=1500&mh=844&q=70" style="width:100%" class="hover-shadow cursor">
+                                            <span class="videoplay hideIcon">
+                                                <svg viewBox="0 0 40 40" fill="currentColor" width="40" height="40"><defs><path d="M20,37.8378378 C29.8515658,37.8378378 37.8378378,29.8515658 37.8378378,20 C37.8378378,10.1484342 29.8515658,2.16216216 20,2.16216216 C10.1484342,2.16216216 2.16216216,10.1484342 2.16216216,20 C2.16216216,29.8515658 10.1484342,37.8378378 20,37.8378378 Z M20,40 C8.954305,40 0,31.045695 0,20 C0,8.954305 8.954305,0 20,0 C31.045695,0 40,8.954305 40,20 C40,31.045695 31.045695,40 20,40 Z M26.594595,19.6756755 L15.1351351,12.972973 L15.1351351,26.378378 L26.594595,19.6756755 Z" id="path-play"></path></defs><g id="play-button" stroke="none" fill="none" stroke-width="1" fill-rule="evenodd"><g id="Awesome-Icons---slider-+-grid" transform="translate(-768 -876)"><g id="Icons/play" transform="translate(768 876)"><g id="play"><mask id="mask-play" fill="currentColor"><use xlink:href="#path-play"></use></mask><use id="Mask" fill="currentColor" fill-rule="nonzero" xlink:href="#path-play"></use></g></g></g></g></svg>
+                                            </span>
+                                            <p style="display:none" class="nowplay videoplay"> Now Playing</p>
+
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6 col-md-3">
+                                <div class="col-item">
+                                    <div class="popupSlide">
+                                        <a class="mam hover-shadow cursor" width="100%" height="200" src="https://www.youtube.com/embed/q9V3Ww6fhLs" frameborder="0" allowfullscreen="" autoplay="" onclick="currentSlide(4)">
+                                            <img src="https://i.ytimg.com/vi/q9V3Ww6fhLs/maxresdefault.jpg" style="width:100%" class="hover-shadow cursor">
+                                            <span class="videoplay hideIcon">
+                                                <svg viewBox="0 0 40 40" fill="currentColor" width="40" height="40"><defs><path d="M20,37.8378378 C29.8515658,37.8378378 37.8378378,29.8515658 37.8378378,20 C37.8378378,10.1484342 29.8515658,2.16216216 20,2.16216216 C10.1484342,2.16216216 2.16216216,10.1484342 2.16216216,20 C2.16216216,29.8515658 10.1484342,37.8378378 20,37.8378378 Z M20,40 C8.954305,40 0,31.045695 0,20 C0,8.954305 8.954305,0 20,0 C31.045695,0 40,8.954305 40,20 C40,31.045695 31.045695,40 20,40 Z M26.594595,19.6756755 L15.1351351,12.972973 L15.1351351,26.378378 L26.594595,19.6756755 Z" id="path-play"></path></defs><g id="play-button" stroke="none" fill="none" stroke-width="1" fill-rule="evenodd"><g id="Awesome-Icons---slider-+-grid" transform="translate(-768 -876)"><g id="Icons/play" transform="translate(768 876)"><g id="play"><mask id="mask-play" fill="currentColor"><use xlink:href="#path-play"></use></mask><use id="Mask" fill="currentColor" fill-rule="nonzero" xlink:href="#path-play"></use></g></g></g></g></svg>
+                                            </span>
+                                            <p style="display:none" class="nowplay videoplay"> Now Playing</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+
+        </div>
+    </div>
+</div>
+<div class="modal" id="myProductModal" role="dialog">
+    <div class="modal-header" style="border-bottom:none;margin-top: -97px;">
+        <button type="button" class="closeModel" data-dismiss="modal" style="color:white;opacity:1;margin-top: -97px;" onclick="closeProductModal()">&times;</button>
+    </div>
+    <div class="modal-dialog" style="width:100%;">
+        <!-- Modal content-->
+        <div class="modal-content" style="background-color:black;">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <img src="https://img-a.udemycdn.com/course/240x135/382002_5d4a.jpg" style="width:105%">
+                            <span class="Previewvideoplay" onclick="PlayPreview()">
+                                <svg viewBox="0 0 40 40" fill="currentColor" width="40" height="40"><defs><path d="M20,37.8378378 C29.8515658,37.8378378 37.8378378,29.8515658 37.8378378,20 C37.8378378,10.1484342 29.8515658,2.16216216 20,2.16216216 C10.1484342,2.16216216 2.16216216,10.1484342 2.16216216,20 C2.16216216,29.8515658 10.1484342,37.8378378 20,37.8378378 Z M20,40 C8.954305,40 0,31.045695 0,20 C0,8.954305 8.954305,0 20,0 C31.045695,0 40,8.954305 40,20 C40,31.045695 31.045695,40 20,40 Z M26.594595,19.6756755 L15.1351351,12.972973 L15.1351351,26.378378 L26.594595,19.6756755 Z" id="path-play"></path></defs><g id="play-button" stroke="none" fill="none" stroke-width="1" fill-rule="evenodd"><g id="Awesome-Icons---slider-+-grid" transform="translate(-768 -876)"><g id="Icons/play" transform="translate(768 876)"><g id="play"><mask id="mask-play" fill="currentColor"><use xlink:href="#path-play"></use></mask><use id="Mask" fill="currentColor" fill-rule="nonzero" xlink:href="#path-play"></use></g></g></g></g></svg>
+                            </span>
+
+                        </div>
+
+                        <div class="form-group">
+                            <div class="clp-component-render">
+                                <span id="objective" class="in-page-offset-anchor"></span>
+                                <div class="what-you-get">
+                                    <div class="what-you-get__content">
+                                        <div class="requirements__title">
+                                            What you'll learn
+                                        </div>
+                                        <ul class="requirements__list">
+                                            <li class="requirements__item">
+                                                Pass the AWS Solutions Architect Associate certification -- on your first try!
+                                            </li>
+                                            <li class="requirements__item">
+                                                Implement and manage the really tricky AWS services -- VPC, IAM, Route 53 (DNS), and RDS
+                                            </li>
+                                            <li class="requirements__item">
+                                                Operate the most important AWS services correctly
+                                            </li>
+                                            <li class="requirements__item">
+                                                Manage AWS services securely and in compliance with regulatory and company requirements
+                                            </li>
+                                            <li class="requirements__item">
+                                                Practice using an AWS certification exam just like the one you'll take
+                                            </li>
+                                            <li class="requirements__item">
+                                                Build a real-word, scalable and resilient AWS application
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="form-group">
+                            <div id="productDes" class="modalTextHeading"> I am Digital Prodcut</div>
+                        </div>
+                        <div class="form-group"> <div class="modalText">I'm a digital product detail. I'm a great place to add more information about your product such as format, duration, and, when applicable, the genre and the episode name.</div></div>
+                        <div class="form-group">
+                            <div class="modalTextHeading">
+                                DIGITAL PRODUCT SECTION
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="modalText">
+                                I'm a digital product detail. I'm a great place to add more information about your product such as format, duration, and, when applicable, the genre and the episode name. This is also a great space to give your customers a short content brief. Buyers like to know what they’re getting before they purchase, so give them as much information as possible. Make it enticing - but without any spoilers!
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="modalText"><button class="btn form-control btn-primary" id="productPri" style="width:120px;">Buy $150.00</button></div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="clp-component-render">
+                                <div class="requirements" data-purpose="course-requirements">
+                                    <div class="requirements__title modalTextHeading">
+                                        Requirements
+                                    </div>
+                                    <div class="requirements__content modalText">
+                                        <ul class="requirements__list">
+                                            <li class="requirements__item">Technical background as a developer, system administrator, or CS/Engineering student</li>
+                                            <li class="requirements__item">Prior experience with application installation and configuration or website implementation</li>
+                                            <li class="requirements__item">A desire to pass the AWS certification exam: The Solutions Architect Associate</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="requirements" data-purpose="course-audience">
+                                <div class="requirements__title modalTextHeading">
+                                    Who this course is for:
+                                </div>
+                                <ul class="requirements__content modalText">
+                                    <li class="requirements__item">This course is for anyone who wants to learn how to use the awesome AWS service portfolio.</li>
+                                    <li class="requirements__item">It’s perfect for complete AWS beginners with zero AWS experience.</li>
+                                    <li class="requirements__item">It’s also great for someone who has used some AWS services, but wants to expand his or her use and understanding of how all the services interrelate.</li>
+                                    <li class="requirements__item">Of course, it’s perfect for someone who wants to pass the Solutions Architect Associate exam on their very first try!</li>
+                                    <li class="requirements__item">This course is not the best fit for you if you have already passed the Solutions Architect Associate exam or if you have no technical background with computers, application installation and configuration, or website implementation.</li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="PreviewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="background-color:transparent;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="pauseVid()">X</button>
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe id="iframID" src="https://player.vimeo.com/video/132081781" frameborder="0" allowfullscreen="" autoplay="0"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="myCategoryModal" role="dialog">
+    <div class="modal-header" style="border-bottom:none;">
+        <button type="button" class="closeModel" data-dismiss="modal" style="color:white;opacity:1;">&times;</button>
+    </div>
+    <div class="modal-dialog" style="width:100%;">
+        <!-- Modal content-->
+        <div class="modal-content" style="background-color:black;">
+            @*<div class="modal-header" style="border-bottom:none;">
+                    <button type="button" class="close" data-dismiss="modal" style="color:white;opacity:1;">&times;</button>
+                </div>*@
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <h5 class="modalText">Category Name</h5>
+                            <img src="https://i.imgur.com/RuPhz54.jpg" class="img-responsive" alt="a" style="border: 1px solid #efeaea;" id="CategoryImg" />
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <h5 class="modalText">Courses</h5>
+                            <div id="ListProductIMG">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="form-group">
+                                            <img src="https://i.imgur.com/RuPhz54.jpg" class="img-responsive" alt="a" style="border: 1px solid #efeaea;" />
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="form-group">
+                                            <img src="https://i.imgur.com/RuPhz54.jpg" class="img-responsive" alt="a" style="border: 1px solid #efeaea;" />
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="form-group">
+                                            <img src="https://i.imgur.com/RuPhz54.jpg" class="img-responsive" alt="a" style="border: 1px solid #efeaea;" />
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="form-group">
+                                            <img src="https://i.imgur.com/RuPhz54.jpg" class="img-responsive" alt="a" style="border: 1px solid #efeaea;" />
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="form-group">
+                                            <img src="https://i.imgur.com/RuPhz54.jpg" class="img-responsive" alt="a" style="border: 1px solid #efeaea;" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    //$(document).ready(function () {
+    //    $('#musicID').hide();
+    //    $('#softwareID').hide();
+    //    $('#devlopmentID').show();
+    //});
+    //$('#DevTapID').click(function () {
+    //    $('#musicID').hide();
+    //    $('#softwareID').hide();
+    //       $('#devlopmentID').show();
+    //});
+        //$('#MusTapID').click(function () {
+        //$('#musicID').css('display','block');
+        //$('#softwareID').hide();
+        //    $('#devlopmentID').hide();
+
+    //    });
+    //    $('#SofTapID').click(function () {
+    //    $('#musicID').hide();
+    //    $('#softwareID').show();
+    //       $('#devlopmentID').hide();
+    //});
+
+    //$('#DevTapID').click(function () {
+    //    $('.slider').slick('refresh');
+    //});
+    //$('#MusTapID').click(function () {
+    //    $('.slider1').slick('refresh');
+    //    $('.slider').slick('refresh');
+
+    //});
+    //$('#SofTapID').click(function () {
+    //    $('.sliders').slick('refresh');
+    //});
+    //$(".tabbable-line .nav li").click(function () {
+    //    $('.slider').slick('refresh');
+    //});
+</script>
+<script>
+    function PlayPreview() {
+        document.getElementById("PreviewModal").style.display = "block";
+    }
+    function pauseVid() {
+        document.getElementById("PreviewModal").style.display = "none";
+        var src = $('#iframID').attr("src");
+        $('#iframID').attr("src", src + "?amp;showinfo=0&autoplay=0");
+    }
+    debugger;
+    $("#navScroll ul li a[href^='#']").on('click', function (e) {
+
+        // prevent default anchor click behavior
+        e.preventDefault();
+
+        // store hash
+        var hash = this.hash;
+
+        // animate
+        $('html, body').animate({
+            scrollTop: $(hash).offset().top
+        }, 1000);
+        return false;
+    });
+</script>
+<script>
+    $('.carousel').carousel({
+        interval: false
+    });
+
+    var $videoSrc;
+    $(".mam ").click(function () {
+        PlayVideos($(this))
+    });
+    function PlayVideos(ev) {
+        $videoSrc = $(ev).attr("src");
+        $videoSrc = $videoSrc.replace('?amp;showinfo=0', '').replace('&autoplay=1', '&amp;autoplay=1').replace('&amp;autoplay=1', '')
+        document.getElementById("myModal").style.display = "block";
+        var Arrysrc = document.getElementsByClassName("mySlides");
+
+        for (var i = 0; i < length; i++) {
+            var videolist = Arrysrc[i].lastElementChild.src;
+            videolist = videolist.replace('?amp;showinfo=0', '').replace('&autoplay=1', '&amp;autoplay=1').replace('&amp;autoplay=1', '');
+            if ($videoSrc == videolist) {
+
+                $('#ifrmeID' + i).attr("src", $videoSrc + "?amp;showinfo=0&autoplay=1");
+                $('#ifrmeID' + i).attr("allow", "autoplay");
+                document.getElementsByClassName("mySlides")[i].style.display = "block";
+                document.getElementsByClassName("nowplay")[i].style.display = "block";
+                document.getElementsByClassName("hideIcon")[i].style.display = "none";
+
+            }
+            else {
+                $('#ifrmeID' + i).attr("src", Arrysrc[i].lastElementChild.src.replace('&autoplay=1', '').replace('&amp;autoplay=1', ''));
+                document.getElementsByClassName("mySlides")[i].style.display = "none";
+                document.getElementsByClassName("nowplay")[i].style.display = "none";
+                document.getElementsByTagName("span")[i].style.display = "block";
+
+            }
+        }
+    }
+
+    var slideIndex = 1;
+    showSlides(slideIndex);
+    var IsSlide = false;
+    function plusSlides(n) {
+        IsSlide = true;
+        showSlides(slideIndex += n);
+        IsSlide = false;
+    }
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+    function showSlides(n) {
+        debugger;
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("demo");
+        var captionText = document.getElementById("caption");
+        if (n > slides.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = slides.length }
+        if (n == 1) {
+            $("#tutorialPrev").css('display', 'none');
+        }
+        else {
+            $("#tutorialPrev").css('display', 'block');
+        } if (n == slides.length) {
+            $("#tutorialNext").css('display', 'none');
+        }
+        else {
+            $("#tutorialNext").css('display', 'block');
+        }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+
+        }
+        slides[slideIndex - 1].style.display = "block";
+        if (IsSlide == true) { PlayVideos($(slides[slideIndex - 1]).find("iframe")[0]) }
+    }
+    function closeModal() {
+        debugger;
+        document.getElementById("myModal").style.display = "none";
+        var NewArrysrc = document.getElementsByClassName("mySlides");
+        for (var i = 0; i < length; i++) {
+            $('#ifrmeID' + i).attr("src", NewArrysrc[i].lastElementChild.src.replace('&autoplay=1', '').replace('&amp;autoplay=1', ''));
+        }
+    }
+</script>
+<script>
+    var photoIndex = 1;
+    nextSlides(photoIndex);
+    function prevnextSlides(n) {
+        debugger
+        nextSlides(photoIndex += n);
+    }
+
+    function currtSlide(n) {
+        nextSlides(photoIndex = n);
+    }
+    function nextSlides(n) {
+        var photos = document.getElementsByClassName("ItemSlide");
+        if (n > photos.length) { photoIndex = 1 }
+        if (n == 1) {
+            $(".left").css('display', 'none');
+        }
+        else {
+            $(".left").css('display', 'block');
+        } if (n == photos.length) {
+            $(".right").css('display', 'none');
+        }
+        else {
+            $(".right").css('display', 'block');
+        }
+    }
+</script>
+<script>
+    var photoIndex = 1;
+    nextModalSlides(photoIndex);
+    function prevnextModalSlides(n) {
+        debugger
+        nextModalSlides(photoIndex += n);
+    }
+
+    function currtmodalSlide(n) {
+        nextModalSlides(photoIndex = n);
+    }
+    function nextModalSlides(n) {
+        var i;
+        var modalSlide = document.getElementsByClassName("ItemSlide1");
+
+        if (n > modalSlide.length) { photoIndex = 1 }
+
+        if (n > 1) { photoIndex = modalSlide.length }
+        if (n == 1) {
+            $(".lefts").css('display', 'none');
+
+        }
+        else {
+            $(".lefts").css('display', 'block');
+
+        }
+        if (n == modalSlide.length) {
+            $(".rights").css('display', 'none');
+
+        }
+        else {
+            $(".rights").css('display', 'block');
+
+        }
+    }
+</script>
+<script>
+    //$('.cd-trigger').click(function () {
+    //    debugger;
+    //    var $src = $(this)[0].previousElementSibling.src;
+    //    CourseModal(data);
+    //    //var i = $(this)[0].id.replace('quickViewID', '')
+    //    //var details = $('.tcb-product-item')[i];
+    //    //var ProductDesc = $('.ProDesID')[i].innerText;
+    //    //var ProductPrice = $('.ProPriID')[i].innerText;
+    //    //$('#myProductModal').modal('show');
+    //    //$("#productImg").attr("src", $src);
+    //    //$("#productDes").text(ProductDesc);
+    //    //$("#productPri").text('Buy ' + ProductPrice);
+    //});
+    $('.cd-trigger').click(function () {
+        $('#myProductModal').modal('show');
+    });
+    function CourseModal(data) {
+        debugger;
+        var i = data.id.replace('quickViewID', '')
+        var src = $('.ImageClass')[i].src;
+        var details = $('.tcb-product-item')[i];
+        var ProductDesc = $('.ProDesID')[i].innerText;
+        var ProductPrice = $('.ProPriID')[i].innerText;
+        $('#myProductModal').modal('show');
+        $("#productImg").attr("src", src);
+        $("#productDes").text(ProductDesc);
+        $("#productPri").text('Buy ' + ProductPrice);
+    }
+    function closeProductModal() {
+        debugger;
+        document.getElementById("myProductModal").style.display = "none";
+    }
+</script>
+<script>
+    function CategoryModal(cat) {
+        var CategorySrc = $(cat).attr("src");
+        $('#myCategoryModal').modal('show');
+        $("#CategoryImg").attr("src", CategorySrc);
+    }
+</script>
+<script>
+   $(document).ready(function ($){
+        $('.slider').slick({
+            dots: false,
+            infinite: false,
+            speed: 500,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            autoplay: false,
+            autoplaySpeed: 2000,
+            arrows: true,
+
+        });
+
+        $('.slidered').slick({
+            dots: false,
+            infinite: false,
+            speed: 500,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            autoplay: false,
+            autoplaySpeed: 2000,
+            arrows: true,
+            responsive: [{
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            },
+            {
+                breakpoint: 400,
+                settings: {
+                    arrows: false,
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }]
+        });
+         $('.sliderTutorial').slick({
+            dots: false,
+            infinite: false,
+            speed: 500,
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            autoplay: false,
+            autoplaySpeed: 2000,
+            arrows: true,
+            responsive: [{
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            },
+            {
+                breakpoint: 400,
+                settings: {
+                    arrows: false,
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }]
+        });
+    });
+
+
+</script>
+

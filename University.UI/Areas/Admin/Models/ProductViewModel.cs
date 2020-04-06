@@ -41,12 +41,14 @@ namespace University.UI.Areas.Admin.Models
         }
         public Decimal Id { get; set; }
         public decimal sumvideorate { get; set; }
-        [StringLength(50, ErrorMessage = "Do not enter more than 50 characters")]
+        //[StringLength(100, ErrorMessage = "Do not enter more than 50 characters")]
         public string Title { get; set; }
+        public HttpPostedFileBase file { get; set; }
+        // [Required(ErrorMessage = "Please enter First Name")]
         public string ImageURL { get; set; }
         public string subcat { get; set; }
         public string ImageALT { get; set; }
-        [StringLength(100, ErrorMessage = "Do not enter more than 100 characters")]
+        //[StringLength(100, ErrorMessage = "Do not enter more than 100 characters")]
         public string Description { get; set; }
         public string VideosIDs { get; set; }
         public Nullable<Decimal> SubCategoryId { get; set; }

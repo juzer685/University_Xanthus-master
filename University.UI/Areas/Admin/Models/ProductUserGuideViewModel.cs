@@ -26,10 +26,13 @@ namespace University.UI.Areas.Admin.Models
         }
         public Decimal Id { get; set; }
         public Decimal AssocitedCustID { get; set; }
-        [StringLength(100, ErrorMessage = "Do not enter more than 100 characters")]
+       // [StringLength(100, ErrorMessage = "Do not enter more than 100 characters")]
         public string Description { get; set; }
+        [Required(ErrorMessage = "Please select file.")]
+        public HttpPostedFileBase file { get; set; }
         public string ImageURL { get; set; }
-        [StringLength(50, ErrorMessage = "Do not enter more than 50 characters")]
+        //[StringLength(50, ErrorMessage = "Do not enter more than 50 characters")]
+        [Required(ErrorMessage = "Please select file.")]
         public string Title { get; set; }
         public Nullable<Decimal> ProductId { get; set; }
         public Nullable<bool> IsDeleted { get; set; }

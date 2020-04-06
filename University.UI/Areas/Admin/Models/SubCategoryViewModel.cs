@@ -16,7 +16,8 @@ namespace University.UI.Areas.Admin.Models
         //[StringLength(50, ErrorMessage = "Do not enter more than 50 characters")]
        // [MaxLength(50)]
         public string Name { get; set; }
-        [Required(ErrorMessage = "Please fill images")]
+       
+        public HttpPostedFileBase file { get; set; }
         public string ImageURL { get; set; }
         public string ImageALT { get; set; }
         public Nullable<bool> IsDeleted { get; set; }

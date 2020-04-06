@@ -131,7 +131,7 @@
             cache: false,
             success: function (data) {
                 //$('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
-                _showSuccessMessage("Data Deleted Successfully");
+                // _showSuccessMessage("Data Deleted Successfully");
                 $("#FaqVideoPopup").modal('hide');
             }
         });
@@ -210,8 +210,9 @@
                 $('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
                 _showSuccessMessage("Data Saved Successfully"); // show response from the php script.
                 //Cancel();
-                 $("#FaqVideoPopup").modal('hide');
-                $(form).replaceWith(data);
+                $("#FaqVideoPopup").modal('hide');
+               // $("form").replaceWith(data);
+                //$(form).replaceWith(data);
             }
         });
 
