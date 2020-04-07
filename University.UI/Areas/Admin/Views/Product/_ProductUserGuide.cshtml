@@ -23,7 +23,7 @@
             <div class="form-group">
                 <input name="AssocitedID" id="ProductUserGuideAssocitedID" type="hidden" />
                 <label for="Title">Title</label>
-                @Html.TextBoxFor(m => m.Title, new { @class = "form-control txtOnly text-overflow", @required = "required", @maxlength = "100" })
+                @Html.TextBoxFor(m => m.Title, new { @class = "form-control txtOnly text-overflow", @required = "required", @maxlength = "90" })
                 
                 @Html.ValidationMessageFor(m => m.Title, null, new { @class = "", style = "color:red;" })
                 @*@Html.ValidationMessageFor(m => m.Title)*@
