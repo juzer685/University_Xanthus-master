@@ -216,7 +216,8 @@ namespace University.Repository
                                CategoryMaster = c,
                                SubCategoryMaster = s,
                                ProductUserGuide = guide,
-                               //ProductVideos = p.ProductVideos.Where(y => y.IsDeleted != true).ToList(),
+                               CoursePrviewVideos = p.CoursePreviewVideos.Where(y => y.IsDeleted != true).ToList(),
+                               ProductVideos = p.ProductVideos.Where(y => y.IsDeleted != true).ToList(),
                                //ProductVideosTranIDs = p.GetCardTransactionDeatilsMappings.Where(y => y.IsDeleted != true).ToList(),
                                ProductSpec = speci,
                                ProductFAQs = p.ProductFAQs.Where(y => y.IsDeleted != true).ToList(),
@@ -783,6 +784,52 @@ namespace University.Repository
             }
         }
         #endregion
+
+        #region courese preview video
+
+        public bool SaveCoursePreviewVideo(CoursePreviewVideos coursePreviewVideos)
+        {
+            using (var context = new UniversityEntities())
+            {
+                var CoursePreviewvideoExising = context.CoursePreviewVideos.FirstOrDefault(y => y.PreviewID == coursePreviewVideos.PreviewID && y.IsDeleted != true);
+                if (CoursePreviewvideoExising != null)
+                {
+                    CoursePreviewvideoExising.AssocitedCustID = coursePreviewVideos.AssocitedCustID;
+                    CoursePreviewvideoExising.UpdatedDate = DateTime.UtcNow;
+                    CoursePreviewvideoExising.Title = coursePreviewVideos.Title;
+                    CoursePreviewvideoExising.Description= coursePreviewVideos.Description;
+                    //CoursePreviewvideoExising.VideoRate = productVideo.VideoRate;
+                    CoursePreviewvideoExising.IsDeleted = false;
+
+
+                    if (!string.IsNullOrWhiteSpace(coursePreviewVideos.VideoURL))
+                    {
+                        CoursePreviewvideoExising.VideoURL = coursePreviewVideos.VideoURL;
+                    }
+                    //if (!string.IsNullOrWhiteSpace(productVideo.ThumbnailURL))
+                    //{
+                    //    productVideoExising.ThumbnailURL = productVideo.ThumbnailURL;
+                    //}
+                    context.SaveChanges();
+                    //return CoursePreviewvideoExising.PreviewID;
+                }
+                else
+                {
+                    coursePreviewVideos.IsDeleted = false;
+                    coursePreviewVideos.CreatedDate = DateTime.UtcNow;
+                    context.CoursePreviewVideos.Add(coursePreviewVideos);
+                    context.SaveChanges();
+                    //return coursePreviewVideos.PreviewID;
+                }
+                return true;
+
+            }
+        }
+
+        #endregion courese preview video 
+
+
+
         #region Product Videos
         public bool UpdateProductvideo(ProductVideos model)
         {
@@ -869,6 +916,16 @@ namespace University.Repository
             }
             return true;
         }
+
+        public CoursePreviewVideos GetCoursePrviewVideo(Decimal ProductId)
+        {
+            using (var context = new UniversityEntities())
+            {
+                var courseprevvideo = context.CoursePreviewVideos.FirstOrDefault(y => y.ProductID == ProductId && y.IsDeleted != true);
+                return courseprevvideo;
+            }
+        }
+
         public ProductVideos GetProductVideo(Decimal productVideoId)
         {
             using (var context = new UniversityEntities())

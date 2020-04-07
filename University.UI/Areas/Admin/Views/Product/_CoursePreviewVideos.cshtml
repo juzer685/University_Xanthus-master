@@ -1,0 +1,61 @@
+﻿@model  University.UI.Areas.Admin.Models.CoursePreviewViewModel
+
+<link href="~/dist/css/Custom.css" rel="stylesheet" />
+<form " name="ProductVideoForm" enctype="multipart/form-data" method="post" action="/Admin/Product/SaveoursepreviewVideos">
+    <div class="row py-2">
+        <div class="col">
+            <input name="AssocitedID" id="ProductvideosAssocitedID" type="hidden" />
+            @Html.HiddenFor(y => y.ProductID)
+            @Html.Hidden("CourseVideoId", Model.PreviewID, new { @Value = Model.PreviewID })
+            @Html.TextBoxFor(m => m.Title, new { @class = "form-control txtOnly text-overflow", @required = "required", @pattern = "^[^<>%$*@!#]*$", @maxlength = "50", title = Model.Title })
+            @*@Html.ValidationMessageFor(x => x.Title, null, new { @class = "", style = "color:red;" })*@
+            @*@Html.ValidationMessageFor(m => m.Title)*@
+        </div>
+        
+        <div class="col">
+            @Html.TextBoxFor(m => m.Description, new { @class = "form-control text-overflow", rows = "1", @required = "required", @maxlength = "500", title = Model.Description })
+            @*@Html.ValidationMessageFor(x => x.Decription, null, new { @class = "", style = "color:red;" })*@
+            @*@Html.ValidationMessageFor(m => m.Decription)*@
+        </div>
+        @if (string.IsNullOrWhiteSpace(Model.VideoURL))
+        {
+
+            <div class="col">
+                @*@Html.TextBoxFor(m => m.VideoURL, new { @class = "form-control", @required = "required", @pattern = @"^https?:\/\/[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-/]+$", title = "Ex : https://player.vimeo.com/video/322925106" })*@
+                @Html.TextBoxFor(m => m.VideoURL, new
+                {
+                    @class = "form-control text-overflow",
+                    @required = "required",
+                    @pattern = @"^https?:\/\/[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-/]+$",
+                    title = Model.VideoURL,@*title = "Ex : Embed video Path not copy perfect"*@})
+            </div>
+        }
+        else
+        {
+            <div class="col">
+                @Html.TextBoxFor(m => m.VideoURL, new
+                {
+                    @class = "form-control text-overflow",
+                    @required = "required",
+                    @pattern = @"^https?:\/\/[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-/]+$",
+                    title = Model.VideoURL,@*title = "Ex : Embed video Path not copy perfect"*@})
+
+            </div>
+        }
+
+
+        <div class="col">
+            <input type="submit" class="btn btn-primary" value="Save" title="Save" onsubmit="SaveoursepreviewVideos(event)"/>
+            <input type="button" class="btn btn-primary" value="Delete" onclick="DeleteProductVideo(this,'@Model.PreviewID')" title="Delete" />
+        </div>
+
+
+    </div>
+</form>
+
+<script src="~/Scripts/ProjectValidation.js"></script>
+
+
+
+
+

@@ -45,6 +45,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -69,6 +70,9 @@
       <DependentUpon>UniversityEntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Class1.cs" />
+    <Compile Include="CoursePreviewVideos.cs">
+      <DependentUpon>UniversityEntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="CustomEntities\CardTransactionDetailsMappings.cs" />
     <Compile Include="CustomEntities\ProductEntity.cs" />
     <Compile Include="CustomEntities\ProductLayoutMenu.cs" />
@@ -129,6 +133,7 @@
     <Compile Include="ProperrtiesLayer\CardTransactionDeatilsMapping.cs" />
     <Compile Include="ProperrtiesLayer\CategoryUserMapping.cs" />
     <Compile Include="ProperrtiesLayer\CardTransactionDetails.cs" />
+    <Compile Include="ProperrtiesLayer\CoursePreviewVideos.cs" />
     <Compile Include="ProperrtiesLayer\HomeSlider.cs" />
     <Compile Include="ProperrtiesLayer\ProductVideoModel.cs" />
     <Compile Include="ProperrtiesLayer\ProductVideos.cs" />

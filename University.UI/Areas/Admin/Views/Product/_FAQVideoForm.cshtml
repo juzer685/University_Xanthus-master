@@ -1,7 +1,11 @@
 ﻿@model  University.UI.Areas.Admin.Models.ProductFAQVideoViewModel
+@{
+    ViewBag.Title = "Tutorial Link";
+
+}
 
 <form onsubmit="SaveProductFormFaqVideo(event)" name="ProductFormFaqVideo" enctype="multipart/form-data" method="post" action="/Admin/Product/SaveProductProductFAQVideo">
-    <div class="row py-2"  data-backdrop="static" data-keyboard="false">
+    <div class="row py-2" data-backdrop="static" data-keyboard="false">
         @if (string.IsNullOrWhiteSpace(Model.VideoURL))
         {
 

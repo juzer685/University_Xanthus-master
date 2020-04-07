@@ -51,6 +51,7 @@ namespace University.Data
         public virtual DbSet<CardDetails> CardDetails { get; set; }
         public virtual DbSet<CardTransactionDeatilsMapping> CardTransactionDeatilsMapping { get; set; }
         public virtual DbSet<CardTransactionDetails> CardTransactionDetails { get; set; }
+        public virtual DbSet<CoursePreviewVideos> CoursePreviewVideos { get; set; }
     
         public virtual ObjectResult<GetCustomerList_Result> GetCustomerList(Nullable<int> webUserID)
         {

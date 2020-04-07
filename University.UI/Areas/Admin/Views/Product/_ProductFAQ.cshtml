@@ -1,6 +1,12 @@
 ﻿
 @model University.UI.Areas.Admin.Models.ProductViewModel
 @using University.UI.Areas.Admin.Models
+
+@{
+    ViewBag.Title = "FAQs";
+
+}
+
 <style>
     .table-bordered, td {
         border-color: black;
@@ -8,7 +14,7 @@
 </style>
 
 @Html.HiddenFor(m => m.ProductForm)
-<input type="button" class="btn btn-primary" value="Add" onclick="AddFAQ()" style="float:right" title="Add"/>
+<input type="button" class="btn btn-primary" value="Add" onclick="AddFAQ()" style="float:right" title="Add" />
 <div class="row">
     <div id="faqGrid" class="container-fluid grid-striped">
         <div class="row font-weight-bold py-2">
@@ -35,7 +41,7 @@
     <div class="container-fluid"><button onclick="Cancel()" type="button" class="btn btn-primary" title="Exit">Exit</button></div>
 </div>
 
-<div id="FaqVideoPopup" class="modal" role="dialog"  data-backdrop="static" data-keyboard="false">
+<div id="FaqVideoPopup" class="modal" role="dialog" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-lg">
 
         <!-- Modal content-->
@@ -102,7 +108,7 @@
     }
 
     function DeleteFAQ(event, id) {
-        $("#DeleteConfirmationModal").modal('show');
+        $("#DeleteConfirmationModalFAQsTutorial").modal('show');
         $(document).on('click', 'button#confirmation-yes', function () {
             $.ajax({
                 type: "POST",
@@ -122,19 +128,19 @@
 
 
     function DeleteFAQVideo(event, id) {
-        $("#DeleteConfirmationModal").modal('show');
+        $("#DeleteConfirmationModalFAQs").modal('show');
         $(document).on('click', 'button#confirmation-yes', function () {
-        $.ajax({
-            type: "POST",
-            url: "/Admin/Product/DeleteProductFAQVideo",
-            data: { FaqVideoId: id }, // serializes the form's elements.
-            cache: false,
-            success: function (data) {
-                //$('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
-                // _showSuccessMessage("Data Deleted Successfully");
-                $("#FaqVideoPopup").modal('hide');
-            }
-        });
+            $.ajax({
+                type: "POST",
+                url: "/Admin/Product/DeleteProductFAQVideo",
+                data: { FaqVideoId: id }, // serializes the form's elements.
+                cache: false,
+                success: function (data) {
+                    //$('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
+                    // _showSuccessMessage("Data Deleted Successfully");
+                    $("#FaqVideoPopup").modal('hide');
+                }
+            });
         });
     }
 
@@ -211,7 +217,7 @@
                 _showSuccessMessage("Data Saved Successfully"); // show response from the php script.
                 //Cancel();
                 $("#FaqVideoPopup").modal('hide');
-               // $("form").replaceWith(data);
+                // $("form").replaceWith(data);
                 //$(form).replaceWith(data);
             }
         });

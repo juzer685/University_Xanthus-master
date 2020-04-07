@@ -25,9 +25,9 @@ namespace University.Data
             this.ProductUserGuide = new HashSet<ProductUserGuide>();
             this.RecentVisitedProduct = new HashSet<RecentVisitedProduct>();
             this.ProductVideos = new HashSet<ProductVideos>();
+            this.CoursePreviewVideos = new HashSet<CoursePreviewVideos>();
         }
-
-        public string TransactionID { get; set; }
+    
         public decimal Id { get; set; }
         public string Title { get; set; }
         public string ImageURL { get; set; }
@@ -60,7 +60,7 @@ namespace University.Data
         public virtual ICollection<RecentVisitedProduct> RecentVisitedProduct { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductVideos> ProductVideos { get; set; }
-        //public virtual ICollection<productv> ProductVideos { get; set; }
-        public virtual ICollection<CardTransactionDeatilsMapping> GetCardTransactionDeatilsMappings { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CoursePreviewVideos> CoursePreviewVideos { get; set; }
     }
 }

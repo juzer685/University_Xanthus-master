@@ -23,27 +23,28 @@
             <div class="form-group">
                 <input name="AssocitedID" id="ProductUserGuideAssocitedID" type="hidden" />
                 <label for="Title">Title</label>
-                @Html.TextBoxFor(m => m.Title, new { @class = "form-control txtOnly text-overflow", @required = "required", @maxlength = "90" })
-                
-                @Html.ValidationMessageFor(m => m.Title, null, new { @class = "", style = "color:red;" })
+                @Html.TextBoxFor(m => m.Title, new { @class ="form-control txtOnly text-overflow", @maxlength = "90",@required = "required" })
+                @Html.ValidationMessageFor(x => x.Title, null, new { @class = "", style = "color:red;" })
+              
                 @*@Html.ValidationMessageFor(m => m.Title)*@
             </div>
 
             <div class="form-group">
                 <label for="Description">Document (URL)</label>
-                @Html.TextBoxFor(m => m.DocumentURL, new { @class = "form-control text-overflow", @required = "required",title=Model.DocumentURL })
-                @Html.ValidationMessageFor(m => m.DocumentURL, null, new { @class = "", style = "color:red;" })
+                @Html.TextBoxFor(m => m.DocumentURL, new { @class = "form-control text-overflow", @required = "required", title = Model.DocumentURL })
+                @Html.ValidationMessageFor(x => x.DocumentURL, null, new { @class = "", style = "color:red;" })
                 @*@Html.ValidationMessageFor(m => m.DocumentURL)*@
                 @*@if (!string.IsNullOrWhiteSpace(Model.DocumentURL))
-                {
-                    <a href="@Model.DocumentURL" target="_blank">Download Document</a>
-                }*@
+        {
+            <a href="@Model.DocumentURL" target="_blank">Download Document</a>
+        }*@
             </div>
 
             <div class="form-group">
                 <label for="Description">Description</label>
-                @Html.TextAreaFor(m => m.Description, new { @class = "form-control overflow-ellipsis", @required = "required", @maxlength = "1000",style="width: 940px;height:300px;" })
-                @Html.ValidationMessageFor(m => m.Description, null, new { @class = "", style = "color:red;" })
+                @Html.TextAreaFor(m => m.Description, new { @class = "form-control overflow-ellipsis", @required = "required", @maxlength = "1000", style = "width: 940px;height:300px;" })
+                @Html.ValidationMessageFor(x => x.Description, null, new { @class = "", style = "color:red;" })
+               
             </div>
         </div>
         <div class="col-md-6">
@@ -68,7 +69,7 @@
                 <div class="input-group">
                     <div class="custom-file">
                         <input type="file" name="file" class="custom-file-input imgaddUguide" id="file" accept="image/*" onchange="readURL(this);" required>
-                        <span class="field-validation-error" data-valmsg-for="file" data-valmsg-replace="true" style="color:red;margin-top: 30px;position: absolute;"><span id="file-error" class=""> @Html.ValidationMessageFor(m => m.file, null, new { @class = "", style = "color:red;" })</span></span>
+                        <span class="field-validation-error" data-valmsg-for="file" data-valmsg-replace="true" style="color:red;margin-top: 30px;position: absolute;"><span id="file-error" class="">@Html.ValidationMessageFor(x => x.file, null, new { @class = "", style = "color:red;" })</span></span>
                         @if (Model.ImageURL != "")
                         {
                             <label class="custom-file-label" for="exampleInputFile">@Model.ImageURL</label>
@@ -99,6 +100,8 @@
         </div>
     </div>
 </form>
+
+
 
 <script src="~/Scripts/ProjectValidation.js"></script>
 <script>

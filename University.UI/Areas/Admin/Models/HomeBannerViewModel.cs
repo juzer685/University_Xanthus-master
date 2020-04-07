@@ -15,6 +15,7 @@ namespace University.UI.Areas.Admin.Models
         public string Title { get; set; }
         [StringLength(100, ErrorMessage = "Do not enter more than 100 characters")]
         public string Description { get; set; }
+        public HttpPostedFileBase file { get; set; }
         public string LinkTo { get; set; }
         public string ImageALT { get; set; }
         public string ImageURL { get; set; }

@@ -22,6 +22,8 @@ namespace University.UI.Areas.Admin.Models
           //  this.ProductUserGuides = new HashSet<ProductUserGuide>();
             this.ProductVideos = new List<ProductVideoViewModel>();
             this.ProductUserGuide = new ProductUserGuideViewModel();
+            this.CoursePreviewViewModels = new List<CoursePreviewViewModel>();
+            
         }
 
         public ProductForm ProductForm { get; set; }
@@ -74,6 +76,7 @@ namespace University.UI.Areas.Admin.Models
         //public virtual ICollection<ProductUserGuide> ProductUserGuides { get; set; }
 
         public virtual List<ProductVideoViewModel> ProductVideos { get; set; }
+        public virtual List<CoursePreviewViewModel> CoursePreviewViewModels { get; set; }
 
         public virtual List<CardTransactionDetailsMappings> ProductVideosTranIDs { get; set; }
         public virtual CategoryMaster CategoryMaster { get; set; }

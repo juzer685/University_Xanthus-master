@@ -179,6 +179,7 @@
     <Compile Include="Areas\Admin\Controllers\ProductFeedbackController.cs" />
     <Compile Include="Areas\Admin\Controllers\SubCategoryController.cs" />
     <Compile Include="Areas\Admin\Models\CategoryMappingModel.cs" />
+    <Compile Include="Areas\Admin\Models\CoursePreviewViewModel.cs" />
     <Compile Include="Areas\Admin\Models\RegistrationVM.cs" />
     <Compile Include="Areas\Admin\Models\UserListViewModel.cs" />
     <Compile Include="Areas\Admin\Models\CategoryViewModel.cs" />
@@ -2091,6 +2092,9 @@
     <Content Include="Areas\Admin\Views\SubCategory\CategoryUserMappingList.cshtml" />
     <Content Include="Areas\Admin\Views\SubCategory\AddEditCategoryMapp.cshtml" />
     <Content Include="Images\developer4-21-512.webp" />
+    <Content Include="Areas\Admin\Views\Product\_CoursePreview.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\_CoursePreviewVideos.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\_CoursePreviewVideoView.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile10.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile11.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile12.pubxml" />

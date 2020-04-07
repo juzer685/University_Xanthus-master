@@ -20,7 +20,7 @@ namespace University.Data
             this.CategoryUserMapping = new HashSet<CategoryUserMapping>();
             this.Product = new HashSet<Product>();
         }
-
+    
         public decimal Id { get; set; }
         public decimal CategoryId { get; set; }
         public string Name { get; set; }
@@ -34,13 +34,11 @@ namespace University.Data
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public Nullable<decimal> UpdatedBy { get; set; }
         public Nullable<int> AssocitedCustID { get; set; }
-
+    
         public virtual CategoryMaster CategoryMaster { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CategoryUserMapping> CategoryUserMapping { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Product { get; set; }
-
-       
     }
 }

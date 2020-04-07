@@ -401,7 +401,7 @@ namespace University.UI.Areas.Admin.Controllers
                 var productVideo = _productService.GetProductVideo(productVideoId);
                 var viewModel = AutoMapper.Mapper.Map<ProductVideos, ProductVideoViewModel>(productVideo);
                 if (viewModel == null) { viewModel = new ProductVideoViewModel(); }
-                return View("_ProductVideoForm", viewModel);
+                return RedirectToAction("_ProductVideoForm", viewModel);
             }
             else
             {
@@ -437,7 +437,68 @@ namespace University.UI.Areas.Admin.Controllers
         }
         #endregion
 
+        #region coursePreview start
+        public ActionResult LoadCouresPreview(string ProductId)
+        {
+            var res = _productService.GetCoursePrviewVideo(Convert.ToDecimal(ProductId));
+            var viewModel = AutoMapper.Mapper.Map<CoursePreviewVideos, CoursePreviewViewModel>(res);
+            if (viewModel == null)
+            {
+                viewModel = new CoursePreviewViewModel();
+            }
+            //var viewModel = AutoMapper.Mapper.Map<ProductEntity, ProductViewModel>(product ?? new ProductEntity());
+            //if (viewModel.CoursePreviewViewModels.Count == 0) 
+            //{
+            //    viewModel.CoursePreviewViewModels = new List<CoursePreviewViewModel>(); 
+            //}
+            return View("_CoursePreviewVideoView", viewModel);
+        }
 
+        public JsonResult SaveoursepreviewVideos(CoursePreviewViewModel model, string CourseVideoId)
+        {
+            if (CourseVideoId.ToString() == "0")
+            {
+                model.AssocitedCustID = Convert.ToInt32(Session["AdminLoginID"]);
+                model.PreviewID = Convert.ToDecimal(CourseVideoId);
+                if (model.CoursePreviewVideo != null)
+                {
+                    model.VideoURL = UploadFileOnServer(ProductImagePath, model.CoursePreviewVideo);
+                }
+                //else if (IsDeletedImg)
+                //{
+                //    model.ImageURL = "";
+                //}
+                var viewModel = AutoMapper.Mapper.Map<CoursePreviewViewModel, CoursePreviewVideos>(model);
+                
+                var res = _productService.SaveCoursePreviewVideo(viewModel);
+                return Json(res, JsonRequestBehavior.AllowGet);
+            }
+
+           
+            else
+            {
+                    model.AssocitedCustID = Convert.ToInt32(Session["AdminLoginID"]);
+                    model.PreviewID = Convert.ToDecimal(CourseVideoId);
+
+                    if (model.CoursePreviewVideo != null)
+                    {
+                        model.VideoURL = UploadFileOnServer(ProductImagePath, model.CoursePreviewVideo);
+                    }
+                   
+                    var viewModel = AutoMapper.Mapper.Map<CoursePreviewViewModel, CoursePreviewVideos>(model);
+                   
+                    var res = _productService.SaveCoursePreviewVideo(viewModel);
+
+                    
+                    return Json(res, JsonRequestBehavior.AllowGet);
+                    
+
+                
+            }
+        }
+
+
+        #endregion course preview
 
         #region Product Document
         public ActionResult GetProductDocuments(string ProductId)

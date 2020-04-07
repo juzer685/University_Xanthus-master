@@ -101,6 +101,10 @@ namespace University.Service
         {
             return _productRepository.SaveProductUserGuide(productUserGuide);
         }
+        public bool SaveCoursePreviewVideo(CoursePreviewVideos coursePreviewVideos)
+        {
+            return _productRepository.SaveCoursePreviewVideo(coursePreviewVideos);
+        }
         public Decimal SaveProductVideo(ProductVideos productVideo)
         {
             return _productRepository.SaveProductVideo(productVideo);
@@ -116,6 +120,10 @@ namespace University.Service
         public ProductVideos GetProductVideo(Decimal productVideoId)
         {
             return _productRepository.GetProductVideo(productVideoId);
+        }
+        public CoursePreviewVideos GetCoursePrviewVideo(Decimal ProductId)
+        {
+            return _productRepository.GetCoursePrviewVideo(ProductId);
         }
         public Decimal SaveProductDocument(ProductDocuments productDocument)
         {

@@ -10,6 +10,8 @@ namespace University.Repository.Interface
 {
     public interface IProductRepository
     {
+        CoursePreviewVideos GetCoursePrviewVideo(Decimal ProductId);
+        bool SaveCoursePreviewVideo(CoursePreviewVideos coursePreviewVideos);
         IEnumerable<ProductVideos> GetUserVideosLists();
  
         IEnumerable<ProductVideos> GetUserVideosList();

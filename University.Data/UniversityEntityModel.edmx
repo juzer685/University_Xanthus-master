@@ -92,6 +92,24 @@
           <Property Name="UpdatedDate" Type="datetime" />
           <Property Name="UpdatedBy" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
+        <EntityType Name="CoursePreviewVideos">
+          <Key>
+            <PropertyRef Name="PreviewID" />
+          </Key>
+          <Property Name="PreviewID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="VideoURL" Type="nvarchar(max)" />
+          <Property Name="ProductID" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="CreatedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="DeletedDate" Type="datetime" />
+          <Property Name="DeletedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="UpdatedBy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="AssocitedCustID" Type="int" />
+        </EntityType>
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="CustomerID" />
@@ -518,6 +536,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CoursePreviewVideos_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="CoursePreviewVideos" Type="Self.CoursePreviewVideos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CoursePreviewVideos">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CustomerLogin">
           <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
           <End Role="Login_tbl" Type="Self.Login_tbl" Multiplicity="*" />
@@ -706,6 +736,7 @@
           <EntitySet Name="CardTransactionDetails" EntityType="Self.CardTransactionDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CategoryMaster" EntityType="Self.CategoryMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CategoryUserMapping" EntityType="Self.CategoryUserMapping" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CoursePreviewVideos" EntityType="Self.CoursePreviewVideos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmailInfo" EntityType="Self.EmailInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FAQ" EntityType="Self.FAQ" Schema="dbo" store:Type="Tables" />
@@ -748,6 +779,10 @@
           <AssociationSet Name="FK_CategoryUserMapping_SubCategoryMaster" Association="Self.FK_CategoryUserMapping_SubCategoryMaster">
             <End Role="SubCategoryMaster" EntitySet="SubCategoryMaster" />
             <End Role="CategoryUserMapping" EntitySet="CategoryUserMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CoursePreviewVideos_Product" Association="Self.FK_CoursePreviewVideos_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="CoursePreviewVideos" EntitySet="CoursePreviewVideos" />
           </AssociationSet>
           <AssociationSet Name="FK_CustomerLogin" Association="Self.FK_CustomerLogin">
             <End Role="Customer" EntitySet="Customer" />
@@ -932,6 +967,11 @@
           <AssociationSet Name="FK_CardTransactionDetails_Login_tbl" Association="UniversityModel.FK_CardTransactionDetails_Login_tbl">
             <End Role="Login_tbl" EntitySet="Login_tbl" />
             <End Role="CardTransactionDetails" EntitySet="CardTransactionDetails" />
+          </AssociationSet>
+          <EntitySet Name="CoursePreviewVideos" EntityType="UniversityModel.CoursePreviewVideos" />
+          <AssociationSet Name="FK_CoursePreviewVideos_Product" Association="UniversityModel.FK_CoursePreviewVideos_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="CoursePreviewVideos" EntitySet="CoursePreviewVideos" />
           </AssociationSet>
         </EntityContainer>
         <ComplexType Name="GetCustomerList_Result">
@@ -1474,6 +1514,7 @@
           <NavigationProperty Name="ProductUserGuide" Relationship="UniversityModel.FK_ProductUserGuide_Product" FromRole="Product" ToRole="ProductUserGuide" />
           <NavigationProperty Name="RecentVisitedProduct" Relationship="UniversityModel.FK_RecentVisitedProduct_Product" FromRole="Product" ToRole="RecentVisitedProduct" />
           <NavigationProperty Name="ProductVideos" Relationship="UniversityModel.FK_ProductVideos_Product" FromRole="Product" ToRole="ProductVideos" />
+          <NavigationProperty Name="CoursePreviewVideos" Relationship="UniversityModel.FK_CoursePreviewVideos_Product" FromRole="Product" ToRole="CoursePreviewVideos" />
         </EntityType>
         <Association Name="FK_HomeSlider_HomeSlider">
           <End Type="UniversityModel.Product" Role="Product" Multiplicity="1" />
@@ -1683,6 +1724,37 @@
             </Principal>
             <Dependent Role="CardTransactionDetails">
               <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CoursePreviewVideos">
+          <Key>
+            <PropertyRef Name="PreviewID" />
+          </Key>
+          <Property Name="PreviewID" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="VideoURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProductID" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DeletedDate" Type="DateTime" Precision="3" />
+          <Property Name="DeletedBy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="AssocitedCustID" Type="Int32" />
+          <NavigationProperty Name="Product" Relationship="UniversityModel.FK_CoursePreviewVideos_Product" FromRole="CoursePreviewVideos" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_CoursePreviewVideos_Product">
+          <End Type="UniversityModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="UniversityModel.CoursePreviewVideos" Role="CoursePreviewVideos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CoursePreviewVideos">
+              <PropertyRef Name="ProductID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2184,6 +2256,25 @@
                 <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
                 <ScalarProperty Name="CardHolderName" ColumnName="CardHolderName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CoursePreviewVideos">
+            <EntityTypeMapping TypeName="UniversityModel.CoursePreviewVideos">
+              <MappingFragment StoreEntitySet="CoursePreviewVideos">
+                <ScalarProperty Name="AssocitedCustID" ColumnName="AssocitedCustID" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="DeletedBy" ColumnName="DeletedBy" />
+                <ScalarProperty Name="DeletedDate" ColumnName="DeletedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="PreviewID" ColumnName="PreviewID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

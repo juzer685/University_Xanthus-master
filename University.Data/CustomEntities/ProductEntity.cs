@@ -31,6 +31,8 @@ namespace University.Data.CustomEntities
         public virtual SubCategoryMaster SubCategoryMaster { get; set; }
         public virtual ProductUserGuide ProductUserGuide { get; set; }
         public virtual List<ProductVideos> ProductVideos { get; set; }
+        public virtual List<CoursePreviewVideos> CoursePrviewVideos { get; set; }
+
         //public virtual List<ProductVideoModel> ProductVideos { get; set; }
         public virtual List<CardTransactionDeatilsMapping> ProductVideosTranIDs { get; set; }
         public virtual ProductSpec ProductSpec { get; set; }

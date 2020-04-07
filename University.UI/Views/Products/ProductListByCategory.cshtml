@@ -56,10 +56,10 @@
             <div class="col-sm-6">
                 <h1 class="m-0 text-dark">Course Information</h1>
             </div><!-- /.col -->
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
+            <div class="col-sm-12">
+                <ol class="breadcrumb">
                     <li class="breadcrumb-item" aria-current="page"><a href="/Home/index">Home</a></li>
-                    <li class="breadcrumb-item" aria-current="page"><a href="/Home/Category">Courses</a></li>
+                    <li class="breadcrumb-item" aria-current="page"><a href="/Home/Category">Course</a></li>
                     @if (!string.IsNullOrWhiteSpace(ViewBag.CategoryName))
                     {
                         <li class="breadcrumb-item active" aria-current="page">@System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(@ViewBag.CategoryName?.ToLower() ?? "")</li>
@@ -82,7 +82,7 @@
                         </div>*@
                         <div class="product-info">
                             <div class="product-title">
-                                <p class="category"><a href="/Home/Category">Courses</a></p>
+                                <p class="category"><a href="/Home/Category">Course</a></p>
                                 <p class="sub-category"> @ViewBag.CategoryName </p>
                             </div>
                             <div>
@@ -94,13 +94,13 @@
                                                 <div class="product-card">
                                                     <div class="product-img">
                                                         <a class="listitemProductName" href="/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(product.Id.ToString(),System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])">
-                                                            <img class="" src="~/Uploads/Product/@product.ImageURL" alt="slide" width="100%" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';">
+                                                            <img class="" src="~/Uploads/Product/@product.ImageURL" width="100%" alt="slide"  onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" style="height: 240px;">
                                                         </a>
                                                     </div>
                                                     <div class="product-tabs">
                                                         <div class="product-name">
-                                                            <a href="/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(product.Id.ToString(),System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])">
-                                                                <h1> @product.Title</h1>
+                                                            <a href="/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(product.Id.ToString(),System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])" >
+                                                                <h3 style="font-size: 1.5rem;"> @product.Title</h3>
                                                             </a>
                                                         </div>
                                                         <div><a href="#" style="cursor: pointer;" onclick='goToMenu("user-guide","@UrlSecurityManager.Encrypt(product.Id.ToString(),System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])")'>User Guide</a></div>

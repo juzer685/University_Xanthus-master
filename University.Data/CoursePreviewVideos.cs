@@ -12,14 +12,13 @@ namespace University.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class HomeBanner
+    public partial class CoursePreviewVideos
     {
-        public decimal Id { get; set; }
+        public decimal PreviewID { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public string LinkTo { get; set; }
-        public string ImageALT { get; set; }
-        public string ImageURL { get; set; }
+        public string VideoURL { get; set; }
+        public Nullable<decimal> ProductID { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<decimal> CreatedBy { get; set; }
@@ -28,6 +27,7 @@ namespace University.Data
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public Nullable<decimal> UpdatedBy { get; set; }
         public Nullable<int> AssocitedCustID { get; set; }
-        public System.Web.HttpPostedFileBase file { get; set; }
+    
+        public virtual Product Product { get; set; }
     }
 }

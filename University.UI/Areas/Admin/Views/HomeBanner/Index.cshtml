@@ -6,6 +6,7 @@
 
 <style>
     #image-preview {
+        margin-top: 30px;
         width: 250px;
         height: 250px;
     }
@@ -14,7 +15,7 @@
 <!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="container-fluid">
-        <div class="row mb-2" style="margin-top:10px">
+        <div class="row mb-2" style="margin-top: 10px">
             <div class="col-sm-12" >
                 <h1 class="m-0 text-dark">Home</h1>
             </div><!-- /.col -->
@@ -75,10 +76,11 @@
                     <img id="blah" src="@(Model?.ImageFullPath)" alt="" width="250" height="250" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" />
                 </div>*@
                                     <div class="form-group">
-                                        <label class="info-text" for="ImageUrl" style="color:red;">Image <span class="ShortText">(Please ensure featured image size is Less than 2MB)</span></label>
+                                        <label class="info-text" for="ImageUrl" style="color:red;">Image <span class="ShortText">(Please ensure featured image size is Less than 5MB)</span></label>
                                         <div class="input-group">
                                             <div class="custom-file">
                                                 <input type="file" name="file" class="custom-file-input" id="file" required accept="image/*" onchange="readURL(this);">
+                                                <span class="field-validation-error" data-valmsg-for="file" data-valmsg-replace="true" style="color:red;margin-top: 30px;position: absolute;"><span id="file-error" class=""> @Html.ValidationMessageFor(m => m.file, null, new { @class = "", style = "color:red;" })</span></span>
                                                 @if (Model.ImageURL != "")
                                                 {
                                                     <label class="custom-file-label" for="exampleInputFile">@Model.ImageURL</label>
@@ -92,7 +94,7 @@
                                             </div>
                                         </div>
 
-                                        @Html.ValidationMessageFor(m => m.ImageURL)
+                                        @*@Html.ValidationMessageFor(m => m.ImageURL)*@
                                         <img id="image-preview" src=@Model.CheckImage alt="" class="imgStd" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" />
 
                                         @*<img id="image-preview" src="@Model.CheckImage" alt="" class="imgStd" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" />*@
@@ -183,7 +185,7 @@
                 // The size of the file. 
                 if (file >= 5120)
                 { 
-                   _showErrorMessage("Please select a Image less than 5mb");
+                   _showErrorMessage("Please select a Image less than 5MB");
                             
                           e.preventDefault();
                 }
