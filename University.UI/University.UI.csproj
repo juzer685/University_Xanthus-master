@@ -2889,6 +2889,10 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\University.Core\University.Core.csproj">
+      <Project>{8F0E43D1-76C8-42B1-BBFA-54979C17EEC5}</Project>
+      <Name>University.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\University.Data\University.Data.csproj">
       <Project>{d7aadd73-a539-4bb1-8817-cec906bcd42d}</Project>
       <Name>University.Data</Name>

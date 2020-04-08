@@ -91,16 +91,16 @@
                                         @foreach (var product in Model)
                                         {
                                             <div class="col-md-4">
-                                                <div class="product-card">
+                                                <div class="product-card" style="margin-top: 20px;">
                                                     <div class="product-img">
                                                         <a class="listitemProductName" href="/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(product.Id.ToString(),System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])">
                                                             <img class="" src="~/Uploads/Product/@product.ImageURL" width="100%" alt="slide"  onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" style="height: 240px;">
                                                         </a>
                                                     </div>
-                                                    <div class="product-tabs">
+                                                    <div class="product-tabs" style="height: 225px;">
                                                         <div class="product-name">
                                                             <a href="/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(product.Id.ToString(),System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])" >
-                                                                <h3 style="font-size: 1.5rem;"> @product.Title</h3>
+                                                                <h3 style="font-size: 1.5rem;text-align: center;"> @product.Title</h3>
                                                             </a>
                                                         </div>
                                                         <div><a href="#" style="cursor: pointer;" onclick='goToMenu("user-guide","@UrlSecurityManager.Encrypt(product.Id.ToString(),System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])")'>User Guide</a></div>

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.Mvc;
+using University.Core;
 
 namespace University.UI.Areas.Admin.Controllers
 {
@@ -101,6 +102,14 @@ namespace University.UI.Areas.Admin.Controllers
             return Json(res, JsonRequestBehavior.AllowGet);
             //return View(res);
         }
+
+        public JsonResult BindCategories(decimal UserID)
+        {
+            List<CategoryModel> Categories = _subCategoryService.BindCategories(UserID);
+            return Json(Categories, JsonRequestBehavior.AllowGet);
+            //return View(res);
+        }
+
         public ActionResult GetCategoryUserMapping(string Id)
         {
             CategoryMappingModel model;

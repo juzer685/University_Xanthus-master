@@ -34,7 +34,7 @@ namespace University.UI.Areas.Admin.Models
         public string ImageURL { get; set; }
         //[StringLength(50, ErrorMessage = "Do not enter more than 50 characters")]
         //[Required(ErrorMessage = "Please select file.")]
-        [Required]
+        //[Required, Range(1, int.MaxValue, ErrorMessage = "Please Select Title")]
         public string Title { get; set; }
         public Nullable<Decimal> ProductId { get; set; }
         public Nullable<bool> IsDeleted { get; set; }

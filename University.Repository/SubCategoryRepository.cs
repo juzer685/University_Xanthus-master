@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using University.Core;
 
 namespace University.Repository
 {
@@ -61,6 +62,38 @@ namespace University.Repository
                 //}
 
                 return finalcategorylist;
+            }
+
+
+        }
+
+        public List<CategoryModel> BindCategories(decimal UserID)
+        {
+            List<CategoryModel> BindCategories = new List<CategoryModel>();
+            using (var context = new UniversityEntities())
+            {
+
+
+                var UserCategories = (from cat in context.SubCategoryMaster
+                                      join catmap in context.CategoryUserMapping
+                                      on cat.Id equals catmap.CategoryID
+                                      where catmap.UserID == UserID && cat.IsDeleted != true
+                                      select new CategoryModel
+                                      {
+                                          CategoryID = cat.Id,
+                                      }).ToList();
+
+                List<CategoryModel> Categories = (from cat in context.SubCategoryMaster
+                                                  where cat.IsDeleted != true
+                                                  select new CategoryModel
+                                                  {
+                                                      CategoryID = cat.Id,
+                                                      CategoryName = cat.Name
+                                                  }).ToList();
+
+                HashSet<decimal> UserCategoryIds = new HashSet<decimal>(UserCategories.Select(s => s.CategoryID));
+                BindCategories = Categories.Where(m => !UserCategoryIds.Contains(m.CategoryID)).ToList();
+                return BindCategories;
             }
 
 

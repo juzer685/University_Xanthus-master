@@ -11,7 +11,6 @@
         font-size: 0.7rem;
         color: #03A9F4;
     }
-   
 </style>
 <link href="~/dist/css/Custom.css" rel="stylesheet" />
 <form onsubmit="SaveProductUserGuide(event)" name="ProductSuserguide" enctype="multipart/form-data" method="post" action="/Admin/Product/SaveProductUserGuide">
@@ -23,52 +22,37 @@
             <div class="form-group">
                 <input name="AssocitedID" id="ProductUserGuideAssocitedID" type="hidden" />
                 <label for="Title">Title</label>
-                @Html.TextBoxFor(m => m.Title, new { @class ="form-control txtOnly text-overflow", @maxlength = "90",@required = "required" })
+                @Html.TextBoxFor(m => m.Title, new { @class = "form-control txtOnly text-overflow Titleuserguide", @maxlength = "90", @required = "required" })
                 @Html.ValidationMessageFor(x => x.Title, null, new { @class = "", style = "color:red;" })
-              
+
                 @*@Html.ValidationMessageFor(m => m.Title)*@
             </div>
 
             <div class="form-group">
                 <label for="Description">Document (URL)</label>
-                @Html.TextBoxFor(m => m.DocumentURL, new { @class = "form-control text-overflow", @required = "required", title = Model.DocumentURL })
+                @Html.TextBoxFor(m => m.DocumentURL, new { @class = "form-control text-overflow Docmtuserguide", @required = "required", title = Model.DocumentURL })
                 @Html.ValidationMessageFor(x => x.DocumentURL, null, new { @class = "", style = "color:red;" })
                 @*@Html.ValidationMessageFor(m => m.DocumentURL)*@
                 @*@if (!string.IsNullOrWhiteSpace(Model.DocumentURL))
-        {
-            <a href="@Model.DocumentURL" target="_blank">Download Document</a>
-        }*@
+                    {
+                        <a href="@Model.DocumentURL" target="_blank">Download Document</a>
+                    }*@
             </div>
 
             <div class="form-group">
                 <label for="Description">Description</label>
-                @Html.TextAreaFor(m => m.Description, new { @class = "form-control overflow-ellipsis", @required = "required", @maxlength = "1000", style = "width: 940px;height:300px;" })
+                @Html.TextAreaFor(m => m.Description, new { @class = "form-control overflow-ellipsis Descriptionuserguide", @required = "required", @maxlength = "1000", style = "width: 940px;height:300px;" })
                 @Html.ValidationMessageFor(x => x.Description, null, new { @class = "", style = "color:red;" })
-               
+
             </div>
         </div>
         <div class="col-md-6">
-            @*<div class="form-group">
-                    <label for="ImageUrl">Image <span class="ShortText">(Please ensure featured images are 250x250,Less than 2MB and .JPG format)</span></label>
-                    <input type="file" id="Guidefile" name="Guidefile" class="form-control validateHeightWidth" accept="image/gif, image/png" onchange="readURLGuide(this);" />
-                    @Html.ValidationMessageFor(m => m.ImageURL)
-                    @if (string.IsNullOrWhiteSpace(Model.ImageFullPath))
-                    {
-                        <img id="guideImage" name="guideImage" src="" alt="" class="imgStd" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';"/>
-                        <input style="display:none;" id="DeleteImage" onclick="deleteGuideImage()" type="button" value="X" />
-                    }
-                    else
-                    {
-                        <img id="guideImage" name="guideImage" src="@Model.ImageFullPath" class="imgStd" />
-                        <input id="DeleteImage" onclick="deleteGuideImage()" type="button" value="Delete Image" />
-                    }
-                    <input type="hidden" name="IsDeletedImg" id="IsDeletedImg" value="false" />
-                </div>*@
+
             <div class="form-group">
                 <label class="info-text" for="ImageUrl" style="color:red;">Image <span class="ShortText">(Please ensure featured image size is Less than 5MB)</span></label>
                 <div class="input-group">
                     <div class="custom-file">
-                        <input type="file" name="file" class="custom-file-input imgaddUguide" id="file" accept="image/*" onchange="readURL(this);" required>
+                        <input type="file" name="file" class="custom-file-input imgaddUguide Imageuserguide" id="file" accept="image/*" onchange="readURL(this);" required>
                         <span class="field-validation-error" data-valmsg-for="file" data-valmsg-replace="true" style="color:red;margin-top: 30px;position: absolute;"><span id="file-error" class="">@Html.ValidationMessageFor(x => x.file, null, new { @class = "", style = "color:red;" })</span></span>
                         @if (Model.ImageURL != "")
                         {
@@ -87,11 +71,7 @@
 
 
             </div>
-            @*<div class="form-group">
-                <label for="ImageUrl">Image alt (SEO)</label>
-                @Html.TextBoxFor(m => m.ImageALT, new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.ImageALT)
-            </div>*@
+
         </div>
         <div class="right">
             <button type="submit" class="btn btn-primary" title="Save">Save</button>
@@ -101,7 +81,8 @@
     </div>
 </form>
 
-
+<script src="~/Scripts/jquery.validate.min.js" type="text/javascript"></script>
+<script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
 <script src="~/Scripts/ProjectValidation.js"></script>
 <script>

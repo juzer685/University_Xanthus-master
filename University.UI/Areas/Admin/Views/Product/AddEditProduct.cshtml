@@ -1,7 +1,7 @@
 ﻿@model University.UI.Areas.Admin.Models.ProductViewModel
 
 @{
-    ViewBag.Title = "FAQs";
+    //ViewBag.Title = "T";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -21,12 +21,12 @@
                     <h1 class="m-0 text-dark" id="Productheader">Edit Course</h1>
                 </div><!-- /.col -->
             }
-        @*<div class="col-sm-12">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="~/Home/index">Administration</a></li>
-                    <li class="breadcrumb-item active">Course</li>
-                </ol>
-            </div>*@
+            @*<div class="col-sm-12">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="~/Home/index">Administration</a></li>
+                        <li class="breadcrumb-item active">Course</li>
+                    </ol>
+                </div>*@
 
             <div class="col-sm-12">
                 <ol class="breadcrumb">
@@ -48,27 +48,27 @@
                     <div class="card-header p-0 pt-1">
                         @if (Model.Id == 0)
                         {
-                        <ul class="nav nav-tabs tab" id="custom-tabs-one-tab" role="tablist">
-                            <li class="nav-item " id="basicdeatils"><a class="nav-link active" data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadProductBasicDetails">Basic Details</a></li>
-                            <li class="nav-item "><a id="userguide" class="nav-link" data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadProductUserGuide">User Guide</a></li>
-                            @*<li class="nav-item "><a id="courespreviewvideo" class="nav-link" data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadCouresPreview">Coures Preview</a></li>*@
-                            <li class="nav-item disabled"><a id="video" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductVideos"> Tutorials</a></li>
-                            <li class="nav-item disabled"><a id="FAQ" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductFAQ"> FAQ</a></li>
-                            @*<li class="nav-item disabled"><a id="spec" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadProductSpecifiction"> Spec</a></li>
-        <li class="nav-item disabled"><a id="howto" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductDocuments"> How To</a></li>*@
-                        </ul>
+                            <ul class="nav nav-tabs tab" id="custom-tabs-one-tab" role="tablist">
+                                <li class="nav-item " id="basicdeatils"><a class="nav-link active" data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadProductBasicDetails">Basic Details</a></li>
+                                <li class="nav-item "><a id="userguide" class="nav-link" data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadProductUserGuide">User Guide</a></li>
+                                @*<li class="nav-item "><a id="courespreviewvideo" class="nav-link" data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadCouresPreview">Coures Preview</a></li>*@
+                                <li class="nav-item disabled"><a id="video" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductVideos"> Tutorials</a></li>
+                                <li class="nav-item disabled"><a id="FAQ" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductFAQ"> FAQ</a></li>
+                                @*<li class="nav-item disabled"><a id="spec" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadProductSpecifiction"> Spec</a></li>
+                                    <li class="nav-item disabled"><a id="howto" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductDocuments"> How To</a></li>*@
+                            </ul>
                         }
                         else
                         {
-                    <ul class="nav nav-tabs tab" id="custom-tabs-one-tab" role="tablist">
-                        <li class="nav-item " id=""><a class="nav-link active" data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadProductBasicDetails">Basic Details</a></li>
-                        <li class="nav-item "><a id="" class="nav-link" data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadProductUserGuide">User Guide</a></li>
-                        @*<li class="nav-item "><a id="" class="nav-link" data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadCouresPreview">Coures Preview</a></li>*@
-                        <li class="nav-item disabled"><a id="" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductVideos"> Tutorials</a></li>
-                        <li class="nav-item disabled"><a id="" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductFAQ"> FAQ</a></li>
-                        @*<li class="nav-item disabled"><a id="" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadProductSpecifiction"> Spec</a></li>
-        <li class="nav-item disabled"><a id="" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductDocuments"> How To</a></li>*@
-                    </ul>
+                            <ul class="nav nav-tabs tab" id="custom-tabs-one-tab" role="tablist">
+                                <li class="nav-item " id=""><a class="nav-link active" data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadProductBasicDetails">Basic Details</a></li>
+                                <li class="nav-item "><a id="" class="nav-link" data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadProductUserGuide">User Guide</a></li>
+                                @*<li class="nav-item "><a id="" class="nav-link" data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadCouresPreview">Coures Preview</a></li>*@
+                                <li class="nav-item disabled"><a id="" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductVideos"> Tutorials</a></li>
+                                <li class="nav-item disabled"><a id="" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductFAQ"> FAQ</a></li>
+                                @*<li class="nav-item disabled"><a id="" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadProductSpecifiction"> Spec</a></li>
+                                    <li class="nav-item disabled"><a id="" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductDocuments"> How To</a></li>*@
+                            </ul>
                         }
 
                     </div>
@@ -94,6 +94,9 @@
         </div>
     </div><!-- /.container-fluid -->
 </section>
+
+
+
 
 <script>
        //var fileOriginalIndex = "";
@@ -263,55 +266,80 @@
         }
     function SaveProductUserGuide(e) {
       //  $('#ProductUserGuideAssocitedID').val($("#ddlusrlst").val());
+
+
          const fi = document.getElementById('file');
         // Check if any file is selected.
         if (fi.files.length > 0)
         {
-            for (const i = 0; i <= fi.files.length - 1; i++)
-            {
+           
+                    for (const i = 0; i <= fi.files.length - 1; i++)
+                    {
 
-                const fsize = fi.files.item(i).size;
-                const file = Math.round((fsize / 1024));
-                // The size of the file.
-                if (file >= 5120) {
-                    _showErrorMessage("Please select an Image less than 5MB");
+                        const fsize = fi.files.item(i).size;
+                        const file = Math.round((fsize / 1024));
+                        // The size of the file.
+                        if (file >= 5120) {
+                            _showErrorMessage("Please select an Image less than 5MB");
 
-                    e.preventDefault();
-                    return false
+                            e.preventDefault();
+                            return false
+                        }
+                        else
+                        {
+                           
+
+                            var title = $('.Titleuserguide').val();
+                            var documentss = $('.Docmtuserguide').val();
+                            var description = $('.Descriptionuserguide').val();
+                            var image = $('.Imageuserguide').val();
+                             
+                            if (title != "" && documentss != "" && description != "" && image != "") 
+                            {
+                                var form = $(e.target);
+                                var url = form.attr('action');
+                                 var formData = new FormData($(e.target)[0]);
+                                $.ajax({
+                                    type: "POST",
+                                    url: url,
+                                    data: formData, // serializes the form's elements.
+                                    enctype: 'multipart/form-data',
+                                    cache: false,
+                                    contentType: false,
+                                    processData: false,
+                                    success: function (data) {
+
+                                        $('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
+                                        //alert("Data Saved Successfully");
+                                        _showSuccessMessage("Data Saved Successfully");
+                                        setTimeout(function () { $('#video').trigger('click'); }, 1500);
+                                        //setTimeout(function () { location.reload(); }, 1500);
+                                    }
+                                });
+
+                                e.preventDefault();
+                            }
+                            else
+                            {
+                                e.preventDefault();
+                                //return false;
+                                 
+                            }
+                           
+                        }
                 }
-                else
-                {
-                    
-                var form = $(e.target);
-                //var url = '@Url.Action("SaveProductUserGuide", "Product",new {Areas= "Admin"})';
-                var url = form.attr('action');
-                var formData = new FormData($(e.target)[0]);
-                $.ajax({
-                    type: "POST",
-                    url: url,
-                    data: formData, // serializes the form's elements.
-                    enctype: 'multipart/form-data',
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    success: function (data) {
-
-                        $('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
-                        //alert("Data Saved Successfully");
-                        _showSuccessMessage("Data Saved Successfully");
-                        setTimeout(function () { $('#video').trigger('click'); }, 1500);
-                        //setTimeout(function () { location.reload(); }, 1500);
-                    }
-                });
-
-                e.preventDefault();
-                }
-            }
+            
+        
         }
         else
         {
-             var form = $(e.target);
-                    
+            if (e.target != null) {
+                 e.preventDefault();
+                //return false;
+            }
+            else
+            {
+                 var form = $(e.target);
                     var url = form.attr('action');
                     var formData = new FormData($(e.target)[0]);
                     $.ajax({
@@ -323,7 +351,7 @@
                         contentType: false,
                         processData: false,
                         success: function (data) {
-                         
+
                             $('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
                             //alert("Data Saved Successfully");
                             _showSuccessMessage("Data Saved Successfully");
@@ -333,14 +361,10 @@
                     });
 
                     e.preventDefault();
+            }
+            
 
         }
-        
-         
-
-
-         
-
     }
 
 </script>

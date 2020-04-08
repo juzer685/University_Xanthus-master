@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using University.Core;
 
 namespace University.Service
 {
@@ -18,6 +18,10 @@ namespace University.Service
             return _subCategoryRepository.GetCategoryUserList(test);
         }
 
+        public List<CategoryModel> BindCategories(decimal UserID)
+        {
+            return _subCategoryRepository.BindCategories(UserID);
+        }
 
         public bool DeleteCategoryUseerMapping (Decimal id)
         {

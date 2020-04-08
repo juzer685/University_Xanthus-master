@@ -239,7 +239,7 @@
             @if (Model.BannerImage.ImageURL != null)
             {
                 <div class="bannerContainer" style="text-align:center">
-                    <img class="meter-icon" src="@Model.BannerImage.ImageURL" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" alt="slide" style="cursor:pointer;width:200px;margin-top: 15px">
+                    <img class="meter-icon" src="@Model.BannerImage.ImageURL" width="100%" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" alt="slide" style="cursor:pointer;width:200px;margin-top: 15px">
                     @*<img class="meter-icon" src="~/Images/Training2.png" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" onclick="" alt="slide" style="cursor:pointer;width:200px;">*@
                 </div>
             }
@@ -272,7 +272,7 @@
                                     {
                                         <li class="openpop temp" data-toggle="popover">
                                             <span class="mailbox-attachment-icon has-img">
-                                                <img class="imguser" src="~/Uploads/Product/@product.ImageURL" alt="Attachment">
+                                                <img class="imguser"  src="~/Uploads/Product/@product.ImageURL" alt="Attachment" style="width: 100%;">
                                             </span>
                                             <div class="mailbox-attachment-info">
                                                 <a class="SubCategoryId ids">@product.SubCategoryId</a>
@@ -291,7 +291,7 @@
                                     {
                                         <li class="openpop temp" data-toggle="popover">
                                             <span class="mailbox-attachment-icon has-img">
-                                                <img class="imguser" src="~/Uploads/Product/@product.ImageURL" alt="Attachment">
+                                                <img class="imguser" src="~/Uploads/Product/@product.ImageURL" alt="Attachment" style="width: 100%;">
                                             </span>
                                             <div class="mailbox-attachment-info">
                                                 <a class="SubCategoryId ids">@product.SubCategoryId</a>
@@ -316,7 +316,7 @@
                                     }
                                     <li class="openpop temp" data-toggle="popover">
                                         <span class="mailbox-attachment-icon has-img">
-                                            <img class="imguser" src="~/Uploads/Product/@product.ImageURL" alt="Attachment">
+                                            <img class="imguser" src="~/Uploads/Product/@product.ImageURL" alt="Attachment" style="width: 100%;">
                                         </span>
                                         <div class="mailbox-attachment-info">
                                             <a class="SubCategoryId ids">@product.SubCategoryId</a>

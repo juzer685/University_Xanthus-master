@@ -483,8 +483,14 @@
 
                                                             <li class="nav-item">
                                                                 <a class="nav-link" href="/Products/ProductsById?ProductId=@UrlSecurityManager.Encrypt(product.ProductId.ToString(), System.Configuration.ConfigurationManager.AppSettings["SecurityKey"])">
-                                                                    <i class="far fa-circle nav-icon" style="margin-left: -17px;"></i>
-                                                                    <p style="white-space:normal">@System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(product.ProductName.ToLower())</p>
+                                                                   
+                                                                   
+                                                                        
+                                                                    <p style="white-space:normal">
+                                                                        <i class="far fa-circle nav-icon" style="margin-left: -17px;"></i>
+                                                                        @System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(product.ProductName.ToLower())
+
+                                                                    </p>
                                                                 </a>
                                                             </li>
                                                         }

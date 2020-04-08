@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using University.Core;
 
 namespace University.Repository.Interface
 {
     public interface ISubCategoryRepository
     {
         IEnumerable<SubCategoryMaster> GetCategoryUserList(decimal test);
+        List<CategoryModel> BindCategories(decimal UserID);
         bool DeleteCategoryUseerMapping(Decimal id);
         List<CategoryUserMapping> GetCategoryUserMappingGrid();
         (List<Login_tbl>,List<SubCategoryMaster>)  GetCategoryUserMappingList();

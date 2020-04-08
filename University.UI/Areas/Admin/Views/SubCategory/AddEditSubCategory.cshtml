@@ -51,7 +51,7 @@
 @Html.HiddenFor(m => m.Id)
 <div class="form-group">
     <label for="email">Category Name</label>
-    @Html.TextBoxFor(m => m.Name, new { @class = "form-control txtOnly ", @required = "required", @pattern = "^[^<>%$*@!#]*$",@maxlength="50"})
+    @Html.TextBoxFor(m => m.Name, new { @class = "form-control  ", @required = "required", @pattern = "^[^<>%$*@!#]*$",@maxlength="50"})
     @Html.ValidationMessageFor(x => x.Name, null, new { @class = "", style = "color:red;" })
     @*@Html.ValidationMessageFor(m => m.Name)*@
 </div>
