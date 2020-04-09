@@ -19,6 +19,7 @@ namespace University.UI.Areas.Admin.Models
         public HttpPostedFileBase file { get; set; }
         public string ImageURL { get; set; }
         public string ImageALT { get; set; }
+       [Required]
         public Decimal ProductId { get; set; }
         public virtual Product Product { get; set; }
         public IEnumerable<ProductDropdownListViewModel> Products { get; set; }

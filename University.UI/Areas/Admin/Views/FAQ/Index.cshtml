@@ -4,33 +4,35 @@
     ViewBag.Title = "FAQ";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <style>
-     .pointer {
-            cursor: pointer;
-        }
-     /*a {
-	color: #0254EB
-}*/
-/*a:visited {
-	color: #0254EB
-}*/
-a.morelink {
-	text-decoration:none;
-	outline: none;
-}
-.morecontent span {
-	display: none;
-}
-.comment {
-	width: 50%;
-	/*background-color: #f0f0f0;*/
-	margin: 10px;
-}
-.test
-{
-    width:100%
-}
-    
+    .pointer {
+        cursor: pointer;
+    }
+    /*a {
+        color: #0254EB
+    }*/
+    /*a:visited {
+        color: #0254EB
+    }*/
+    a.morelink {
+        text-decoration: none;
+        outline: none;
+    }
+
+    .morecontent span {
+        display: none;
+    }
+
+    .comment {
+        width: 50%;
+        /*background-color: #f0f0f0;*/
+        margin: 10px;
+    }
+
+    .test {
+        width: 100%
+    }
 </style>
 
 
@@ -61,14 +63,14 @@ a.morelink {
                     <div class="card-header">
                         <h3 class="card-title">
                             <button title="Add" type="button" class="btn btn-primary btn-sm b-w-80" onclick="AddFAQ()">
-                            @*<button type="button" class="btn btn-primary btn-sm b-w-80 FAQadd" >*@
-                            Add
+                                @*<button type="button" class="btn btn-primary btn-sm b-w-80 FAQadd" >*@
+                                Add
                             </button>
                         </h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <table id="FAQTable" class="table table-bordered table-hover test" >
+                        <table id="FAQTable" class="table table-bordered table-hover test">
                             <thead>
                                 <tr>
                                     <th class="text-center">Question</th>
@@ -79,18 +81,18 @@ a.morelink {
                             <tbody>
                                 @foreach (var item in Model)
                                 {
-                                    
-                                        <tr>
-                                            <td class="more comment" title="@item.Question">@item.Question</td>
-                                            <td class="more comment" title="@item.Answer">@item.Answer</td>
-                                            <td class="text-center">
-                                                <i title="Edit" class="fas fa-edit pointer" onclick="AddFAQ('@item.Id')"></i>
-                                                <i title="Delete" class="fas fa-trash pointer" onclick="DeleteFAQ('@item.Id')"></i>
-                                            </td>
-                                        </tr>
-                                     
-                                    }
-                                </tbody>
+
+                                    <tr>
+                                        <td class="more comment" title="@item.Question">@item.Question</td>
+                                        <td class="more comment" title="@item.Answer">@item.Answer</td>
+                                        <td class="text-center">
+                                            <i title="Edit" class="fas fa-edit pointer" onclick="AddFAQ('@item.Id')"></i>
+                                            <i title="Delete" class="fas fa-trash pointer" onclick="DeleteFAQ('@item.Id')"></i>
+                                        </td>
+                                    </tr>
+
+                                }
+                            </tbody>
                         </table>
                     </div>
                     <!-- /.card-body -->
@@ -124,6 +126,7 @@ a.morelink {
 </div>
 <!-- /Add Home Slider modal-dialog -->
 
+
 <script>
     //$('.FAQadd').click(function () {
     //    if ($('#ddlusrlst').val() == 0)
@@ -141,8 +144,8 @@ a.morelink {
 
         $(document).on('submit', '#faqForm', function (e) {
             // code
-           //  $('#FAQAssocitedID').val($("#ddlusrlst").val());
-            
+            //  $('#FAQAssocitedID').val($("#ddlusrlst").val());
+
             var form = $(this);
             var url = form.attr('action');
             var formData = new FormData($(this)[0]);
@@ -157,7 +160,7 @@ a.morelink {
                 success: function (data) {
                     //$('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
                     //alert("Data Saved Successfully"); // show response from the php script.
-                        $("#AddEditFAQ").modal("hide");
+                    $("#AddEditFAQ").modal("hide");
                     _showSuccessMessage("Data Saved Successfully");
                     setTimeout(function () { location.reload(); }, 1500);
                 }
@@ -172,14 +175,12 @@ a.morelink {
             url: "/Admin/FAQ/GetFAQ",
             data: { id: Id }, // serializes the form's elements.
             success: function (data) {
-                 if (Id == null || Id == 0)
-                    {
-                        $("#FAQheader").html("Add FAQ");
-                    }
-                    else
-                    {
-                        $("#FAQheader").html("Edit FAQ");
-                    }
+                if (Id == null || Id == 0) {
+                    $("#FAQheader").html("Add FAQ");
+                }
+                else {
+                    $("#FAQheader").html("Edit FAQ");
+                }
                 // show response from the php script.
                 $("#popupBody").html(data);
                 $("#AddEditFAQ").modal('show');
@@ -204,42 +205,42 @@ a.morelink {
 //FAQ dot dot start
 
  //   $(document).ready(function() {
-	//var showChar = 30;
-	//var ellipsestext = "...";
-	//var moretext = "more";
-	//var lesstext = "less";
-	//$('.more').each(function() {
-	//	var content = $(this).html();
+    //var showChar = 30;
+    //var ellipsestext = "...";
+    //var moretext = "more";
+    //var lesstext = "less";
+    //$('.more').each(function() {
+    //	var content = $(this).html();
 
-	//	if(content.length > showChar) {
+    //	if(content.length > showChar) {
 
-	//		var c = content.substr(0, showChar);
-	//		var h = content.substr(showChar-1, content.length - showChar);
+    //		var c = content.substr(0, showChar);
+    //		var h = content.substr(showChar-1, content.length - showChar);
 
-	//		var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span>';
+    //		var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span>';
 
-	//		$(this).html(html);
-	//	}
+    //		$(this).html(html);
+    //	}
 
-	//});
+    //});
 
-	//$(".morelink").click(function(){
-	//	if($(this).hasClass("less")) {
-	//		$(this).removeClass("less");
-	//		$(this).html(moretext);
-	//	} else {
-	//		$(this).addClass("less");
-	//		$(this).html(lesstext);
-	//	}
-	//	$(this).parent().prev().toggle();
-	//	$(this).prev().toggle();
-	//	return false;
-	//});
+    //$(".morelink").click(function(){
+    //	if($(this).hasClass("less")) {
+    //		$(this).removeClass("less");
+    //		$(this).html(moretext);
+    //	} else {
+    //		$(this).addClass("less");
+    //		$(this).html(lesstext);
+    //	}
+    //	$(this).parent().prev().toggle();
+    //	$(this).prev().toggle();
+    //	return false;
+    //});
 //});
 
     //faq dot dot end
-   
-    
+
+
 
 
 

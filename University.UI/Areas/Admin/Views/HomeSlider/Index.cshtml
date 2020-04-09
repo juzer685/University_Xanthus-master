@@ -5,9 +5,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <style>
-     .pointer {
-            cursor: pointer;
-        }
+    .pointer {
+        cursor: pointer;
+    }
 </style>
 
 <!-- Content Header (Page header) -->
@@ -37,8 +37,8 @@
                         <h3 class="card-title">
                             <button title="Add" type="button" class="btn btn-primary btn-sm b-w-80 homeslideradd" onclick="AddHomeSlider()">
                                 @*<button type="button" class="btn btn-primary btn-sm b-w-80 homeslideradd" >*@
-                                    Add
-                                </button>
+                                Add
+                            </button>
                         </h3>
                     </div>
                     <!-- /.card-header -->
@@ -54,16 +54,16 @@
                             <tbody>
                                 @foreach (var item in Model)
                                 {
-                                        <tr>
-                                            @*<td>@item.Product.Title</td>*@
-                                            <td>@item.TextDescription</td>
-                                            <td class="text-center">
-                                                <i title="Edit" class="fas fa-edit pointer" onclick="AddHomeSlider('@item.Id')"></i>
-                                                <i title="Delete" class="fas fa-trash pointer" onclick="DeleteHomeSlider('@item.Id')"></i>
-                                                @*<input type="button" class="btn-primary-ips" value="Edit" onclick="AddHomeSlider('@item.Id')" />
-                                                    <input type="button" class="btn-primary-ips" value="Delete" onclick="DeleteHomeSlider('@item.Id')" />*@
-                                            </td>
-                                        </tr>
+                                    <tr>
+                                        @*<td>@item.Product.Title</td>*@
+                                        <td>@item.TextDescription</td>
+                                        <td class="text-center">
+                                            <i title="Edit" class="fas fa-edit pointer" onclick="AddHomeSlider('@item.Id')"></i>
+                                            <i title="Delete" class="fas fa-trash pointer" onclick="DeleteHomeSlider('@item.Id')"></i>
+                                            @*<input type="button" class="btn-primary-ips" value="Edit" onclick="AddHomeSlider('@item.Id')" />
+                                                <input type="button" class="btn-primary-ips" value="Delete" onclick="DeleteHomeSlider('@item.Id')" />*@
+                                        </td>
+                                    </tr>
                                 }
                             </tbody>
                         </table>
@@ -79,12 +79,12 @@
 <!-- /Add Home Slider modal-dialog -->
 <div class="modal fade" id="AddEditHomeSlider" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog">
-        <form id="homeSliderForm" action="/Admin/HomeSlider/AddEditHomeSlider">
+        <form id="homeSliderForm" action="/Admin/HomeSlider/AddEditHomeSlider" validate>
             <div class="modal-dialog">
                 <!-- Modal content-->
-                
-                    <input name="AssocitedID" id="HomesliderAssocitedID" type="hidden" />
-               
+
+                <input name="AssocitedID" id="HomesliderAssocitedID" type="hidden" />
+
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title" id="Homesliderheader">Add Home Slider</h4>
@@ -104,40 +104,40 @@
     <!-- /.modal-dialog -->
 </div>
 <!-- /Add Home Slider modal-dialog -->
-
+<script src="~/Scripts/jquery.validate.min.js" type="text/javascript"></script>
+<script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>
 <script>
     $('.homeslideradd').click(function () {
-         $(".checktest").attr("required", true);
+        $(".checktest").attr("required", true);
 
     })
-    
+
     $(document).ready(function () {
         $('#HomeSliderTable').DataTable();
 
         $(document).on('submit', '#homeSliderForm', function (e) {
             // code
-            $('#HomesliderAssocitedID').val($("#ddlusrlst").val());
+           // $('#HomesliderAssocitedID').val($("#ddlusrlst").val());
 
-           
-        const fi = document.getElementById('file'); 
-        // Check if any file is selected. 
-        if (fi.files.length > 0) { 
-            for (const i = 0; i <= fi.files.length - 1; i++) { 
-  
-                const fsize = fi.files.item(i).size; 
-                const file = Math.round((fsize / 1024)); 
-                // The size of the file. 
-                if (file >=5120) { 
-                   _showErrorMessage("Please select an Image less than 5MB");
-                            
-                          e.preventDefault();
-                }
-                //else if (file < 2048) { 
-                //    alert( 
-                //      "File too small, please select a file greater than 2mb"); 
-                //} 
-                else { 
-                    
+
+            const fi = document.getElementById('file');
+            // Check if any file is selected.
+            if (fi.files.length > 0) {
+                for (const i = 0; i <= fi.files.length - 1; i++) {
+
+                    const fsize = fi.files.item(i).size;
+                    const file = Math.round((fsize / 1024));
+                    // The size of the file.
+                    if (file >= 5120) {
+                        _showErrorMessage("Please select an Image less than 5MB");
+
+                        e.preventDefault();
+                    }
+                    //else if (file < 2048) {
+                    //    alert(
+                    //      "File too small, please select a file greater than 2mb");
+                    //}
+                    else {
                         var form = $(this);
                         var url = form.attr('action');
                         var formData = new FormData($(this)[0]);
@@ -150,18 +150,18 @@
                             contentType: false,
                             processData: false,
                             success: function (data) {
-                    
-                   
-                                 $("#AddEditHomeSlider").modal("hide");
+
+
+                                $("#AddEditHomeSlider").modal("hide");
                                 _showSuccessMessage("Data Saved Successfully");
                                 setTimeout(function () { location.reload(); }, 1500);
                             }
                         });
                         e.preventDefault();
-                } 
-            } 
-        } 
-    
+                    }
+                }
+            }
+
 
 
 
@@ -178,14 +178,12 @@
             url: "/Admin/HomeSlider/GetHomeSlider",
             data: { Id: Id }, // serializes the form's elements.
             success: function (data) {
-                 if (Id == null || Id == 0)
-                    {
-                        $("#Homesliderheader").html("Add Home Slider");
-                    }
-                    else
-                    {
-                        $("#Homesliderheader").html("Edit Home SLider");
-                    }
+                if (Id == null || Id == 0) {
+                    $("#Homesliderheader").html("Add Home Slider");
+                }
+                else {
+                    $("#Homesliderheader").html("Edit Home SLider");
+                }
                 // show response from the php script.
                 $("#popupBody").html(data);
                 $("#AddEditHomeSlider").modal('show');

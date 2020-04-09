@@ -1,26 +1,26 @@
 ﻿@model  University.UI.Areas.Admin.Models.ProductVideoViewModel
 
-    <link href="~/dist/css/Custom.css" rel="stylesheet" />
+<link href="~/dist/css/Custom.css" rel="stylesheet" />
 
 
-    
+
 <form onsubmit="SaveProductProductVideoForms(event)" name="ProductVideoForm" enctype="multipart/form-data" method="post" action="/Admin/Product/SaveProductVideo">
     <div class="row py-2">
         <div class="col">
             <input name="AssocitedID" id="ProductvideosAssocitedID" type="hidden" />
             @Html.HiddenFor(y => y.ProductId)
             @Html.Hidden("ProductVideoId", Model.Id, new { @Value = Model.Id })
-            @Html.TextBoxFor(m => m.Title, new { @class = "form-control txtOnly text-overflow", @required = "required", @pattern = "^[^<>%$*@!#]*$",@maxlength="50",title=Model.Title})
-            @*@Html.ValidationMessageFor(x => x.Title, null, new { @class = "", style = "color:red;" })*@
+            @Html.TextBoxFor(m => m.Title, new { @class = "form-control txtOnly text-overflow titletutorial", @required = "required", @pattern = "^[^<>%$*@!#]*$", @maxlength = "50", title = Model.Title })
+            @Html.ValidationMessageFor(x => x.Title, "", new { @class = "", style = "color:red;" })
             @*@Html.ValidationMessageFor(m => m.Title)*@
         </div>
         <div class="col input-icon ">
-            @Html.TextBoxFor(m => m.VideoRate, new { @class = "form-control number", @required = "required",@maxlength="6"})
+            @Html.TextBoxFor(m => m.VideoRate, new { @class = "form-control number", @required = "required", @maxlength = "6" })
             <i>$</i>
         </div>
         <div class="col">
-            @Html.TextBoxFor(m => m.Decription, new { @class = "form-control text-overflow", rows = "1", @required = "required", @maxlength="500",title=Model.Decription})
-            @*@Html.ValidationMessageFor(x => x.Decription, null, new { @class = "", style = "color:red;" })*@
+            @Html.TextBoxFor(m => m.Decription, new { @class = "form-control text-overflow descriptionutorial", rows = "1", @required = "required", @maxlength = "500", title = Model.Decription })
+            @Html.ValidationMessageFor(x => x.Decription, "", new { @class = "", style = "color:red;" })
             @*@Html.ValidationMessageFor(m => m.Decription)*@
         </div>
         @if (string.IsNullOrWhiteSpace(Model.VideoURL))
@@ -28,21 +28,34 @@
 
             <div class="col">
                 @*@Html.TextBoxFor(m => m.VideoURL, new { @class = "form-control", @required = "required", @pattern = @"^https?:\/\/[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-/]+$", title = "Ex : https://player.vimeo.com/video/322925106" })*@
-                @Html.TextBoxFor(m => m.VideoURL, new { @class = "form-control text-overflow", @required = "required", @pattern = @"^https?:\/\/[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-/]+$",title=Model.VideoURL, @*title = "Ex : Embed video Path not copy perfect"*@ })
+                @Html.TextBoxFor(m => m.VideoURL, new
+                {
+                    @class = "form-control text-overflow videonutorial",
+                    @required = "required",
+                    @pattern = @"^https?:\/\/[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-/]+$",
+                    title = Model.VideoURL,@*title = "Ex : Embed video Path not copy perfect"*@})
             </div>
+            @Html.ValidationMessageFor(x => x.VideoURL, "", new { @class = "", style = "color:red;" })
+
         }
         else
         {
             <div class="col">
-                @Html.TextBoxFor(m => m.VideoURL, new { @class = "form-control text-overflow", @required = "required", @pattern = @"^https?:\/\/[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-/]+$",title=Model.VideoURL, @*title = "Ex : Embed video Path not copy perfect"*@ })
+                @Html.TextBoxFor(m => m.VideoURL, new
+                {
+                    @class = "form-control text-overflow videonutorial",
+                    @required = "required",
+                    @pattern = @"^https?:\/\/[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-/]+$",
+                    title = Model.VideoURL,@*title = "Ex : Embed video Path not copy perfect"*@})
 
             </div>
+            @Html.ValidationMessageFor(x => x.VideoURL, "", new { @class = "", style = "color:red;" })
         }
-      
-      
+
+
         <div class="col">
             <input type="submit" class="btn btn-primary" value="Save" title="Save" />
-            <input type="button" class="btn btn-primary" value="Delete" onclick="DeleteProductVideo(this,'@Model.Id')"title="Delete" />
+            <input type="button" class="btn btn-primary" value="Delete" onclick="DeleteProductVideo(this,'@Model.Id')" title="Delete" />
         </div>
 
 
@@ -51,6 +64,8 @@
 
 <script src="~/Scripts/ProjectValidation.js"></script>
 
-
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
 
 
