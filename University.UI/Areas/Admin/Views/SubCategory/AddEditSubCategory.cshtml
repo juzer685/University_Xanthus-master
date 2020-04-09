@@ -50,7 +50,7 @@
     <label class="info-text" for="ImageUrl" id="lblImageName" style="color: red;">Category Image <span class="ShortText">(Please ensure featured image size is Less than 5MB)</span></label>
     <div class="input-group">
         <div class="custom-file">
-            <input type="file" id="categoryfile" name="file" class="custom-file-input  validateHeightWidth checktest" accept="image/*" onchange="readURL(this);">
+            <input type="file" id="categoryfile"  name="file" class="custom-file-input  validateHeightWidth checktest" accept="image/*" onchange="readURL(this);">
             <span class="field-validation-error" data-valmsg-for="file" data-valmsg-replace="true" style="color:red;margin-top: 30px;position: absolute;"><span id="file-error" class=""> @Html.ValidationMessageFor(m => m.file, null, new { @class = "", style = "color:red;" })</span></span>
 
                 @if (Model.ImageURL != "")

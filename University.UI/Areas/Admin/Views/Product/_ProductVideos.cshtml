@@ -92,17 +92,18 @@
 <script src="~/Scripts/ProjectValidation.js"></script>
 
 <script>
+    
     var template = $('#ProductVideoTemplate').html();
 
-    function SaveProductProductVideoForms(e) {
+        function SaveProductProductVideoForms(e) {
         //$('#ProductvideosAssocitedID').val($("#ddlusrlst").val());
-        var title = $(".titletutorial").val();
-        var description = $(".descriptionutorial").val();
-        var videotutorial = $(".videonutorial").val();
-        alert(title);
-        alert(description);
-        alert(videotutorial);
-        if (title != "" && description != "" && videotutorial != "") {
+        //var title = $(".titletutorial").val();
+        //var description = $(".descriptionutorial").val();
+        //var videotutorial = $(".videonutorial").val();
+        //alert(title);
+        //alert(description);
+        //alert(videotutorial);
+        
             var form = $(e.target);
             var url = form.attr('action');
             var formData = new FormData($(e.target)[0]);
@@ -117,20 +118,16 @@
                 success: function (data) {
                     $(form).replaceWith(data);
                     $('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
-                    //alert("Data Saved Successfully");
+                    alert("Data Saved Successfully");
                     _showSuccessMessage("Data Saved Successfully");
                     setTimeout(function () { $('#FAQ').trigger('click'); }, 1500);
                 }
             });
 
             e.preventDefault();
-        }
-        else {
-            e.preventDefault();
-        }
-
-
     }
+
+
 
     $(document).ready(function () {
         $("#ProductVideoPopup").on("hidden.bs.modal", function () {

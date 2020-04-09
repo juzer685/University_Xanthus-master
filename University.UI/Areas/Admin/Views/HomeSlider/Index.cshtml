@@ -79,7 +79,7 @@
 <!-- /Add Home Slider modal-dialog -->
 <div class="modal fade" id="AddEditHomeSlider" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog">
-        <form id="homeSliderForm" action="/Admin/HomeSlider/AddEditHomeSlider" validate>
+        <form id="homeSliderForm" action="/Admin/HomeSlider/AddEditHomeSlider" >
             <div class="modal-dialog">
                 <!-- Modal content-->
 
@@ -94,7 +94,7 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary" title="SUbmit">Submit</button>
+                        <input type="submit" class="btn btn-primary" title="Submit" value="Submit" />
                         <button type="button" class="btn btn-default" data-dismiss="modal" title="Close">Close</button>
                     </div>
                 </div>
@@ -113,14 +113,23 @@
     })
 
     $(document).ready(function () {
+        jQuery('form#homeSliderForm').validate({
+   onsubmit : false
+});
         $('#HomeSliderTable').DataTable();
+        //$('#UserRegisterationBtn').click(function () {
+        //    alert("hii");
+        //    var formValid = $('#homeSliderForm').validate().form();
+        //if (!formValid)
+        //    return false;
+        //}
 
-        $(document).on('submit', '#homeSliderForm', function (e) {
-            // code
-           // $('#HomesliderAssocitedID').val($("#ddlusrlst").val());
 
-
-            const fi = document.getElementById('file');
+ $(document).on('submit', '#homeSliderForm', function (e) {
+     var formValid = $('#homeSliderForm').validate().form();
+     if (formValid )
+             {
+                 const fi = document.getElementById('file');
             // Check if any file is selected.
             if (fi.files.length > 0) {
                 for (const i = 0; i <= fi.files.length - 1; i++) {
@@ -163,11 +172,17 @@
             }
 
 
-
-
-
-
-        });
+                 
+             }
+         
+             else
+             {
+                 //return false;
+                e.preventDefault();
+            
+             }
+    });
+        
     });
 
     function AddHomeSlider(Id) {

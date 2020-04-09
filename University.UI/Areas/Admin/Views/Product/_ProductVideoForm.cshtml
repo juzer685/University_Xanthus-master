@@ -4,14 +4,15 @@
 
 
 
-<form onsubmit="SaveProductProductVideoForms(event)" name="ProductVideoForm" enctype="multipart/form-data" method="post" action="/Admin/Product/SaveProductVideo">
+<form onsubmit="SaveProductProductVideoForms(event)" id="saveproductvideos"  name="ProductVideoForm" enctype="multipart/form-data" method="post" action="/Admin/Product/SaveProductVideo">
     <div class="row py-2">
         <div class="col">
             <input name="AssocitedID" id="ProductvideosAssocitedID" type="hidden" />
             @Html.HiddenFor(y => y.ProductId)
             @Html.Hidden("ProductVideoId", Model.Id, new { @Value = Model.Id })
-            @Html.TextBoxFor(m => m.Title, new { @class = "form-control txtOnly text-overflow titletutorial", @required = "required", @pattern = "^[^<>%$*@!#]*$", @maxlength = "50", title = Model.Title })
-            @Html.ValidationMessageFor(x => x.Title, "", new { @class = "", style = "color:red;" })
+            @Html.TextBoxFor(m => m.Title, new { @class = "form-control txtOnly text-overflow titletutorial", @required = "required", @pattern = "^[^<>%$*@!#]*$", title = Model.Title })
+            <span class="field-validation-error" data-valmsg-for="MobileNo" data-valmsg-replace="true" style="color:red;"><span id="MobileNo-error" class="">@Html.ValidationMessageFor(x => x.Title, "", new { @class = "", style = "color:red;" })</span></span>
+
             @*@Html.ValidationMessageFor(m => m.Title)*@
         </div>
         <div class="col input-icon ">
@@ -61,11 +62,5 @@
 
     </div>
 </form>
-
-<script src="~/Scripts/ProjectValidation.js"></script>
-
-<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-<script src="~/Scripts/jquery.validate.js"></script>
 
 

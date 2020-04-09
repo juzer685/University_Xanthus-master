@@ -116,7 +116,7 @@ namespace University.Repository
                     model.IsDeleted = false;
                     model.CreatedDate = DateTime.UtcNow;
                     context.HomeSlider.Add(model);
-                    context.SaveChanges();
+                   context.SaveChanges();
                 }
                 return true;
 

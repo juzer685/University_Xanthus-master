@@ -15,6 +15,21 @@
         font-size: 0.7rem;
         color: #03A9F4;
     }
+    #ProductId-error
+    {
+        color:red;
+    }
+    #TextDescription-error
+    {
+        color:red;
+    }
+    #file-error
+    {
+        margin-top: 70px;
+        white-space: pre;
+        color: red;
+        margin-right: 432px;
+    }
 </style>
 <link href="~/dist/css/Custom.css" rel="stylesheet" />
 <div>
@@ -23,8 +38,8 @@
     <div class="form-group">
         <label for="email">Course Name</label>
         @Html.DropDownListFor(m => m.ProductId, new SelectList(Model.Products, "Id", "Title"), "--select Course--", new { @class = "form-control titleslider",@required = "required" })
-      
-        @Html.ValidationMessageFor(m => m.ProductId, "", new { @class = "", style = "color:red;" })
+        @*<span class="field-validation-error" data-valmsg-for="ProductId" data-valmsg-replace="true" style="color:red;"><span id="ProductId-error" class="">@Html.ValidationMessageFor(m => m.ProductId, "", new { @class = "", style = "color:red;" })</span></span>*@
+        
         @*<span class="field-validation-error text-danger"data-valmsg-for="ProductId"data-valmsg-replace="true">The StudentName field is required.</span>*@
     </div>
     
@@ -33,17 +48,18 @@
     <div class="form-group">
         <label for="email">Description</label>
         @Html.TextAreaFor(m => m.TextDescription, new { @class = "form-control descriptionslider", @maxlength = "1000", @required = "required", })
-        @Html.ValidationMessageFor(m => m.TextDescription, "", new { @class = "", style = "color:red;" })
        
+        @Html.ValidationMessageFor(m => m.TextDescription, "", new { @class = "", style = "color:red;" })
+
     </div>
 
     <div class="form-group">
-        <label class="info-text" for="ImageUrl" style="color:red;">Slider Image <span class="ShortText">(Please ensure featured image size is Less than 5MB)</span></label>
+        <label class="info-text" for="ImageUrl" style="color: red;">Slider Image <span class="ShortText">(Please ensure featured image size is Less than 5MB)</span></label>
         <div class="input-group">
             <div class="custom-file">
 
-                <input type="file" id="file" name="file" class="custom-file-input imageslider" required accept="image/*" onchange="readURL(this);">
-                <span class="field-validation-error" data-valmsg-for="file" data-valmsg-replace="true" style="color:red;margin-top: 30px;position: absolute;"><span id="file-error" class="" style="margin-top: -32px;position: absolute;">@Html.ValidationMessageFor(x => x.file, null, new { @class = "", style = "color:red;" })</span></span>
+                <input type="file"  id="file" name="file" class="custom-file-input imageslider" required accept="image/*" onchange="readURL(this);">
+                @*<span class="field-validation-error" data-valmsg-for="file" data-valmsg-replace="true" style="color:red;margin-top: 30px;position: absolute;"><span id="file-error" class="" style="margin-top: -32px;position: absolute;">@Html.ValidationMessageFor(x => x.file, null, new { @class = "", style = "color:red;" })</span></span>*@
                 @if (Model.ImageURL != "")
                 {
                     <label class="custom-file-label" for="exampleInputFile">@Model.ImageURL</label>
@@ -68,7 +84,10 @@
         }
     });
 
+
+
     function readURL(input) {
+        
         if (input.files && input.files[0]) {
             var reader = new FileReader();
 

@@ -381,8 +381,11 @@ namespace University.UI.Areas.Admin.Controllers
         }
         public ActionResult SaveProductVideo(ProductVideoViewModel model, string ProductVideoId)
         {
-            
-            if (ProductVideoId.ToString() == "0")
+            if(ProductVideoId == null)
+            {
+                return View();
+            }
+            else if (ProductVideoId.ToString() == "0")
             {
                 model.AssocitedCustID = Convert.ToInt32(Session["AdminLoginID"]);
                 model.Id = Convert.ToDecimal(ProductVideoId);

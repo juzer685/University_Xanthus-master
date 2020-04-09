@@ -117,7 +117,7 @@
                 <div class="modal-body" id="popupBody">
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" title="Submit">Submit</button>
+                    <button type="submit" class="btn btn-primary" title="Submit" id="UserRegisterationBtn">Submit</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal" title="Close">Close</button>
                 </div>
             </div>
@@ -126,7 +126,8 @@
 </div>
 <!-- /Add Home Slider modal-dialog -->
 
-
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 <script>
     //$('.FAQadd').click(function () {
     //    if ($('#ddlusrlst').val() == 0)
@@ -142,30 +143,32 @@
     $(document).ready(function () {
         $('#FAQTable').DataTable();
 
-        $(document).on('submit', '#faqForm', function (e) {
-            // code
-            //  $('#FAQAssocitedID').val($("#ddlusrlst").val());
-
-            var form = $(this);
-            var url = form.attr('action');
-            var formData = new FormData($(this)[0]);
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: formData, // serializes the form's elements.
-                //enctype: 'multipart/form-data',
-                cache: false,
-                contentType: false,
-                processData: false,
-                success: function (data) {
-                    //$('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
-                    //alert("Data Saved Successfully"); // show response from the php script.
-                    $("#AddEditFAQ").modal("hide");
-                    _showSuccessMessage("Data Saved Successfully");
-                    setTimeout(function () { location.reload(); }, 1500);
-                }
-            });
-            e.preventDefault();
+        $('#UserRegisterationBtn').click(function () {
+            var formValid = $('#faqForm').validate().form();
+            if (!formValid)
+                return false;
+            else {
+                var form = $(this);
+                var url = form.attr('action');
+                var formData = new FormData($(this)[0]);
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: formData, // serializes the form's elements.
+                    //enctype: 'multipart/form-data',
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        //$('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
+                        //alert("Data Saved Successfully"); // show response from the php script.
+                        $("#AddEditFAQ").modal("hide");
+                        _showSuccessMessage("Data Saved Successfully");
+                        setTimeout(function () { location.reload(); }, 1500);
+                    }
+                });
+                e.preventDefault();
+            }
         });
     });
 
