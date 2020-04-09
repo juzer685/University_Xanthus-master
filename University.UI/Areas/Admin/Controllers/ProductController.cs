@@ -442,9 +442,10 @@ namespace University.UI.Areas.Admin.Controllers
         #endregion
 
         #region coursePreview start
-        public ActionResult LoadCouresPreview(string CourseID)
+        public ActionResult LoadCouresPreview(string ProductId)
         {
-            var res = _productService.GetCoursePrviewVideo(Convert.ToDecimal(CourseID));
+           // var courseid = CourseID;
+            var res = _productService.GetCoursePrviewVideo(Convert.ToDecimal(ProductId));
             var viewModel = Mapper.Map<CoursePreviewVideos, CoursePreviewViewModel>(res);
             if (viewModel == null)
             {
@@ -458,7 +459,7 @@ namespace University.UI.Areas.Admin.Controllers
             return View("_CoursePreviewVideoView", viewModel);
         }
 
-        public JsonResult SaveoursepreviewVideos(CoursePreviewViewModel model, string CourseVideoId)
+        public JsonResult SaveoursepreviewVideos(CoursePreviewVideos model, string CourseVideoId)
         {
             if (CourseVideoId.ToString() == "0")
             {
@@ -472,9 +473,9 @@ namespace University.UI.Areas.Admin.Controllers
                 //{
                 //    model.ImageURL = "";
                 //}
-                var viewModel = AutoMapper.Mapper.Map<CoursePreviewViewModel, CoursePreviewVideos>(model);
+                //var viewModel = Mapper.Map<CoursePreviewViewModel, CoursePreviewVideos>(model);
                 
-                var res = _productService.SaveCoursePreviewVideo(viewModel);
+                var res = _productService.SaveCoursePreviewVideo(model);
                 return Json(res, JsonRequestBehavior.AllowGet);
             }
 
@@ -489,9 +490,9 @@ namespace University.UI.Areas.Admin.Controllers
                         model.VideoURL = UploadFileOnServer(ProductImagePath, model.CoursePreviewVideo);
                     }
                    
-                    var viewModel = AutoMapper.Mapper.Map<CoursePreviewViewModel, CoursePreviewVideos>(model);
+                    //var viewModel = Mapper.Map<CoursePreviewViewModel, CoursePreviewVideos>(model);
                    
-                    var res = _productService.SaveCoursePreviewVideo(viewModel);
+                    var res = _productService.SaveCoursePreviewVideo(model);
 
                     
                     return Json(res, JsonRequestBehavior.AllowGet);
@@ -501,7 +502,12 @@ namespace University.UI.Areas.Admin.Controllers
             }
         }
 
+        public ActionResult DeletePreviewVideo(int CourseVideoId)
+        {
+            var res = _productService.DeleteProductVideo(Convert.ToDecimal(CourseVideoId));
 
+            return Json(res, JsonRequestBehavior.AllowGet);
+        }
         #endregion course preview
 
         #region Product Document

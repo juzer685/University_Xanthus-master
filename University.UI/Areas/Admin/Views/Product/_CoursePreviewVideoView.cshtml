@@ -14,7 +14,7 @@
 </style>
 <link href="~/dist/css/Custom.css" rel="stylesheet" />
 <form onsubmit="SaveoursepreviewVideos(event)" name="courepreviewvideo" id="coursepreviewvideoview" enctype="multipart/form-data" method="post" action="/Admin/Product/SaveoursepreviewVideos">
-    @Html.HiddenFor(y => y.CourseID)
+    @Html.HiddenFor(y => y.ProductID)
     @Html.Hidden("CourseVideoId", Model.PreviewID)
     <div class="row">
         <div class="col-md-6">
@@ -23,60 +23,61 @@
                 <input name="AssocitedID" id="ProductUserGuideAssocitedID" type="hidden" />
                 <label for="Title">Title</label>
                 <div class="col">
-                    @Html.TextBoxFor(m => m.Title, new { @class = "form-control txtOnly text-overflow", @required = "required", @maxlength = "90" })
+                    @Html.TextBoxFor(m => m.Title, new { @class = "form-control txtOnly text-overflow", @required = "required", @maxlength = "90" ,title=Model.Title })
 
                     @Html.ValidationMessageFor(m => m.Title, null, new { @class = "", style = "color:red;" })
                     @*@Html.ValidationMessageFor(m => m.Title)*@
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="Description">Description</label>
-                    <div class="col">
-                        @Html.TextAreaFor(m => m.Description, new { @class = "form-control overflow-ellipsis", @required = "required", @maxlength = "1000" })
-                        @Html.ValidationMessageFor(m => m.Description, null, new { @class = "", style = "color:red;" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="Description">Description</label>
-
-                    @if (string.IsNullOrWhiteSpace(Model.VideoURL))
-                    {
-                        <div class="col">
-                            @*@Html.TextBoxFor(m => m.VideoURL, new { @class = "form-control", @required = "required", @pattern = @"^https?:\/\/[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-/]+$", title = "Ex : https://player.vimeo.com/video/322925106" })*@
-                            @Html.TextBoxFor(m => m.VideoURL, new
-                       {
-                           @class = "form-control text-overflow videonutorial",
-                           @required = "required",
-                           @pattern = @"^https?:\/\/[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-/]+$",
-                           title = Model.VideoURL,@*title = "Ex : Embed video Path not copy perfect"*@})
-                        </div>
-                        @Html.ValidationMessageFor(x => x.VideoURL, "", new { @class = "", style = "color:red;" })
-
-
-
-                    }
-                    else
-                    {
-                        <div class="col">
-                            @Html.TextBoxFor(m => m.VideoURL, new
-                       {
-                           @class = "form-control text-overflow videonutorial",
-                           @required = "required",
-                           @pattern = @"^https?:\/\/[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-/]+$",
-                           title = Model.VideoURL,@*title = "Ex : Embed video Path not copy perfect"*@})
-
-                        </div>
-                        @Html.ValidationMessageFor(x => x.VideoURL, "", new { @class = "", style = "color:red;" })
-                    }
                 </div>
             </div>
 
-        <div class="right">
-            <input type="submit" class="btn btn-primary" value="Save" title="Save" id="PreviewVideoBtn" />
-            @*<button type="button" class="btn btn-primary" title="Save" onclick="SaveoursepreviewVideos(event)">Save</button>*@
-            <button type="button" class="btn btn-primary" onclick="Cancel()" title="Cancel">Cancel</button>
-            <button type="button" class="btn btn-primary" onclick="Cancel()" title="Exit">Exit</button>
+            <div class="form-group">
+                <label for="Description">Link To Preview</label>
+
+                @if (string.IsNullOrWhiteSpace(Model.VideoURL))
+                {
+                    <div class="col">
+                        @*@Html.TextBoxFor(m => m.VideoURL, new { @class = "form-control", @required = "required", @pattern = @"^https?:\/\/[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-/]+$", title = "Ex : https://player.vimeo.com/video/322925106" })*@
+                        @Html.TextBoxFor(m => m.VideoURL, new
+                   {
+                       @class = "form-control text-overflow videonutorial",
+                       @required = "required",
+                       @pattern = @"^https?:\/\/[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-/]+$",
+                       title = Model.VideoURL,@*title = "Ex : Embed video Path not copy perfect"*@})
+                    </div>
+                    @Html.ValidationMessageFor(x => x.VideoURL, "", new { @class = "", style = "color:red;" })
+
+
+
+                }
+                else
+                {
+                    <div class="col">
+                        @Html.TextBoxFor(m => m.VideoURL, new
+                   {
+                       @class = "form-control text-overflow videonutorial",
+                       @required = "required",
+                       @pattern = @"^https?:\/\/[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-/]+$",
+                       title = Model.VideoURL,@*title = "Ex : Embed video Path not copy perfect"*@})
+
+                    </div>
+                    @Html.ValidationMessageFor(x => x.VideoURL, "", new { @class = "", style = "color:red;" })
+                }
+            </div>
+            <div class="form-group">
+                <label for="Description">Description</label>
+                <div class="col">
+                    @Html.TextAreaFor(m => m.Description, new { @class = "form-control overflow-ellipsis", @maxlength = "1000" })
+                    @*@Html.ValidationMessageFor(m => m.Description, null, new { @class = "", style = "color:red;" })*@
+                </div>
+            </div>
+            <div class="col">
+                <input type="submit" class="btn btn-primary" value="Save" title="Save" id="PreviewVideoBtn" />
+                @*<button type="button" class="btn btn-primary" title="Save" onclick="SaveoursepreviewVideos(event)">Save</button>*@
+                @*<button type="button" class="btn btn-primary" onclick="Cancel()" title="Cancel">Cancel</button>*@
+                <button type="button" class="btn btn-primary" onclick="Cancel()" title="Exit">Exit</button>
+            </div>
         </div>
+        
     </div>
 </form>
 <script src="~/Scripts/CoursePreviewvideo.js"></script>

@@ -117,6 +117,11 @@ namespace University.Service
         {
             return _productRepository.DeleteProductVideo(productVideoId);
         }
+        public bool DeletePreviewVideo(Decimal CourseVideoId )
+        {
+            return _productRepository.DeletePreviewVideo(CourseVideoId);
+        }
+        
         public ProductVideos GetProductVideo(Decimal productVideoId)
         {
             return _productRepository.GetProductVideo(productVideoId);

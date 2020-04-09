@@ -817,6 +817,7 @@ namespace University.Repository
                 {
                     coursePreviewVideos.IsDeleted = false;
                     coursePreviewVideos.CreatedDate = DateTime.UtcNow;
+                    coursePreviewVideos.ProductID = coursePreviewVideos.ProductID;
                     context.CoursePreviewVideos.Add(coursePreviewVideos);
                     context.SaveChanges();
                     //return coursePreviewVideos.PreviewID;
@@ -916,15 +917,31 @@ namespace University.Repository
             }
             return true;
         }
-
+        #region courese preview video
         public CoursePreviewVideos GetCoursePrviewVideo(Decimal CourseID)
         {
             using (var context = new UniversityEntities())
             {
-                var courseprevvideo = context.CoursePreviewVideos.FirstOrDefault(y => y.CourseID == CourseID && y.IsDeleted != true);
+                var courseprevvideo = context.CoursePreviewVideos.FirstOrDefault(y => y.ProductID == CourseID && y.IsDeleted != true);
                 return courseprevvideo;
             }
         }
+        public bool DeletePreviewVideo(Decimal CourseVideoId)
+        {
+            using (var context = new UniversityEntities())
+            {
+                var productVideo = context.CoursePreviewVideos.FirstOrDefault(y => y.PreviewID == CourseVideoId);
+                if (productVideo != null)
+                {
+                    
+                    productVideo.IsDeleted = true;
+                    productVideo.DeletedDate = DateTime.UtcNow;
+                    context.SaveChanges();
+                }
+            }
+            return true;
+        }
+        #endregion course preview video
 
         public ProductVideos GetProductVideo(Decimal productVideoId)
         {

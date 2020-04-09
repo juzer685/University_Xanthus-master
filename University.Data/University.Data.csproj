@@ -134,6 +134,7 @@
     <Compile Include="ProperrtiesLayer\CategoryUserMapping.cs" />
     <Compile Include="ProperrtiesLayer\CardTransactionDetails.cs" />
     <Compile Include="ProperrtiesLayer\CoursePreviewVideos.cs" />
+    <Compile Include="ProperrtiesLayer\HomeBanner.cs" />
     <Compile Include="ProperrtiesLayer\HomeSlider.cs" />
     <Compile Include="ProperrtiesLayer\ProductVideoModel.cs" />
     <Compile Include="ProperrtiesLayer\ProductVideos.cs" />
