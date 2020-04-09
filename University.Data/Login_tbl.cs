@@ -24,6 +24,14 @@ namespace University.Data
             this.CardDetails = new HashSet<CardDetails>();
             this.CardTransactionDetails = new HashSet<CardTransactionDetails>();
         }
+
+        public string FirstLastName
+        {
+            get
+            {
+                return FirstName + ' ' + LastName;
+            }
+        }
     
         public int ID { get; set; }
         public string UserName { get; set; }

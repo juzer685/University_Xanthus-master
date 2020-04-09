@@ -11,6 +11,9 @@
         font-size: 0.7rem;
         color: #03A9F4;
     }
+    span.field-validation-error {
+        width: 100%;
+    }
 </style>
 <link href="~/dist/css/Custom.css" rel="stylesheet" />
 <form onsubmit="SaveoursepreviewVideos(event)" name="courepreviewvideo" id="coursepreviewvideoview" enctype="multipart/form-data" method="post" action="/Admin/Product/SaveoursepreviewVideos">
@@ -23,9 +26,9 @@
                 <input name="AssocitedID" id="ProductUserGuideAssocitedID" type="hidden" />
                 <label for="Title">Title</label>
                 <div class="col">
-                    @Html.TextBoxFor(m => m.Title, new { @class = "form-control txtOnly text-overflow", @required = "required", @maxlength = "90" ,title=Model.Title })
-
-                    @Html.ValidationMessageFor(m => m.Title, null, new { @class = "", style = "color:red;" })
+                    @Html.TextBoxFor(m => m.Title, new { @class = "form-control txtOnly text-overflow", @required = "required", @maxlength = "90" })
+                    <span class="field-validation-error" data-valmsg-for="file" data-valmsg-replace="true" style="color:red;margin-top: 30px;position: absolute;"><span id="file-error" class="" style="margin-top: -33px;position: absolute;"> @Html.ValidationMessageFor(m => m.Title, null, new { @class = "", style = "color:red;" })</span></span>
+                   
                     @*@Html.ValidationMessageFor(m => m.Title)*@
                 </div>
             </div>
@@ -42,9 +45,10 @@
                        @class = "form-control text-overflow videonutorial",
                        @required = "required",
                        @pattern = @"^https?:\/\/[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-/]+$",
-                       title = Model.VideoURL,@*title = "Ex : Embed video Path not copy perfect"*@})
+                       @*title = "Ex : Embed video Path not copy perfect"*@})
                     </div>
-                    @Html.ValidationMessageFor(x => x.VideoURL, "", new { @class = "", style = "color:red;" })
+                    <span class="field-validation-error" data-valmsg-for="file" data-valmsg-replace="true" style="color:red;margin-top: 30px;position: absolute;"><span id="file-error" class="" style="position: absolute;margin-top: -30px;"> @Html.ValidationMessageFor(x => x.VideoURL, "", new { @class = "", style = "color:red;" })</span></span>
+                   
 
 
 
@@ -57,10 +61,10 @@
                        @class = "form-control text-overflow videonutorial",
                        @required = "required",
                        @pattern = @"^https?:\/\/[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-]+\.[a-zA-Z0-9_\-/]+$",
-                       title = Model.VideoURL,@*title = "Ex : Embed video Path not copy perfect"*@})
+                      @*title = "Ex : Embed video Path not copy perfect"*@})
 
                     </div>
-                    @Html.ValidationMessageFor(x => x.VideoURL, "", new { @class = "", style = "color:red;" })
+                    <span class="field-validation-error" data-valmsg-for="file" data-valmsg-replace="true" style="color:red;margin-top: 30px;position: absolute;"><span id="file-error" class="" style="position: absolute;margin-top: -30px;"> @Html.ValidationMessageFor(x => x.VideoURL, "", new { @class = "", style = "color:red;" })</span></span>
                 }
             </div>
             <div class="form-group">
@@ -89,7 +93,7 @@
 
 
         function SaveoursepreviewVideos(e) {
-            alert("hiii");
+
             var formValid = $('#coursepreviewvideoview').validate().form();
             if (!formValid)
                 return false;
@@ -108,7 +112,7 @@
                     contentType: false,
                     processData: false,
                     success: function (data) {
-                        alert(data);
+
                         $('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
                         //alert("Data Saved Successfully");
                         _showSuccessMessage("Data Saved Successfully");
