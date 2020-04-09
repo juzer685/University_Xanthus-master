@@ -28,6 +28,5 @@ namespace University.Data
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public Nullable<decimal> UpdatedBy { get; set; }
         public Nullable<int> AssocitedCustID { get; set; }
-        public System.Web.HttpPostedFileBase file { get; set; }
     }
 }

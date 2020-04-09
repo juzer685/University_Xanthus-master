@@ -917,11 +917,11 @@ namespace University.Repository
             return true;
         }
 
-        public CoursePreviewVideos GetCoursePrviewVideo(Decimal ProductId)
+        public CoursePreviewVideos GetCoursePrviewVideo(Decimal CourseID)
         {
             using (var context = new UniversityEntities())
             {
-                var courseprevvideo = context.CoursePreviewVideos.FirstOrDefault(y => y.ProductID == ProductId && y.IsDeleted != true);
+                var courseprevvideo = context.CoursePreviewVideos.FirstOrDefault(y => y.CourseID == CourseID && y.IsDeleted != true);
                 return courseprevvideo;
             }
         }

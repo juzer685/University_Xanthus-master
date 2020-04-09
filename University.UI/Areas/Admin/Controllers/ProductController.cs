@@ -11,6 +11,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.Mvc;
+using AutoMapper;
 
 namespace University.UI.Areas.Admin.Controllers
 {
@@ -441,10 +442,10 @@ namespace University.UI.Areas.Admin.Controllers
         #endregion
 
         #region coursePreview start
-        public ActionResult LoadCouresPreview(string ProductId)
+        public ActionResult LoadCouresPreview(string CourseID)
         {
-            var res = _productService.GetCoursePrviewVideo(Convert.ToDecimal(ProductId));
-            var viewModel = AutoMapper.Mapper.Map<CoursePreviewVideos, CoursePreviewViewModel>(res);
+            var res = _productService.GetCoursePrviewVideo(Convert.ToDecimal(CourseID));
+            var viewModel = Mapper.Map<CoursePreviewVideos, CoursePreviewViewModel>(res);
             if (viewModel == null)
             {
                 viewModel = new CoursePreviewViewModel();

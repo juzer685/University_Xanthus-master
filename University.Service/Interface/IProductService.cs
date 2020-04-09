@@ -12,7 +12,7 @@ namespace University.Service.Interface
     {
         //IEnumerable<Product> GetUserVideosList();
         // IEnumerable<ProductVideos> GetUserVideosLists(int ProductVideoId);
-        CoursePreviewVideos GetCoursePrviewVideo(Decimal ProductId );
+        CoursePreviewVideos GetCoursePrviewVideo(Decimal CourseID);
         IEnumerable<ProductVideos> GetUserVideosLists();
         // IEnumerable<ProductVideos> GetUserVideosLists(int ProductVideoId);
         bool SaveCoursePreviewVideo(CoursePreviewVideos previewVideos);

@@ -51,7 +51,7 @@
                             <ul class="nav nav-tabs tab" id="custom-tabs-one-tab" role="tablist">
                                 <li class="nav-item " id="basicdeatils"><a class="nav-link active" data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadProductBasicDetails">Basic Details</a></li>
                                 <li class="nav-item "><a id="userguide" class="nav-link" data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadProductUserGuide">User Guide</a></li>
-                                @*<li class="nav-item "><a id="courespreviewvideo" class="nav-link" data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadCouresPreview">Coures Preview</a></li>*@
+                                <li class="nav-item "><a id="courespreviewvideo" class="nav-link" data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadCouresPreview">Coures Preview</a></li>
                                 <li class="nav-item disabled"><a id="video" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductVideos"> Tutorials</a></li>
                                 <li class="nav-item disabled"><a id="FAQ" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductFAQ"> FAQ</a></li>
                                 @*<li class="nav-item disabled"><a id="spec" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadProductSpecifiction"> Spec</a></li>
@@ -63,7 +63,7 @@
                             <ul class="nav nav-tabs tab" id="custom-tabs-one-tab" role="tablist">
                                 <li class="nav-item " id=""><a class="nav-link active" data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadProductBasicDetails">Basic Details</a></li>
                                 <li class="nav-item "><a id="" class="nav-link" data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadProductUserGuide">User Guide</a></li>
-                                @*<li class="nav-item "><a id="" class="nav-link" data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadCouresPreview">Coures Preview</a></li>*@
+                                <li class="nav-item "><a id="" class="nav-link" data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadCouresPreview">Coures Preview</a></li>
                                 <li class="nav-item disabled"><a id="" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductVideos"> Tutorials</a></li>
                                 <li class="nav-item disabled"><a id="" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/GetProductFAQ"> FAQ</a></li>
                                 @*<li class="nav-item disabled"><a id="" class="nav-link " data-toggle="tab" data-target="#frmDiv" href="/Admin/Product/LoadProductSpecifiction"> Spec</a></li>
@@ -303,7 +303,7 @@
                                         $('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
                                         //alert("Data Saved Successfully");
                                         _showSuccessMessage("Data Saved Successfully");
-                                        setTimeout(function () { $('#video').trigger('click'); }, 1500);
+                                        setTimeout(function () { $('#courespreviewvideo').trigger('click'); }, 1500);
                                         //setTimeout(function () { location.reload(); }, 1500);
                                     }
                                 });
@@ -344,7 +344,7 @@
                             $('.overlayNew').css({ "visibility": "visible", "opacity": "1" });
                             //alert("Data Saved Successfully");
                             _showSuccessMessage("Data Saved Successfully");
-                            setTimeout(function () { $('#video').trigger('click'); }, 1500);
+                            setTimeout(function () { $('#courespreviewvideo').trigger('click'); }, 1500);
                             //setTimeout(function () { location.reload(); }, 1500);
                         }
                     });

@@ -2088,6 +2088,7 @@
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Scripts\CardDetails.js" />
     <Content Include="Scripts\ChangePassword.js" />
+    <Content Include="Scripts\CoursePreviewvideo.js" />
     <Content Include="Scripts\custom.js" />
     <Content Include="Areas\Admin\Views\SubCategory\CategoryUserMappingList.cshtml" />
     <Content Include="Areas\Admin\Views\SubCategory\AddEditCategoryMapp.cshtml" />

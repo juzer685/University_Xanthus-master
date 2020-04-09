@@ -121,9 +121,9 @@ namespace University.Service
         {
             return _productRepository.GetProductVideo(productVideoId);
         }
-        public CoursePreviewVideos GetCoursePrviewVideo(Decimal ProductId)
+        public CoursePreviewVideos GetCoursePrviewVideo(Decimal CourseID)
         {
-            return _productRepository.GetCoursePrviewVideo(ProductId);
+            return _productRepository.GetCoursePrviewVideo(CourseID);
         }
         public Decimal SaveProductDocument(ProductDocuments productDocument)
         {

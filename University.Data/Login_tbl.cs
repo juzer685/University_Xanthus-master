@@ -34,16 +34,6 @@ namespace University.Data
         public Nullable<System.DateTime> DeletedDate { get; set; }
         public Nullable<decimal> DeletedBy { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
-
-        public string  FirstLastName
-        {
-            get
-            {
-                return FirstName + ' ' + LastName;
-            }
-        }
-
-
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public Nullable<decimal> CustomerId { get; set; }
