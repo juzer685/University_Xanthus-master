@@ -1,7 +1,7 @@
 ﻿@model University.UI.Areas.Admin.Models.HomeSliderViewModel
 @{
     ViewBag.Title = "AddEditHomeSlider";
-    Layout = null;
+    //Layout = null;
 }
 
 <style>
@@ -18,17 +18,20 @@
     #ProductId-error
     {
         color:red;
+         font: -webkit-control;
+
     }
-    #TextDescription-error
-    {
-        color:red;
+    #TextDescription-error {
+        color: red;
+    font: -webkit-control;
     }
-    #file-error
-    {
+
+    #file-error {
         margin-top: 70px;
         white-space: pre;
         color: red;
-        margin-right: 432px;
+        margin-right: 442px;
+         font: -webkit-control;
     }
 </style>
 <link href="~/dist/css/Custom.css" rel="stylesheet" />
@@ -37,7 +40,7 @@
 
     <div class="form-group">
         <label for="email">Course Name</label>
-        @Html.DropDownListFor(m => m.ProductId, new SelectList(Model.Products, "Id", "Title"), "--select Course--", new { @class = "form-control titleslider",@required = "required" })
+        @Html.DropDownListFor(m => m.ProductId, new SelectList(Model.Products, "Id", "Title"), "--select Course--", new { @class = "form-control titleslider",@required = "required",@id="Titles"})
         @*<span class="field-validation-error" data-valmsg-for="ProductId" data-valmsg-replace="true" style="color:red;"><span id="ProductId-error" class="">@Html.ValidationMessageFor(m => m.ProductId, "", new { @class = "", style = "color:red;" })</span></span>*@
         
         @*<span class="field-validation-error text-danger"data-valmsg-for="ProductId"data-valmsg-replace="true">The StudentName field is required.</span>*@
@@ -47,14 +50,15 @@
 
     <div class="form-group">
         <label for="email">Description</label>
-        @Html.TextAreaFor(m => m.TextDescription, new { @class = "form-control descriptionslider", @maxlength = "1000", @required = "required", })
+        @Html.TextAreaFor(m => m.TextDescription, new { @class = "form-control descriptionslider", @maxlength = "1000", @required = "required",title=Model.TextDescription })
        
         @Html.ValidationMessageFor(m => m.TextDescription, "", new { @class = "", style = "color:red;" })
 
     </div>
 
     <div class="form-group">
-        <label class="info-text" for="ImageUrl" style="color: red;">Slider Image <span class="ShortText">(Please ensure featured image size is Less than 5MB)</span></label>
+        <label class="info-text" for="ImageUrl" style="        color: red;
+">Slider Image <span class="ShortText">(Please ensure featured image size is Less than 5MB)</span></label>
         <div class="input-group">
             <div class="custom-file">
 
@@ -75,6 +79,7 @@
         <img id="image-preview" src="@Model.ImageFullPath" alt="" class="imgStd" onerror="this.onerror = null; this.src = '/images/NoImageAvailable.jpg';" />
     </div>
 </div>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>  
 
 <script>
     $(document).ready(function () {
@@ -98,5 +103,18 @@
             reader.readAsDataURL(input.files[0]);
         }
     }
+
+
+    $(function ()
+    {  
+        $("[id*=Titles] option").each(function (i)
+        {  
+            if (i > 0)
+            {  
+                var title = $(this).val();  
+                $(this).attr("title", title);  
+            }  
+        });  
+    });
 
 </script>

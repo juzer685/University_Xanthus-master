@@ -2135,6 +2135,7 @@
     <None Include="Properties\PublishProfiles\FolderProfile46.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile47.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile48.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile49.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile8.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile9.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />

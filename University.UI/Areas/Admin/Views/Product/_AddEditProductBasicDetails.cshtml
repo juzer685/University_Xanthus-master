@@ -26,7 +26,7 @@
             <div class="form-group">
                 <input name="AssocitedID" id="BasicDeatilsAssocitedID" type="hidden" />
                 <label for="email">Category Name</label>
-                @Html.DropDownListFor(m => m.SubCategoryId, new SelectList(ViewBag.SubCategoryList, "Id", "Name"), "--select category--", new { @class = "form-control pointer ", @required = "required" })
+                @Html.DropDownListFor(m => m.SubCategoryId, new SelectList(ViewBag.SubCategoryList, "Id", "Name"), "--select category--", new { @class = "form-control pointer ", @required = "required"})
                 @Html.ValidationMessageFor(x => x.SubCategoryId, null, new { @class = "", style = "color:red;" })
                 @*@Html.ValidationMessageFor(m => m.SubCategoryId)*@
             </div>
